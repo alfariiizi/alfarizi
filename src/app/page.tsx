@@ -1,37 +1,54 @@
+import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { Maxwidthdiv } from "./_components/Maxwindthdiv";
+import { displayFont } from "./_components/fonts";
+import { socials } from "./data";
 
 export default function HomePage() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-      <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-        <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
-          Create <span className="text-[hsl(280,100%,70%)]">T3</span> App
+    <Maxwidthdiv
+      className="h-screen-without-navbar flex flex-wrap items-center justify-between"
+      // style={{
+      //   height: `calc(100dvh - ${heightNavbar}px)`,
+      // }}
+    >
+      <div className="flex max-w-3xl flex-col gap-10">
+        <h1
+          className={cn(
+            displayFont.className,
+            "text-primary text-5xl font-bold",
+          )}
+        >
+          Hey there &#128075; <br /> I&apos;m{" "}
+          <span className="text-secondary">Chocoholic</span>, Developer, and
+          Nerd.
         </h1>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
-          <Link
-            className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-            href="https://create.t3.gg/en/usage/first-steps"
-            target="_blank"
-          >
-            <h3 className="text-2xl font-bold">First Steps →</h3>
-            <div className="text-lg">
-              Just the basics - Everything you need to know to set up your
-              database and authentication.
-            </div>
-          </Link>
-          <Link
-            className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-            href="https://create.t3.gg/en/introduction"
-            target="_blank"
-          >
-            <h3 className="text-2xl font-bold">Documentation →</h3>
-            <div className="text-lg">
-              Learn more about Create T3 App, the libraries it uses, and how to
-              deploy it.
-            </div>
-          </Link>
+        <div className="flex flex-col gap-6">
+          <p>
+            24 years old nerd, passionate in web development, game, and
+            chocklate.
+          </p>
+          <p>
+            I write in Javascript, HTML, CSS, TailwindCSS, C/C++, Python, and
+            Julia. I can to database and make servers do stuff.
+          </p>
         </div>
       </div>
-    </main>
+      <div className="mb-14 flex flex-col items-end gap-2 place-self-end">
+        <p>You can find me there &#128071;</p>
+        <div className="flex items-center gap-3">
+          {socials.map((social) => (
+            <Link
+              key={social.label}
+              href={social.href}
+              title={social.label}
+              target="_blank"
+            >
+              <social.icon className="h-6 w-6 duration-150 hover:opacity-80" />
+            </Link>
+          ))}
+        </div>
+      </div>
+    </Maxwidthdiv>
   );
 }
