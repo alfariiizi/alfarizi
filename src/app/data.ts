@@ -7,13 +7,13 @@ export const socials = [
     href: "https://github.com/alfariiizi",
   },
   {
-    label: "LinkedIn",
-    icon: FaLinkedin,
-    href: "https://www.linkedin.com/in/moh-rizal-alfarizi-3809b9246/",
-  },
-  {
     label: "Instagram",
     icon: FaInstagram,
     href: "https://www.instagram.com/alfariiiziii_/",
+  },
+  {
+    label: "LinkedIn",
+    icon: FaLinkedin,
+    href: "https://www.linkedin.com/in/moh-rizal-alfarizi-3809b9246/",
   },
 ] as const;

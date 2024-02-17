@@ -1,3 +1,4 @@
+import tailwindTypography from "@tailwindcss/typography";
 import { type Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
 import { layout, navbar } from "./src/app/_components/shared";
@@ -20,7 +21,15 @@ export default {
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            maxWidth: "86ch", // add required value here
+            fontSize: "18px",
+          },
+        },
+      },
     },
   },
-  plugins: [],
+  plugins: [tailwindTypography],
 } satisfies Config;
