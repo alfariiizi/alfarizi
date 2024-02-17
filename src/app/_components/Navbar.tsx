@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { Maxwidthdiv } from "./Maxwindthdiv";
+import { ThemeToggle } from "./ThemeToggle";
 import { displayFont } from "./fonts";
 import { navbar } from "./shared";
 
@@ -42,6 +43,7 @@ export function Navbar() {
         </h1>
       </Link>
       <div className={cn(displayFont.className, "flex items-center gap-10")}>
+        <ThemeToggle />
         {menus.map((menu) => (
           <Link
             key={menu.label}
