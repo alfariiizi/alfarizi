@@ -26,7 +26,7 @@ const menus = [
 export function Navbar() {
   return (
     <Maxwidthdiv
-      className="flex items-center justify-between"
+      className="bg-background/60 sticky inset-x-0 top-0 z-[100] flex items-center justify-between backdrop-blur-md"
       style={{
         height: navbar.height,
       }}

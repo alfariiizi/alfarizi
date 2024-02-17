@@ -6,13 +6,8 @@ import { socials } from "./data";
 
 export default function HomePage() {
   return (
-    <Maxwidthdiv
-      className="h-screen-without-navbar flex flex-wrap items-center justify-between"
-      // style={{
-      //   height: `calc(100dvh - ${heightNavbar}px)`,
-      // }}
-    >
-      <div className="flex max-w-3xl flex-col gap-10">
+    <Maxwidthdiv className="h-screen-without-navbar flex flex-col items-center justify-end gap-20 md:flex-row md:justify-between">
+      <div className="flex max-w-3xl flex-col gap-10 md:mb-28">
         <h1
           className={cn(
             displayFont.className,
@@ -26,7 +21,7 @@ export default function HomePage() {
         <div className="flex flex-col gap-6">
           <p>
             24 years old nerd, passionate in web development, game, and
-            chocklate.
+            chocolate.
           </p>
           <p>
             I write in Javascript, HTML, CSS, TailwindCSS, C/C++, Python, and

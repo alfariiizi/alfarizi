@@ -26,9 +26,7 @@ export default function RootLayout({
       <body
         className={cn(`font-sans ${inter.variable}`, "bg-background text-text")}
       >
-        <div className="sticky inset-x-0 top-0">
-          <Navbar />
-        </div>
+        <Navbar />
         <main
           className="relative px-4"
           style={{
@@ -38,6 +36,7 @@ export default function RootLayout({
         >
           {children}
         </main>
+        <div className="h-screen" />
       </body>
     </html>
   );
