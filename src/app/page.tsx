@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
+import { RoughNotation, RoughNotationGroup } from "react-rough-notation";
 import { Maxwidthdiv } from "./_components/Maxwindthdiv";
 import { displayFont } from "./_components/fonts";
 import { socials } from "./data";
@@ -21,14 +22,62 @@ export default function HomePage() {
             Nerd.
           </h1>
           <div className="flex flex-col gap-6">
-            <p>
-              24 years old nerd, passionate in web development, game, and
-              chocolate.
-            </p>
-            <p>
-              I write in Javascript, HTML, CSS, TailwindCSS, C/C++, Python, and
-              Julia. I can to database and make servers do stuff.
-            </p>
+            <RoughNotationGroup show>
+              <p>
+                24 years old nerd, passionate in{" "}
+                <RoughNotation type="highlight" color="var(--accent)">
+                  web development
+                </RoughNotation>
+                ,{" "}
+                <RoughNotation type="underline" color="var(--accent)">
+                  game
+                </RoughNotation>
+                ,{" "}
+                <RoughNotation type="circle" color="var(--accent)">
+                  data
+                </RoughNotation>
+                , and{" "}
+                <RoughNotation type="underline" color="var(--accent)">
+                  chocolate
+                </RoughNotation>
+                .
+              </p>
+              <p>
+                I write in{" "}
+                <RoughNotation type="crossed-off" color="var(--accent)">
+                  HTML
+                </RoughNotation>
+                ,{" "}
+                <RoughNotation type="crossed-off" color="var(--accent)">
+                  CSS
+                </RoughNotation>
+                ,{" "}
+                <RoughNotation type="underline" color="var(--accent)">
+                  Javascript
+                </RoughNotation>
+                ,{" "}
+                <RoughNotation type="highlight" color="var(--accent)">
+                  Reactjs
+                </RoughNotation>
+                ,{" "}
+                <RoughNotation type="circle" color="var(--accent)">
+                  TailwindCSS
+                </RoughNotation>
+                ,{" "}
+                <RoughNotation type="underline" color="var(--accent)">
+                  C/C++
+                </RoughNotation>
+                ,{" "}
+                <RoughNotation type="circle" color="var(--accent)">
+                  Python
+                </RoughNotation>
+                , and{" "}
+                <RoughNotation type="underline" color="var(--accent)">
+                  Julia
+                </RoughNotation>
+                . I can do database and make servers do stuff.
+              </p>
+            </RoughNotationGroup>
           </div>
         </div>
         <div className="mb-14 flex flex-col items-end gap-2 place-self-end">
