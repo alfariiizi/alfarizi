@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 
 import { Mdx } from "@/app/_components/MDXComponets";
 import { displayFont } from "@/app/_components/fonts";
+import { env } from "@/env";
 import { cn } from "@/lib/utils";
 import { type Metadata } from "next";
 import Link from "next/link";
@@ -35,7 +36,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: post.title,
+    title: `${post.title} | ${env.PROJECT_NAME}`,
     description: post.description,
   };
 }
