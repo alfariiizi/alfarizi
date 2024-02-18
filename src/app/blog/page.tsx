@@ -22,7 +22,7 @@ export default function Page() {
           {allPosts.map((post) => (
             <>
               <article key={post._id} className="flex gap-5">
-                <p className="min-w-32 text-end text-secondary md:min-w-40">
+                <p className="min-w-32 text-end font-semibold text-secondary md:min-w-40">
                   {formatter.format(new Date(post.date))}
                 </p>
                 <div className="flex flex-col gap-1">

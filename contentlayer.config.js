@@ -44,6 +44,14 @@ export const Post = defineDocumentType(() => ({
       type: "date",
       required: true,
     },
+    icon: {
+      type: "string",
+    },
+    tags: {
+      type: "list",
+      of: { type: "string" },
+      required: true,
+    },
   },
   computedFields,
 }));
