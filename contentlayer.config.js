@@ -56,7 +56,45 @@ export const Post = defineDocumentType(() => ({
   computedFields,
 }));
 
+export const Project = defineDocumentType(() => ({
+  name: "Project",
+  filePathPattern: `project/**/*.mdx`,
+  contentType: "mdx",
+  fields: {
+    title: {
+      type: "string",
+      required: true,
+    },
+    company: {
+      type: "string",
+      required: true,
+    },
+    description: {
+      type: "string",
+    },
+    tech: {
+      type: "string",
+    },
+    startDate: {
+      type: "date",
+      required: true,
+    },
+    endDate: {
+      type: "date",
+    },
+    icon: {
+      type: "string",
+    },
+    tags: {
+      type: "list",
+      of: { type: "string" },
+      required: true,
+    },
+  },
+  computedFields,
+}));
+
 export default makeSource({
   contentDirPath: "./src/content",
-  documentTypes: [Post, Page],
+  documentTypes: [Post, Page, Project],
 });

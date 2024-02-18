@@ -1,8 +1,9 @@
-import { allPosts } from ".contentlayer/generated";
+import { allProjects } from ".contentlayer/generated";
 import { notFound } from "next/navigation";
 
 import { Mdx } from "@/app/_components/MDXComponets";
 import { displayFont } from "@/app/_components/fonts";
+import { env } from "@/env";
 import { cn } from "@/lib/utils";
 import { type Metadata } from "next";
 import Link from "next/link";
@@ -16,7 +17,7 @@ interface PostProps {
 
 async function getPostFromParams(params: PostProps["params"]) {
   const slug = params?.slug?.join("/");
-  const post = allPosts.find((post) => post.slugAsParams === slug);
+  const post = allProjects.find((post) => post.slugAsParams === slug);
 
   if (!post) {
     null;
@@ -35,18 +36,16 @@ export async function generateMetadata({
   }
 
   return {
-    title: post.title,
+    title: `${post.title} | ${env.PROJECT_NAME}`,
     description: post.description,
   };
 }
 
 export async function generateStaticParams(): Promise<PostProps["params"][]> {
-  return allPosts.map((post) => ({
+  return allProjects.map((post) => ({
     slug: post.slugAsParams.split("/"),
   }));
 }
-
-const formatter = new Intl.DateTimeFormat("en-US", { dateStyle: "long" });
 
 export default async function PostPage({ params }: PostProps) {
   const post = await getPostFromParams(params);
@@ -57,12 +56,9 @@ export default async function PostPage({ params }: PostProps) {
 
   return (
     <article className="prose mx-auto px-4 pb-16 pt-14 text-text dark:prose-invert">
-      <div className="flex justify-start gap-4">
-        {post.icon && <h1 className="">{post.icon}</h1>}
-        <h1 className={cn("text-primary", displayFont.className)}>
-          {post.title}
-        </h1>
-      </div>
+      <h1 className={cn("text-primary", displayFont.className)}>
+        {post.title} ({post.company})
+      </h1>
       {post.description && (
         <p className={cn("mb-1 mt-3 text-xl", displayFont.className)}>
           {post.description}
@@ -75,7 +71,8 @@ export default async function PostPage({ params }: PostProps) {
             displayFont.className,
           )}
         >
-          {formatter.format(new Date(post.date))}
+          {post.startDate.split("-")[0]} -{" "}
+          {post.endDate?.split("-")[0] ?? "Present"}
         </p>
         <div className="mb-5 h-2 w-2 rounded-full bg-text" />
         <p
