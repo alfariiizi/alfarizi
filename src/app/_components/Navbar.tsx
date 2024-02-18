@@ -43,7 +43,12 @@ export function Navbar() {
             alfarizi.
           </h1>
         </Link>
-        <div className={cn(displayFont.className, "flex items-center gap-10")}>
+        <div
+          className={cn(
+            displayFont.className,
+            "flex items-center gap-4 md:gap-10",
+          )}
+        >
           <ThemeToggle />
           {menus.map((menu) => (
             <Link
