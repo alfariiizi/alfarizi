@@ -4,9 +4,7 @@ import { displayFont } from "@/app/_components/fonts";
 import { cn } from "@/lib/utils";
 import "@/styles/timeline.css";
 import Link from "next/link";
-import { type IconType } from "react-icons";
 import { BsStarFill } from "react-icons/bs";
-import { TbBrandNextjs } from "react-icons/tb";
 import { useInView } from "react-intersection-observer";
 import {
   VerticalTimeline,
@@ -19,46 +17,6 @@ import Image from "next/image";
 
 // solving issue with nextjs:
 // https://github.com/stephane-monnot/react-vertical-timeline/issues/166
-
-type Projects = {
-  title: string;
-  description: string;
-  projectFrom: string;
-  date: string;
-  appTech: string;
-  icon: string | IconType;
-  link?: string;
-}[];
-
-const projects: Projects = [
-  {
-    title: "Robota",
-    description: "Hotel review analyst",
-    projectFrom: "Datains",
-    appTech: "Next.js 14",
-    date: "2023 - present",
-    link: "https://robota.live",
-    icon: TbBrandNextjs,
-  },
-  {
-    title: "Robota",
-    description: "Hotel review analyst",
-    projectFrom: "Datains",
-    appTech: "Next.js 14",
-    date: "2023 - present",
-    link: "https://robota.live",
-    icon: TbBrandNextjs,
-  },
-  {
-    title: "Robota",
-    description: "Hotel review analyst",
-    projectFrom: "Datains",
-    appTech: "Next.js 14",
-    date: "2023 - present",
-    link: "https://robota.live",
-    icon: TbBrandNextjs,
-  },
-];
 
 export function Timeline() {
   const { ref, inView } = useInView({
@@ -129,7 +87,7 @@ export function Timeline() {
         })}
         <VerticalTimelineElement
           visible={inView}
-          iconStyle={{ background: "rgb(16, 204, 82)", color: "#fff" }}
+          iconStyle={{ background: "var(--primary)", color: "#fff" }}
           icon={<BsStarFill />}
         />
       </VerticalTimeline>
