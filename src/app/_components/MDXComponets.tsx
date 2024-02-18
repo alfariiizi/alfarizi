@@ -10,7 +10,6 @@ interface MdxProps {
 }
 
 export function Mdx({ code }: MdxProps) {
-  // eslint-disable-next-line
   const Component = useMDXComponent(code);
 
   return <Component components={components} />;

@@ -49,22 +49,30 @@ const formatter = new Intl.DateTimeFormat("en-US", { dateStyle: "long" });
 export default async function PostPage({ params }: PostProps) {
   const post = await getPostFromParams(params);
 
-  console.log({ post });
-
   if (!post) {
     notFound();
   }
 
   return (
-    <article className="prose dark:prose-invert mx-auto px-4 py-6 text-text">
-      <h1 className={cn("mb-2 text-primary", displayFont.className)}>
+    <article className="prose dark:prose-invert mx-auto px-4 pb-16 pt-14 text-text">
+      <h1 className={cn("mb-6 text-primary", displayFont.className)}>
         {post.title}
       </h1>
-      {post.description && <p className="mt-1 text-xl">{post.description}</p>}
-      {post.date && (
-        <p className="text-base">{formatter.format(new Date(post.date))}</p>
+      {post.description && (
+        <p className={cn("mb-1 mt-3 text-xl", displayFont.className)}>
+          {post.description}
+        </p>
       )}
-      <hr className="my-4" />
+      {post.date && (
+        <p
+          className={cn("mt-1 text-base text-secondary", displayFont.className)}
+        >
+          {formatter.format(new Date(post.date))}
+        </p>
+      )}
+
+      <hr className="mb-10 mt-0" />
+
       <Mdx code={post.body.code} />
     </article>
   );

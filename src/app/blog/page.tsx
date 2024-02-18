@@ -7,7 +7,6 @@ import { displayFont } from "../_components/fonts";
 const formatter = new Intl.DateTimeFormat("en-US", { dateStyle: "long" });
 
 export default function Page() {
-  console.log({ allPosts });
   return (
     <Maxwidthdiv className="mt-10 flex justify-center">
       <div className="flex w-full max-w-3xl flex-col gap-16">
