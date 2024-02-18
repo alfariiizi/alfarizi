@@ -59,12 +59,10 @@ export default async function PostPage({ params }: PostProps) {
       <h1 className={cn("text-primary", displayFont.className)}>
         {post.title} ({post.company})
       </h1>
-      {post.description && (
-        <p className={cn("mb-1 mt-3 text-xl", displayFont.className)}>
-          {post.description}
-        </p>
-      )}
-      <div className="flex h-auto items-center gap-7">
+      <p className={cn("mb-1 mt-0 text-xl", displayFont.className)}>
+        {post.description}
+      </p>
+      <div className="mb-0 flex h-fit items-center gap-7">
         <p
           className={cn(
             "mt-1 text-base font-semibold text-secondary",
@@ -85,9 +83,26 @@ export default async function PostPage({ params }: PostProps) {
         </p>
       </div>
 
+      {post.link && (
+        <p className={cn("-mt-4 mb-7 font-semibold", displayFont.className)}>
+          Link:{" "}
+          <Link
+            href={post.link}
+            target="_blank"
+            className="inline h-fit duration-150 hover:opacity-80"
+          >
+            {post.link}
+          </Link>
+        </p>
+      )}
+
       <div className="mb-10 mt-0 border-t-2 border-dashed border-primary" />
 
-      <Mdx code={post.body.code} />
+      {post.body.raw.length === 0 ? (
+        <p>The project detail is in process to be made.</p>
+      ) : (
+        <Mdx code={post.body.code} />
+      )}
 
       <div className="mb-10 mt-10 border-t-2 border-dashed border-primary" />
 

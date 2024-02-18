@@ -32,7 +32,9 @@ export function Timeline() {
       <VerticalTimeline lineColor="#aaa" className="text-gray-400">
         {sortedProjects.map((project) => {
           const startYear = project.startDate.split("-")[0];
-          const endYear = project.endDate?.split("-")[0];
+          const endYear = project.endDate?.split("-")[0] ?? "Present";
+          const displayYear =
+            startYear === endYear ? startYear : `${startYear} - ${endYear}`;
 
           return (
             <VerticalTimelineElement
@@ -47,7 +49,7 @@ export function Timeline() {
               contentArrowStyle={{
                 borderRight: "8px solid var(--secondary)",
               }}
-              date={`${startYear} - ${endYear ?? "Present"}`}
+              date={displayYear}
               iconStyle={{
                 background: "var(--primary)",
                 color: "#fff",

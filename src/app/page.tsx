@@ -18,7 +18,7 @@ export default function HomePage() {
                 "text-4xl font-bold text-primary md:text-5xl",
               )}
             >
-              Hey there &#128075; <br /> I&apos;m{" "}
+              Hey there &#128075; <br /> I&apos;m a{" "}
               <span className="text-secondary">Cat lover</span>, Developer, and
               Nerd.
             </h1>

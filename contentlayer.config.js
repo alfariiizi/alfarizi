@@ -71,8 +71,13 @@ export const Project = defineDocumentType(() => ({
     },
     description: {
       type: "string",
+      required: true,
     },
     tech: {
+      type: "string",
+      required: true,
+    },
+    link: {
       type: "string",
     },
     startDate: {
@@ -84,6 +89,7 @@ export const Project = defineDocumentType(() => ({
     },
     icon: {
       type: "string",
+      required: true,
     },
     tags: {
       type: "list",
