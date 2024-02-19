@@ -1,0 +1,111 @@
+---
+icon: "📽️"
+title: Apakah Neovim benar benar lebih baik daripada VSCode?
+description: Opini pribadi mengenai neovim dan bagaimana perbandingannya dengan modern code editor seperti vscode
+date: "2024-02-18"
+tags:
+  - neovim
+  - vim
+  - lazyvim
+  - vscode
+---
+
+Dalam waktu 1 bulan ini, saya baru saja nyobain neovim. Saya merasa banyak hal yang semakin produktif dan secara bersamaan banyak hal juga yang saya merasa ngga produktif. Disini saya bakalan share pengalaman 1 bulan saya menggunakan neovim dan bagaimana perbandingannya dengan editor sejuta umat yakni vscode.
+
+## 🕺 Neovim
+
+<Image
+  src="https://miro.medium.com/v2/resize:fit:1152/0*GV9sbK_g6fiNqsuS.jpg"
+  alt="Neovim meme"
+  width="300"
+  height="300"
+/>
+
+Neovim pertama kali diperkenalkan ke publik pada tahun 2014. Secara singkat, neovim itu sebenernya merupakan improvisasi dari vim. Buat kalian yang belum tau, vim sendiri diperkenalkan pada tahun 1991 dan merupakan improvisasi dari vi. Jadi ya bisa dianggap saling improve gitu dari vim, ke vim, hingga ke neovim (untuk sejauh ini).
+
+<Alert>
+  Pada postingan lain, saya bakalan bikin pembahasan mengenai editor apa yang
+  kira kira bakalan bisa menggantikan neovim
+</Alert>
+
+Dalam melakukan konfigurasi, neovim menggunakan bahasa **lua**, sedangkan vim menggunakan bahasa vimscript. Penggunaan bahasa lua ini merupakan point plus karena menurut saya pribadi vimscript mempunyai syntax yang cukup susah dipahami.
+
+Untuk menambahkan fitur pada neovim, kalian bisa menambahkan **plugin**. Plugin pada neovim ini ekivalen dengan _extension_ pada vscode. Komunitas neovim tergolong lumayan besar, sehingga banyak sekali plugin yang dapat dipilih dan digunakan.
+
+Pada dasarnya, neovim tidak menyediakan cara untuk me-manage plugin. Namun, dengan bantuan komunitas yang besar, banyak pula pilihan _plugin manager_ yang bisa digunakan. Beberapa plugin manager yang paling terkenal adalah [vim.plug](https://github.com/junegunn/vim-plug), [packer.nvim](https://github.com/wbthomason/packer.nvim), dan [lazy.nvim](https://github.com/folke/lazy.nvim).
+
+Untuk aktifitas programming, neovim tidak out of the box mempunyai fitur autocompletion, syntax highlighting, dan manajerial LSP, sehingga diperlukan setting manual neovim agar fitur tersebut bisa berjalan. Salah satu plugin - plugin yang bisa digunakan adalah [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) untuk autocompletion, [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) untuk syntax highlighting, dan [mason.nvim](https://github.com/williamboman/mason.nvim) untuk manajerial LSP.
+
+<Alert>
+  **LSP** merupakan singkatan dari **Language Server Protocol**, yang mana
+  merupakan protocol agar code editor atau IDE bisa berkomunikasi dengan
+  _Language Server_. Tujuannya adalah agar code editor atau IDE bisa mendapatkan
+  autocompletion berdasarkan bahasa pemrograman yang sedang ditulis, go to
+  definition, find all references, dll.
+</Alert>
+
+Jika kalian sudah membaca sampai bagian ini, mungkin kalian bakalan mikir: "_Kok ribet banget ya pakek Neovim_". Emang iya, ribet. Tapi balik lagi, karena the power of community, muncullah **neovim distro** yang mana merupakan pre-configure neovim, sehingga kalian bisa langsung pakek neovim tanpa perlu melakukan banyak konfigurasi diawal. Beberapa neovim distro yang paling populer adalah [AstroNvim](https://astronvim.com), [LunarVim](https://www.lunarvim.org), [NvChad](https://nvchad.com), dan [LazyVim](https://www.lazyvim.org).
+
+## 🧗🏽 Pengalaman Menggunakan Neovim
+
+<Image
+  src="https://user-images.githubusercontent.com/292349/213447056-92290767-ea16-430c-8727-ce994c93e9cc.png"
+  alt="Lazyvim"
+  width="800"
+  height="800"
+  caption="Tampilan LazyVim"
+/>
+
+Selama menggunakan neovim, awalnya saya menggunakan neovim distro NvChad, kemudian beralih ke LazyVim. Perubahan neovim distro ini dikarenakan saya ngerasa banyak komunitas yang membicarakan LazyVim daripada NvChad, dan juga LazyVim sendiri dibuat oleh _folke_ yang mana juga membuat package manager lazy.nvim. Pada tulisan saya selanjutnya, ketika saya bilang "neovim", saya me-refer ke "lazyvim".
+
+Bagian kelebihan dan kekurangan merupakan bagian yang subjektif, sehingga saya coba jelaskan dahulu background saya:
+
+- Sering menggunakan **vscode** sebagai **code editor**
+- Masih **pemula** dalam bahasa pemrograman **lua**
+- Lebih dari 2 tahun menggunakan **vim motion** dengan vim extension di vscode
+
+Oke, sekarang akan saya jelaskan pengalaman saya selama menggunakan neovim
+
+### Kelebihan
+
+#### Produktifitas tinggi
+
+Neovim seperti mengenalkan baru bagaimana bekerja dengan produktifitas tinggi. Kalo kata Doctor Octopus (dari Spiderman), "The power of the ~sun~ _code editor_ in the palm of my hand". Navigasi antar file dengan [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) dan navigasi antar kata dengan [flash.nvim](https://github.com/folke/flash.nvim) membuat saya merasa navigasi menggunakan mouse merupakan suatu downgrade dalam evolusi manusia.
+
+#### Lebih paham bagaimana code editor bekerja
+
+Meskipun lazyvim sudah pre-configure, tidak semua plugin dan bahasa bisa untuk langsung menggunakan LSP. Untuk itu kita perlu melakukan konfigurasi itu sendiri ketika itu tidak tersedia oleh lazyvim. Proses konfigurasi ini membuat saya menjadi tahu bagaimana suatu editor bekerja dan bahkan bagaimana suatu editor dapat berkomunikasi dengan LSP, bekerja dengan linter, dah bahkan bisa bekerja dengan formatter.
+
+#### Terlihat keren (Candaan)
+
+Kamu bisa bilang ke teman atau rekan kerjamu: "Btw, saya pakek neovim 😎".
+
+### Kekurangan
+
+#### Kebergantungan terhadap komunitas
+
+Hampir semua plugin yang digunakan dalam lazyvim, merupakan buatan dari komunitas. Hal ini bisa berarti baik jika kontributor nya aktif dalam merespon issue yang ada dan juga aktif dalam mengembangkan fitur yang ada. Namun, kebergantungan pada komunitas juga bisa berarti buruk, dikarenakan bisa jadi kontributor tersebut sudah tidak melakukan aktif dalam mengembangkan plugin yang ada. Sebagai contoh, ketika saya mencoba neovim, sedang terjadi shifting dari plugin [null-ls](https://github.com/jose-elias-alvarez/null-ls.nvim) ke [none-ls](https://github.com/nvimtools/none-ls.nvim). null-ls sangat penting dalam penggunaan neovim, dikarenakan null-ls bisa menjadi LSP client untuk formatter. null-ls tidak dilanjut lagi dikarenakan [kontributor utama nya bilang kalau sudah tidak pakai neovim](https://github.com/jose-elias-alvarez/null-ls.nvim/issues/1621).
+
+#### Membaca Dokumentasi
+
+Neovim menggunakan bahasa lua untuk konfigurasi. Menambahkan plugin serasa seperti belajar teknologi baru dikerenakan perlunya membaca dokumentasi plugin agar kita bisa memakai plugin tersebut. Belum lagi jika dokumentasi nya ditulis dengan tidak terlalu baik.
+
+#### Terlalu sering menyentuh file konfigurasi
+
+**Skenario 1: Perfeksionis dan ingin mengubah konfigurasi**. Ya memang, terkadang pengen aja ngubah konfigurasi. Kadang itu ngga nyadar sudah berjam-jam ngurusi konfigurasi file sampai saya lupa mengurus konfigurasi hidup 🥲.
+
+**Skenario 2: Tidak ingin mengubah konfigurasi, tapi ada bug**. Ketika akan mengerjakan suatu task, tentunya yang perlu dilakukan adalah membuka neovim, mengerjakan task, melakukan push. Namun jika ketika membuka neovim ada update plugin, dan setelah update plugin ternyata ada bug di neovim, maka bakalan kesel banget pastinya. Tinggal bug nya nge-ganggu atau ngga. Kalo nge-ganggu ya bisa baca baca issue di github mengenai plugin tersebut, tapi jika tidak mengganggu ya bisa dibiarin aja (untuk plugin yang sering dipakek, biasanya fix bug nya bakalan secepatnya ada).
+
+## 👀 Apakah saya akan beralih ke neovim?
+
+Jawabannya adalah **Tidak**. Mengapa? Menurut saya neovim masih terlalu kompleks bagi saya, banyak yang perlu dipahami, banyak yang perlu dibaca, dan banyak yang perlu disesuaikan. Kekurangan yang saya sebutkan diatas tidak terjadi di vscode. Ketika saya membuka vscode, saya merasa lebih terfokus pada task yang ada, dan tidak sering membuka file konfigurasi vscode nya. Selain itu, vscode hanya menggunakan json untuk mengatur konfigurasi nya, sehingga sangatlah mudah untuk mengatur konfigurasi nya.
+
+Namun, setelah beberapa hari kembali menggunakan vscode, saya merasa ada yang kurang dalam hal navigasi. Saya sempat kembali menggunakan neovim lagi untuk beberapa hari, sebelum akhirnya kembali menggunakan vscode. Untuk navigasi antar file, vscode mempunyai search file dengan menggunakan `ctrl + p`. Namun untuk navigasi antar kata, masih kalah jauh neovim. Untuk mengatasi ini, saya mencoba melakukan penyesuaian konfigurasi file pada vscode. Hasilnya, semua faktor terpenuhi, navigasi antar file dan antar kata jadi lebih smooth dan mantap 👌.
+
+Kalau kalian pengen tahu bagaimana konfigurasi file vscode saya, kalian bisa melihat nya di [repo dotfile saya](https://github.com/alfariiizi/dotfiles/tree/main/dot_config/private_Code/User). Jangan lupa kasih bintang nya ya kalo kalian suka dengan file konfigurasi vscode saya.
+
+## 📋 Kesimpulan
+
+Semua hal pasti ada kelebihan dan kekurangan. Sesuaikan saja dengan kebutuhan yang ada. Jika kalian punya waktu yang banyak setiap harinya dan tidak begitu masalah dengan kekurangan yang sudah saya sebutkan sebelumnya, maka kalian bisa beralih menggunakan neovim. Bagi saya, code editor yang out of the box support fitur - fitur dasar pemrograman + support vim motion, adalah code editor yang sesuai dengan saya.
+
+Segitu dulu cerita pengalaman saya selama menggunakan neovim. Jika kalian tertarik untuk membaca hal - hal lain yang saya tulis, kalian bisa membuka <Link href="/blog">halaman blog saya</Link>. Sekian dulu, salam sehat selalu 👋.
