@@ -24,7 +24,7 @@ export default {
       typography: {
         DEFAULT: {
           css: {
-            maxWidth: "86ch", // add required value here
+            maxWidth: "80ch", // add required value here
             fontSize: "18px",
           },
         },

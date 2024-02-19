@@ -112,7 +112,7 @@ export default async function PostPage({ params }: PostProps) {
           {post.tags.map((tag) => (
             <Link
               key={tag}
-              href={`/blog/tag/${tag}`}
+              href={`/tag/${tag}`}
               className={cn(
                 "bg-text/80 rounded-md px-2 py-1",
                 displayFont.className,
