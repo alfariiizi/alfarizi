@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import "@/styles/globals.css";
+import "highlight.js/styles/github-dark.css";
 
 import { Inter } from "next/font/google";
 import { Navbar } from "./_components/Navbar";
@@ -13,7 +14,7 @@ const inter = Inter({
 
 export const metadata = {
   title: "Alfarizi",
-  description: "Alfarizi Personal Website",
+  description: "Alfarizi's Personal Website",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
