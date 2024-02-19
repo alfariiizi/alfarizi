@@ -1,8 +1,8 @@
 import { allPosts } from ".contentlayer/generated";
 import { notFound } from "next/navigation";
 
-import { Mdx } from "@/app/_components/MDXComponets";
 import { displayFont } from "@/app/_components/fonts";
+import { Mdx } from "@/components/mdx/MDXComponets";
 import { env } from "@/env";
 import { cn } from "@/lib/utils";
 import { type Metadata } from "next";
@@ -59,8 +59,13 @@ export default async function PostPage({ params }: PostProps) {
   return (
     <article className="prose mx-auto px-4 pb-16 pt-14 text-text dark:prose-invert">
       <div className="flex justify-start gap-4">
-        {post.icon && <h1 className="">{post.icon}</h1>}
-        <h1 className={cn("text-primary", displayFont.className)}>
+        {post.icon && <h1 className="text-3xl md:text-4xl">{post.icon}</h1>}
+        <h1
+          className={cn(
+            "text-3xl text-primary md:text-4xl",
+            displayFont.className,
+          )}
+        >
           {post.title}
         </h1>
       </div>

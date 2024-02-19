@@ -7,6 +7,10 @@ import { displayFont } from "../_components/fonts";
 const formatter = new Intl.DateTimeFormat("en-US", { dateStyle: "long" });
 
 export default function Page() {
+  const sortedPost = allPosts.sort((a, b) =>
+    new Date(a.date) < new Date(b.date) ? 1 : -1,
+  );
+
   return (
     <Maxwidthdiv className="mt-10 flex justify-center">
       <div className="flex w-full max-w-3xl flex-col gap-16">
@@ -19,10 +23,10 @@ export default function Page() {
           Latest posts &#9997;
         </h2>
         <div className={cn("flex flex-col gap-10", displayFont.className)}>
-          {allPosts.map((post) => (
+          {sortedPost.map((post) => (
             <>
               <article key={post._id} className="flex gap-5">
-                <p className="min-w-20 text-end font-semibold text-secondary md:min-w-40">
+                <p className="min-w-[5.5rem] text-end font-semibold text-secondary md:min-w-40">
                   {formatter.format(new Date(post.date))}
                 </p>
                 <div className="flex flex-col gap-1">

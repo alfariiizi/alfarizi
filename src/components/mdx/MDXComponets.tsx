@@ -1,8 +1,12 @@
 import { useMDXComponent } from "next-contentlayer/hooks";
-import Image from "next/image";
+import Link from "next/link";
+import { Alert } from "./Alert";
+import { Image } from "./Image";
 
 const components = {
   Image,
+  Alert,
+  Link,
 };
 
 interface MdxProps {

@@ -13,6 +13,7 @@
     "@t3-oss/env-nextjs": "^0.7.1",
     "@tailwindcss/typography": "^0.5.10",
     "@theme-toggles/react": "^4.1.0",
+    "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "contentlayer": "^0.3.4",
     "highlight.js": "^11.9.0",

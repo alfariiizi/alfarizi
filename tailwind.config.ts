@@ -22,9 +22,20 @@ export default {
         sans: ["var(--font-sans)", ...fontFamily.sans],
       },
       typography: {
+        // customize typography
+        // https://stackoverflow.com/questions/66594385/how-do-i-modify-the-default-styling-of-the-typography-prose-class-in-tailwindcss?newreg=53bd1cf2d09943f8b35b0528c1a0794c
         DEFAULT: {
           css: {
             maxWidth: "80ch", // add required value here
+            fontSize: "16px",
+            // "&:hover": {
+            //   // could be any. It's like extending css selector
+            //   color: "#F7941E",
+            // },
+          },
+        },
+        sm: {
+          css: {
             fontSize: "18px",
           },
         },

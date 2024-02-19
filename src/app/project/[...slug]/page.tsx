@@ -1,8 +1,8 @@
 import { allProjects } from ".contentlayer/generated";
 import { notFound } from "next/navigation";
 
-import { Mdx } from "@/app/_components/MDXComponets";
 import { displayFont } from "@/app/_components/fonts";
+import { Mdx } from "@/components/mdx/MDXComponets";
 import { env } from "@/env";
 import { cn } from "@/lib/utils";
 import { type Metadata } from "next";
