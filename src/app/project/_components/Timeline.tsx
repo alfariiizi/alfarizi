@@ -3,7 +3,6 @@
 import { displayFont } from "@/app/_components/fonts";
 import { cn } from "@/lib/utils";
 import "@/styles/timeline.css";
-import Link from "next/link";
 import { BsStarFill } from "react-icons/bs";
 import { useInView } from "react-intersection-observer";
 import {
@@ -14,11 +13,13 @@ import "react-vertical-timeline-component/style.min.css";
 
 import { allProjects } from ".contentlayer/generated";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 // solving issue with nextjs:
 // https://github.com/stephane-monnot/react-vertical-timeline/issues/166
 
 export function Timeline() {
+  const router = useRouter();
   const { ref, inView } = useInView({
     triggerOnce: true,
   });
@@ -29,7 +30,7 @@ export function Timeline() {
 
   return (
     <section ref={ref}>
-      <VerticalTimeline lineColor="#aaa" className="text-gray-400">
+      <VerticalTimeline lineColor="rgb(107 114 128);" className="text-gray-400">
         {sortedProjects.map((project) => {
           const startYear = project.startDate.split("-")[0];
           const endYear = project.endDate?.split("-")[0] ?? "Present";
@@ -40,16 +41,18 @@ export function Timeline() {
             <VerticalTimelineElement
               key={project.title}
               visible={inView}
-              className="vertical-timeline-element--work"
+              className="vertical-timeline-element--work ease-in-out"
               contentStyle={{
-                background: "var(--secondary)",
-                color: "var(--text)",
+                // background: "var(--secondary)",
+                // color: "var(--text)",
                 borderBottom: "0px",
+                padding: "0",
               }}
               contentArrowStyle={{
                 borderRight: "8px solid var(--secondary)",
               }}
               date={displayYear}
+              dateClassName="mx-6 text-gray-500" // The size should same as padding of content (see: point Content)
               iconStyle={{
                 background: "var(--primary)",
                 color: "#fff",
@@ -65,25 +68,31 @@ export function Timeline() {
                 />
               }
             >
-              <Link href={project.slug} className="w-fit">
+              <button
+                type="button"
+                className="block h-full w-full bg-secondary px-6 py-5 text-start text-text duration-150 hover:opacity-85"
+                onClick={() => router.push(project.slug)}
+              >
+                {" "}
+                {/* <-- point A */}
                 <h3
                   className={cn(
-                    "vertical-timeline-element-title w-fit text-lg font-semibold duration-150 hover:opacity-70",
+                    "vertical-timeline-element-title w-fit text-lg font-semibold",
                     displayFont.className,
                   )}
                 >
                   {project.title} ({project.company})
                 </h3>
-              </Link>
-              <h4
-                className={cn(
-                  "vertical-timeline-element-subtitle",
-                  displayFont.className,
-                )}
-              >
-                {project.tech}
-              </h4>
-              <p>{project.description}</p>
+                <h4
+                  className={cn(
+                    "vertical-timeline-element-subtitle",
+                    displayFont.className,
+                  )}
+                >
+                  {project.tech}
+                </h4>
+                <p>{project.description}</p>
+              </button>
             </VerticalTimelineElement>
           );
         })}
