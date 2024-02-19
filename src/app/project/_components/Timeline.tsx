@@ -30,7 +30,7 @@ export function Timeline() {
 
   return (
     <section ref={ref}>
-      <VerticalTimeline lineColor="rgb(107 114 128);" className="text-gray-400">
+      <VerticalTimeline lineColor="#aaa" className="text-gray-400">
         {sortedProjects.map((project) => {
           const startYear = project.startDate.split("-")[0];
           const endYear = project.endDate?.split("-")[0] ?? "Present";
