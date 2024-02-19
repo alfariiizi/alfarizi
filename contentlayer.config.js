@@ -107,6 +107,8 @@ export default makeSource({
   documentTypes: [Post, Page, Project],
   mdx: {
     remarkPlugins: [remarkGfm],
-    rehypePlugins: [rehypeHighlight()],
+    // eslint-disable-next-line
+    // @ts-ignore
+    rehypePlugins: [rehypeHighlight],
   },
 });
