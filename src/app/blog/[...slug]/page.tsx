@@ -54,11 +54,11 @@ export default async function Page({ params }: PostProps) {
         </p>
       </div>
 
-      <div className="mb-10 mt-0 border-t-2 border-dashed border-primary" />
+      <div className="mb-10 mt-0 border-t-2 border-dashed border-gray-300 dark:border-gray-800" />
 
       <Mdx code={post.body.code} />
 
-      <div className="mb-10 mt-10 border-t-2 border-dashed border-primary" />
+      <div className="mb-10 mt-10 border-t-2 border-dashed border-gray-300 dark:border-gray-800" />
 
       <div>
         <p className={cn("mb-0 font-semibold", displayFont.className)}>Tags:</p>
