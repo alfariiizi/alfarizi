@@ -27,7 +27,7 @@ export default {
         DEFAULT: {
           css: {
             maxWidth: "80ch", // add required value here
-            fontSize: "16px",
+            fontSize: "1rem",
             // "&:hover": {
             //   // could be any. It's like extending css selector
             //   color: "#F7941E",
@@ -36,7 +36,7 @@ export default {
         },
         sm: {
           css: {
-            fontSize: "18px",
+            fontSize: "16px",
           },
         },
       },

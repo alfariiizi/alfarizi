@@ -1,55 +1,15 @@
-import { allPosts } from ".contentlayer/generated";
 import { notFound } from "next/navigation";
 
 import { displayFont } from "@/app/_components/fonts";
 import { Mdx } from "@/components/mdx/MDXComponets";
-import { env } from "@/env";
 import { cn } from "@/lib/utils";
-import { type Metadata } from "next";
 import Link from "next/link";
 import readingTime from "reading-time";
-
-interface PostProps {
-  params: {
-    slug: string[];
-  };
-}
-
-async function getPostFromParams(params: PostProps["params"]) {
-  const slug = params?.slug?.join("/");
-  const post = allPosts.find((post) => post.slugAsParams === slug);
-
-  if (!post) {
-    null;
-  }
-
-  return post;
-}
-
-export async function generateMetadata({
-  params,
-}: PostProps): Promise<Metadata> {
-  const post = await getPostFromParams(params);
-
-  if (!post) {
-    return {};
-  }
-
-  return {
-    title: `${post.title} | ${env.PROJECT_NAME}`,
-    description: post.description,
-  };
-}
-
-export async function generateStaticParams(): Promise<PostProps["params"][]> {
-  return allPosts.map((post) => ({
-    slug: post.slugAsParams.split("/"),
-  }));
-}
+import { getPostFromParams, type PostProps } from "./lib/getPostFromParams";
 
 const formatter = new Intl.DateTimeFormat("en-US", { dateStyle: "long" });
 
-export default async function PostPage({ params }: PostProps) {
+export default async function Page({ params }: PostProps) {
   const post = await getPostFromParams(params);
 
   if (!post) {
@@ -57,7 +17,7 @@ export default async function PostPage({ params }: PostProps) {
   }
 
   return (
-    <article className="prose mx-auto px-4 pb-16 pt-14 text-text dark:prose-invert">
+    <>
       <div className="flex justify-start gap-4">
         {post.icon && <h1 className="text-3xl md:text-4xl">{post.icon}</h1>}
         <h1
@@ -77,7 +37,7 @@ export default async function PostPage({ params }: PostProps) {
       <div className="flex h-auto items-center gap-7">
         <p
           className={cn(
-            "mt-1 text-base font-semibold text-secondary",
+            "mt-1 text-base font-semibold text-blue-700 dark:text-blue-300",
             displayFont.className,
           )}
         >
@@ -86,7 +46,7 @@ export default async function PostPage({ params }: PostProps) {
         <div className="mb-5 h-2 w-2 rounded-full bg-text" />
         <p
           className={cn(
-            "mt-1 text-base font-semibold text-secondary",
+            "mt-1 text-base font-semibold text-blue-700 dark:text-blue-300",
             displayFont.className,
           )}
         >
@@ -117,6 +77,6 @@ export default async function PostPage({ params }: PostProps) {
           ))}
         </div>
       </div>
-    </article>
+    </>
   );
 }

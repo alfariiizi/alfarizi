@@ -1,6 +1,13 @@
 import { defineDocumentType, makeSource } from "contentlayer/source-files";
+import GithubSlugger from "github-slugger";
 import rehypeHighlight from "rehype-highlight";
+import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
+
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 
 /** @type {import('contentlayer/source-files').ComputedFields} */
 const computedFields = {
@@ -11,6 +18,37 @@ const computedFields = {
   slugAsParams: {
     type: "string",
     resolve: (doc) => doc._raw.flattenedPath.split("/").slice(1).join("/"),
+  },
+  headings: {
+    type: "json",
+    resolve: async (doc) => {
+      const regXHeader = /\n(?<flag>#{1,6})\s+(?<content>.+)/g;
+      const slugger = new GithubSlugger();
+      /** @type string */
+      const raw = doc.body.raw;
+      const headings = Array.from(raw.matchAll(regXHeader)).map(
+        ({ groups }) => {
+          const flag = groups?.flag;
+          const content = groups?.content;
+          const flagLevel = [
+            "one",
+            "two",
+            "three",
+            undefined,
+            undefined,
+            undefined,
+          ];
+
+          return {
+            level: flag?.length ? flagLevel[flag.length - 1] : undefined,
+            text: content,
+            slug: content ? slugger.slug(content) : undefined,
+          };
+        },
+      );
+
+      return headings;
+    },
   },
 };
 
@@ -109,6 +147,6 @@ export default makeSource({
     remarkPlugins: [remarkGfm],
     // eslint-disable-next-line
     // @ts-ignore
-    rehypePlugins: [rehypeHighlight],
+    rehypePlugins: [rehypeHighlight, rehypeSlug],
   },
 });
