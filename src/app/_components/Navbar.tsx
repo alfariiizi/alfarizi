@@ -7,16 +7,16 @@ import { navbar } from "./shared";
 
 const menus = [
   {
-    label: "Home",
-    href: "/",
-  },
-  {
     label: "Blog",
     href: "/blog",
   },
   {
     label: "Project",
     href: "/project",
+  },
+  {
+    label: "Tags",
+    href: "/tag",
   },
   //   {
   //     label: "Contact Me",

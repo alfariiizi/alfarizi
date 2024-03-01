@@ -20,6 +20,7 @@ export default {
       },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
+        display: ["var(--font-display)"],
       },
       typography: {
         // customize typography

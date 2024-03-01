@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import "@/styles/globals.css";
 import "highlight.js/styles/github-dark.css";
 
-import { Inter } from "next/font/google";
+import { Inter, Laila } from "next/font/google";
 import { Navbar } from "./_components/Navbar";
 import { Providers } from "./_components/Providers";
 import { layout } from "./_components/shared";
@@ -10,6 +10,12 @@ import { layout } from "./_components/shared";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
+});
+
+export const displayFont = Laila({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-display",
 });
 
 export const metadata = {
@@ -26,7 +32,10 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={cn(`font-sans ${inter.variable}`, "bg-background text-text")}
+        className={cn(
+          `font-sans ${inter.variable} ${displayFont.variable}`,
+          "bg-background text-text",
+        )}
       >
         <Providers>
           <Navbar />
