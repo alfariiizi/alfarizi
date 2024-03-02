@@ -9,8 +9,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        text: "var(--text)",
-        background: "var(--background)",
+        text: "hsl(var(--text))",
+        background: "hsl(var(--background))",
         primary: "var(--primary)",
         secondary: "var(--secondary)",
         accent: "var(--accent)",
