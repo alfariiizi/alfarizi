@@ -2,7 +2,6 @@ import { allProjects } from ".contentlayer/generated";
 import { notFound } from "next/navigation";
 
 import { Mdx } from "@/components/mdx/MDXComponets";
-import { env } from "@/env";
 import { cn } from "@/lib/utils";
 import { type Metadata } from "next";
 import Link from "next/link";
@@ -28,15 +27,15 @@ async function getPostFromParams(params: PostProps["params"]) {
 export async function generateMetadata({
   params,
 }: PostProps): Promise<Metadata> {
-  const post = await getPostFromParams(params);
+  const project = await getPostFromParams(params);
 
-  if (!post) {
+  if (!project) {
     return {};
   }
 
   return {
-    title: `${post.title} | ${env.PROJECT_NAME}`,
-    description: post.description,
+    title: project.title,
+    description: project.description,
   };
 }
 

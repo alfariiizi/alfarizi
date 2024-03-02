@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import "@/styles/globals.css";
 import "highlight.js/styles/github-dark.css";
 
+import { type Metadata } from "next";
 import { Inter, Laila } from "next/font/google";
 import { Navbar } from "./_components/Navbar";
 import { Providers } from "./_components/Providers";
@@ -18,9 +19,14 @@ const laila = Laila({
   weight: ["400", "500", "600", "700"],
 });
 
-export const metadata = {
-  title: "Alfarizi",
-  description: "Alfarizi's Personal Website",
+export const metadata: Metadata = {
+  title: {
+    default: "Alfarizi's Personal Website",
+    template: "%s | Alfarizi",
+  },
+  // description: "Explore Alfarizi's world of innovation through detailed blog posts and a portfolio of diverse projects spanning software development, design, and more. Dive into the journey of creativity and technology.",
+  description:
+    "Explore Alfarizi's world of innovation through detailed blog posts and a portfolio of diverse projects spanning software development. Dive into the journey of creativity and technology.",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 

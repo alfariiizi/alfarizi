@@ -1,5 +1,6 @@
 import { allPosts, allProjects } from ".contentlayer/generated";
 import { Maxwidthdiv } from "@/app/_components/Maxwindthdiv";
+import { Metadata } from "next";
 import Link from "next/link";
 import { allTagsRaw } from "../_lib/allTags";
 
@@ -17,6 +18,12 @@ type Props = {
     tag: string;
   };
 };
+
+export function generateMetadata({ params }: Props): Metadata {
+  return {
+    title: `Tag: ${params.tag}`,
+  };
+}
 
 export function generateStaticParams() {
   const tags: string[] = [];

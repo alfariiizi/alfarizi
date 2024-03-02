@@ -1,7 +1,6 @@
 import { allPosts } from ".contentlayer/generated";
 import { Maxwidthdiv } from "@/app/_components/Maxwindthdiv";
 import { type Heading } from "@/app/types/toc";
-import { env } from "@/env";
 import { type Metadata } from "next";
 import { notFound } from "next/navigation";
 import React from "react";
@@ -17,7 +16,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${post.title} | ${env.PROJECT_NAME}`,
+    title: post.title,
     description: post.description,
   };
 }

@@ -1,6 +1,13 @@
+import { type Metadata } from "next";
 import Link from "next/link";
 import { Maxwidthdiv } from "../_components/Maxwindthdiv";
 import { allTagsRaw } from "./_lib/allTags";
+
+export const metadata: Metadata = {
+  title: "Tag",
+  description:
+    "Explore all tags that I use in my blogpost and in my project details.",
+};
 
 export default function page() {
   const allTags: { name: string; total: number }[] = [];
