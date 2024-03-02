@@ -59,7 +59,10 @@ export default async function PostPage({ params }: PostProps) {
     startYear === endYear ? startYear : `${startYear} - ${endYear}`;
 
   return (
-    <article className="prose mx-auto px-4 pb-16 pt-14 text-text dark:prose-invert">
+    <article
+      lang="id"
+      className="prose mx-auto px-4 pb-16 pt-14 text-text dark:prose-invert"
+    >
       <h1 className={cn("text-primary", "font-display")}>
         {post.title} ({post.company})
       </h1>

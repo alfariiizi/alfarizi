@@ -43,7 +43,7 @@ export default async function layout({ params, children }: Props) {
   const headings = post.headings as Heading[];
 
   return (
-    <Maxwidthdiv className="flex gap-6">
+    <Maxwidthdiv className="flex gap-6" lang="id">
       <div className="hidden w-[100px] lg:block" />
       {/* Article */}
       <article className="prose relative mx-auto px-4 pb-16 pt-14 text-text dark:prose-invert">
