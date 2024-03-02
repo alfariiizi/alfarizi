@@ -29,7 +29,7 @@ export default function page() {
   });
 
   return (
-    <Maxwidthdiv className="mt-10 flex flex-col gap-14">
+    <Maxwidthdiv className="mb-10 mt-10 flex flex-col gap-14">
       <div className="flex flex-col gap-3">
         <h2 className="font-display text-4xl font-bold text-primary">
           Tags 🎯
