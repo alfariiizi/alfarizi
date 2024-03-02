@@ -12,10 +12,10 @@ const inter = Inter({
   variable: "--font-sans",
 });
 
-export const displayFont = Laila({
+const laila = Laila({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
   variable: "--font-display",
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata = {
@@ -33,7 +33,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          `font-sans ${inter.variable} ${displayFont.variable}`,
+          `font-sans ${inter.variable} ${laila.variable}`,
           "bg-background text-text",
         )}
       >

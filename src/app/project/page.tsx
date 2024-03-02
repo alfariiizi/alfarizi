@@ -1,6 +1,5 @@
 import { cn } from "@/lib/utils";
 import { Maxwidthdiv } from "../_components/Maxwindthdiv";
-import { displayFont } from "../_components/fonts";
 import { Timeline } from "./_components/Timeline";
 
 export default function page() {
@@ -9,7 +8,7 @@ export default function page() {
       <h2
         className={cn(
           "place-self-center text-3xl font-bold text-primary",
-          displayFont.className,
+          "font-display",
         )}
       >
         Projects 🏗️

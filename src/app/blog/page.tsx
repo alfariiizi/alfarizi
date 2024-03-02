@@ -2,7 +2,6 @@ import { allPosts } from ".contentlayer/generated";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { Maxwidthdiv } from "../_components/Maxwindthdiv";
-import { displayFont } from "../_components/fonts";
 
 const formatter = new Intl.DateTimeFormat("en-US", { dateStyle: "long" });
 
@@ -17,12 +16,12 @@ export default function Page() {
         <h2
           className={cn(
             "text-4xl font-bold text-primary lg:text-5xl",
-            displayFont.className,
+            "font-display",
           )}
         >
           Latest posts &#9997;
         </h2>
-        <div className={cn("flex flex-col gap-10", displayFont.className)}>
+        <div className={cn("flex flex-col gap-10", "font-display")}>
           {sortedPost.map((post) => (
             <>
               <article key={post._id} className="flex gap-5">

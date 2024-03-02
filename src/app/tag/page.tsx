@@ -27,7 +27,6 @@ export default function page() {
     // Sort by total
     return b.total - a.total;
   });
-  console.log(allTags);
 
   return (
     <Maxwidthdiv className="mt-10 flex flex-col gap-14">

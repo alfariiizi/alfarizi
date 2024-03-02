@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { RoughNotation, RoughNotationGroup } from "react-rough-notation";
 import { Maxwidthdiv } from "./_components/Maxwindthdiv";
-import { displayFont } from "./_components/fonts";
 import { socials } from "./data";
 
 export default function HomePage() {
@@ -14,7 +13,7 @@ export default function HomePage() {
           <div className="flex max-w-3xl flex-col gap-6 md:mb-28 md:gap-10">
             <h1
               className={cn(
-                displayFont.className,
+                "font-display",
                 "text-4xl font-bold text-primary md:text-5xl",
               )}
             >

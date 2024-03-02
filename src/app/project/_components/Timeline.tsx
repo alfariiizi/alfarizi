@@ -1,6 +1,5 @@
 "use client";
 
-import { displayFont } from "@/app/_components/fonts";
 import { cn } from "@/lib/utils";
 import "@/styles/timeline.css";
 import { BsStarFill } from "react-icons/bs";
@@ -78,7 +77,7 @@ export function Timeline() {
                 <h3
                   className={cn(
                     "vertical-timeline-element-title w-fit text-lg font-semibold",
-                    displayFont.className,
+                    "font-display",
                   )}
                 >
                   {project.title} ({project.company})
@@ -86,7 +85,7 @@ export function Timeline() {
                 <h4
                   className={cn(
                     "vertical-timeline-element-subtitle",
-                    displayFont.className,
+                    "font-display",
                   )}
                 >
                   {project.tech}

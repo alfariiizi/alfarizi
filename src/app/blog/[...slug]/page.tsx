@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
 
-import { displayFont } from "@/app/_components/fonts";
 import { Mdx } from "@/components/mdx/MDXComponets";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
@@ -20,17 +19,12 @@ export default async function Page({ params }: PostProps) {
     <>
       <div className="flex justify-start gap-4">
         {post.icon && <h1 className="text-3xl md:text-4xl">{post.icon}</h1>}
-        <h1
-          className={cn(
-            "text-3xl text-primary md:text-4xl",
-            displayFont.className,
-          )}
-        >
+        <h1 className={cn("text-3xl text-primary md:text-4xl", "font-display")}>
           {post.title}
         </h1>
       </div>
       {post.description && (
-        <p className={cn("mb-1 mt-3 text-xl", displayFont.className)}>
+        <p className={cn("mb-1 mt-3 text-xl", "font-display")}>
           {post.description}
         </p>
       )}
@@ -38,7 +32,7 @@ export default async function Page({ params }: PostProps) {
         <p
           className={cn(
             "mt-1 text-base font-semibold text-blue-700 dark:text-blue-300",
-            displayFont.className,
+            "font-display",
           )}
         >
           {formatter.format(new Date(post.date))}
@@ -47,7 +41,7 @@ export default async function Page({ params }: PostProps) {
         <p
           className={cn(
             "mt-1 text-base font-semibold text-blue-700 dark:text-blue-300",
-            displayFont.className,
+            "font-display",
           )}
         >
           {readingTime(post.body.raw).text}
@@ -61,16 +55,13 @@ export default async function Page({ params }: PostProps) {
       <div className="mb-10 mt-10 border-t-2 border-dashed border-gray-300 dark:border-gray-800" />
 
       <div>
-        <p className={cn("mb-0 font-semibold", displayFont.className)}>Tags:</p>
+        <p className={cn("mb-0 font-semibold", "font-display")}>Tags:</p>
         <div className="flex flex-wrap gap-3">
           {post.tags.map((tag) => (
             <Link
               key={tag}
               href={`/tag/${tag}`}
-              className={cn(
-                "bg-text/80 rounded-md px-2 py-1",
-                displayFont.className,
-              )}
+              className={cn("bg-text/80 rounded-md px-2 py-1", "font-display")}
             >
               {tag}
             </Link>

@@ -1,4 +1,3 @@
-import { displayFont } from "@/app/_components/fonts";
 import { cn } from "@/lib/utils";
 import React from "react";
 import { IoInformationCircleOutline } from "react-icons/io5";
@@ -22,7 +21,7 @@ export function Alert({ title, children, variant = "info" }: Props) {
       className="border-text bg-teal-400 shadow-lg shadow-gray-500 dark:bg-teal-800"
     >
       <AlertTitle
-        className={cn("flex items-center gap-2 font-semibold", displayFont)}
+        className={cn("font-display flex items-center gap-2 font-semibold")}
       >
         {variant === "info" && (
           <IoInformationCircleOutline className="h-5 w-5" />

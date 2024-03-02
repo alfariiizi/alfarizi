@@ -1,7 +1,6 @@
 import { allProjects } from ".contentlayer/generated";
 import { notFound } from "next/navigation";
 
-import { displayFont } from "@/app/_components/fonts";
 import { Mdx } from "@/components/mdx/MDXComponets";
 import { env } from "@/env";
 import { cn } from "@/lib/utils";
@@ -61,17 +60,17 @@ export default async function PostPage({ params }: PostProps) {
 
   return (
     <article className="prose mx-auto px-4 pb-16 pt-14 text-text dark:prose-invert">
-      <h1 className={cn("text-primary", displayFont.className)}>
+      <h1 className={cn("text-primary", "font-display")}>
         {post.title} ({post.company})
       </h1>
-      <p className={cn("mb-1 mt-0 text-xl", displayFont.className)}>
+      <p className={cn("mb-1 mt-0 text-xl", "font-display")}>
         {post.description}
       </p>
       <div className="mb-0 flex h-fit items-center gap-7">
         <p
           className={cn(
             "mt-1 text-base font-semibold text-blue-700 dark:text-blue-300",
-            displayFont.className,
+            "font-display",
           )}
         >
           {displayYear}
@@ -80,7 +79,7 @@ export default async function PostPage({ params }: PostProps) {
         <p
           className={cn(
             "mt-1 text-base font-semibold text-blue-700 dark:text-blue-300",
-            displayFont.className,
+            "font-display",
           )}
         >
           {readingTime(post.body.raw).text}
@@ -88,7 +87,7 @@ export default async function PostPage({ params }: PostProps) {
       </div>
 
       {post.link && (
-        <p className={cn("-mt-4 mb-7 font-semibold", displayFont.className)}>
+        <p className={cn("-mt-4 mb-7 font-semibold", "font-display")}>
           Link:{" "}
           <Link
             href={post.link}
@@ -111,16 +110,13 @@ export default async function PostPage({ params }: PostProps) {
       <div className="mb-10 mt-10 border-t-2 border-dashed border-gray-300 dark:border-gray-800" />
 
       <div>
-        <p className={cn("mb-0 font-semibold", displayFont.className)}>Tags:</p>
+        <p className={cn("mb-0 font-semibold", "font-display")}>Tags:</p>
         <div className="flex flex-wrap gap-3">
           {post.tags.map((tag) => (
             <Link
               key={tag}
               href={`/tag/${tag}`}
-              className={cn(
-                "bg-text/80 rounded-md px-2 py-1",
-                displayFont.className,
-              )}
+              className={cn("bg-text/80 rounded-md px-2 py-1", "font-display")}
             >
               {tag}
             </Link>

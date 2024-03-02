@@ -2,7 +2,6 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { Maxwidthdiv } from "./Maxwindthdiv";
 import { ThemeToggle } from "./ThemeToggle";
-import { displayFont } from "./fonts";
 import { navbar } from "./shared";
 
 const menus = [
@@ -36,7 +35,7 @@ export function Navbar() {
         <Link href="/">
           <h1
             className={cn(
-              displayFont.className,
+              "font-display",
               "text-xl font-semibold duration-150 hover:opacity-80",
             )}
           >
@@ -44,10 +43,7 @@ export function Navbar() {
           </h1>
         </Link>
         <div
-          className={cn(
-            displayFont.className,
-            "flex items-center gap-4 md:gap-10",
-          )}
+          className={cn("font-display", "flex items-center gap-4 md:gap-10")}
         >
           <ThemeToggle />
           {menus.map((menu) => (
