@@ -1,6 +1,7 @@
 import { allPosts, allProjects } from ".contentlayer/generated";
 import { Maxwidthdiv } from "@/app/_components/Maxwindthdiv";
 import Link from "next/link";
+import { allTagsRaw } from "../_lib/allTags";
 
 type From = "Project" | "Blog";
 
@@ -16,6 +17,17 @@ type Props = {
     tag: string;
   };
 };
+
+export function generateStaticParams() {
+  const tags: string[] = [];
+  allTagsRaw.forEach((tag) => {
+    if (!tags.includes(tag)) {
+      tags.push(tag);
+    }
+  });
+
+  return tags;
+}
 
 export default function page({ params }: Props) {
   const contents: Content[] = [
