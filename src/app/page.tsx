@@ -25,7 +25,7 @@ export default function HomePage() {
               </h1>
               <div>
                 {/* <div className="size-[150px] bg-gray-400" /> */}
-                <div className="relative mx-auto h-[150px] w-[150px] overflow-clip rounded-full bg-primary p-2">
+                <div className="relative mx-auto h-[150px] w-[150px] overflow-clip rounded-full bg-primary p-2 shadow-lg">
                   <Image
                     src="/images/hero.png"
                     alt="Alfarizi"
