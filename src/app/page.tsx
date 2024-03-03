@@ -9,7 +9,7 @@ import { socials } from "./data";
 export default function HomePage() {
   return (
     <Maxwidthdiv className="relative px-0">
-      <div className="z-10 bg-background/60 backdrop-blur-3xl dark:bg-background/80">
+      <div className="z-10 bg-background/60 backdrop-blur-2xl dark:bg-background/80 sm:backdrop-blur-3xl">
         <Maxwidthdiv className="mt-3 flex h-full flex-col items-center justify-end gap-12 sm:mt-0 sm:h-screen-without-navbar md:flex-row md:justify-between">
           <div className="flex max-w-3xl flex-col gap-6 md:mb-28 md:gap-10">
             <div className="flex flex-col-reverse gap-4 sm:flex-row">
