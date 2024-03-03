@@ -1,3 +1,4 @@
+import { MotionDiv } from "@/lib/framer-motion";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,64 +8,81 @@ import { socials } from "./data";
 
 export default function HomePage() {
   return (
-    <Maxwidthdiv className="relative">
-      <div className="bg-background/90 backdrop-blur-3xl">
-        <Maxwidthdiv className="bg-background/90 mt-3 flex h-full flex-col items-center justify-end gap-12 backdrop-blur-3xl sm:mt-0 sm:h-screen-without-navbar md:flex-row md:justify-between">
+    <Maxwidthdiv className="relative px-0">
+      <div className="z-10 bg-background/60 backdrop-blur-3xl dark:bg-background/80">
+        <Maxwidthdiv className="mt-3 flex h-full flex-col items-center justify-end gap-12 sm:mt-0 sm:h-screen-without-navbar md:flex-row md:justify-between">
           <div className="flex max-w-3xl flex-col gap-6 md:mb-28 md:gap-10">
-            <h1
-              className={cn(
-                "font-display",
-                "text-4xl font-bold text-primary md:text-5xl",
-              )}
-            >
-              Hey there &#128075; <br /> I&apos;m a{" "}
-              <span className="text-secondary">Cat lover</span>, Developer, and
-              Nerd.
-            </h1>
+            <div className="flex flex-col-reverse gap-4 sm:flex-row">
+              <h1
+                className={cn(
+                  "font-display",
+                  "text-4xl font-black text-primary md:text-5xl",
+                )}
+              >
+                Hey there &#128075; <br /> I&apos;m a{" "}
+                <span className="text-secondary">Cat lover</span>, Developer,
+                and Nerd.
+              </h1>
+              <div>
+                {/* <div className="size-[150px] bg-gray-400" /> */}
+                <div className="relative mx-auto h-[150px] w-[150px] overflow-clip rounded-full bg-primary p-2">
+                  <Image
+                    src="/images/hero.png"
+                    alt="Alfarizi"
+                    width={200}
+                    height={200}
+                    className="absolute"
+                    quality={100}
+                    priority
+                    draggable={false}
+                  />
+                </div>
+              </div>
+            </div>
             <div className="flex flex-col gap-6 leading-7">
               <RoughNotationGroup show>
                 <p>
                   24 years old nerd who interested in several IT fields,
                   including <br className="sm:hidden" />
-                  <RoughNotation type="highlight" color="var(--accent)">
+                  <RoughNotation type="highlight" color="hsl(var(--accent))">
                     Web development
                   </RoughNotation>
                   ,{" "}
-                  <RoughNotation type="underline" color="var(--accent)">
+                  <RoughNotation type="underline" color="hsl(var(--accent))">
                     Data Science
                   </RoughNotation>{" "}
                   / <br />
-                  <RoughNotation type="underline" color="var(--accent)">
+                  <RoughNotation type="underline" color="hsl(var(--accent))">
                     Data Analyst
                   </RoughNotation>
                   , and <br className="sm:hidden" />
-                  <RoughNotation type="underline" color="var(--accent)">
+                  <RoughNotation type="underline" color="hsl(var(--accent))">
                     Computer Graphics
                   </RoughNotation>
                   .
                 </p>
                 <p>
                   My most in-depth experience so far has been in{" "}
-                  <RoughNotation type="underline" color="var(--accent)">
+                  <RoughNotation type="underline" color="hsl(var(--accent))">
                     Web development
                   </RoughNotation>
                   . The frontend library I use is{" "}
-                  <RoughNotation type="circle" color="var(--accent)">
+                  <RoughNotation type="circle" color="hsl(var(--accent))">
                     Reactjs
                   </RoughNotation>
                   , while the framework I utilize for full-stack development is{" "}
-                  <RoughNotation type="highlight" color="var(--accent)">
+                  <RoughNotation type="highlight" color="hsl(var(--accent))">
                     Next.js
                   </RoughNotation>
                   .
                 </p>
-                <p className="hidden sm:block">
+                <p className="">
                   Furthermore, in other IT fields, I primarily use{" "}
-                  <RoughNotation type="underline" color="var(--accent)">
+                  <RoughNotation type="underline" color="hsl(var(--accent))">
                     Python
                   </RoughNotation>{" "}
                   for data processing, and also I use{" "}
-                  <RoughNotation type="circle" color="var(--accent)">
+                  <RoughNotation type="circle" color="hsl(var(--accent))">
                     Vulkan API
                   </RoughNotation>{" "}
                   as the primary graphics API in my personal projects within
@@ -92,20 +110,50 @@ export default function HomePage() {
         </Maxwidthdiv>
       </div>
 
-      <Image
-        src="/shapes/blob.svg"
-        alt="shapes"
-        width={1024}
-        height={600}
-        className="absolute left-0 top-0 -z-10 h-[400px] w-[400px] opacity-30 dark:opacity-20 lg:bottom-5 lg:left-32 lg:h-[500px] lg:w-[500px]"
-      />
-      <Image
-        src="/shapes/blob-2.svg"
-        alt="shapes"
-        width={1024}
-        height={768}
+      <MotionDiv
+        initial={{
+          opacity: 0,
+        }}
+        animate={{
+          opacity: 1,
+        }}
+        transition={{
+          duration: 3.5,
+          ease: "easeInOut",
+        }}
+        className="absolute left-0 top-0 -z-10 h-[300px] w-[300px] opacity-30 dark:opacity-20 lg:bottom-5 lg:left-32 lg:h-[500px] lg:w-[500px]"
+      >
+        <Image
+          src="/shapes/blob.svg"
+          alt="shapes"
+          width={1024}
+          height={600}
+          className=""
+          draggable={false}
+        />
+      </MotionDiv>
+      <MotionDiv
+        initial={{
+          opacity: 0,
+        }}
+        animate={{
+          opacity: 1,
+        }}
+        transition={{
+          duration: 4,
+          ease: "easeInOut",
+        }}
         className="absolute right-20 top-10 -z-10 hidden h-[500px] w-[500px] opacity-40 dark:opacity-20 lg:block"
-      />
+      >
+        <Image
+          src="/shapes/blob-2.svg"
+          alt="shapes"
+          width={1024}
+          height={768}
+          className=""
+          draggable={false}
+        />
+      </MotionDiv>
     </Maxwidthdiv>
   );
 }

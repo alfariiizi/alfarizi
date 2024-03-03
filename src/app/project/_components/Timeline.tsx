@@ -48,12 +48,12 @@ export function Timeline() {
                 padding: "0",
               }}
               contentArrowStyle={{
-                borderRight: "8px solid var(--secondary)",
+                borderRight: "8px solid hsl(var(--secondary))",
               }}
               date={displayYear}
               dateClassName="mx-6 text-gray-500" // The size should same as padding of content (see: point Content)
               iconStyle={{
-                background: "var(--primary)",
+                background: "hsl(var(--primary))",
                 color: "#fff",
                 padding: "4px",
               }}
@@ -97,7 +97,7 @@ export function Timeline() {
         })}
         <VerticalTimelineElement
           visible={inView}
-          iconStyle={{ background: "var(--primary)", color: "#fff" }}
+          iconStyle={{ background: "hsl(var(--primary))", color: "#fff" }}
           icon={<BsStarFill />}
         />
       </VerticalTimeline>

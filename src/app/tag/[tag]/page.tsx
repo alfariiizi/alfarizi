@@ -1,8 +1,8 @@
 import { allPosts, allProjects } from ".contentlayer/generated";
 import { Maxwidthdiv } from "@/app/_components/Maxwindthdiv";
-import { Metadata } from "next";
+import { allTags } from "@/lib/tags";
+import { type Metadata } from "next";
 import Link from "next/link";
-import { allTagsRaw } from "../_lib/allTags";
 
 type From = "Project" | "Blog";
 
@@ -26,14 +26,7 @@ export function generateMetadata({ params }: Props): Metadata {
 }
 
 export function generateStaticParams() {
-  const tags: string[] = [];
-  allTagsRaw.forEach((tag) => {
-    if (!tags.includes(tag)) {
-      tags.push(tag);
-    }
-  });
-
-  return tags;
+  return allTags;
 }
 
 export default function page({ params }: Props) {

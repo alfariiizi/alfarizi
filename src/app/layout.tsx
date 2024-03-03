@@ -39,14 +39,16 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          `font-sans ${inter.variable} ${laila.variable}`,
+          `font-sans ${inter.variable}`,
+          laila.variable,
+          // GeistSans.variable,
           "bg-background text-text",
         )}
       >
         <Providers>
           <Navbar />
           <main
-            className="relative px-4"
+            className="relative"
             style={{
               paddingTop: layout.paddingTop,
               paddingBottom: layout.paddingBottom,

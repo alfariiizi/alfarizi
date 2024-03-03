@@ -118,7 +118,10 @@ export default async function PostPage({ params }: PostProps) {
             <Link
               key={tag}
               href={`/tag/${tag}`}
-              className={cn("bg-text/80 rounded-md px-2 py-1", "font-display")}
+              className={cn(
+                "rounded-md bg-text/80 px-2 py-1 text-background duration-150 hover:opacity-70",
+                "font-display",
+              )}
             >
               {tag}
             </Link>

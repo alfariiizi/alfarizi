@@ -1,13 +1,21 @@
 import { cn } from "@/lib/utils";
 import React from "react";
 
-type Props = React.HTMLAttributes<HTMLDivElement>;
+type Props = React.HTMLAttributes<HTMLDivElement> & {
+  smallPadding?: boolean;
+};
 
-export function Maxwidthdiv({ className, children, ...props }: Props) {
+export function Maxwidthdiv({
+  smallPadding = false,
+  className,
+  children,
+  ...props
+}: Props) {
   return (
     <div
       className={cn(
-        "mx-auto w-full max-w-[1440px] px-4 sm:px-6 md:px-10",
+        "mx-auto w-full max-w-[1440px] px-8 sm:px-10 md:px-12",
+        smallPadding && "px-4 sm:px-6 md:px-10",
         className,
       )}
       {...props}

@@ -11,9 +11,9 @@ export default {
       colors: {
         text: "hsl(var(--text))",
         background: "hsl(var(--background))",
-        primary: "var(--primary)",
-        secondary: "var(--secondary)",
-        accent: "var(--accent)",
+        primary: "hsl(var(--primary))",
+        secondary: "hsl(var(--secondary))",
+        accent: "hsl(var(--accent))",
       },
       height: {
         "screen-without-navbar": `calc(100dvh - ${navbar.height} - ${layout.paddingTop} - ${layout.paddingBottom})`,
@@ -21,6 +21,7 @@ export default {
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
         display: ["var(--font-display)"],
+        // display: ["var(--font-geist-sans)"],
       },
       typography: {
         // customize typography

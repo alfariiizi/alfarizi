@@ -1,7 +1,7 @@
+import { allTagsRaw } from "@/lib/tags";
 import { type Metadata } from "next";
 import Link from "next/link";
 import { Maxwidthdiv } from "../_components/Maxwindthdiv";
-import { allTagsRaw } from "./_lib/allTags";
 
 export const metadata: Metadata = {
   title: "Tag",
@@ -41,7 +41,7 @@ export default function page() {
         <h2 className="font-display text-4xl font-bold text-primary">
           Tags 🎯
         </h2>
-        <p className="font-display max-w-[800px]">
+        <p className="max-w-[800px] font-display">
           All tags that I use in my blogpost or in my projects. You can click
           the tag and see all related blogpost or projects that use the tag.
         </p>
@@ -51,7 +51,7 @@ export default function page() {
           <Link
             key={tag.name}
             href={`/tag/${tag.name}`}
-            className="flex items-center gap-1 rounded-full border-2 border-text bg-background px-2 py-1 opacity-70 duration-150 hover:opacity-100"
+            className="flex items-center gap-1 rounded-full border-2 border-text/80 bg-background px-2 py-1 duration-150 hover:opacity-70"
           >
             <p className="font-medium">{tag.name}</p>
             <div className="flex h-7 min-w-7 items-center justify-center rounded-full bg-secondary p-2">
