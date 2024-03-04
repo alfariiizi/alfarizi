@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { Metadata } from "next";
+import { type Metadata } from "next";
 import { Maxwidthdiv } from "../_components/Maxwindthdiv";
 import { Timeline } from "./_components/Timeline";
 

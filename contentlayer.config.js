@@ -3,6 +3,8 @@ import GithubSlugger from "github-slugger";
 import rehypeHighlight from "rehype-highlight";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
+import { env } from "./src/env";
+import { getBase64 } from "./src/lib/getBase64";
 
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
@@ -137,7 +139,16 @@ export const Project = defineDocumentType(() => ({
       required: true,
     },
   },
-  computedFields,
+  computedFields: {
+    blurData: {
+      type: "string",
+      resolve: async (doc) => {
+        const base64 = await getBase64(`${env.NEXT_PUBLIC_URL}${doc.icon}`);
+        return base64;
+      },
+    },
+    ...computedFields,
+  },
 }));
 
 export default makeSource({

@@ -1,4 +1,5 @@
 import { Maxwidthdiv } from "@/app/_components/Maxwindthdiv";
+import "@/styles/content.css";
 import React from "react";
 
 type Props = {

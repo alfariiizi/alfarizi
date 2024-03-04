@@ -63,6 +63,8 @@ export function Timeline() {
                   alt={project.tech ?? ""}
                   width={200}
                   height={200}
+                  placeholder="blur"
+                  blurDataURL={project.blurData}
                   className="h-full w-full rounded-full bg-white p-1 md:p-2"
                 />
               }

@@ -6,6 +6,8 @@ import { RoughNotation, RoughNotationGroup } from "react-rough-notation";
 import { Maxwidthdiv } from "./_components/Maxwindthdiv";
 import { socials } from "./data";
 
+import ImgHero from "@public/images/hero.png";
+
 export default function HomePage() {
   return (
     <Maxwidthdiv className="relative px-0">
@@ -27,12 +29,11 @@ export default function HomePage() {
                 {/* <div className="size-[150px] bg-gray-400" /> */}
                 <div className="relative mx-auto h-[150px] w-[150px] overflow-clip rounded-full bg-primary p-2 shadow-lg">
                   <Image
-                    src="/images/hero.png"
+                    src={ImgHero}
                     alt="Alfarizi"
                     width={200}
                     height={200}
                     className="absolute"
-                    quality={100}
                     priority
                     draggable={false}
                   />

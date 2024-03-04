@@ -1,4 +1,6 @@
+import withPlaiceholder from "@plaiceholder/next";
 import { withContentlayer } from "next-contentlayer";
+
 /**
  * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially useful
  * for Docker builds.
@@ -18,4 +20,4 @@ const config = {
   },
 };
 
-export default withContentlayer(config);
+export default withContentlayer(withPlaiceholder(config));
