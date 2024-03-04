@@ -31,6 +31,7 @@ export default function HomePage() {
                   <Image
                     src={ImgHero}
                     alt="Alfarizi"
+                    placeholder="blur"
                     width={200}
                     height={200}
                     className="absolute"
