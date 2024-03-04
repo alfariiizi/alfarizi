@@ -62,16 +62,16 @@ export default async function PostPage({ params }: PostProps) {
       lang="id"
       className="prose mx-auto px-4 pb-16 pt-14 text-text dark:prose-invert"
     >
-      <h1 className={cn("text-primary", "font-display")}>
+      <h1 className={cn("text-3xl text-primary sm:text-4xl", "font-display")}>
         {post.title} ({post.company})
       </h1>
-      <p className={cn("mb-1 mt-0 text-xl", "font-display")}>
+      <p className={cn("mb-1 mt-0 text-base sm:text-lg", "font-display")}>
         {post.description}
       </p>
       <div className="mb-0 flex h-fit items-center gap-7">
         <p
           className={cn(
-            "mt-1 text-base font-semibold text-blue-700 dark:text-blue-300",
+            "mt-1 text-base font-semibold text-blue-700 dark:text-blue-300 sm:text-lg",
             "font-display",
           )}
         >
@@ -80,7 +80,7 @@ export default async function PostPage({ params }: PostProps) {
         <div className="mb-5 h-2 w-2 rounded-full bg-text" />
         <p
           className={cn(
-            "mt-1 text-base font-semibold text-blue-700 dark:text-blue-300",
+            "mt-1 text-base font-semibold text-blue-700 dark:text-blue-300 sm:text-lg",
             "font-display",
           )}
         >
@@ -112,7 +112,14 @@ export default async function PostPage({ params }: PostProps) {
       <div className="mb-10 mt-10 border-t-2 border-dashed border-gray-300 dark:border-gray-800" />
 
       <div>
-        <p className={cn("mb-0 font-semibold", "font-display")}>Tags:</p>
+        <p
+          className={cn(
+            "mb-0 text-base font-semibold sm:text-lg",
+            "font-display",
+          )}
+        >
+          Tags:
+        </p>
         <div className="flex flex-wrap gap-3">
           {post.tags.map((tag) => (
             <Link

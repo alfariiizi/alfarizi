@@ -19,19 +19,19 @@ export default async function Page({ params }: PostProps) {
     <>
       <div className="flex justify-start gap-4">
         {post.icon && <h1 className="text-3xl md:text-4xl">{post.icon}</h1>}
-        <h1 className={cn("text-3xl text-primary md:text-4xl", "font-display")}>
+        <h1 className={cn("text-2xl text-primary sm:text-3xl", "font-display")}>
           {post.title}
         </h1>
       </div>
       {post.description && (
-        <p className={cn("mb-1 mt-3 text-xl", "font-display")}>
+        <p className={cn("mb-1 mt-3 text-base sm:text-lg", "font-display")}>
           {post.description}
         </p>
       )}
       <div className="flex h-auto items-center gap-7">
         <p
           className={cn(
-            "mt-1 text-base font-semibold text-blue-700 dark:text-blue-300",
+            "mt-1 text-base font-semibold text-blue-700 dark:text-blue-300 sm:text-lg",
             "font-display",
           )}
         >
@@ -40,7 +40,7 @@ export default async function Page({ params }: PostProps) {
         <div className="mb-5 h-2 w-2 rounded-full bg-text" />
         <p
           className={cn(
-            "mt-1 text-base font-semibold text-blue-700 dark:text-blue-300",
+            "mt-1 text-base font-semibold text-blue-700 dark:text-blue-300 sm:text-lg",
             "font-display",
           )}
         >
