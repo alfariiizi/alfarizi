@@ -8,14 +8,9 @@ startDate: "2023-05-22"
 icon: "/images/tech-logo/nextjs.png"
 tags:
   - hotel
-  - nextjs
-  - reactjs
-  - react-query
-  - trpc
-  - next-auth
-  - zustand
-  - zod
 ---
+
+Robota merupakan analisis review hotel. Produk Robota ini dikerjakan oleh Tim Produk DataIns. Ruang lingkup yang saya kerjakan adalah dibagian frontend.
 
 <Image
   src="/images/projects/robota/landing.png"
@@ -24,27 +19,9 @@ tags:
   caption="Landing page Robota"
 />
 
-{/* Robota merupakan aplikasi analisis review dari hotel. Review tersebut akan dianalisis dengan model artificial intelligence, kemudian akan diberikan beberapa hasil skor berdasarkan analisis yang telah dilakukan. Skor skor tersebut akan bisa digunakan hotel untuk melihat bagaimana review dalam beberapa waktu terakhir. */}
-
-Robota merupakan analisis review hotel. Produk Robota ini dikerjakan oleh Tim Produk DataIns. Ruang lingkup yang saya kerjakan adalah dibagian frontend. Pada kesempatan ini, saya bakalan share apa aja stack pada frontend ini.
-
-**Framework: Nextjs**. Saya pilih nextjs dikarenakan pengalaman saya dengan project project pribadi nextjs sebelumnya. Selain itu, nextjs mempunyai fitur yang advance seperti Server Side Rendering (SSR), React Server Component (RSC), Static Generation, dan Partial Pre-Rendering (PPR) yang membuat pengalaman user menjadi lebih baik ketika menggunakan Robota.
-
-**Authentication and Authorization: Nextauth**. Nextauth dipilih karena auth bisa dilakukan di dalam Robota, tanpa menggunakan third-party auth provider. Selain itu, Nextauth juga sudah mendukung pengambilan data session di React Server Component dan Client Component, sehingga pengambilan data session bisa menjadi fleksible dan mempunyai performa tinggi.
-
 <Image
   src="/images/projects/robota/dashboard.png"
   alt="Robota Dashboard"
   size={1600}
   caption="Dashboard Robota"
 />
-
-**Remote procedural call: tRPC**. tRPC dipilih karena bisa menjembatani nextjs backend dengan backend Robota. Dengan menggunakan tRPC juga, Robota bisa melakukan fetching dengan React Server Component dan juga bisa melakukan fetching di Client Component (dengan bantuan react-query).
-
-**Global state management: react-query (server state management) dan zustand (client state management)**. React-query saya gunakan karena fitur yang react-query tawarkan sangatlah banyak dan secara langsung terintegrasi dengan tRPC. Zustand saya pilih karena menurut saya merupakan client state management yang tergampang untuk dibuat, dipakai, dan di-manage.
-
-**Client validation: Zod**. Zod dipilih karena mempunyai cara validasi yang cukup intuitif. Zod dapat diintegrasikan dengan tRPC, sehingga validasi form ketika data masuk dan validasi hasil pemanggilan API bisa typesafe.
-
-**Grafik: Charjs**. Chartjs digunakan dengan bantuan _React Chartjs 2_. Chartjs dipilih karena dapat menghasilkan grafik yang bagus dan interaktif ketika di-hover. Selain itu, dokumentasi dari charjs dan react-chartjs-2 juga cukup gampang dipahami. Performa charjs untuk menampilkan grafik juga tergolong bagus.
-
-Itulah tech-stacks penting yang digunakan di Robota ini. Tech-stacks frontend yang digunakan di Robota mempunyai tujuan agar Robota ini mempunyai UX, DX, dan performa yang bagus. Semua nya sudah typesafe dan sudah menggunakan advance feature dari nextjs.

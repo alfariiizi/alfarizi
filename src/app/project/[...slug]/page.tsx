@@ -89,7 +89,7 @@ export default async function PostPage({ params }: PostProps) {
       </div>
 
       {post.link && (
-        <p className={cn("-mt-4 mb-7 font-semibold", "font-display")}>
+        <h4 className={cn("-mt-4 mb-7 font-semibold", "font-display")}>
           Link:{" "}
           <Link
             href={post.link}
@@ -98,7 +98,7 @@ export default async function PostPage({ params }: PostProps) {
           >
             {post.link}
           </Link>
-        </p>
+        </h4>
       )}
 
       <div className="mb-10 mt-0 border-t-2 border-dashed border-gray-300 dark:border-gray-800" />

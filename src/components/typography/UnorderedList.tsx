@@ -7,7 +7,7 @@ export function UnorderedList({
 }: ComponentPropsWithoutRef<"ul">) {
   return (
     <ul
-      className={cn("my-6 ml-1 list-disc [&>li]:mt-2", className)}
+      className={cn("my-6 ml-1 list-disc text-text [&>li]:mt-2", className)}
       {...props}
     />
   );

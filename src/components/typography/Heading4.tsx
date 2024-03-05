@@ -8,7 +8,7 @@ export function Heading4({
   return (
     <h4
       className={cn(
-        "scroll-m-20 text-base font-semibold tracking-tight sm:text-lg",
+        "scroll-m-20 text-sm font-semibold tracking-tight text-text sm:text-base",
         className,
       )}
       {...props}

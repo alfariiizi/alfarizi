@@ -45,9 +45,7 @@ export default async function layout({ params, children }: Props) {
     <Maxwidthdiv smallPadding className="flex gap-6" lang="id">
       <div className="hidden w-[100px] lg:block" />
       {/* Article */}
-      <article className="prose relative mx-auto px-4 pb-16 pt-14 text-text dark:prose-invert">
-        {children}
-      </article>
+      {children}
       {/* Table of content */}
       <div className="sticky left-0 top-0 hidden h-fit max-w-[360px] flex-col gap-4 pt-20 text-base lg:flex">
         <h3 className="font-semibold text-gray-400 dark:text-gray-600">
