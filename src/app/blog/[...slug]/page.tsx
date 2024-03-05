@@ -40,21 +40,15 @@ export default async function Page({ params }: PostProps) {
             {post.description}
           </p>
         )}
-        <div className="flex h-auto items-center gap-7">
+        <div className="flex h-auto items-center gap-3 sm:gap-7">
           <p
-            className={cn(
-              "text-base font-semibold text-blue-700 dark:text-blue-300 sm:text-lg",
-              "font-display",
-            )}
+            className={cn("text-base font-semibold text-slate-500 sm:text-lg")}
           >
             {formatter.format(new Date(post.date))}
           </p>
           <div className="h-2 w-2 rounded-full bg-text" />
           <p
-            className={cn(
-              "text-base font-semibold text-blue-700 dark:text-blue-300 sm:text-lg",
-              "font-display",
-            )}
+            className={cn("text-base font-semibold text-slate-500 sm:text-lg")}
           >
             {readingTime(post.body.raw).text}
           </p>
