@@ -8,7 +8,7 @@ export function ListItem({
   return (
     <li
       className={cn(
-        "text-sm leading-6 text-text sm:text-base sm:leading-7",
+        "text-foreground text-sm leading-6 sm:text-base sm:leading-7",
         className,
       )}
       {...props}

@@ -4,7 +4,7 @@ import "highlight.js/styles/github-dark.css";
 
 import { env } from "@/env";
 import { type Metadata } from "next";
-import { Inter, Laila } from "next/font/google";
+import { Inter, Josefin_Sans, Laila, Playfair_Display } from "next/font/google";
 import { Navbar } from "./_components/Navbar";
 import { Providers } from "./_components/Providers";
 import { layout } from "./_components/shared";
@@ -18,6 +18,18 @@ const laila = Laila({
   subsets: ["latin"],
   variable: "--font-display",
   weight: ["400", "500", "600", "700"],
+});
+
+const playfairDisplay = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-display",
+  weight: ["400", "500", "600", "700", "800", "900"],
+});
+
+const josefinSans = Josefin_Sans({
+  subsets: ["latin"],
+  variable: "--font-display",
+  weight: ["100", "200", "300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -44,9 +56,9 @@ export default function RootLayout({
       <body
         className={cn(
           `font-sans ${inter.variable}`,
-          laila.variable,
+          josefinSans.variable,
           // GeistSans.variable,
-          "bg-background text-text",
+          "text-foreground bg-background",
         )}
       >
         <Providers>

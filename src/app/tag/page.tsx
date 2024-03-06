@@ -54,8 +54,8 @@ export default function page() {
             className="flex items-center gap-1 rounded-full border-2 border-text/80 bg-background px-2 py-1 duration-150 hover:opacity-70"
           >
             <p className="font-medium">{tag.name}</p>
-            <div className="flex h-7 min-w-7 items-center justify-center rounded-full bg-secondary p-2">
-              <p className="text-text">{tag.total}</p>
+            <div className="flex h-7 min-w-7 items-center justify-center rounded-full bg-accent p-2">
+              <p className="text-accent-foreground">{tag.total}</p>
             </div>
           </Link>
         ))}

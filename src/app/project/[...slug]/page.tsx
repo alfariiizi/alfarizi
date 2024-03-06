@@ -60,7 +60,7 @@ export default async function PostPage({ params }: PostProps) {
   return (
     <article
       lang="id"
-      className="prose mx-auto px-4 pb-16 pt-14 text-text dark:prose-invert"
+      className="text-foreground prose mx-auto px-4 pb-16 pt-14 dark:prose-invert"
     >
       <h1 className={cn("text-3xl text-primary sm:text-4xl", "font-display")}>
         {post.title} ({post.company})

@@ -28,7 +28,7 @@ export default function Page() {
                 <p className="min-w-[5.5rem] text-end font-semibold text-secondary md:min-w-40">
                   {formatter.format(new Date(post.date))}
                 </p>
-                <div className="flex flex-col gap-1">
+                <div className="flex flex-col gap-0">
                   <Link
                     href={post.slug}
                     className="w-fit duration-150 hover:opacity-70"
@@ -37,7 +37,9 @@ export default function Page() {
                       {post.title}
                     </h3>
                   </Link>
-                  {post.description && <p>{post.description}</p>}
+                  {post.description && (
+                    <p className="font-sans">{post.description}</p>
+                  )}
                 </div>
               </article>
             </>

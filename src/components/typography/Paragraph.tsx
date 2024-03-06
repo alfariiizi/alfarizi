@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
 import { type ComponentPropsWithoutRef } from "react";
 
-const paragraphVariants = cva("text-text [&:not(:first-child)]:mt-4", {
+const paragraphVariants = cva("text-foreground [&:not(:first-child)]:mt-4", {
   variants: {
     size: {
       small: "text-xs leading-5 sm:text-sm sm:leading-6",

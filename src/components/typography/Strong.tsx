@@ -1,14 +1,14 @@
 import { cn } from "@/lib/utils";
 import { type ComponentPropsWithoutRef } from "react";
 
-export function UnorderedList({
+export function Strong({
   className,
   ...props
-}: ComponentPropsWithoutRef<"ul">) {
+}: ComponentPropsWithoutRef<"strong">) {
   return (
-    <ul
+    <strong
       className={cn(
-        "text-foreground my-6 ml-1 list-disc [&>li]:mt-2",
+        "dark:text-blue-alternative-400 text-blue-alternative-600 font-semibold",
         className,
       )}
       {...props}

@@ -22,33 +22,34 @@ export default async function Page({ params }: PostProps) {
   }
 
   return (
-    <Article className="relative mx-auto px-4 pb-16 pt-10 text-text">
+    <Article className="text-foreground relative mx-auto px-4 pb-16 pt-10">
       <ArticleHeader>
         <div className="flex justify-start gap-4">
           {post.icon && <h1 className="text-3xl md:text-4xl">{post.icon}</h1>}
           <h1
             className={cn(
-              "text-2xl font-semibold text-primary sm:text-3xl",
-              "font-display",
+              "font-display text-2xl font-semibold text-primary sm:text-3xl",
             )}
           >
             {post.title}
           </h1>
         </div>
         {post.description && (
-          <p className={cn("text-base sm:text-lg", "font-display")}>
-            {post.description}
-          </p>
+          <p className={cn("text-base sm:text-lg")}>{post.description}</p>
         )}
         <div className="flex h-auto items-center gap-3 sm:gap-7">
           <p
-            className={cn("text-base font-semibold text-slate-500 sm:text-lg")}
+            className={cn(
+              "font-display text-base font-semibold text-slate-500 sm:text-lg",
+            )}
           >
             {formatter.format(new Date(post.date))}
           </p>
-          <div className="h-2 w-2 rounded-full bg-text" />
+          <div className="h-2 w-2 rounded-full bg-accent" />
           <p
-            className={cn("text-base font-semibold text-slate-500 sm:text-lg")}
+            className={cn(
+              "font-display text-base font-semibold text-slate-500 sm:text-lg",
+            )}
           >
             {readingTime(post.body.raw).text}
           </p>
@@ -71,8 +72,7 @@ export default async function Page({ params }: PostProps) {
               key={tag}
               href={`/tag/${tag}`}
               className={cn(
-                "rounded-md bg-text/80 px-2 py-1 text-background duration-150 hover:opacity-80",
-                "font-display",
+                "bg-foreground/80 rounded-md px-2 py-1 text-background duration-150 hover:opacity-80",
               )}
             >
               {tag}

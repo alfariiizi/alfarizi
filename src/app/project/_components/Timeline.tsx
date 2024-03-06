@@ -71,7 +71,7 @@ export function Timeline() {
             >
               <button
                 type="button"
-                className="block h-full w-full bg-secondary px-6 py-5 text-start text-text duration-150 hover:opacity-85"
+                className="text-foreground block h-full w-full bg-secondary px-6 py-5 text-start duration-150 hover:opacity-85"
                 onClick={() => router.push(project.slug)}
               >
                 {" "}

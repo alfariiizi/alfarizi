@@ -1,11 +1,14 @@
 import {
   Blockquote,
+  Code,
+  Empesized,
   Heading1,
   Heading2,
   Heading3,
   Heading4,
   ListItem,
   Paragraph,
+  Strong,
   UnorderedList,
 } from "../typography";
 
@@ -18,4 +21,7 @@ export const elements = {
   blockquote: Blockquote,
   ul: UnorderedList,
   li: ListItem,
+  strong: Strong,
+  em: Empesized,
+  code: Code,
 };

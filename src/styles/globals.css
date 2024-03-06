@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
+/* @layer base {
   :root {
     --text: 245 83% 9%;
     --background: 240 90% 96%;
@@ -16,5 +16,28 @@
     --primary: 244 85% 71%;
     --secondary: 335 85% 35%;
     --accent: 37 80% 53%;
+  }
+} */
+
+@layer base {
+  :root {
+    --foreground: 200 60% 3%;
+    --background: 206 64% 98%;
+    --primary: 209 34% 29%;
+    --primary-foreground: 206 64% 98%;
+    --secondary: 258 12% 72%;
+    --secondary-foreground: 200 60% 3%;
+    --accent: 51 59% 43%;
+    --accent-foreground: 200 60% 3%;
+  }
+  .dark {
+    --foreground: 200 60% 97%;
+    --background: 200 60% 2%;
+    --primary: 209 34% 71%;
+    --primary-foreground: 200 60% 2%;
+    --secondary: 258 12% 28%;
+    --secondary-foreground: 200 60% 97%;
+    --accent: 51 59% 57%;
+    --accent-foreground: 200 60% 2%;
   }
 }

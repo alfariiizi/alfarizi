@@ -12,33 +12,29 @@ export default function HomePage() {
   return (
     <Maxwidthdiv className="relative px-0">
       <div className="z-10 bg-background/60 backdrop-blur-2xl dark:bg-background/80 sm:backdrop-blur-3xl">
-        <Maxwidthdiv className="mt-3 flex h-full flex-col items-center justify-end gap-12 sm:mt-0 sm:h-screen-without-navbar md:flex-row md:justify-between">
+        <Maxwidthdiv className="mt-3 flex h-full flex-col items-center justify-end gap-12 sm:mt-0 sm:h-screen-without-navbar sm:pt-6 md:flex-row md:justify-between">
           <div className="flex max-w-3xl flex-col gap-6 md:mb-28 md:gap-10">
             <div className="flex flex-col-reverse gap-4 sm:flex-row">
               <h1
                 className={cn(
-                  "font-display",
-                  "text-4xl font-black text-primary md:text-5xl",
+                  "font-display text-4xl font-black text-primary md:text-5xl md:leading-snug",
                 )}
               >
                 Hey there &#128075; <br /> I&apos;m a{" "}
                 <span className="text-secondary">Cat lover</span>, Developer,
                 and Nerd.
               </h1>
-              <div>
-                {/* <div className="size-[150px] bg-gray-400" /> */}
-                <div className="relative mx-auto h-[150px] w-[150px] overflow-clip rounded-full bg-primary p-2 shadow-lg">
-                  <Image
-                    src={ImgHero}
-                    alt="Alfarizi"
-                    placeholder="blur"
-                    width={200}
-                    height={200}
-                    className="absolute"
-                    priority
-                    draggable={false}
-                  />
-                </div>
+              <div className="relative mx-auto !aspect-square h-[150px] w-[150px] overflow-clip rounded-full bg-primary p-2 shadow-lg sm:h-[120px]">
+                <Image
+                  src={ImgHero}
+                  alt="Alfarizi"
+                  placeholder="blur"
+                  width={200}
+                  height={200}
+                  className="absolute aspect-square"
+                  priority
+                  draggable={false}
+                />
               </div>
             </div>
             <div className="flex flex-col gap-6 leading-7">
