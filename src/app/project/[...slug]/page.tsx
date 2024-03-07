@@ -1,6 +1,7 @@
 import { allProjects } from ".contentlayer/generated";
 import { notFound } from "next/navigation";
 
+import Tag from "@/app/_components/Tag";
 import { Mdx } from "@/components/mdx/MDXComponets";
 import {
   Article,
@@ -166,7 +167,7 @@ export default async function PostPage({ params }: PostProps) {
             <Link
               href={post.link}
               target="_blank"
-              className="decoration-foreground inline h-fit underline underline-offset-2 duration-150 hover:opacity-80"
+              className="inline h-fit underline decoration-foreground underline-offset-2 duration-150 hover:opacity-80"
             >
               {post.link}
             </Link>
@@ -184,15 +185,7 @@ export default async function PostPage({ params }: PostProps) {
         </p>
         <div className="flex flex-wrap gap-3">
           {post.tags.map((tag) => (
-            <Link
-              key={tag}
-              href={`/tag/${tag}`}
-              className={cn(
-                "bg-foreground/80 rounded-md px-2 py-1 text-sm text-background duration-150 hover:opacity-80 sm:text-base",
-              )}
-            >
-              {tag}
-            </Link>
+            <Tag key={tag} tag={tag} />
           ))}
         </div>
       </ArticleFooter>

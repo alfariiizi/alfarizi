@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 
+import Tag from "@/app/_components/Tag";
 import { Mdx } from "@/components/mdx/MDXComponets";
 import {
   Article,
@@ -8,7 +9,6 @@ import {
   ArticleHeader,
 } from "@/components/ui/article";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
 import readingTime from "reading-time";
 import { getPostFromParams, type PostProps } from "./lib/getPostFromParams";
 
@@ -65,18 +65,12 @@ export default async function Page({ params }: PostProps) {
       {/* <div className="mb-10 mt-10 border-t-2 border-dashed border-gray-300 dark:border-gray-800" /> */}
 
       <ArticleFooter>
-        <p className={cn("text-base font-semibold sm:text-lg")}>Tags:</p>
+        <p className={cn("font-display text-base font-semibold sm:text-lg")}>
+          Tags:
+        </p>
         <div className="flex flex-wrap gap-3">
           {post.tags.map((tag) => (
-            <Link
-              key={tag}
-              href={`/tag/${tag}`}
-              className={cn(
-                "bg-foreground/80 rounded-md px-2 py-1 text-sm text-background duration-150 hover:opacity-80 sm:text-base",
-              )}
-            >
-              {tag}
-            </Link>
+            <Tag key={tag} tag={tag} />
           ))}
         </div>
       </ArticleFooter>
