@@ -43,34 +43,36 @@ export default async function layout({ params, children }: Props) {
 
   return (
     <Maxwidthdiv smallPadding className="flex gap-6" lang="id">
-      <div className="hidden w-[100px] lg:block" />
+      {post.toc && <div className="hidden w-[100px] lg:block" />}
       {/* Article */}
       {children}
       {/* Table of content */}
-      <div className="sticky left-0 top-0 hidden h-fit max-w-[360px] flex-col gap-4 pt-20 text-base lg:flex">
-        <h3 className="font-semibold text-gray-400 dark:text-gray-600">
-          On this page
-        </h3>
-        <div className="flex flex-col gap-3">
-          {headings.map((heading) => {
-            if (!heading.level) {
-              return undefined;
-            }
+      {post.toc && (
+        <div className="sticky left-0 top-0 hidden h-fit w-[260px] flex-col gap-4 pt-20 text-base lg:flex">
+          <h3 className="font-semibold text-gray-400 dark:text-gray-600">
+            On this page
+          </h3>
+          <div className="flex flex-col gap-3">
+            {headings.map((heading) => {
+              if (!heading.level) {
+                return undefined;
+              }
 
-            return (
-              <div key={`#${heading.slug}`}>
-                <a
-                  data-level={heading.level}
-                  href={`#${heading.slug}`}
-                  className="flex leading-tight opacity-60 duration-150 hover:opacity-100 data-[level=four]:pl-[2rem] data-[level=three]:pl-4 data-[level=two]:pl-0"
-                >
-                  {heading.text}
-                </a>
-              </div>
-            );
-          })}
+              return (
+                <div key={`#${heading.slug}`}>
+                  <a
+                    data-level={heading.level}
+                    href={`#${heading.slug}`}
+                    className="flex leading-tight opacity-60 duration-150 hover:opacity-100 data-[level=four]:pl-[2rem] data-[level=three]:pl-4 data-[level=two]:pl-0"
+                  >
+                    {heading.text}
+                  </a>
+                </div>
+              );
+            })}
+          </div>
         </div>
-      </div>
+      )}
     </Maxwidthdiv>
   );
 }

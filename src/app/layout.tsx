@@ -4,7 +4,7 @@ import "highlight.js/styles/github-dark.css";
 
 import { env } from "@/env";
 import { type Metadata } from "next";
-import { Inter, Josefin_Sans, Laila, Playfair_Display } from "next/font/google";
+import { Inter, Josefin_Sans } from "next/font/google";
 import { Navbar } from "./_components/Navbar";
 import { Providers } from "./_components/Providers";
 import { layout } from "./_components/shared";
@@ -12,18 +12,6 @@ import { layout } from "./_components/shared";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
-});
-
-const laila = Laila({
-  subsets: ["latin"],
-  variable: "--font-display",
-  weight: ["400", "500", "600", "700"],
-});
-
-const playfairDisplay = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-display",
-  weight: ["400", "500", "600", "700", "800", "900"],
 });
 
 const josefinSans = Josefin_Sans({

@@ -89,6 +89,10 @@ export const Post = defineDocumentType(() => ({
     icon: {
       type: "string",
     },
+    toc: {
+      type: "boolean",
+      default: false,
+    },
     tags: {
       type: "list",
       of: { type: "string" },
@@ -137,6 +141,10 @@ export const Project = defineDocumentType(() => ({
       type: "list",
       of: { type: "string" },
       required: true,
+    },
+    toc: {
+      type: "boolean",
+      default: false,
     },
   },
   computedFields: {
