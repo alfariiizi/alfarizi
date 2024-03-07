@@ -19,7 +19,7 @@ export default function Page() {
             "font-display",
           )}
         >
-          Latest posts &#9997;
+          Latest posts ✍️
         </h2>
         <div className={cn("flex flex-col gap-10", "font-display")}>
           {sortedPost.map((post) => (
@@ -33,12 +33,14 @@ export default function Page() {
                     href={post.slug}
                     className="w-fit duration-150 hover:opacity-70"
                   >
-                    <h3 className="text-xl font-semibold text-primary">
+                    <h3 className="text-lg font-semibold text-primary sm:text-xl">
                       {post.title}
                     </h3>
                   </Link>
                   {post.description && (
-                    <p className="font-sans">{post.description}</p>
+                    <p className="font-sans text-sm sm:text-base">
+                      {post.description}
+                    </p>
                   )}
                 </div>
               </article>
