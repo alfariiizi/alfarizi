@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { RiHome2Line } from "react-icons/ri";
 import { menus } from "./shared";
 
 export default function LargerNavbar() {
@@ -11,7 +10,7 @@ export default function LargerNavbar() {
         href={home.href}
         className="flex items-center gap-1 rounded-lg bg-primary px-3 py-2 text-background duration-150 hover:opacity-80"
       >
-        <RiHome2Line />
+        <home.icon />
         {home.label}
       </Link>
       {others.map((menu) => (
