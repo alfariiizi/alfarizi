@@ -22,7 +22,7 @@ export default async function Page({ params }: PostProps) {
   }
 
   return (
-    <Article className="text-foreground relative mx-auto px-4 pb-16 pt-10">
+    <Article lang="id">
       <ArticleHeader>
         <div className="flex justify-start gap-4">
           {post.icon && <h1 className="text-3xl md:text-4xl">{post.icon}</h1>}
@@ -65,14 +65,14 @@ export default async function Page({ params }: PostProps) {
       {/* <div className="mb-10 mt-10 border-t-2 border-dashed border-gray-300 dark:border-gray-800" /> */}
 
       <ArticleFooter>
-        <p className={cn("font-semibold", "font-display")}>Tags:</p>
+        <p className={cn("text-base font-semibold sm:text-lg")}>Tags:</p>
         <div className="flex flex-wrap gap-3">
           {post.tags.map((tag) => (
             <Link
               key={tag}
               href={`/tag/${tag}`}
               className={cn(
-                "bg-foreground/80 rounded-md px-2 py-1 text-background duration-150 hover:opacity-80",
+                "bg-foreground/80 rounded-md px-2 py-1 text-sm text-background duration-150 hover:opacity-80 sm:text-base",
               )}
             >
               {tag}
