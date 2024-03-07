@@ -50,6 +50,17 @@ export default {
           800: "#0e3140",
           900: "#071920",
         },
+        "yellow-alternative": {
+          100: "#fef3d5",
+          200: "#fde7ab",
+          300: "#fbda82",
+          400: "#face58",
+          500: "#f9c22e",
+          600: "#c79b25",
+          700: "#95741c",
+          800: "#644e12",
+          900: "#322709",
+        },
       },
       height: {
         "screen-without-navbar": `calc(100dvh - ${navbar.height} - ${layout.paddingTop} - ${layout.paddingBottom})`,

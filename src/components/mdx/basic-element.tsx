@@ -1,4 +1,5 @@
 import {
+  Anchor,
   Blockquote,
   Code,
   Empesized,
@@ -24,4 +25,5 @@ export const elements = {
   strong: Strong,
   em: Empesized,
   code: Code,
+  a: Anchor,
 };

@@ -9,7 +9,7 @@ export function Heading3({
   return (
     <h3
       className={cn(
-        "text-foreground dark:text-purple-alternative-300 text-purple-alternative-700 scroll-m-20 text-lg font-semibold tracking-tight sm:text-xl",
+        "text-foreground dark:text-purple-alternative-300 text-purple-alternative-700 scroll-m-20 font-display text-lg font-semibold tracking-tight sm:text-xl",
         className,
       )}
       {...props}

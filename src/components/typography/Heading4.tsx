@@ -9,7 +9,7 @@ export function Heading4({
   return (
     <h4
       className={cn(
-        "text-foreground 400 dark:text-purple-alternative-300 text-purple-alternative-700 scroll-m-20 text-sm font-semibold tracking-tight sm:text-base",
+        "dark:text-purple-alternative-300 text-purple-alternative-700 scroll-m-20 font-display text-base font-semibold tracking-tight sm:text-lg",
         className,
       )}
       {...props}

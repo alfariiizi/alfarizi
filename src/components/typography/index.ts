@@ -1,3 +1,4 @@
+export * from "./Anchor";
 export * from "./Blockquote";
 export * from "./Code";
 export * from "./Empesized";
