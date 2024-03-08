@@ -1,6 +1,5 @@
 import { cn } from "@/lib/utils";
 import "@/styles/globals.css";
-import "highlight.js/styles/github-dark.css";
 
 import { env } from "@/env";
 import { type Metadata } from "next";
@@ -46,7 +45,7 @@ export default function RootLayout({
           `font-sans ${inter.variable}`,
           josefinSans.variable,
           // GeistSans.variable,
-          "text-foreground bg-background",
+          "bg-background text-foreground",
         )}
       >
         <Providers>

@@ -9,6 +9,7 @@ import {
   Heading4,
   ListItem,
   Paragraph,
+  Pre,
   Strong,
   UnorderedList,
 } from "../typography";
@@ -26,4 +27,5 @@ export const elements = {
   em: Empesized,
   code: Code,
   a: Anchor,
+  pre: Pre,
 };

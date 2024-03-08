@@ -75,6 +75,7 @@ export default {
         // https://stackoverflow.com/questions/66594385/how-do-i-modify-the-default-styling-of-the-typography-prose-class-in-tailwindcss?newreg=53bd1cf2d09943f8b35b0528c1a0794c
         DEFAULT: {
           css: {
+            width: "100%",
             maxWidth: "80ch", // add required value here
             fontSize: "1rem",
             // "&:hover": {
@@ -85,6 +86,7 @@ export default {
         },
         sm: {
           css: {
+            width: "100%", // add required value here
             fontSize: "16px",
           },
         },

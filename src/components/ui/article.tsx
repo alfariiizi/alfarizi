@@ -16,7 +16,7 @@ const Article = React.forwardRef<
     ref={ref}
     className={cn(
       "flex max-w-[80ch] flex-col gap-6 divide-y-2 divide-dashed divide-gray-300 dark:divide-gray-800",
-      "text-foreground relative mx-auto px-4 pb-16 pt-10",
+      "relative mx-auto px-4 pb-16 pt-10 text-foreground",
       className,
     )}
     {...props}
@@ -50,7 +50,7 @@ const ArticleContent = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("prose pt-6 dark:prose-invert", className)}
+    className={cn("prose w-full pt-6 dark:prose-invert", className)}
     {...props}
   />
 ));

@@ -8,5 +8,6 @@ export * from "./Heading3";
 export * from "./Heading4";
 export * from "./ListItem";
 export * from "./Paragraph";
+export * from "./Pre";
 export * from "./Strong";
 export * from "./UnorderedList";

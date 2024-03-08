@@ -1,6 +1,12 @@
-import { defineDocumentType, makeSource } from "contentlayer/source-files";
+import {
+  defineDocumentType,
+  makeSource,
+  type ComputedFields,
+} from "contentlayer/source-files";
 import GithubSlugger from "github-slugger";
-import rehypeHighlight from "rehype-highlight";
+import rehypePrettyCode, {
+  type Options as RehypePrettyCodeOption,
+} from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
 import { env } from "./src/env";
@@ -12,7 +18,7 @@ import { getBase64 } from "./src/lib/getBase64";
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 
 /** @type {import('contentlayer/source-files').ComputedFields} */
-const computedFields = {
+const computedFields: ComputedFields = {
   slug: {
     type: "string",
     resolve: (doc) => `/${doc._raw.flattenedPath}`,
@@ -26,8 +32,7 @@ const computedFields = {
     resolve: async (doc) => {
       const regXHeader = /\n(?<flag>#{1,6})\s+(?<content>.+)/g;
       const slugger = new GithubSlugger();
-      /** @type string */
-      const raw = doc.body.raw;
+      const raw = doc.body.raw as string;
       const headings = Array.from(raw.matchAll(regXHeader)).map(
         ({ groups }) => {
           const flag = groups?.flag;
@@ -159,13 +164,25 @@ export const Project = defineDocumentType(() => ({
   },
 }));
 
+const rehypePrettyCodeOption: RehypePrettyCodeOption = {
+  grid: true,
+  theme: "dark-plus",
+  keepBackground: false,
+};
+
 export default makeSource({
   contentDirPath: "./content",
   documentTypes: [Post, Page, Project],
   mdx: {
     remarkPlugins: [remarkGfm],
-    // eslint-disable-next-line
-    // @ts-ignore
-    rehypePlugins: [rehypeHighlight, rehypeSlug],
+    rehypePlugins: [
+      rehypeSlug,
+      [
+        // eslint-disable-next-line
+        // @ts-ignore
+        rehypePrettyCode,
+        rehypePrettyCodeOption,
+      ],
+    ],
   },
 });
