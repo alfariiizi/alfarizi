@@ -4,11 +4,13 @@ import {
   type ComputedFields,
 } from "contentlayer/source-files";
 import GithubSlugger from "github-slugger";
+import rehypeKatex from "rehype-katex";
 import rehypePrettyCode, {
   type Options as RehypePrettyCodeOption,
 } from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
 import { env } from "./src/env";
 import { getBase64 } from "./src/lib/getBase64";
 
@@ -16,8 +18,8 @@ import { getBase64 } from "./src/lib/getBase64";
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 
-/** @type {import('contentlayer/source-files').ComputedFields} */
 const computedFields: ComputedFields = {
   slug: {
     type: "string",
@@ -174,11 +176,12 @@ export default makeSource({
   contentDirPath: "./content",
   documentTypes: [Post, Page, Project],
   mdx: {
-    remarkPlugins: [remarkGfm],
+    remarkPlugins: [remarkGfm, remarkMath],
     rehypePlugins: [
       rehypeSlug,
+      // @ts-ignore
+      rehypeKatex,
       [
-        // eslint-disable-next-line
         // @ts-ignore
         rehypePrettyCode,
         rehypePrettyCodeOption,

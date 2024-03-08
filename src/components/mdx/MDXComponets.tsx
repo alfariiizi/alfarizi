@@ -2,12 +2,14 @@ import { useMDXComponent } from "next-contentlayer/hooks";
 import Link from "next/link";
 import { Callout } from "./Callout";
 import { Image } from "./Image";
+import { Math } from "./Math";
 import { elements } from "./basic-element";
 
 const components = {
   Image,
   Callout,
   Link,
+  Math,
   ...elements,
 };
 
