@@ -30,32 +30,14 @@ export default function MobileNavbar() {
             }}
             className="fixed left-0 w-full bg-background px-10 py-8 shadow-2xl backdrop-blur-md"
           >
-            <ul className="flex w-full flex-col gap-10">
+            <ul className="flex w-full flex-col gap-6">
               {menus.map((menu) => (
                 <Link
                   key={menu.label}
                   href={menu.href}
-                  className="w-fit duration-150 hover:opacity-70"
+                  className="w-full py-2 duration-150 hover:opacity-70"
                   onClick={() => setOpen(false)}
                 >
-                  {/* <motion.li
-                    initial={{
-                      scale: 0,
-                      opacity: 0,
-                    }}
-                    animate={{
-                      scale: 1,
-                      opacity: 1,
-                    }}
-                    transition={{
-                      duration: 0.1,
-                      type: "tween",
-                      delay: 0.05 + index / 20,
-                    }}
-                    className="w-full rounded-lg border-2 border-text px-4 py-3 text-lg duration-150 hover:opacity-70"
-                  >
-                    {menu.label}
-                  </motion.li> */}
                   <li className="inline-flex w-fit items-center gap-3">
                     <menu.icon className="size-5" /> {menu.label}
                   </li>
