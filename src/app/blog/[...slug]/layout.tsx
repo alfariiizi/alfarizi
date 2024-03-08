@@ -1,4 +1,3 @@
-import { allPosts } from ".contentlayer/generated";
 import { Maxwidthdiv } from "@/app/_components/Maxwindthdiv";
 import { type Heading } from "@/app/types/toc";
 import { type Metadata } from "next";
@@ -21,11 +20,11 @@ export async function generateMetadata({
   };
 }
 
-export async function generateStaticParams(): Promise<PostProps["params"][]> {
-  return allPosts.map((post) => ({
-    slug: post.slugAsParams.split("/"),
-  }));
-}
+// export async function generateStaticParams(): Promise<PostProps["params"][]> {
+//   return allPosts.map((post) => ({
+//     slug: post.slugAsParams.split("/"),
+//   }));
+// }
 
 type Props = {
   children: React.ReactNode;
