@@ -23,10 +23,10 @@ Dalam waktu 1 bulan ini, saya baru saja nyobain neovim. Saya merasa banyak hal y
 
 Neovim pertama kali diperkenalkan ke publik pada tahun 2014. Secara singkat, neovim itu sebenernya merupakan improvisasi dari vim. Buat kalian yang belum tau, vim sendiri diperkenalkan pada tahun 1991 dan merupakan improvisasi dari vi. Jadi ya bisa dianggap saling improve gitu dari vim, ke vim, hingga ke neovim (untuk sejauh ini).
 
-<Alert>
+<Callout>
   Pada postingan lain, saya bakalan bikin pembahasan mengenai editor apa yang
   kira kira bakalan bisa menggantikan neovim.
-</Alert>
+</Callout>
 
 Dalam melakukan konfigurasi, neovim menggunakan bahasa **lua**, sedangkan vim menggunakan bahasa vimscript. Penggunaan bahasa lua ini merupakan point plus karena menurut saya pribadi vimscript mempunyai syntax yang cukup susah dipahami.
 
@@ -36,13 +36,13 @@ Pada dasarnya, neovim tidak menyediakan cara untuk me-manage plugin. Namun, deng
 
 Untuk aktifitas programming, neovim tidak out of the box mempunyai fitur autocompletion, syntax highlighting, dan manajerial LSP, sehingga diperlukan setting manual neovim agar fitur tersebut bisa berjalan. Salah satu plugin - plugin yang bisa digunakan adalah [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) untuk autocompletion, [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) untuk syntax highlighting, dan [mason.nvim](https://github.com/williamboman/mason.nvim) untuk manajerial LSP.
 
-<Alert>
+<Callout>
   **LSP** merupakan singkatan dari **Language Server Protocol**, yang mana
   merupakan protocol agar code editor atau IDE bisa berkomunikasi dengan
   _Language Server_. Tujuannya adalah agar code editor atau IDE bisa mendapatkan
   autocompletion berdasarkan bahasa pemrograman yang sedang ditulis, go to
   definition, find all references, dll.
-</Alert>
+</Callout>
 
 Jika kalian sudah membaca sampai bagian ini, mungkin kalian bakalan mikir: "_Kok ribet banget ya pakek Neovim_". Emang iya, ribet. Tapi balik lagi, karena the power of community, muncullah **neovim distro** yang mana merupakan pre-configure neovim, sehingga kalian bisa langsung pakek neovim tanpa perlu melakukan banyak konfigurasi diawal. Beberapa neovim distro yang paling populer adalah [AstroNvim](https://astronvim.com), [LunarVim](https://www.lunarvim.org), [NvChad](https://nvchad.com), dan [LazyVim](https://www.lazyvim.org).
 

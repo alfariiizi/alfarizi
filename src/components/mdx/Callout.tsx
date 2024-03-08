@@ -11,7 +11,7 @@ type Props = {
   children?: React.ReactNode;
 };
 
-export function Alert({ title, children, variant = "info" }: Props) {
+export function Callout({ title, children, variant = "info" }: Props) {
   const titleDisplay =
     title ?? `${variant.split("")[0]?.toUpperCase()}${variant.slice(1)}`;
 
