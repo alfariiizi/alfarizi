@@ -17,7 +17,7 @@ export default function CounterDemo() {
           key={count}
           initial={{
             opacity: 0,
-            translateX: 30 * factor,
+            translateX: 50 * factor,
           }}
           animate={{
             opacity: 1,
