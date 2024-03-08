@@ -28,7 +28,8 @@
     "paths": {
       "@/*": ["./src/*"],
       "@public/*": ["./public/*"],
-      ".contentlayer/*": [".contentlayer/*"]
+      ".contentlayer/*": [".contentlayer/*"],
+      "@content/*": ["./content/*"]
     }
   },
   "include": [
