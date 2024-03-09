@@ -41,47 +41,47 @@ export default function HomePage() {
               <RoughNotationGroup show>
                 <p>
                   24 years old nerd who interested in several IT fields,
-                  including <br className="sm:hidden" />
+                  including{" "}
                   <RoughNotation type="highlight" color="hsl(var(--accent))">
-                    Web development
+                    <span className="text-nowrap">Web development</span>
                   </RoughNotation>
                   ,{" "}
                   <RoughNotation type="underline" color="hsl(var(--accent))">
-                    Data Science
+                    <span className="text-nowrap">Data Science</span>
                   </RoughNotation>{" "}
-                  / <br />
+                  /{" "}
                   <RoughNotation type="underline" color="hsl(var(--accent))">
-                    Data Analyst
+                    <span className="text-nowrap">Data Analyst</span>
                   </RoughNotation>
-                  , and <br className="sm:hidden" />
+                  , and{" "}
                   <RoughNotation type="underline" color="hsl(var(--accent))">
-                    Computer Graphics
+                    <span className="text-nowrap">Computer Graphics</span>
                   </RoughNotation>
                   .
                 </p>
                 <p>
                   My most in-depth experience so far has been in{" "}
                   <RoughNotation type="underline" color="hsl(var(--accent))">
-                    Web development
+                    <span className="text-nowrap">Web development</span>
                   </RoughNotation>
                   . The frontend library I use is{" "}
                   <RoughNotation type="circle" color="hsl(var(--accent))">
-                    Reactjs
+                    <span className="text-nowrap">Reactjs</span>
                   </RoughNotation>
                   , while the framework I utilize for full-stack development is{" "}
                   <RoughNotation type="highlight" color="hsl(var(--accent))">
-                    Next.js
+                    <span className="text-nowrap">Next.js</span>
                   </RoughNotation>
                   .
                 </p>
                 <p className="">
                   Furthermore, in other IT fields, I primarily use{" "}
                   <RoughNotation type="underline" color="hsl(var(--accent))">
-                    Python
+                    <span className="text-nowrap">Python</span>
                   </RoughNotation>{" "}
                   for data processing, and also I use{" "}
                   <RoughNotation type="circle" color="hsl(var(--accent))">
-                    Vulkan API
+                    <span className="text-nowrap">Vulkan API</span>
                   </RoughNotation>{" "}
                   as the primary graphics API in my personal projects within
                   Computer Graphics.
