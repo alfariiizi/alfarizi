@@ -15,6 +15,7 @@ import { env } from "@/env";
 import emailjs from "@emailjs/browser";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { z } from "zod";
 
 const formSchema = z.object({
@@ -68,6 +69,7 @@ export default function Form() {
     // console.log(res);
 
     if (res.ok) {
+      toast.success("Successfully send an email!", { duration: 4000 });
       form.reset({
         email: "",
         message: "",
@@ -108,8 +110,12 @@ export default function Form() {
             </FormItem>
           )}
         />
-        <Button type="submit" disabled={form.formState.isSubmitting}>
-          Submit
+        <Button
+          type="submit"
+          disabled={form.formState.isSubmitting}
+          className="w-20"
+        >
+          Send
         </Button>
       </form>
     </FormRoot>
