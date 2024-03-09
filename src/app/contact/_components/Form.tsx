@@ -11,8 +11,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { env } from "@/env";
-import emailjs from "@emailjs/browser";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -35,38 +33,14 @@ export default function Form() {
   });
 
   async function onSubmit(values: FormSchema) {
-    const res = await emailjs
-      .send(
-        "service_phmvnjq",
-        "template_djdmdim",
-        {
-          from_email: values.email,
-          message: values.message,
-        },
-        {
-          publicKey: env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
-        },
-      )
-      .then(() => {
-        return {
-          ok: true,
-        };
-      })
-      .catch((err) => {
-        console.error(err);
-        return {
-          ok: false,
-        };
-      });
-
-    // const data = new URLSearchParams();
-    // data.append("email", values.email);
-    // data.append("message", values.message);
-    // const res = await fetch("/api/email", {
-    //   method: "POST",
-    //   body: data,
-    // });
-    // console.log(res);
+    const data = new URLSearchParams();
+    data.append("email", values.email);
+    data.append("message", values.message);
+    const res = await fetch("/api/email", {
+      method: "POST",
+      body: data,
+    });
+    console.log(res);
 
     if (res.ok) {
       toast.success("Successfully send an email!", { duration: 4000 });
@@ -112,8 +86,9 @@ export default function Form() {
         />
         <Button
           type="submit"
+          size="lg"
           disabled={form.formState.isSubmitting}
-          className="w-20"
+          className="w-full md:w-24"
         >
           Send
         </Button>

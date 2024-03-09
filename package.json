@@ -10,11 +10,12 @@
     "start": "next start"
   },
   "dependencies": {
-    "@emailjs/browser": "^4.3.3",
     "@hookform/resolvers": "^3.3.4",
     "@plaiceholder/next": "^3.0.0",
     "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-slot": "^1.0.2",
+    "@react-email/components": "^0.0.15",
+    "@react-email/tailwind": "^0.0.14",
     "@t3-oss/env-nextjs": "^0.7.1",
     "@tailwindcss/typography": "^0.5.10",
     "@theme-toggles/react": "^4.1.0",
@@ -46,6 +47,7 @@
     "rehype-slug": "^6.0.0",
     "remark-gfm": "3.0.1",
     "remark-math": "^6.0.0",
+    "resend": "^3.2.0",
     "sharp": "0.32.6",
     "shiki": "^1.1.7",
     "tailwind-merge": "^2.2.1",

@@ -10,6 +10,7 @@ export const env = createEnv({
     NODE_ENV: z.enum(["development", "test", "production"]),
     PROJECT_NAME: z.string(),
     GOOGLE_VERIFICATION_ID: z.string().optional(),
+    RESEND_API_KEY: z.string(),
   },
 
   /**
@@ -19,7 +20,6 @@ export const env = createEnv({
    */
   client: {
     NEXT_PUBLIC_URL: z.string(),
-    NEXT_PUBLIC_EMAILJS_PUBLIC_KEY: z.string(),
   },
 
   /**
@@ -27,11 +27,14 @@ export const env = createEnv({
    * middlewares) or client-side so we need to destruct manually.
    */
   runtimeEnv: {
+    // [Server]
     NODE_ENV: process.env.NODE_ENV,
     PROJECT_NAME: "Alfarizi",
-    NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_URL,
     GOOGLE_VERIFICATION_ID: process.env.GOOGLE_VERIFICATION_ID,
-    NEXT_PUBLIC_EMAILJS_PUBLIC_KEY: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
+    RESEND_API_KEY: process.env.RESEND_API_KEY,
+
+    // [Client]
+    NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_URL,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
