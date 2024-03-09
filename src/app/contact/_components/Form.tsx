@@ -11,6 +11,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { env } from "@/env";
+import emailjs from "@emailjs/browser";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -27,11 +29,50 @@ export default function Form() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
+      message: "",
     },
   });
 
-  function onSubmit(values: FormSchema) {
-    console.log(values);
+  async function onSubmit(values: FormSchema) {
+    const res = await emailjs
+      .send(
+        "service_phmvnjq",
+        "template_djdmdim",
+        {
+          from_email: values.email,
+          message: values.message,
+        },
+        {
+          publicKey: env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
+        },
+      )
+      .then(() => {
+        return {
+          ok: true,
+        };
+      })
+      .catch((err) => {
+        console.error(err);
+        return {
+          ok: false,
+        };
+      });
+
+    // const data = new URLSearchParams();
+    // data.append("email", values.email);
+    // data.append("message", values.message);
+    // const res = await fetch("/api/email", {
+    //   method: "POST",
+    //   body: data,
+    // });
+    // console.log(res);
+
+    if (res.ok) {
+      form.reset({
+        email: "",
+        message: "",
+      });
+    }
   }
 
   return (
@@ -67,7 +108,9 @@ export default function Form() {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit" disabled={form.formState.isSubmitting}>
+          Submit
+        </Button>
       </form>
     </FormRoot>
   );
