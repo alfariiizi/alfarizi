@@ -102,7 +102,7 @@ export default function Form() {
               <FormControl>
                 <Textarea
                   className="min-h-[8rem]"
-                  placeholder="I want to know more about you!"
+                  placeholder="Let's connect with me!"
                   {...field}
                 />
               </FormControl>
