@@ -17,7 +17,7 @@ export default function LargerNavbar() {
         <Link
           key={menu.label}
           href={menu.href}
-          className="duration-150 hover:opacity-80"
+          className="w-fit text-nowrap duration-150 hover:opacity-80"
         >
           {menu.label}
         </Link>

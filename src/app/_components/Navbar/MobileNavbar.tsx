@@ -39,7 +39,7 @@ export default function MobileNavbar() {
                   onClick={() => setOpen(false)}
                 >
                   <li className="inline-flex w-fit items-center gap-3">
-                    <menu.icon className="size-5" /> {menu.label}
+                    <menu.icon /> {menu.label}
                   </li>
                 </Link>
               ))}
