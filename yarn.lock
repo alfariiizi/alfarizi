@@ -3361,6 +3361,11 @@ lru-cache@^6.0.0:
   resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-10.2.0.tgz#0bd445ca57363465900f4d1f9bd8db343a4d95c3"
   integrity sha512-2bIM8x+VAf6JT4bKAljS1qUWgMsqZRPGJS6FSahIMPVvctcNhyVp7AJu7quxOW9jwkryBReKZY5tY5JYv2n/7Q==
 
+lucide-react@^0.352.0:
+  version "0.352.0"
+  resolved "https://registry.yarnpkg.com/lucide-react/-/lucide-react-0.352.0.tgz#a260cabdb03a220d11518420e64c3377be42b90a"
+  integrity sha512-GKzcxx6H6PT9onMPN9zxyD4KNqgHDoVaY+ad14vhTzBdXFm3FQZhH5XeP8sHJRhLk9imHHta/8DZe55kd/KerQ==
+
 markdown-extensions@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/markdown-extensions/-/markdown-extensions-1.1.1.tgz#fea03b539faeaee9b4ef02a3769b455b189f7fc3"
@@ -5591,6 +5596,11 @@ tailwind-merge@^2.2.1:
   integrity sha512-o+2GTLkthfa5YUt4JxPfzMIpQzZ3adD1vLVkvKE1Twl9UAhGsEbIZhHHZVRttyW177S8PDJI3bTQNaebyofK3Q==
   dependencies:
     "@babel/runtime" "^7.23.7"
+
+tailwindcss-animate@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/tailwindcss-animate/-/tailwindcss-animate-1.0.7.tgz#318b692c4c42676cc9e67b19b78775742388bef4"
+  integrity sha512-bl6mpH3T7I3UFxuvDEXLxy/VuFxBk5bbzplh7tXI68mwMokNYd1t9qPBHlnyTwfa4JGC4zP516I1hYYtQ/vspA==
 
 tailwindcss@^3.3.5:
   version "3.4.1"
