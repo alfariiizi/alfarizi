@@ -1,6 +1,6 @@
 import { BsPostcard, BsTags } from "react-icons/bs";
 import { PiProjectorScreenChart } from "react-icons/pi";
-import { RiContactsBookLine, RiHome2Line } from "react-icons/ri";
+import { RiContactsBookLine, RiHome2Line, RiStackLine } from "react-icons/ri";
 
 export const menus = [
   {
@@ -23,6 +23,16 @@ export const menus = [
     href: "/tag",
     icon: () => <BsTags className="size-5" />,
   },
+  {
+    label: "Tech",
+    href: "/tech",
+    icon: () => <RiStackLine className="size-5" />,
+  },
+  // {
+  //   label: "Tools",
+  //   href: "/tools",
+  //   icon: () => <VscTools className="size-5" />,
+  // },
   {
     label: "Contact",
     href: "/contact",
