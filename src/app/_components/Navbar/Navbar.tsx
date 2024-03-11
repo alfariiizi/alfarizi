@@ -8,7 +8,7 @@ import MobileNavbar from "./MobileNavbar";
 
 export function Navbar() {
   return (
-    <nav className="sticky inset-x-0 top-0 z-[100] bg-background/90 backdrop-blur-md">
+    <nav className="sticky inset-x-0 top-0 z-[100] bg-background/90 backdrop-blur-lg md:bg-background/60 md:backdrop-blur-md">
       <Maxwidthdiv
         smallPadding
         className="flex items-center justify-between"
