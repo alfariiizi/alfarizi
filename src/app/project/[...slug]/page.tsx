@@ -65,73 +65,6 @@ export default async function PostPage({ params }: PostProps) {
     startYear === endYear ? startYear : `${startYear} - ${endYear}`;
 
   return (
-    // <article
-    //   lang="id"
-    //   className="text-foreground prose mx-auto px-4 pb-16 pt-14 dark:prose-invert"
-    // >
-    //   <h1 className={cn("text-3xl text-primary sm:text-4xl", "font-display")}>
-    //     {post.title} ({post.company})
-    //   </h1>
-    //   <p className={cn("mb-1 mt-0 text-base sm:text-lg", "font-display")}>
-    //     {post.description}
-    //   </p>
-    //   <div className="mb-0 flex h-fit items-center gap-7">
-    //     <p
-    //       className={cn(
-    //         "mt-1 text-base font-semibold text-blue-700 dark:text-blue-300 sm:text-lg",
-    //         "font-display",
-    //       )}
-    //     >
-    //       {displayYear}
-    //     </p>
-    //     <div className="mb-5 h-2 w-2 rounded-full bg-text" />
-    //     <p
-    //       className={cn(
-    //         "mt-1 text-base font-semibold text-blue-700 dark:text-blue-300 sm:text-lg",
-    //         "font-display",
-    //       )}
-    //     >
-    //       {readingTime(post.body.raw).text}
-    //     </p>
-    //   </div>
-
-    //   )}
-
-    //   <div className="mb-10 mt-0 border-t-2 border-dashed border-gray-300 dark:border-gray-800" />
-
-    //   {post.body.raw.length === 0 ? (
-    //     <p>The project detail is in process to be made.</p>
-    //   ) : (
-    //     <Mdx code={post.body.code} />
-    //   )}
-
-    //   <div className="mb-10 mt-10 border-t-2 border-dashed border-gray-300 dark:border-gray-800" />
-
-    //   <div>
-    //     <p
-    //       className={cn(
-    //         "mb-0 text-base font-semibold sm:text-lg",
-    //         "font-display",
-    //       )}
-    //     >
-    //       Tags:
-    //     </p>
-    //     <div className="flex flex-wrap gap-3">
-    //       {post.tags.map((tag) => (
-    //         <Link
-    //           key={tag}
-    //           href={`/tag/${tag}`}
-    //           className={cn(
-    //             "rounded-md bg-text/80 px-2 py-1 text-background duration-150 hover:opacity-70",
-    //             "font-display",
-    //           )}
-    //         >
-    //           {tag}
-    //         </Link>
-    //       ))}
-    //     </div>
-    //   </div>
-    // </article>
     <Article lang="id">
       <ArticleHeader>
         <h1
@@ -167,9 +100,21 @@ export default async function PostPage({ params }: PostProps) {
             <Link
               href={post.link}
               target="_blank"
-              className="inline h-fit underline decoration-foreground underline-offset-2 duration-150 hover:opacity-80"
+              className="inline h-fit text-sm underline decoration-foreground underline-offset-2 duration-150 hover:opacity-80"
             >
               {post.link}
+            </Link>
+          </h4>
+        )}
+        {post.repo && (
+          <h4 className={cn("font-semibold")}>
+            <span className="font-display">Repo:</span>{" "}
+            <Link
+              href={post.repo}
+              target="_blank"
+              className="inline h-fit text-sm underline decoration-foreground underline-offset-2 duration-150 hover:opacity-80"
+            >
+              {post.repo}
             </Link>
           </h4>
         )}
