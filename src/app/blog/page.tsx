@@ -1,7 +1,12 @@
 import { allPosts } from ".contentlayer/generated";
 import { cn } from "@/lib/utils";
+import { type Metadata } from "next";
 import Link from "next/link";
 import { Maxwidthdiv } from "../_components/Maxwindthdiv";
+
+export const metadata: Metadata = {
+  title: "Blogpost",
+};
 
 const formatter = new Intl.DateTimeFormat("en-US", { dateStyle: "long" });
 
