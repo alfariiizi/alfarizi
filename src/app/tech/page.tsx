@@ -1,10 +1,10 @@
 import { type Metadata } from "next";
 import { Maxwidthdiv } from "../_components/Maxwindthdiv";
 
-const title = "Tech";
-
 export const metadata: Metadata = {
-  title,
+  title: "Tech",
+  description:
+    "Explore the technologies I'm proficient in, including web development, computer graphics, data science, and data analysis.",
 };
 
 export default function page() {
