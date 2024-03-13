@@ -11,6 +11,7 @@ export const env = createEnv({
     PROJECT_NAME: z.string(),
     GOOGLE_VERIFICATION_ID: z.string().optional(),
     RESEND_API_KEY: z.string(),
+    UMAMI_DATA_WEBSITE_ID: z.string().optional(),
   },
 
   /**
@@ -32,6 +33,7 @@ export const env = createEnv({
     PROJECT_NAME: "Alfarizi",
     GOOGLE_VERIFICATION_ID: process.env.GOOGLE_VERIFICATION_ID,
     RESEND_API_KEY: process.env.RESEND_API_KEY,
+    UMAMI_DATA_WEBSITE_ID: process.env.UMAMI_DATA_WEBSITE_ID,
 
     // [Client]
     NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_URL,

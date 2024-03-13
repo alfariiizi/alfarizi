@@ -47,11 +47,13 @@ export default function RootLayout({
           integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC"
           crossOrigin="anonymous"
         />
-        <script
-          defer
-          src="https://analytics.eu.umami.is/script.js"
-          data-website-id="6cd16624-a863-402a-aa3c-053918a07a04"
-        ></script>
+        {env.UMAMI_DATA_WEBSITE_ID && (
+          <script
+            defer
+            src="https://analytics.eu.umami.is/script.js"
+            data-website-id={env.UMAMI_DATA_WEBSITE_ID}
+          />
+        )}
       </head>
       <body
         className={cn(
