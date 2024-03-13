@@ -10,7 +10,8 @@ type Props = {
 export default function TechItem({ heading, techList, children }: Props) {
   return (
     <div className="relative ml-3 border-l-2 border-secondary">
-      <div className="absolute -left-2 top-5 h-4 w-4 translate-y-1/2 rounded-full bg-accent" />
+      <div className="absolute -left-2 top-5 h-4 w-4 translate-y-1/2 rounded-full bg-background" />
+      <div className="absolute -left-2 top-5 h-4 w-4 translate-y-1/2 animate-pulse rounded-full bg-accent" />
       <div className="py-6 pl-10 [&>p]:mb-2 [&>p]:mt-1 [&>p]:text-sm [&>p]:leading-normal [&>p]:sm:text-base">
         <div className="mb-4 space-y-0">
           <h2 className="font-display text-lg font-semibold text-primary sm:text-xl">
