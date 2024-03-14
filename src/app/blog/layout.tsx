@@ -1,7 +1,7 @@
-import type React from "react";
+import { type ReactNode } from "react";
 
 type Props = {
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 export default function layout({ children }: Props) {
