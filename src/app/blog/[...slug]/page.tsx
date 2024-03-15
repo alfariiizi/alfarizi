@@ -16,15 +16,48 @@ export default async function Page({ params }: PostProps) {
     {
       loading: () => (
         <div className="flex flex-col gap-4">
-          <Skeleton className="h-6 w-full" />
-          <Skeleton className="h-6 w-full" />
-          <Skeleton className="h-6 w-full" />
-          <Skeleton className="h-6 w-full" />
-          <Skeleton className="h-6 w-full" />
-          <Skeleton className="h-6 w-full" />
-          <Skeleton className="h-6 w-full" />
-          <Skeleton className="h-6 w-full" />
-          <Skeleton className="h-6 w-full" />
+          <div className="flex w-full gap-1 md:gap-3">
+            <Skeleton className="h-6 w-[40%]" />
+            <Skeleton className="h-6 w-[20%]" />
+            <Skeleton className="h-6 w-[35%]" />
+            <Skeleton className="h-6 w-full" />
+          </div>
+          <div className="flex w-full gap-1 md:gap-3">
+            <Skeleton className="h-6 w-[20%]" />
+            <Skeleton className="h-6 w-[40%]" />
+            <Skeleton className="h-6 w-full" />
+            <Skeleton className="h-6 w-[35%]" />
+          </div>
+          <div className="flex w-full gap-1 md:gap-3">
+            <Skeleton className="h-6 w-[35%]" />
+            <Skeleton className="h-6 w-[40%]" />
+            <Skeleton className="h-6 w-full" />
+            <Skeleton className="h-6 w-[20%]" />
+          </div>
+          <div className="flex w-full gap-1 md:gap-3">
+            <Skeleton className="h-6 w-full" />
+            <Skeleton className="h-6 w-[40%]" />
+            <Skeleton className="h-6 w-[20%]" />
+            <Skeleton className="h-6 w-[35%]" />
+          </div>
+          <div className="flex w-full gap-1 md:gap-3">
+            <Skeleton className="h-6 w-[20%]" />
+            <Skeleton className="h-6 w-[35%]" />
+            <Skeleton className="h-6 w-full" />
+            <Skeleton className="h-6 w-[40%]" />
+          </div>
+          <div className="flex w-full gap-1 md:gap-3">
+            <Skeleton className="h-6 w-[35%]" />
+            <Skeleton className="h-6 w-full" />
+            <Skeleton className="h-6 w-[40%]" />
+            <Skeleton className="h-6 w-[20%]" />
+          </div>
+          <div className="flex w-full gap-1 md:gap-3">
+            <Skeleton className="h-6 w-[35%]" />
+            <Skeleton className="h-6 w-[20%]" />
+            <Skeleton className="h-6 w-full" />
+            <Skeleton className="h-6 w-[40%]" />
+          </div>
         </div>
       ),
     },
