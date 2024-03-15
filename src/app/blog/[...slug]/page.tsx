@@ -1,79 +1,34 @@
 import { notFound } from "next/navigation";
 
-import Tag from "@/app/_components/Tag";
-import { Mdx } from "@/components/mdx/MDXComponets";
-import {
-  Article,
-  ArticleContent,
-  ArticleFooter,
-  ArticleHeader,
-} from "@/components/ui/article";
-import { cn } from "@/lib/utils";
-import readingTime from "reading-time";
+import { Skeleton } from "@/components/ui/skeleton";
+import dynamic from "next/dynamic";
 import { getPostFromParams, type PostProps } from "./lib/getPostFromParams";
 
-const formatter = new Intl.DateTimeFormat("en-US", { dateStyle: "long" });
-
 export default async function Page({ params }: PostProps) {
-  const post = await getPostFromParams(params);
+  const post = getPostFromParams(params);
 
   if (!post) {
     notFound();
   }
 
-  return (
-    <Article lang="id">
-      <ArticleHeader>
-        <div className="flex justify-start gap-4">
-          {post.icon && <h1 className="text-3xl md:text-4xl">{post.icon}</h1>}
-          <h1
-            className={cn(
-              "font-display text-2xl font-semibold text-primary sm:text-3xl",
-            )}
-          >
-            {post.title}
-          </h1>
+  const Mdx = dynamic(
+    () => import(`/content/blog/${post.metadata.slug}/index.mdx`),
+    {
+      loading: () => (
+        <div className="flex flex-col gap-4">
+          <Skeleton className="h-6 w-full" />
+          <Skeleton className="h-6 w-full" />
+          <Skeleton className="h-6 w-full" />
+          <Skeleton className="h-6 w-full" />
+          <Skeleton className="h-6 w-full" />
+          <Skeleton className="h-6 w-full" />
+          <Skeleton className="h-6 w-full" />
+          <Skeleton className="h-6 w-full" />
+          <Skeleton className="h-6 w-full" />
         </div>
-        {post.description && (
-          <p className={cn("text-base sm:text-lg")}>{post.description}</p>
-        )}
-        <div className="flex h-auto items-center gap-3 sm:gap-7">
-          <p
-            className={cn(
-              "font-display text-base font-semibold text-slate-500 sm:text-lg",
-            )}
-          >
-            {formatter.format(new Date(post.date))}
-          </p>
-          <div className="h-2 w-2 rounded-full bg-accent" />
-          <p
-            className={cn(
-              "font-display text-base font-semibold text-slate-500 sm:text-lg",
-            )}
-          >
-            {readingTime(post.body.raw).text}
-          </p>
-        </div>
-      </ArticleHeader>
-
-      {/* <div className="mb-10 mt-0 border-t-2 border-dashed border-gray-300 dark:border-gray-800" /> */}
-
-      <ArticleContent>
-        <Mdx code={post.body.code} />
-      </ArticleContent>
-
-      {/* <div className="mb-10 mt-10 border-t-2 border-dashed border-gray-300 dark:border-gray-800" /> */}
-
-      <ArticleFooter>
-        <p className={cn("font-display text-base font-semibold sm:text-lg")}>
-          Tags:
-        </p>
-        <div className="flex flex-wrap gap-3">
-          {post.tags.map((tag) => (
-            <Tag key={tag} tag={tag} />
-          ))}
-        </div>
-      </ArticleFooter>
-    </Article>
+      ),
+    },
   );
+
+  return <Mdx />;
 }

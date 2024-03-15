@@ -28,7 +28,7 @@
     "paths": {
       "@/*": ["./src/*"],
       "@public/*": ["./public/*"],
-      ".contentlayer/*": [".contentlayer/*"],
+      ".velite/*": [".velite/*"],
       "@content/*": ["./content/*"]
     }
   },
