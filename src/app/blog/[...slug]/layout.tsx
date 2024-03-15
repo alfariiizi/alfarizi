@@ -1,6 +1,7 @@
 import Comments from "@/app/_components/Comments";
 import { Maxwidthdiv } from "@/app/_components/Maxwindthdiv";
 import Tag from "@/app/_components/Tag";
+import { Mdx } from "@/components/mdx/MDXComponets";
 import {
   Article,
   ArticleContent,
@@ -93,8 +94,11 @@ export default function layout({ params, children }: Props) {
           {/* <div className="mb-10 mt-0 border-t-2 border-dashed border-gray-300 dark:border-gray-800" /> */}
 
           <ArticleContent>
-            {/* <Mdx code={post.content.mdx} /> */}
-            {children}
+            {post.metadata.rcc ? (
+              <>{children}</>
+            ) : (
+              <Mdx code={post.content.mdx} />
+            )}
           </ArticleContent>
 
           {/* <div className="mb-10 mt-10 border-t-2 border-dashed border-gray-300 dark:border-gray-800" /> */}

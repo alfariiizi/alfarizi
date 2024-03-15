@@ -85,6 +85,7 @@ const postMetadata = defineCollection({
       icon: s.string(),
       toc: s.boolean().default(false),
       tags: s.string().array().default([]),
+      rcc: s.boolean().default(false), // client component
     })
     .transform((data) => {
       const slugger = new GithubSlugger();

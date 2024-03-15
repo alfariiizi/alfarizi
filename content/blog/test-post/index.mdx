@@ -1,4 +1,5 @@
 import CounterDemo from "./CounterDemo.tsx";
+import { Checkbox } from "@/components/ui/checkbox";
 
 ## Headers
 
@@ -37,9 +38,17 @@ _You **can** combine them_
 
 ### Checkbox
 
-- [x] List 1
-- [ ] List 2
-- [ ] List 3
+You can click this box!
+
+<div className="mb-0 mt-0 flex items-center gap-2 pt-0">
+  <Checkbox id="terms" />
+  <label
+    htmlFor="terms"
+    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+  >
+    Do you have cool cats?
+  </label>
+</div>
 
 ## Images
 
@@ -68,14 +77,6 @@ Checkout my [Github Profile](https://github.com/alfariiizi).
 > Markdown is a lightweight markup language with plain-text-formatting syntax, created in 2004 by John Gruber with Aaron Swartz.
 >
 > > Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
-
-## Tables
-
-| Left columns | Right columns |
-| ------------ | :-----------: |
-| left foo     |   right foo   |
-| left bar     |   right bar   |
-| left baz     |   right baz   |
 
 ## Blocks of code
 

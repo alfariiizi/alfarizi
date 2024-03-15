@@ -9,7 +9,7 @@ export function Heading2({
   return (
     <h2
       className={cn(
-        "text-foreground dark:text-purple-alternative-300 text-purple-alternative-700 scroll-m-20 font-display text-xl font-semibold tracking-tight first:mt-0 sm:text-2xl",
+        "mt-6 scroll-m-20 font-display text-xl font-semibold tracking-tight text-foreground text-purple-alternative-700 first:mt-0 dark:text-purple-alternative-300 sm:text-2xl",
         className,
       )}
       {...props}
