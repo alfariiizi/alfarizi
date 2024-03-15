@@ -83,5 +83,5 @@
     "initVersion": "7.26.0"
   },
   "overrides": {},
-  "packageManager": "yarn@1.22.21"
+  "packageManager": "npm@10.4.0"
 }
