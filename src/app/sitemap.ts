@@ -1,4 +1,4 @@
-import { allPosts, allProjects } from ".contentlayer/generated";
+import { projects as allProjects, postMetadata } from ".velite";
 import { env } from "@/env";
 import { allTags } from "@/lib/tags";
 import { type MetadataRoute } from "next";
@@ -11,13 +11,13 @@ function generateUrl(route: string) {
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const posts: MetadataRoute.Sitemap = allPosts.map((post) => ({
-    url: generateUrl(post.slug),
+  const posts: MetadataRoute.Sitemap = postMetadata.map((post) => ({
+    url: generateUrl(post.permalink),
     changeFrequency: "monthly",
     priority: 0.8,
   }));
   const projects: MetadataRoute.Sitemap = allProjects.map((project) => ({
-    url: generateUrl(project.slug),
+    url: generateUrl(project.permalink),
     changeFrequency: "monthly",
     priority: 0.6,
   }));

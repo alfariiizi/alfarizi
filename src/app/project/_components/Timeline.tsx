@@ -10,7 +10,7 @@ import {
 } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
 
-import { allProjects } from ".contentlayer/generated";
+import { projects } from ".velite";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -23,7 +23,7 @@ export function Timeline() {
     triggerOnce: true,
   });
 
-  const sortedProjects = allProjects.sort((a, b) =>
+  const sortedProjects = projects.sort((a, b) =>
     new Date(a.startDate) > new Date(b.startDate) ? -1 : 1,
   );
 
@@ -63,8 +63,8 @@ export function Timeline() {
                   alt={project.tech ?? ""}
                   width={200}
                   height={200}
-                  placeholder="blur"
-                  blurDataURL={project.blurData}
+                  // placeholder="blur"
+                  // blurDataURL={project.blurData}
                   className="h-full w-full rounded-full bg-white p-1 md:p-2"
                 />
               }
@@ -72,7 +72,7 @@ export function Timeline() {
               <button
                 type="button"
                 className="block h-full w-full bg-secondary px-6 py-5 text-start text-foreground duration-150 hover:opacity-85"
-                onClick={() => router.push(project.slug)}
+                onClick={() => router.push(project.permalink)}
               >
                 {" "}
                 {/* <-- point A */}

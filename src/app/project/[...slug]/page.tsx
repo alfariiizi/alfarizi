@@ -1,4 +1,4 @@
-import { allProjects } from ".contentlayer/generated";
+import { projects } from ".velite";
 import { notFound } from "next/navigation";
 
 import Tag from "@/app/_components/Tag";
@@ -20,9 +20,9 @@ interface PostProps {
   };
 }
 
-async function getPostFromParams(params: PostProps["params"]) {
+function getPostFromParams(params: PostProps["params"]) {
   const slug = params?.slug?.join("/");
-  const post = allProjects.find((post) => post.slugAsParams === slug);
+  const post = projects.find((post) => post.slug === slug);
 
   if (!post) {
     null;
@@ -31,10 +31,8 @@ async function getPostFromParams(params: PostProps["params"]) {
   return post;
 }
 
-export async function generateMetadata({
-  params,
-}: PostProps): Promise<Metadata> {
-  const project = await getPostFromParams(params);
+export function generateMetadata({ params }: PostProps): Metadata {
+  const project = getPostFromParams(params);
 
   if (!project) {
     return {};
@@ -52,8 +50,10 @@ export async function generateMetadata({
 //   }));
 // }
 
-export default async function PostPage({ params }: PostProps) {
-  const post = await getPostFromParams(params);
+export default function PostPage({ params }: PostProps) {
+  console.log({ params });
+  const post = getPostFromParams(params);
+  console.log({ post });
 
   if (!post) {
     notFound();
@@ -91,7 +91,7 @@ export default async function PostPage({ params }: PostProps) {
               "font-display text-base font-semibold text-slate-500 sm:text-lg",
             )}
           >
-            {readingTime(post.body.raw).text}
+            {readingTime(post.raw).text}
           </p>
         </div>
         {post.link && (
@@ -121,7 +121,7 @@ export default async function PostPage({ params }: PostProps) {
       </ArticleHeader>
 
       <ArticleContent>
-        <Mdx code={post.body.code} />
+        <Mdx code={post.mdx} />
       </ArticleContent>
 
       <ArticleFooter>

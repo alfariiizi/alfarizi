@@ -1,8 +1,8 @@
-import { allPosts, allProjects } from ".contentlayer/generated";
+import { postMetadata, projects } from ".velite";
 
 export const allTagsRaw = [
-  ...allPosts.map((post) => post.tags).flat(),
-  ...allProjects.map((post) => post.tags).flat(),
+  ...projects.map((post) => post.tags).flat(),
+  ...postMetadata.map((post) => post.tags).flat(),
 ];
 
 const allTags: string[] = [];

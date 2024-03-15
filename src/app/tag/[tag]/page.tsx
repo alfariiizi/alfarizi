@@ -1,4 +1,4 @@
-import { allPosts, allProjects } from ".contentlayer/generated";
+import { postMetadata, projects } from ".velite";
 import { Maxwidthdiv } from "@/app/_components/Maxwindthdiv";
 import { allTags } from "@/lib/tags";
 import "@/styles/content.css";
@@ -35,7 +35,7 @@ export function generateStaticParams() {
 
 export default function page({ params }: Props) {
   const contents: Content[] = [
-    ...allProjects
+    ...projects
       .filter((f) => f.tags.includes(params.tag))
       .map(
         (project) =>
@@ -46,7 +46,7 @@ export default function page({ params }: Props) {
             from: "Project",
           }) as Content,
       ),
-    ...allPosts
+    ...postMetadata
       .filter((f) => f.tags.includes(params.tag))
       .map(
         (post) =>

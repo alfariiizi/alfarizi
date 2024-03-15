@@ -103,7 +103,7 @@ const posts = defineCollection({
   pattern: "blog/**/index.mdx",
   schema: s
     .object({
-      mdx: s.mdx({ gfm: false }),
+      mdx: s.mdx({ gfm: true }),
       raw: s.raw(),
     })
     .transform((data) => {
@@ -138,6 +138,42 @@ const posts = defineCollection({
     }),
 });
 
+const projects = defineCollection({
+  name: "Project",
+  pattern: "project/**/*.mdx",
+  schema: s
+    .object({
+      title: s.string().max(99),
+      company: s.string().max(99),
+      description: s.string().max(999),
+      tech: s.string().max(99),
+      link: s.string().url().optional(),
+      repo: s.string().url().optional(),
+      startDate: s.isodate(),
+      endDate: s.isodate().optional(),
+      icon: s.string(),
+      tags: s.string().array().default([]),
+      mdx: s.mdx({ gfm: true }),
+      raw: s.raw(),
+    })
+    .transform((data) => {
+      const slugger = new GithubSlugger();
+      const slug = slugger.slug(data.title);
+      return {
+        ...data,
+        slug,
+        permalink: `/project/${slug}`,
+      };
+    }),
+  // .transform(async (data) => {
+  //   const base64 = await getBase64(`${env.NEXT_PUBLIC_URL}${data.icon}`);
+  //   return {
+  //     ...data,
+  //     blurData: base64,
+  //   };
+  // }),
+});
+
 export default defineConfig({
   root: "content",
   output: {
@@ -147,7 +183,7 @@ export default defineConfig({
     name: "[name]-[hash:6].[ext]",
     clean: true,
   },
-  collections: { tags, pages, posts, postMetadata },
+  collections: { tags, pages, posts, postMetadata, projects },
   mdx: {
     // @ts-ignore
     remarkPlugins: [remarkMath],

@@ -82,11 +82,6 @@
   "ct3aMetadata": {
     "initVersion": "7.26.0"
   },
-  "overrides": {
-    "velite": {
-      "sharp": "0.32.6",
-      "remark-gfm": "3.0.1"
-    }
-  },
+  "overrides": {},
   "packageManager": "yarn@1.22.21"
 }
