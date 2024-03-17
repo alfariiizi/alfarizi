@@ -4,12 +4,14 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "prebuild": "bash script/copy-assets.sh",
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
     "start": "next start"
   },
   "dependencies": {
+    "@excalidraw/excalidraw": "^0.17.3",
     "@giscus/react": "^3.0.0",
     "@hookform/resolvers": "^3.3.4",
     "@mdx-js/loader": "^3.0.1",

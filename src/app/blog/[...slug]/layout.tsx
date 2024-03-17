@@ -9,6 +9,7 @@ import {
   ArticleHeader,
 } from "@/components/ui/article";
 import { cn } from "@/lib/utils";
+import "@/styles/content.css";
 import { type Metadata } from "next";
 import { notFound } from "next/navigation";
 import React from "react";

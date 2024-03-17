@@ -1,5 +1,6 @@
 import Link from "next/link";
 import * as runtime from "react/jsx-runtime";
+import { Excalidraw } from "../excalidraw";
 import { Callout } from "./Callout";
 import { Image } from "./Image";
 import { Math } from "./Math";
@@ -20,6 +21,7 @@ const mdxComponents = {
   Callout,
   Link,
   Math,
+  Excalidraw,
   ...elements,
 };
 

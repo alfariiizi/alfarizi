@@ -39,7 +39,8 @@
     "**/*.tsx",
     "**/*.cjs",
     "**/*.js",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "src/components/excalidraw/index.tss"
   ],
   "exclude": ["node_modules"]
 }
