@@ -7,7 +7,6 @@ type Props = ComponentPropsWithoutRef<"pre"> & {
 
 export function Pre({ className, children, ...props }: Props) {
   const lang = props["data-language"] ?? "shell";
-  console.log(props);
 
   return (
     <div className="flex flex-col gap-0">
@@ -16,7 +15,8 @@ export function Pre({ className, children, ...props }: Props) {
       </div>
       <pre
         className={cn(
-          "m-0 max-h-[60vh] w-full min-w-0 max-w-[80vw] overflow-auto text-nowrap rounded-none rounded-b-md text-sm sm:text-base md:max-h-[80vh]",
+          "m-0 max-h-[60vh] w-full min-w-0 max-w-[80vw] overflow-auto text-nowrap rounded-none rounded-b-md text-sm sm:text-base md:max-h-[80vh] [&_span]:text-xs md:[&_span]:text-sm",
+          "scrollbar-thin",
           className,
         )}
         {...props}

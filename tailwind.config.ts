@@ -1,4 +1,5 @@
 import tailwindTypography from "@tailwindcss/typography";
+import tailwindScrollbar from "tailwind-scrollbar";
 import { type Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
 import { layout, navbar } from "./src/app/_components/shared";
@@ -104,5 +105,5 @@ export default {
       },
     },
   },
-  plugins: [tailwindTypography],
+  plugins: [tailwindTypography, tailwindScrollbar({ nocompatible: true })],
 } satisfies Config;
