@@ -1,0 +1,18 @@
+icon: 🔭
+title: Mengapa kita perlu menggunakan React Server Component?
+description: Next.js 13 memperkenalkan React Server Component (RSC). Mengapa kita perlu menggunakan RSC? Pada tulisan ini, saya akan sharing setidaknya 3 point mengapa kita perlu menggunakan RSC.
+date: "2024-03-21"
+tags:
+  - reactjs
+  - nextjs
+  - component
+  - server-component
+  - client-component
+toc: true
+rcc: false
+bib:
+  - "[Next.js 13 | Next.js](https://nextjs.org/blog/next-13)"
+  - "[Explaining useEffect and Fetch in React | SheCodes](https://www.shecodes.io/athena/52759-explaining-useeffect-and-fetch-in-react)"
+  - "[Dan Abramov · RSC From Scratch. Part 1: Server Components · reactwg/server-components · Discussion #5](https://github.com/reactwg/server-components/discussions/5)"
+  - "[Dan Abramov · rfcs/text/0188-server-components.md at main · reactjs/rfcs](https://github.com/reactjs/rfcs/blob/main/text/0188-server-components.md)"
+  - "[Introducing Zero-Bundle-Size React Server Components - React](https://react.dev/blog/2020/12/21/data-fetching-with-react-server-components)"

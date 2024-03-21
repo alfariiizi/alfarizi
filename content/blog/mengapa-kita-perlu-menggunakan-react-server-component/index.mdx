@@ -1,0 +1,355 @@
+<Image
+  src="https://vived.io/wp-content/uploads/2022/10/6xl7is.jpeg"
+  alt="Meme RSC"
+  scale={0.8}
+/>
+
+Next.js 13 memperkenalkan React Server Component (RSC). Mengapa kita perlu menggunakan RSC? Pada tulisan ini, saya akan sharing setidaknya 3 point mengapa kita perlu menggunakan RSC, yakni:
+
+- Bundle size
+- Initial fetching
+- Menjaga informasi sensitif di Server
+
+## It's All About Bundle Size!
+
+React Server Component pertama kali diperkenalkan oleh [Dan Abramov](https://twitter.com/dan_abramov2) pada tahun 2020 lewat penjelasan sederhana nya di [dokumen RFC](https://github.com/reactjs/rfcs/blob/main/text/0188-server-components.md). Kemudian pada hari yang sama, Dan Abramov juga membuatkan [video pengenalan RSC](https://react.dev/blog/2020/12/21/data-fetching-with-react-server-components). Lalu pada tahun 2023, Dan Abramov menjelaskan RSC secara detail di [github discussion](https://github.com/reactwg/server-components/discussions/5).
+
+Dari penjelasan Dan Abramov tersebut, tujuan utama React Server Component adalah untuk mengurangi bundle size yang dikirimkan ke user. Caranya adalah dengan **menjalankan semua logic di server**, kemudian mengirimkan hasil logic tersebut ke user.
+
+<Callout>
+  Saya menggunakan istilah "user" sebagai orang yang mengoperasikan browser.
+</Callout>
+
+Agar lebih mudah memahami nya, mari kita langsung masuk ke contoh. Misalnya saya punya 2 file:
+
+- `posts.js`: Berisikan semua data posts
+- `page.jsx`: Berisikan component RSC
+
+Isi dari file `posts.js` dan `page.jsx` nya sebagai berikut
+
+```js title="posts.js"
+// This posts array have size of 6MB
+export const posts = [
+  {
+    metadata: {
+      date: '2023-03-18',
+      title: 'Example Title 1',
+    },
+    body: "..." // all content body (this element has largest size)
+  },
+  {
+    metadata: {
+      date: '2023-03-02',
+      title: 'Example Title 2',
+    },
+    body: "..." // all content body (this element has largest size)
+  },
+  {
+    metadata: {
+      date: '2023-02-26',
+      title: 'Example Title 3',
+    },
+    body: "..." // all content body (this element has largest size)
+  },
+  ...
+  ...
+]
+```
+
+```jsx title="page.jsx"
+import { posts } from "./posts";
+
+// This is RSC
+export default function Page() {
+  const sortedPost = posts.sort((a, b) =>
+    new Date(a.metadata.date) < new Date(b.metadata.date) ? 1 : -1,
+  );
+
+  return (
+    <div>
+      <h2>Latest posts</h2>
+      <div>
+        {sortedPost.map((post) => (
+          <article key={post.metadata.title}>
+            <h3>{post.metadata.title}</h3>
+          </article>
+        ))}
+      </div>
+    </div>
+  );
+}
+```
+
+Karena component diatas merupakan RSC, maka yang akan diterima oleh user adalah:
+
+```html
+<div>
+  <h2>Latest posts</h2>
+  <div>
+    <article>
+      <h3>Example Title 1</h3>
+    </article>
+    <article>
+      <h3>Example Title 2</h3>
+    </article>
+    <article>
+      <h3>Example Title 3</h3>
+    </article>
+    <!-- And so on -->
+  </div>
+</div>
+```
+
+Yup! Yang diterima user adalah HTML! Tidak perlu mengirimkan `posts` array yang berukuran 6MB. Ini tentunya membuat bundle size nya berkurang drastis. Jadi, server melakukan logic yang ada, kemudian mengirimkan apa yang ada di dalam `return` keyword.
+
+## Initial Fetching
+
+Logic pada RSC pada dasarnya adalah javascript biasa. Maka dari itu, bisa dibayangkan langsung kalau kita juga dapat melakukan fetching langsung di server. Sebelum masuk ke fetching dengan RSC, mari kita coba bahas sebentar bagaimana kita biasanya melakukan fetching di React Component yang bukan RSC.
+
+<Callout title="Client Component dan React Server Component">
+  Karena React Component secara umum itu fully interactive, maka saya akan sebut
+  dengan istilah Client Component (CC). Jadi, dipenjelasan saya selanjutnya,
+  akan terdapat 2 jenis component: **CC** dan **RSC**.
+</Callout>
+
+### Initial Fetching di Client Component
+
+Kita dapat melakukan initial fetching di Client Component dengan bantuan `useState` dan `useEffect` seperti berikut:
+
+```jsx {4,6-15}
+import React, { useState, useEffect } from "react";
+
+function App() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(
+        "https://jsonplaceholder.typicode.com/users",
+      );
+      const jsonData = await response.json();
+      setData(jsonData);
+    };
+    fetchData();
+  }, []);
+
+  return (
+    <div>
+      <h1>List of Users</h1>
+      <ul>
+        {data.map((user) => (
+          <li key={user.id}>
+            {user.name} ({user.email})
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default App;
+```
+
+Proses awal user melakukan request page hingga user bisa melihat page yang secara utuh, dapat digambarkan seperti diagram berikut
+
+<Excalidraw
+  filename="/content/blog/mengapa-kita-perlu-menggunakan-react-server-component/fetching-client.excalidraw"
+  caption="Timeline fetching pada Client Component"
+/>
+
+1. User melakukan request pada suatu page
+2. Server merespon dengan mengirimkan bundle **(Saat ini: User melihat blank page)**
+3. Bundle page tersebut ternyata memerlukan fetching data ke server lagi **(Saat ini: User melihat blank page)**
+4. Bundle menerima seluruh data yang diperlukan **(Saat ini: User melihat contentful page)**
+
+Semua bundle perlu dikirimkan dulu ke user, sebelum akhirnya bundle tersebut melakukan fetching. Pada saat tersebut, tampilan page nya sedikit awkward, yup! just blank page, nothing to see! Semakin besar bundle size nya, maka akan semakin lama user akan melihat blank page.
+
+### Initial Fetching di React Server Component
+
+Karena logic dari RSC pada dasarnya hanyalah javascript biasa, maka kita bisa melakukan fetching langsung disini.
+
+```jsx {2-3}
+async function App() {
+  const response = await fetch("https://jsonplaceholder.typicode.com/users");
+  const data = await response.json();
+
+  return (
+    <div>
+      <h1>List of Users</h1>
+      <ul>
+        {data.map((user) => (
+          <li key={user.id}>
+            {user.name} ({user.email})
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default App;
+```
+
+Proses fetching data pada React Server Component ini bisa digambarkan seperti ini
+
+<Excalidraw
+  filename="/content/blog/mengapa-kita-perlu-menggunakan-react-server-component/fetching-server.excalidraw"
+  caption="Timeline fetching pada React Server Component"
+/>
+
+1. User melakukan request pada suatu page
+2. Server akan meneruskan request tersebut ke RSC, kemudian RSC melakukan semua fetching yang diperlukan **(Saat ini: User tidak melihat apa apa)**
+3. Bundle dikirimkan ke user **(Saat ini: User melihat contentful page)**
+
+Hasil yang akan diterima oleh user adalah
+
+```html
+<div>
+  <h1>List of Users</h1>
+  <ul>
+    <li>Tony tony@avenger.com</li>
+    <li>Tom tom@avenger.com</li>
+    <li>Steve steve@avenger.com</li>
+    <!-- And so on -->
+  </ul>
+</div>
+```
+
+Jika timeline fetching pada CC dibandingkan dengan fetching pada RSC, gabungan timeline nya akan seperti ini
+
+<Excalidraw
+  filename="/content/blog/mengapa-kita-perlu-menggunakan-react-server-component/comparison-fetching-client-server.excalidraw"
+  caption="Perbandingan timeline antara fetching dengan CC dan fetching dengan RSC"
+/>
+
+Dari timeline tersebut, dapat dilihat bahwa RSC mempunyai timeline yang **lebih pendek** daripada CC. Sehingga disimpulkan: **Initial load** akan lebih cepat jika menggunakan RSC daripada menggunakan CC.
+
+## Menjaga informasi sensitif di Server
+
+Seperti yang telah saya katakan di bagian awal, RSC menjalankan logic yang ada, kemudian mengirimkan apa yang ada di `return` keyword. Agar informasi sensitif seperti API Key, Secret ID, dsb. tidak dikirimkan ke user, maka kita bisa menaruh informasi sensitif tersebut di server.
+
+Pada nextjs project, kita bisa membuat file `.env` atau `.env.local` yang berisikan informasi sensitif, misalnya:
+
+```env
+OPENAI_API_KEY=8Pf4irQSqkcF15ueN1Pji0xSe+3sWVD+giBKyTHILtw=
+```
+
+kemudian menggunakannya ketika melakukan fetching di RSC:
+
+```jsx {1,4-15}
+const API_KEY = process.env.API_KEY;
+
+export default async function ServerComponent() {
+  const response = await fetch(
+    `https://openai/api/${API_KEY}/ancvalsdjf`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        ...
+      }),
+    },
+  );
+
+  const responseData = await response.json();
+  const data = responseData.data;
+
+  return (
+    <div>
+      <h1>Server Component</h1>
+      <ul>
+        {data.map((d) => (
+          <li key={d.id}>
+           /* data */
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+```
+
+Dengan begitu, informasi sensitif akan tetap aman di server.
+
+## Notes Tambahan: Tipe Data yang dapat dikirimkan oleh RSC
+
+Ini saya akan membahas spesifik pada Next.js. Jadi, jika kita ingin menjalankan suatu logic di server, kita bisa menggunakan:
+
+- React Server Component
+- Route Handler
+
+### Return dari React Server Component
+
+React Server Component biasanya me-return data ber-tipe html, html + css, jsx, atau tsx. Jika didalam RSC hanya terdapat basic html element, maka yang di-return RSC adalah html atau html + css. Tapi, jika didalam RSC terdapat CC, maka yang di-return adalah jsx atau tsx.
+
+```jsx {6-17,20-27}
+import { ClientComponent } from "./ClientComponent";
+
+const todos = ["read books", "eat", "sleep"];
+
+// Akan me-return html + css file
+export function ServerComponent1() {
+  return (
+    <div className="space-y-2">
+      <h1>Hello World</h1>
+      <ul className="flex flex-col items-center gap-1">
+        {todos.map((todo) => (
+          <li key={todo}>{todo}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+// Akan me-return jsx/tsx file
+export function ServerComponent2() {
+  return (
+    <div>
+      <h1>Hello World</h1>
+      <ClientComponent />
+    </div>
+  );
+}
+```
+
+### Return dari Route Handler
+
+Route handler, biasanya dijalankan sebagai endpoint API. Sehingga biasanya route handler ini me-return data ber-tipe json. Saya ambil dari dokumentasi Next.js, contoh dari route handler itu seperti ini
+
+```jsx
+export async function GET() {
+  const res = await fetch("https://data.mongodb-api.com/...", {
+    headers: {
+      "Content-Type": "application/json",
+      "API-Key": process.env.DATA_API_KEY,
+    },
+  });
+  const data = await res.json();
+
+  return Response.json({ data });
+}
+```
+
+## Kesimpulan
+
+React Server Component mempunyai banyak kelebihan, dari bundle size yang kecil, initial fetching / initial load, hingga keamanan untuk tetap menjaga agar informasi sensitif tetap berada di server. Namun, react server component bukan tanpa kekurangan, saya akan membahas kekurangan kekurangannya di tulisan lain. Contoh contoh yang saya gunakan disini bukanlah contoh - contoh yang kompleks, maka dari itu, di kesempatan lain saya juga bakalan membuat tulisan mengenai penggunaan RSC di real-world cases.
+
+Sebelum saya akhiri tulisan ini, mari simak apa kata Bos Vercel tentang bahasa wajib anak lulusan jurusan IT, tidak lain dan tidak bukan, PHP:
+
+## Extra: Vercel mengakui kebenaran PHP
+
+<Image
+  src="/content/blog/mengapa-kita-perlu-menggunakan-react-server-component/php-nextjs-conf.png"
+  alt="PHP in Nextjs Conf"
+  scale={0.8}
+/>
+
+Pada [Next.js Conf 2023](https://youtu.be/gfU1iZnjRZM?si=R-wDrvEKLbgck94Z), Next.js merelease fitur _server action_. Konsep RSC dan server action ini mirip dengan konsep yang ada di PHP. Sehingga, CEO Vercel, Guillermo Rauch, mengatakan:
+
+> I want to give a shout out to the visionaries, the risk takers, the ones who dared to go deeper. You know who I'm talking about, PHP!
+>
+> PHP is right all along. More server, simpler programming model, and the OG serverless.
+
+Sekeren itu emang PHP!
