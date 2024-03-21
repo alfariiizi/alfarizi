@@ -16,3 +16,4 @@ bib:
   - "[Dan Abramov · RSC From Scratch. Part 1: Server Components · reactwg/server-components · Discussion #5](https://github.com/reactwg/server-components/discussions/5)"
   - "[Dan Abramov · rfcs/text/0188-server-components.md at main · reactjs/rfcs](https://github.com/reactjs/rfcs/blob/main/text/0188-server-components.md)"
   - "[Introducing Zero-Bundle-Size React Server Components - React](https://react.dev/blog/2020/12/21/data-fetching-with-react-server-components)"
+  - "[How to Secure API Keys Using Next.js Server Components | Docs | The Graph](https://thegraph.com/docs/en/cookbook/how-to-secure-api-keys-using-nextjs-server-components)"
