@@ -61,11 +61,11 @@ export default function layout({ params, children }: Props) {
           <ArticleHeader>
             <div className="flex justify-start gap-4">
               {post.metadata.icon && (
-                <h1 className="text-2xl md:text-3xl">{post.metadata.icon}</h1>
+                <h1 className="text-xl sm:text-3xl">{post.metadata.icon}</h1>
               )}
               <h1
                 className={cn(
-                  "font-display text-2xl font-semibold text-primary sm:text-3xl",
+                  "font-display text-xl font-semibold text-primary sm:text-3xl",
                 )}
               >
                 {post.metadata.title}
@@ -74,7 +74,7 @@ export default function layout({ params, children }: Props) {
             <div className="flex h-auto items-center gap-3 sm:gap-7">
               <p
                 className={cn(
-                  "font-display text-base font-semibold text-slate-500 sm:text-lg",
+                  "pt-1 font-display text-sm font-semibold text-slate-500 sm:text-lg",
                 )}
               >
                 {formatter.format(new Date(post.metadata.date))}
@@ -82,15 +82,18 @@ export default function layout({ params, children }: Props) {
               <div className="h-2 w-2 rounded-full bg-accent" />
               <p
                 className={cn(
-                  "font-display text-base font-semibold text-slate-500 sm:text-lg",
+                  "pt-1 font-display text-sm font-semibold text-slate-500 sm:text-lg",
                 )}
               >
                 {readingTime(post.content.raw).text}
               </p>
             </div>
+            <div className="mt-2 flex flex-wrap gap-2">
+              {post.metadata.tags.map((tag) => (
+                <Tag key={tag} tag={tag} className="text-xs sm:text-sm" />
+              ))}
+            </div>
           </ArticleHeader>
-
-          {/* <div className="mb-10 mt-0 border-t-2 border-dashed border-gray-300 dark:border-gray-800" /> */}
 
           <ArticleContent>
             {post.metadata.rcc ? (
@@ -99,8 +102,6 @@ export default function layout({ params, children }: Props) {
               <Mdx code={post.content.mdx} />
             )}
           </ArticleContent>
-
-          {/* <div className="mb-10 mt-10 border-t-2 border-dashed border-gray-300 dark:border-gray-800" /> */}
 
           <ArticleFooter className="space-y-6">
             {post.metadata.bib.length !== 0 && (
@@ -157,7 +158,7 @@ export default function layout({ params, children }: Props) {
                     <a
                       data-level={heading.level}
                       href={`#${heading.slug}`}
-                      className="flex text-sm leading-tight opacity-60 duration-150 hover:opacity-100 data-[level=four]:pl-[2rem] data-[level=three]:pl-4 data-[level=two]:pl-0"
+                      className="flex text-sm leading-tight opacity-60 duration-150 data-[level=four]:pl-[2rem] data-[level=three]:pl-4 data-[level=two]:pl-0 hover:opacity-100"
                     >
                       {heading.text}
                     </a>
