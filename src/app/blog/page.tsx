@@ -15,8 +15,6 @@ export default function Page() {
     new Date(a.metadata.date) < new Date(b.metadata.date) ? 1 : -1,
   );
 
-  console.log(sortedPost.map((p) => p.metadata.isNew));
-
   return (
     <Maxwidthdiv className="mt-10 flex justify-center">
       <div className="flex w-full max-w-3xl flex-col gap-16">

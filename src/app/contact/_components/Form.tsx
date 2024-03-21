@@ -40,7 +40,6 @@ export default function Form() {
       method: "POST",
       body: data,
     });
-    console.log(res);
 
     if (res.ok) {
       toast.success("Successfully send an email!", { duration: 4000 });

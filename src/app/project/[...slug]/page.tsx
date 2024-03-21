@@ -51,9 +51,7 @@ export function generateMetadata({ params }: PostProps): Metadata {
 // }
 
 export default function PostPage({ params }: PostProps) {
-  console.log({ params });
   const post = getPostFromParams(params);
-  console.log({ post });
 
   if (!post) {
     notFound();
