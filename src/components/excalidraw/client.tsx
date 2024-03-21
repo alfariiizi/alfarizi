@@ -1,5 +1,6 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import {
   type ExcalidrawImperativeAPI,
   type ExcalidrawInitialDataState,
@@ -9,26 +10,29 @@ import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { useWindowSize } from "react-use";
 
+const ExcalidrawPrimitive = dynamic(
+  () => import("@excalidraw/excalidraw").then((data) => data.Excalidraw),
+  {
+    ssr: false,
+    loading: () => {
+      return (
+        <div className="flex h-[35dvh] max-h-[480px] w-full animate-pulse items-center justify-center bg-zinc-200 dark:bg-zinc-800 md:h-[50dvh] lg:h-[60dvh]">
+          <p className="font-display text-lg text-foreground">
+            Loading Diagram...
+          </p>
+        </div>
+      );
+    },
+  },
+);
+
 type Props = {
   data: ExcalidrawInitialDataState;
 };
 
-const ExcalidrawPrimitive = dynamic(
-  async () => (await import("@excalidraw/excalidraw")).Excalidraw,
-  {
-    ssr: false,
-    loading: () => (
-      <div className="flex h-[35dvh] max-h-[480px] w-full animate-pulse items-center justify-center bg-zinc-200 dark:bg-zinc-800 md:h-[50dvh] lg:h-[60dvh]">
-        <p className="font-display text-lg text-foreground">
-          Loading Diagram...
-        </p>
-      </div>
-    ),
-  },
-);
-
 function ExcalidrawClient({ data }: Props) {
   const [isFirstScroll, setIsFirstScroll] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [api, setApi] = useState<ExcalidrawImperativeAPI>();
   const { theme } = useTheme();
   const { width } = useWindowSize();
@@ -40,8 +44,17 @@ function ExcalidrawClient({ data }: Props) {
     });
   }, [api, width]);
 
+  // useEffect only runs on the client, so now we can safely show the UI
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
+
   return (
-    <div className="">
+    <div className="relative h-[40dvh] max-h-[520px] md:h-[55dvh] lg:h-[65dvh]">
       <div className="">
         <button
           type="button"
@@ -56,10 +69,13 @@ function ExcalidrawClient({ data }: Props) {
           Scroll to center
         </button>
       </div>
-      <div className="h-[35dvh] max-h-[480px] w-full md:h-[50dvh] lg:h-[60dvh]">
+      <div
+        className={cn(
+          "absolute h-[35dvh] max-h-[480px] w-full md:h-[50dvh] lg:h-[60dvh]",
+        )}
+      >
         <ExcalidrawPrimitive
           initialData={{
-            scrollToContent: true,
             ...data,
           }}
           theme={theme === "light" ? "light" : "dark"}

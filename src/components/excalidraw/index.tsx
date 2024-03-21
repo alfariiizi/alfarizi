@@ -1,20 +1,27 @@
 import "@/styles/excalidraw.css";
 import type { ExcalidrawInitialDataState } from "@excalidraw/excalidraw/types/types";
 import { promises as fs } from "fs";
-// import { ExcalidrawClient } from "./client";
-import dynamic from "next/dynamic";
+import ExcalidrawClient from "./client";
 
-const ExcalidrawClient = dynamic(async () => await import("./client"), {
-  ssr: false,
-  loading: () => (
-    <div className="flex h-[40dvh] w-full items-center justify-center bg-gray-500 md:h-[50dvh] lg:h-[60dvh]">
-      {/* <Skeleton className="h-[40dvh] w-full md:h-[50dvh] lg:h-[60dvh]" /> */}
-      <p className="font-display text-lg">Loading Excalidraw</p>
-    </div>
-  ),
-});
+// const ExcalidrawClient = dynamic(
+//   () => import("./client").then((data) => data),
+//   {
+//     ssr: false,
+//     loading: () => {
+//       // Grab the HTML from the DOM and use it as the loading component to prevent layout collapse/flickering
+//       const lazyEl = document.getElementById("lazy")?.outerHTML;
 
-/* eslint-disable @typescript-eslint/ban-ts-comment */
+//       return (
+//         <div
+//           className="flex h-[100px] max-h-[480px] w-full animate-pulse items-center justify-center bg-zinc-200 dark:bg-zinc-800 md:h-[50dvh] lg:h-[60dvh]"
+//           dangerouslySetInnerHTML={{
+//             __html: lazyEl ? lazyEl : "",
+//           }}
+//         />
+//       );
+//     },
+//   },
+// );
 
 type Props = {
   filename: string;
@@ -32,9 +39,7 @@ async function Excalidraw({ filename, caption }: Props) {
     <div className="space-y-2">
       <ExcalidrawClient data={excalidrawData} />
       {caption && (
-        <p className="text-center text-sm text-gray-700 dark:text-gray-300">
-          {caption}
-        </p>
+        <p className="text-center text-sm text-zinc-500">{caption}</p>
       )}
     </div>
   );
