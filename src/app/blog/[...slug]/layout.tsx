@@ -11,6 +11,7 @@ import {
 import { cn } from "@/lib/utils";
 import "@/styles/content.css";
 import { type Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import React from "react";
 import readingTime from "reading-time";
@@ -70,9 +71,6 @@ export default function layout({ params, children }: Props) {
                 {post.metadata.title}
               </h1>
             </div>
-            <p className={cn("text-base sm:text-lg")}>
-              {post.metadata.description}
-            </p>
             <div className="flex h-auto items-center gap-3 sm:gap-7">
               <p
                 className={cn(
@@ -104,16 +102,40 @@ export default function layout({ params, children }: Props) {
 
           {/* <div className="mb-10 mt-10 border-t-2 border-dashed border-gray-300 dark:border-gray-800" /> */}
 
-          <ArticleFooter>
-            <p
-              className={cn("font-display text-base font-semibold sm:text-lg")}
-            >
-              Tags:
-            </p>
-            <div className="flex flex-wrap gap-3">
-              {post.metadata.tags.map((tag) => (
-                <Tag key={tag} tag={tag} />
-              ))}
+          <ArticleFooter className="space-y-6">
+            {post.metadata.bib.length !== 0 && (
+              <div>
+                <p className="font-display text-base font-semibold sm:text-lg">
+                  Bibliography:
+                </p>
+                <ul className="list-disc space-y-1 [&>li]:ml-4">
+                  {post.metadata.bib.map((b) => (
+                    <li key={b.text} className="list-item">
+                      <Link
+                        target="_blank"
+                        href={b.link ?? ""}
+                        className="underline underline-offset-2 duration-150 hover:opacity-80"
+                      >
+                        {b.text}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            <div>
+              <p
+                className={cn(
+                  "font-display text-base font-semibold sm:text-lg",
+                )}
+              >
+                Tags:
+              </p>
+              <div className="flex flex-wrap gap-3">
+                {post.metadata.tags.map((tag) => (
+                  <Tag key={tag} tag={tag} />
+                ))}
+              </div>
             </div>
           </ArticleFooter>
         </Article>
@@ -121,7 +143,7 @@ export default function layout({ params, children }: Props) {
         {/* Table of content */}
         {post.metadata.toc && (
           <div className="sticky left-0 top-0 hidden h-fit w-[260px] flex-col gap-4 pt-20 text-base lg:flex">
-            <h3 className="font-semibold text-gray-400 dark:text-gray-600">
+            <h3 className="text-sm font-semibold text-gray-400 dark:text-gray-600">
               On this page
             </h3>
             <div className="flex flex-col gap-3">
@@ -135,7 +157,7 @@ export default function layout({ params, children }: Props) {
                     <a
                       data-level={heading.level}
                       href={`#${heading.slug}`}
-                      className="flex leading-tight opacity-60 duration-150 hover:opacity-100 data-[level=four]:pl-[2rem] data-[level=three]:pl-4 data-[level=two]:pl-0"
+                      className="flex text-sm leading-tight opacity-60 duration-150 hover:opacity-100 data-[level=four]:pl-[2rem] data-[level=three]:pl-4 data-[level=two]:pl-0"
                     >
                       {heading.text}
                     </a>

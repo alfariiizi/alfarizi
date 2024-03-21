@@ -11,6 +11,10 @@ import { elements } from "./basic-element";
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-implied-eval */
 
+export function generatePath(filename: string) {
+  return `/content/blog/mengapa-kita-perlu-menggunakan-react-server-component/${filename}`;
+}
+
 const useMDXComponent = (code: string) => {
   const fn = new Function(code);
   return fn({ ...runtime }).default;
@@ -23,6 +27,7 @@ const mdxComponents = {
   Math,
   Excalidraw,
   ...elements,
+  generatePath,
 };
 
 interface MdxProps {

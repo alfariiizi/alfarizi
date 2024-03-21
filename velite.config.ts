@@ -1,10 +1,12 @@
 import GithubSlugger from "github-slugger";
-import rehypeKatex from "rehype-katex";
-import rehypePrettyCode from "rehype-pretty-code";
-import remarkMath from "remark-math";
 import { defineCollection, defineConfig, s } from "velite";
+import { rehypePlugins } from "./src/mdx-plugins/rehype-plugins";
+import { remarkPlugins } from "./src/mdx-plugins/remark-plugins";
 
 /* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 
 const icon = s.enum(["github", "instagram", "medium", "twitter", "youtube"]);
 const count = s
@@ -74,6 +76,11 @@ const meta = s
 //     .transform((data) => ({ ...data, permalink: `/blog/${data.slug}` })),
 // });
 
+// Regular expression to match the pattern
+// It captures the text within the square brackets as the first group
+// and the text within the parentheses as the second group
+const regex = /\[([^\]]+)]\(([^)]+)\)/;
+
 const postMetadata = defineCollection({
   name: "PostMetadata",
   pattern: "blog/**/metadata.yaml",
@@ -86,6 +93,7 @@ const postMetadata = defineCollection({
       toc: s.boolean().default(false),
       tags: s.string().array().default([]),
       rcc: s.boolean().default(false), // client component
+      bib: s.string().array().default([]), // bibliography
     })
     .transform((data) => {
       const slugger = new GithubSlugger();
@@ -94,6 +102,19 @@ const postMetadata = defineCollection({
         ...data,
         slug,
         permalink: `/blog/${slug}`,
+      };
+    })
+    .transform((data) => {
+      const bib = data.bib.map((b) => {
+        const result = b.match(regex);
+        return {
+          text: result?.[1],
+          link: result?.[2],
+        };
+      });
+      return {
+        ...data,
+        bib,
       };
     }),
 });
@@ -186,8 +207,9 @@ export default defineConfig({
   collections: { tags, pages, posts, postMetadata, projects },
   mdx: {
     // @ts-ignore
-    remarkPlugins: [remarkMath],
-    rehypePlugins: [rehypeKatex, rehypePrettyCode],
+    remarkPlugins,
+    // @ts-ignore
+    rehypePlugins,
   },
   // prepare: ({ tags, posts }) => {
   //   const docs = posts.filter(

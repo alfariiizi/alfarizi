@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "prebuild": "bash script/copy-assets.sh",
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",

@@ -25,12 +25,14 @@ export async function Image({
   const srcFull = isExternal
     ? src.toString()
     : `${env.NEXT_PUBLIC_URL}${src.toString()}`;
+
   const blurData = await getBase64(srcFull);
   const imageSize = await probe(srcFull);
 
   return (
     <div className="mx-auto my-3 flex min-w-0 flex-col items-center gap-2">
       <NextImage
+        title={isExternal ? srcFull : undefined}
         src={src}
         className={cn("my-0 h-auto rounded-sm", full && "w-full", className)}
         width={imageSize.width * (scale ?? 1)}

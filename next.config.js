@@ -2,6 +2,7 @@ import createMDX from "@next/mdx";
 import withPlaiceholder from "@plaiceholder/next";
 import rehypeKatex from "rehype-katex";
 import rehypePrettyCode from "rehype-pretty-code";
+import rehypeSlug from "rehype-slug";
 import remarkMath from "remark-math";
 import { build } from "velite";
 
@@ -20,7 +21,10 @@ const withMDX = createMDX({
   // Add markdown plugins here, as desired
   options: {
     remarkPlugins: [remarkMath],
+    // @ts-ignore
     rehypePlugins: [
+      rehypeSlug,
+      rehypeKatex,
       [
         rehypePrettyCode,
         {
@@ -29,7 +33,6 @@ const withMDX = createMDX({
           keepBackground: false,
         },
       ],
-      rehypeKatex,
     ],
   },
 });
