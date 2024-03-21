@@ -116,6 +116,21 @@ const postMetadata = defineCollection({
         ...data,
         bib,
       };
+    })
+    .transform((data) => {
+      const dateNow = new Date();
+      const datePost = new Date(data.date);
+
+      // Menghitung selisih dalam milidetik
+      const difference = dateNow.getTime() - datePost.getTime();
+
+      // Mengubah milidetik menjadi hari
+      const dayDifference = difference / (1000 * 60 * 60 * 24);
+
+      return {
+        ...data,
+        isNew: dayDifference < 14,
+      };
     }),
 });
 
