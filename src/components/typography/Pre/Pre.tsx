@@ -1,28 +1,31 @@
 import { cn } from "@/lib/utils";
-import { type ComponentPropsWithoutRef } from "react";
+import { forwardRef } from "react";
 
-type Props = ComponentPropsWithoutRef<"pre"> & {
+type Props = {
   "data-language"?: string;
 };
 
-export function Pre({ className, children, ...props }: Props) {
-  const lang = props["data-language"] ?? "shell";
+export const Pre = forwardRef<
+  HTMLPreElement,
+  React.HTMLAttributes<HTMLPreElement> & Props
+>(({ className, children, ...props }, ref) => {
+  const lang = props["data-language"] ?? "plaintext";
 
   return (
-    <div className="flex flex-col gap-0">
-      <div className="w-full max-w-[80vw] rounded-t-md bg-secondary px-4 py-1 font-mono text-sm text-secondary-foreground dark:bg-secondary/40 sm:text-base">
+    <pre
+      ref={ref}
+      className={cn(
+        "relative m-0 max-h-[60vh] w-full min-w-0 max-w-[80vw] overflow-auto text-nowrap rounded-none rounded-b-md px-0 pb-4 pt-10 text-sm sm:text-base md:max-h-[80vh] [&_span]:text-xs md:[&_span]:text-sm",
+        "scrollbar-thin",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+      <div className="absolute left-2 top-2 w-10 text-xs text-secondary sm:text-sm">
         {lang.toLowerCase()}
       </div>
-      <pre
-        className={cn(
-          "m-0 max-h-[60vh] w-full min-w-0 max-w-[80vw] overflow-auto text-nowrap rounded-none rounded-b-md text-sm sm:text-base md:max-h-[80vh] [&_span]:text-xs md:[&_span]:text-sm",
-          "scrollbar-thin",
-          className,
-        )}
-        {...props}
-      >
-        {children}
-      </pre>
-    </div>
+    </pre>
   );
-}
+});
+Pre.displayName = "Pre";

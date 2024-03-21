@@ -1,16 +1,20 @@
 import { cn } from "@/lib/utils";
 import { type ComponentPropsWithoutRef } from "react";
 
-export function Code({
-  className,
-  ...props
-}: ComponentPropsWithoutRef<"code">) {
+type Props = ComponentPropsWithoutRef<"code"> & {
+  "data-language"?: string;
+};
+
+export function Code({ className, ...props }: Props) {
+  const lang = props["data-language"];
+
+  if (lang) {
+    return <code className={className} {...props} />;
+  }
+
   return (
     <code
-      className={cn(
-        "dark:text-red-alternative-400 text-red-alternative-600",
-        className,
-      )}
+      className={cn("text-rose-500 dark:text-rose-800", className)}
       {...props}
     />
   );

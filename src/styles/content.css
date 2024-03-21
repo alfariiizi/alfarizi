@@ -16,30 +16,22 @@
   display: block;
 }
 
-/* [Code block line number] */
-
-code {
-  counter-reset: line;
+[data-rehype-pretty-code-figure] {
+  @apply space-y-0;
 }
 
-code > [data-line]::before {
-  counter-increment: line;
-  content: counter(line);
-
-  /* Other styling */
-  display: inline-block;
-  width: 1rem;
-  margin-right: 1.1rem;
-  text-align: right;
-  color: gray;
+[data-rehype-pretty-code-title] {
+  @apply h-fit w-full max-w-[80vw] rounded-t-md bg-secondary !py-2 px-4 font-mono text-sm text-secondary-foreground dark:bg-secondary/40 sm:text-base;
 }
 
-code[data-line-numbers-max-digits="2"] > [data-line]::before {
-  width: 2rem;
+[data-line] {
+  @apply px-4 md:px-6;
 }
 
-code[data-line-numbers-max-digits="3"] > [data-line]::before {
-  width: 3rem;
+/* [Line highlight] */
+
+[data-highlighted-line] {
+  @apply bg-zinc-700 dark:bg-zinc-900;
 }
 
 /* [Code block highlight] */

@@ -10,4 +10,5 @@
 rsync -rmv --include='*/' \
  --include='*.jpg'\
  --include='*.png'\
- --exclude='*' content/ public/content
+ --exclude='*'\
+ content/blog/ public/content/blog
