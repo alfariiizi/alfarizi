@@ -29,3 +29,10 @@ The solution is:
 For now, I choose first solution. The drawback is I cannot using static params. But it get the job done.
 
 > Maybe in the future I will choose second solution in order to use static params.
+
+## Excalidraw file cause: vercel error no such file or directory, open '/var/task/
+
+> This error only happens on vercel
+
+Issue: <https://github.com/vercel/next.js/issues/52711>
+Solution: <https://github.com/vercel/next.js/issues/52711#issuecomment-1855735947>
