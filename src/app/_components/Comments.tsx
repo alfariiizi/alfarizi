@@ -3,12 +3,23 @@
 import { cn } from "@/lib/utils";
 import GiscusComment from "@giscus/react";
 import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 import { Maxwidthdiv } from "./Maxwindthdiv";
 
 type Props = React.HTMLAttributes<HTMLDivElement>;
 
 export default function Comments({ className, ...props }: Props) {
   const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  // useEffect only runs on the client, so now we can safely show the UI
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <Maxwidthdiv smallPadding className={cn("max-w-5xl", className)} {...props}>
