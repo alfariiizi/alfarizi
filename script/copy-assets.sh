@@ -8,6 +8,7 @@
 #  --exclude='*' content/ public/content
 
 rsync -rmv --include='*/' \
+ --include='*.excalidraw'\
  --include='*.jpg'\
  --include='*.png'\
  --exclude='*'\

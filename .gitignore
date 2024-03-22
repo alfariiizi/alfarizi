@@ -48,3 +48,6 @@ yarn-error.log*
 
 # content
 .content-archived
+content/**/*.png
+content/**/*.jpg
+content/**/*.excalidraw

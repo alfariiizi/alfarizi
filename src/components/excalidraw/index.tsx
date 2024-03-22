@@ -33,8 +33,8 @@ async function Excalidraw({ filename, caption }: Props) {
   console.log(process.cwd());
   console.log(process.cwd() + filename);
   // const excalidrawFile = await fs.readFile(process.cwd() + filename, "utf-8");
-  const excalidrawPath = path.join(process.cwd() + filename);
-  const excalidrawFile = fs.readFileSync(excalidrawPath, { encoding: "utf-8" });
+  const excalidrawPath = path.join(process.cwd(), "public", filename);
+  const excalidrawFile = fs.readFileSync(excalidrawPath, { encoding: "utf8" });
   console.log(excalidrawFile);
 
   const excalidrawData = JSON.parse(
