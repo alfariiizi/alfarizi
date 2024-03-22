@@ -36,7 +36,7 @@ export default function page() {
   });
 
   return (
-    <Maxwidthdiv className="mb-10 mt-10 flex flex-col gap-14">
+    <Maxwidthdiv className="my-10 flex flex-col gap-14">
       <div className="flex flex-col gap-3">
         <h2 className="font-display text-4xl font-bold text-primary">
           Tags 🎯
@@ -51,7 +51,7 @@ export default function page() {
           <Link
             key={tag.name}
             href={`/tag/${tag.name}`}
-            className="flex items-center gap-1 rounded-full border-2 border-text/80 bg-background px-2 py-1 duration-150 hover:opacity-70"
+            className="border-text/80 flex items-center gap-1 rounded-full border-2 bg-background px-2 py-1 duration-150 hover:opacity-70"
           >
             <p className="font-medium">{tag.name}</p>
             <div className="flex aspect-square h-6 items-center justify-center rounded-full bg-accent p-2 sm:h-7 sm:min-w-7">

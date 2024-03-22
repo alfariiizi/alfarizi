@@ -16,7 +16,7 @@ export default function Page() {
   );
 
   return (
-    <Maxwidthdiv className="mt-10 flex justify-center">
+    <Maxwidthdiv className="my-10 flex justify-center">
       <div className="flex w-full max-w-3xl flex-col gap-16">
         <h2
           className={cn(
