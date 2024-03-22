@@ -16,7 +16,7 @@ const ExcalidrawPrimitive = dynamic(
     ssr: false,
     loading: () => {
       return (
-        <div className="flex h-[35vh] max-h-[480px] w-full animate-pulse items-center justify-center bg-zinc-200 dark:bg-zinc-800 md:h-[50vh] lg:h-[60vh]">
+        <div className="flex h-[35lvh] max-h-[480px] w-full animate-pulse items-center justify-center bg-zinc-200 dark:bg-zinc-800 md:h-[50lvh] lg:h-[60lvh]">
           <p className="font-display text-lg text-foreground">
             Loading Diagram...
           </p>
@@ -54,7 +54,7 @@ function ExcalidrawClient({ data }: Props) {
   }
 
   return (
-    <div className="relative h-[40vh] max-h-[520px] md:h-[55vh] lg:h-[65vh]">
+    <div className="relative h-[40lvh] max-h-[520px] md:h-[55lvh] lg:h-[65lvh]">
       <div className="">
         <button
           type="button"
@@ -71,7 +71,7 @@ function ExcalidrawClient({ data }: Props) {
       </div>
       <div
         className={cn(
-          "absolute h-[35vah] max-h-[480px] w-full md:h-[50vh] lg:h-[60vh]",
+          "absolute h-[35lvh] max-h-[480px] w-full md:h-[50lvh] lg:h-[60lvh]",
         )}
       >
         <ExcalidrawPrimitive
