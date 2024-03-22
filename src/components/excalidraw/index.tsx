@@ -1,6 +1,7 @@
 import "@/styles/excalidraw.css";
 import type { ExcalidrawInitialDataState } from "@excalidraw/excalidraw/types/types";
-import { promises as fs } from "fs";
+import fs from "fs";
+import path from "path";
 import ExcalidrawClient from "./client";
 
 // const ExcalidrawClient = dynamic(
@@ -29,7 +30,12 @@ type Props = {
 };
 
 async function Excalidraw({ filename, caption }: Props) {
-  const excalidrawFile = await fs.readFile(process.cwd() + filename, "utf8");
+  console.log(process.cwd());
+  console.log(process.cwd() + filename);
+  // const excalidrawFile = await fs.readFile(process.cwd() + filename, "utf-8");
+  const excalidrawPath = path.join(process.cwd() + filename);
+  const excalidrawFile = fs.readFileSync(excalidrawPath, { encoding: "utf-8" });
+  console.log(excalidrawFile);
 
   const excalidrawData = JSON.parse(
     excalidrawFile,

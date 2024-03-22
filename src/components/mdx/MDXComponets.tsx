@@ -17,7 +17,7 @@ export function generatePath(filename: string) {
 
 const useMDXComponent = (code: string) => {
   const fn = new Function(code);
-  return fn({ ...runtime }).default;
+  return fn({ ...runtime, baseUrl: process.cwd() }).default;
 };
 
 const mdxComponents = {
