@@ -1,7 +1,7 @@
 icon: 🔭
 title: Mengapa kita perlu menggunakan React Server Component?
 description: Next.js 13 memperkenalkan React Server Component (RSC). Mengapa kita perlu menggunakan RSC? Pada tulisan ini, saya akan sharing setidaknya 3 point mengapa kita perlu menggunakan RSC.
-date: "2024-03-21"
+date: "2024-03-22"
 tags:
   - reactjs
   - nextjs
