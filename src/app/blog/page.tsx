@@ -33,7 +33,7 @@ export default function Page() {
                 <p
                   className={cn(
                     "min-w-[5.5rem] text-end font-semibold text-secondary md:min-w-40",
-                    post.metadata.isNew && "mt-6",
+                    post.metadata.isNew && "mt-7",
                   )}
                 >
                   {formatter.format(new Date(post.metadata.date))}
@@ -41,7 +41,7 @@ export default function Page() {
                 <div className="flex flex-col gap-0">
                   <div>
                     {post.metadata.isNew && (
-                      <p className="w-fit animate-pulse rounded-md bg-accent px-2 py-1 text-xs font-semibold text-accent-foreground">
+                      <p className="mb-1 w-fit animate-pulse rounded-md bg-accent px-2 py-1 text-xs font-semibold text-accent-foreground">
                         New 🎉
                       </p>
                     )}
@@ -54,7 +54,7 @@ export default function Page() {
                       </h3>
                     </Link>
                   </div>
-                  <p className="font-sans text-sm sm:text-base">
+                  <p className="font-sans text-sm leading-normal sm:text-base">
                     {post.metadata.description}
                   </p>
                 </div>
