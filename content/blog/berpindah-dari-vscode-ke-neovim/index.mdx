@@ -1,0 +1,121 @@
+Pada [artikel sebelumnya](https://alfarizi.vercel.app/blog/apakah-neovim-benar-benar-lebih-baik-daripada-vscode), saya menceritakan pengalaman saya menggunakan Neovim selama satu bulan. Di akhir artikel tersebut, saya memilih menggunakan VSCode daripada menggunakan Neovim. Namun saya sekarang berpindah menggunakan Neovim lagi. Di tulisan ini saya akan menjelaskan mengapa saya berpindah menggunakan neovim dan apa saja feature di VSCode yang saya rindukan ketika saya menggunakan neovim.
+
+Sebelumnya, saya akan menjelaskan perjalanan saya: vscode ➡️ neovim ➡️ vscode ➡️ neovim.
+
+## From VSCode to Neovim to VSCode and back to Neovim
+
+<Image
+  src="https://pbs.twimg.com/media/FYzjRcdWYAAuS6-.png"
+  alt="Neovim Meme"
+  scale={0.8}
+/>
+
+
+### Sebelum VSCode dan Neovim
+
+Code editor pertama saya sebenarnya adalah sublime text 3. Saya memakai _sublime text 3_ ini ketika saya pertama kali belajar web development semasa SMA. Setelah SMA, saya sempat gap year 1 tahun. Diwaktu tersebut saya uji nyali dengan belajar bahasa C/C++ untuk mendalami Game Development dan Computer Graphics, sehingga pada saat itu saya memakai _Visual Studio_ (bukan Visual Studio Code ya!). Setelah itu, saya mencoba berganti OS dari Windows ke Linux (pada saat itu adalah Ubuntu), sehingga saya pun perlu berganti menggunakan code editor lain dikarenakan Visual Studio tidak ada di Linux. Alhasil saya memilih menggunakan _Visual Studio Code_ (_VSCode_).
+
+### VSCode: Code editor sejuta umat
+
+<Image
+  src="https://i.redd.it/w7k2w1wk4yq61.png"
+  alt="VSCode meme"
+  scale={0.5}
+/>
+
+Pengalaman saya menggunakan VSCode cukuplah baik. Untuk menginstal extension tinggal klik di menu extension. Untuk melakukan kustomisasi setting atau keybinding tinggal memodifikasi nya dengan tampilan UI atau secara langsung di json nya. Ketika artikel ini ditulis, kurang lebih saya sudah menggunakan vscode selama 5 tahun.
+
+Pada saat menggunakan vscode, saya belajar menggunakan _Vim movement_ (dari Vim Extension). Dari situlah, saya menjadi lebih lama menyentuh keyboard daripada menyentuh mouse. Setelah cukup lama menggunakan Vim movement ini, saya akhirnya mengkostumisasi konfigurasi setting dan keybinding berdasarkan Vim movement. Jika tertarik dengan konfigurasi setting dan keybinding saya, kalian bisa melihatnya di: [setting](https://github.com/alfariiizi/dotfiles/blob/main/dot_config/private_Code/User/settings.json) dan [keybinding](https://github.com/alfariiizi/dotfiles/blob/main/dot_config/private_Code/User/keybindings.json)
+
+VSCode tampak sangat sempurna sebagai code editor. Namun, dari pengalaman saya, pada project yang besar, ketika saya menjalankan vscode dengan vim extension, saya sering mendapati hang. Saya dapat berpindah file, tapi saya tidak bisa mengedit file. Terkadang hang ini berlangsung beberapa detik, namun juga terkadang hang ini bisa berlangsung beberapa menit. Lama hang ini bergantung pada sisa RAM yang sedang digunakan. Semakin sedikit sisa RAM, maka semakin lama hang tersebut. Sebagai informasi, laptop saya menggunakan Intel i7-10510U dengan RAM 20GB. Ketika saya cek dengan `btop` command, kebanyakan space RAM ini digunakan oleh node (saya gunakan untuk development nextjs) dan vscode.
+
+Dikarenakan saya sudah familiar dengan vim movement, akhirnya saya memberanikan diri menggunakan neovim.
+
+### Neovim Distro is a "No No"
+
+Saya memberanikan diri menggunakan neovim, namun saya terlalu takut melakukan konfigurasi sendiri. Sehingga akhirnya saya menggunakan Neovim distro. Neovim distro merupakan pre-configure neovim agar kita bisa menggunakan neovim tanpa perlu melakukan konfigurasi yang ribet. Beberapa neovim distro yang populer adalah: [LazyVim](https://www.lazyvim.org/), [NvChad](https://nvchad.com/), [AstroNvim](https://astronvim.com/), dan [LunarVim](https://www.lunarvim.org/)
+
+Pada [artikel sebelumnya](https://alfarizi.vercel.app/blog/apakah-neovim-benar-benar-lebih-baik-daripada-vscode), saya menjelaskan bahwa saya menggunakan [LazyVim](https://www.lazyvim.org/). Sebelum menggunakan LazyVim, saya juga pernah menggunakan [NvChad](https://nvchad.com/). Experience saya menggunakan neovim distro kurang lebih tidak terlalu bagus. Oke... semua plugin nya sudah terkonfigurasi dan tinggal pakek, tapi keymap nya juga ikutan terkonfigurasi sehingga cukup susah untuk dikustomisasi.
+
+### Back to VSCode
+
+Ketika saya menggunakan neovim distro, saya merasa terlalu ribet. Banyak konsep yang perlu dipelajari, dan saya tidak bisa melakukan kustomisasi sesuai keinginan saya. Akhirnya saya kembali menggunakan vscode, seperti yang saya jelaskan pada ending [artikel sebelumnya](https://alfarizi.vercel.app/blog/apakah-neovim-benar-benar-lebih-baik-daripada-vscode). Namun, ketika menggunakan vscode, saya kembali merasakan ketidaknyamanan ketika vscode hang beberapa menit.
+
+### Back to Neovim
+
+Saya dihadapkan dengan 2 opsi. Kembali menggunakan neovim distro, atau tetap menggunakan vscode. Saya menyadari, sebenarnya ada opsi ke-3, yakni menggunakan neovim yang dikonfiguasi sendiri. Saya mengabaikan opsi ke-3 ini karena tidak mungkin saya bisa mengkonfigurasi sendiri. It's too complicated! Or is it?
+
+Tanpa sengaja, saya menemukan github repo bernama [kickstart](https://github.com/nvim-lua/kickstart.nvim). Ini bukan neovim distro. Kickstart ini hanyalah konfigurasi dasar neovim yang bisa kita kustomisasi sendiri. Jika dengan neovim distro kita dapat memperoleh nilai konfigurasi 9 (dari skala 10), maka dengan kickstart ini kita bisa mendapatkan nilai konfigurasi 4 (dari skala 10). Dari nilai 4 tersebut kita dapat melakukan kustomisasi yang kita inginkan agar bisa sampai bernilai 8 atau bahkan 10.
+
+Konfigurasi Neovim saya bisa dilihat di: [nvim_config](https://github.com/alfariiizi/nvim_config)
+
+<Image
+  src="https://i.redd.it/in0sqjbb9zr71.jpg"
+  alt="Neovim Configuration Meme"
+  scale={0.25}
+/>
+
+Yap... I'm a nerd. Saya mengakui nya. Untuk mendapatkan konfigurasi neovim hingga yang saya inginkan, saya kurang lebih menghabiskan waktu 40 jam, itu sudah termasuk belajar mengenai konsep - konsep neovim, menambahkan plugin, mengatur struktur file, integrasi LSP, linter, formatter, autocompletion, optimisasi autocompletion, dsb.
+
+Mungkin 40 jam tersebut terlihat cukup lama. Tapi percayalah gaes, ketika kalian sudah mencoba neovim dengan kickstart, kalian bakal excited ketika melakukan konfigurasi neovim (ini berlaku jika kalian nerd). Dengan dedikasi waktu konfigurasi tersebut, saya merasa cukup puas dan sangat produktif dalam melakukan coding.
+
+## What I Love in Neovim
+
+Sebenarnya ada banyak hal yang saya suka di Neovim. Namun jika saya jelaskan semua sepertinya tulisan ini akan menjadi kepanjangan. Maka dari itu, saya akan jelaskan hal ter-favorit saya ketika menggunakan Neovim. Hal tersebut adalah **movement**. Bagi saya terdapat 3 movement, yakni _horizontal movement_, _vertical movement_, dan _file movement_.
+
+### Horizontal movement
+
+Ini sebenarnya sangatlah basic, kita bisa menggunakan `w`, `W`, `b`, `B` untuk horizontal movement. Namun jika ingin lebih kompleks lagi, kita bisa menggunakan `f`, `F`, `t`, `T`.
+
+### Vertical Movement
+
+Ketika kita ingin bergerak secara vertikal, terkadang kita ingin menuju ke bagian code yang terlihat di layar kita, tapi terkadang juga bisa tidak terlihat di layar kita.
+
+<Image
+  src="/content/blog/berpindah-dari-vscode-ke-neovim/flash-nvim.gif"
+  alt="flash.nvim"
+  scale={1}
+/>
+
+Jika bagian code yang ingin kita tuju masih terlihat di layar, maka kita menggunakan movement dari plugin [Flash](https://github.com/folke/flash.nvim). Dengan men-trigger flash, kita bisa lompat ke bagian code mana pun yang ada di layar kita.
+
+Jika bagian code yang ingin kita tuju tidak berada di dalam layar kita, maka kita bisa menggunakan `Ctrl + d` dan `Ctrl + u` untuk melakukan scroll down dan scroll up.
+
+### File Movement
+
+<Image
+  src="/content/blog/berpindah-dari-vscode-ke-neovim/find-files-telescope.gif"
+  alt="telescope.nvim"
+  scale={1}
+/>
+
+Untuk melakukan file movement, saya menggunakan [Telescope](https://github.com/nvim-telescope/telescope.nvim). Telescope merupakan plugin untuk melakukan fuzzy find. Secara out of the box, kita bisa mencari files, mencari suatu keyword, mencari dokumentasi, mencari keymap, dsb.
+
+<Callout title="Preferensi Pribadi" status="note">
+  Apa yang saya gunakan untuk melakukan movement diatas merupakan preferensi pribadi dan merupakan hasil dari kustomisasi saya pribadi. Jika kalian kurang sesuai dengan pilihan saya, kalian bisa melakukan kustomisasi pada Neovim.
+</Callout>
+
+## What features I miss from VSCode
+
+<Image
+  src="https://i.ytimg.com/vi/XR6OaznDwl8/maxresdefault.jpg"
+  alt="Console Ninja"
+  scale={0.2}
+/>
+
+Sampai ketika saya menulis ini, hanya ada 1 features (sebenarnya sih lebih ke extension ya) yang saya harap ada di Neovim. Yaitu [Console Ninja](https://marketplace.visualstudio.com/items?itemName=WallabyJs.console-ninja). Di vscode, saya sering menggunakan console ninja agar tahu isi dari suatu variable atau object ketika memanggil fungsi `console.log`. Sebenarnya saya dulu terbiasa menggunakan debugger ketika saya ngoding dengan bahasa C/C++ dan JS/TS/Reactjs. Namun, ketika saya menggunakan Nextjs, proses debugging ini menjadi sangat kompleks. Ini dikarenakan terdapat Server Component dan tipe rendering Nextjs menggunakan Server Side Rendering. Belum lagi jika pakek TurboPack pada Nextjs. Maka dari itu, `console.log` merupakan solusi menurut saya.
+
+Namun, dengan absen nya Console Ninja di Neovim, saya harus berpuas diri menggunakan chrome devtools untuk proses debugging.
+
+## Not using VSCode anymore?
+
+<Image
+  src="https://i.redd.it/f1lqhl6j5lp81.png"
+  alt="Neovim + Vscode"
+  scale={0.4}
+/>
+
+Saya menggunakan Neovim bukan berarti saya anti VSCode. Untuk web development dan pemrograman secara umum, saya menggunakan neovim. Untuk analisis data, saya menggunakan jupyter notebook di vscode. Saya tahu bahwa saya dapat mengintegrasikan jupyter notebook di neovim, namun menurutku secara UI masih lebih baik menjalankan jupyter notebook di vscode. Saya tidak memaksakan semua nya dapat digunakan di neovim.
+
+Oke... sampai disitu dulu tulisanku mengenai perpindahan saya dari VSCode ke Neovim. Jika kalian suka dengan tulisan ini, kalian bisa like tulisan ini. Atau jika kalian ada yang ingin ditanyakan atau sekedar menyapa saya, kalian bisa tulis di komentar. Salam sehat selalu... Bye... 👋
+
