@@ -1,5 +1,75 @@
 # Notes
 
+## Template
+
+## LinkedIn
+
+### Indonesian
+
+Judul Artikel:
+[Judul Artikel Anda]
+
+Intro:
+Halo, Profesional LinkedIn!
+
+Saya dengan senang hati ingin berbagi artikel terbaru saya: "[Judul Artikel Anda]". Dalam artikel ini, saya membahas [Deskripsi Singkat tentang Isi Artikel].
+
+Tujuan:
+Artikel ini ditujukan untuk [Siapa Target Audiens], dengan harapan dapat [Apa yang Anda Ingin Pembaca Dapatkan dari Artikel Ini].
+
+Ajakan Bertindak:
+Saya sangat menghargai feedback dan pandangan Anda! Silakan baca dan beri tahu saya pikiran Anda di kolom komentar.
+
+👉 Baca artikel lengkapnya di sini: [URL Artikel]
+
+Terima kasih atas dukungan Anda!
+
+### English
+
+Judul Artikel:
+[Your Article Title]
+
+Intro:
+Hello, LinkedIn Professionals!
+
+I'm excited to share my latest article with you: "[Your Article Title]". In this piece, I explore [Brief Description of the Article Content].
+
+Objective:
+This article is intended for [Who the Target Audience Is], aiming to [What You Want the Reader to Take Away from the Article].
+
+Call to Action:
+I would greatly appreciate your feedback and thoughts! Please take a moment to read and let me know your insights in the comments section.
+
+👉 Read the full article here: [Article URL]
+
+Thank you for your support!
+
+## Twitter
+
+### Indonesian
+
+🚀 Just dropped: "[Judul Artikel Anda]"!
+
+📝 Dalam artikel ini, saya jelaskan tentang [Deskripsi Singkat tentang Isi Artikel]. Cocok untuk [Siapa Target Audiens] yang ingin [Apa yang Anda Ingin Pembaca Dapatkan dari Artikel Ini].
+
+👀 Baca & beri tahu saya pendapat Anda! #TagRelevan #TopikRelevan
+
+🔗 [URL Artikel]
+
+👉 RT & favorit jika Anda menemukan ini berguna!
+
+### English
+
+🚀 Just dropped: "[Your Article Title]"!
+
+📝 In this article, I delve into [Brief Description of the Article Content]. Perfect for [Who the Target Audience Is] looking to [What You Want the Reader to Take Away from the Article].
+
+👀 Read & let me know your thoughts! #RelevantTag #RelevantTopic
+
+🔗 [Article URL]
+
+👉 RT & favorite if you find this useful!
+
 ## Source
 
 - Copy code block button:
