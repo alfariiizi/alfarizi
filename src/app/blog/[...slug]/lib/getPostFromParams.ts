@@ -8,7 +8,7 @@ export interface PostProps {
 
 export function getPostFromParams(params: PostProps["params"]) {
   const slug = params?.slug?.join("/");
-  const post = posts.find((post) => post.metadata.slug === slug);
+  const post = posts.find((post) => post.slug === slug);
 
   if (!post) {
     null;

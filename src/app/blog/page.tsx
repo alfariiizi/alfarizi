@@ -11,8 +11,9 @@ export const metadata: Metadata = {
 const formatter = new Intl.DateTimeFormat("en-US", { dateStyle: "long" });
 
 export default function Page() {
+  console.log({ posts });
   const sortedPost = posts.sort((a, b) =>
-    new Date(a.metadata.date) < new Date(b.metadata.date) ? 1 : -1,
+    new Date(a.date) < new Date(b.date) ? 1 : -1,
   );
 
   return (
@@ -33,29 +34,29 @@ export default function Page() {
                 <p
                   className={cn(
                     "min-w-[5.5rem] text-end font-semibold text-secondary md:min-w-40",
-                    post.metadata.isNew && "mt-7",
+                    post.isNew && "mt-7",
                   )}
                 >
-                  {formatter.format(new Date(post.metadata.date))}
+                  {formatter.format(new Date(post.date))}
                 </p>
                 <div className="flex flex-col gap-0">
                   <div>
-                    {post.metadata.isNew && (
+                    {post.isNew && (
                       <p className="mb-1 w-fit animate-pulse rounded-md bg-accent px-2 py-1 text-xs font-semibold text-accent-foreground">
                         New 🎉
                       </p>
                     )}
                     <Link
-                      href={post.metadata.permalink}
+                      href={post.permalink}
                       className="w-fit duration-150 hover:opacity-70"
                     >
                       <h3 className="text-lg font-semibold text-primary sm:text-xl">
-                        {post.metadata.title}
+                        {post.title}
                       </h3>
                     </Link>
                   </div>
                   <p className="font-sans text-sm leading-normal sm:text-base">
-                    {post.metadata.description}
+                    {post.description}
                   </p>
                 </div>
               </article>

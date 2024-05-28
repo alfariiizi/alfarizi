@@ -81,9 +81,63 @@ const meta = s
 // and the text within the parentheses as the second group
 const regex = /\[([^\]]+)]\(([^)]+)\)/;
 
-const postMetadata = defineCollection({
-  name: "PostMetadata",
-  pattern: "blog/**/metadata.yaml",
+// [Old post metadata]
+// const postMetadata = defineCollection({
+//   name: "PostMetadata",
+//   pattern: "blog/**/metadata.yaml",
+//   schema: s
+//     .object({
+//       title: s.string().max(99),
+//       description: s.string().max(999),
+//       date: s.isodate(),
+//       icon: s.string(),
+//       toc: s.boolean().default(false),
+//       tags: s.string().array().default([]),
+//       rcc: s.boolean().default(false), // client component
+//       bib: s.string().array().default([]), // bibliography
+//     })
+//     .transform((data) => {
+//       const slugger = new GithubSlugger();
+//       const slug = slugger.slug(data.title);
+//       return {
+//         ...data,
+//         slug,
+//         permalink: `/blog/${slug}`,
+//       };
+//     })
+//     .transform((data) => {
+//       const bib = data.bib.map((b) => {
+//         const result = b.match(regex);
+//         return {
+//           text: result?.[1],
+//           link: result?.[2],
+//         };
+//       });
+//       return {
+//         ...data,
+//         bib,
+//       };
+//     })
+//     .transform((data) => {
+//       const dateNow = new Date();
+//       const datePost = new Date(data.date);
+//
+//       // Menghitung selisih dalam milidetik
+//       const difference = dateNow.getTime() - datePost.getTime();
+//
+//       // Mengubah milidetik menjadi hari
+//       const dayDifference = difference / (1000 * 60 * 60 * 24);
+//
+//       return {
+//         ...data,
+//         isNew: dayDifference < 14,
+//       };
+//     }),
+// });
+
+const posts = defineCollection({
+  name: "Post",
+  pattern: "blog/**/index.mdx",
   schema: s
     .object({
       title: s.string().max(99),
@@ -94,6 +148,8 @@ const postMetadata = defineCollection({
       tags: s.string().array().default([]),
       rcc: s.boolean().default(false), // client component
       bib: s.string().array().default([]), // bibliography
+      mdx: s.mdx({ gfm: true }),
+      raw: s.raw(),
     })
     .transform((data) => {
       const slugger = new GithubSlugger();
@@ -131,16 +187,6 @@ const postMetadata = defineCollection({
         ...data,
         isNew: dayDifference < 14,
       };
-    }),
-});
-
-const posts = defineCollection({
-  name: "Post",
-  pattern: "blog/**/index.mdx",
-  schema: s
-    .object({
-      mdx: s.mdx({ gfm: true }),
-      raw: s.raw(),
     })
     .transform((data) => {
       const regXHeader = /\n(?<flag>#{1,6})\s+(?<content>.+)/g;
@@ -219,7 +265,7 @@ export default defineConfig({
     name: "[name]-[hash:6].[ext]",
     clean: true,
   },
-  collections: { tags, pages, posts, postMetadata, projects },
+  collections: { tags, pages, posts, projects },
   mdx: {
     // @ts-ignore
     remarkPlugins,

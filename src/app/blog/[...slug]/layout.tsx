@@ -25,8 +25,8 @@ export function generateMetadata({ params }: PostProps): Metadata {
   }
 
   return {
-    title: post.metadata.title,
-    description: post.metadata.description,
+    title: post.title,
+    description: post.description,
   };
 }
 
@@ -50,25 +50,25 @@ export default function layout({ params, children }: Props) {
     notFound();
   }
 
-  const headings = post.content.headings;
+  const headings = post.headings;
 
   return (
     <div className="mb-28 space-y-10">
       <Maxwidthdiv smallPadding className="flex gap-6" lang="id">
-        {post.metadata.toc && <div className="hidden w-[100px] lg:block" />}
+        {post.toc && <div className="hidden w-[100px] lg:block" />}
         {/* Article */}
         <Article lang="id">
           <ArticleHeader>
             <div className="flex justify-start gap-4">
-              {post.metadata.icon && (
-                <h1 className="text-xl sm:text-3xl">{post.metadata.icon}</h1>
+              {post.icon && (
+                <h1 className="text-xl sm:text-3xl">{post.icon}</h1>
               )}
               <h1
                 className={cn(
                   "font-display text-xl font-semibold text-primary sm:text-3xl",
                 )}
               >
-                {post.metadata.title}
+                {post.title}
               </h1>
             </div>
             <div className="flex h-auto items-center gap-3 sm:gap-7">
@@ -77,7 +77,7 @@ export default function layout({ params, children }: Props) {
                   "pt-1 font-display text-sm font-semibold text-slate-500 sm:text-lg",
                 )}
               >
-                {formatter.format(new Date(post.metadata.date))}
+                {formatter.format(new Date(post.date))}
               </p>
               <div className="h-2 w-2 rounded-full bg-accent" />
               <p
@@ -85,32 +85,28 @@ export default function layout({ params, children }: Props) {
                   "pt-1 font-display text-sm font-semibold text-slate-500 sm:text-lg",
                 )}
               >
-                {readingTime(post.content.raw).text}
+                {readingTime(post.raw).text}
               </p>
             </div>
             <div className="mt-2 flex flex-wrap gap-2">
-              {post.metadata.tags.map((tag) => (
+              {post.tags.map((tag) => (
                 <Tag key={tag} tag={tag} className="text-xs sm:text-sm" />
               ))}
             </div>
           </ArticleHeader>
 
           <ArticleContent>
-            {post.metadata.rcc ? (
-              <>{children}</>
-            ) : (
-              <Mdx code={post.content.mdx} />
-            )}
+            {post.rcc ? <>{children}</> : <Mdx code={post.mdx} />}
           </ArticleContent>
 
           <ArticleFooter className="space-y-6">
-            {post.metadata.bib.length !== 0 && (
+            {post.bib.length !== 0 && (
               <div>
                 <p className="font-display text-base font-semibold sm:text-lg">
                   Bibliography:
                 </p>
                 <ul className="list-disc space-y-1 [&>li]:ml-4">
-                  {post.metadata.bib.map((b) => (
+                  {post.bib.map((b) => (
                     <li key={b.text} className="list-item">
                       <Link
                         target="_blank"
@@ -133,7 +129,7 @@ export default function layout({ params, children }: Props) {
                 Tags:
               </p>
               <div className="flex flex-wrap gap-3">
-                {post.metadata.tags.map((tag) => (
+                {post.tags.map((tag) => (
                   <Tag key={tag} tag={tag} />
                 ))}
               </div>
@@ -142,7 +138,7 @@ export default function layout({ params, children }: Props) {
         </Article>
 
         {/* Table of content */}
-        {post.metadata.toc && (
+        {post.toc && (
           <div className="sticky left-0 top-0 hidden h-fit w-[260px] flex-col gap-4 pt-20 text-base lg:flex">
             <h3 className="text-sm font-semibold text-gray-400 dark:text-gray-600">
               On this page

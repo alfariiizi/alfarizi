@@ -12,5 +12,6 @@ rsync -rmv --include='*/' \
  --include='*.jpg'\
  --include='*.png'\
  --include='*.gif'\
+ --include='*.webm'\
  --exclude='*'\
  content/blog/ public/content/blog

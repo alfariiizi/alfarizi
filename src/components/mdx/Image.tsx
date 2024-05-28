@@ -27,7 +27,16 @@ export async function Image({
     : `${env.NEXT_PUBLIC_URL}${src.toString()}`;
 
   const blurData = await getBase64(srcFull);
-  const imageSize = await probe(srcFull);
+  let isDoBlur = true;
+  const imageSize = await probe(srcFull)
+    .then((data) => data)
+    .catch(() => {
+      isDoBlur = false;
+      return {
+        width: 1024,
+        height: 720,
+      };
+    });
 
   return (
     <div className="mx-auto my-3 flex min-w-0 flex-col items-center gap-2">
@@ -39,8 +48,8 @@ export async function Image({
         height={imageSize.height * (scale ?? 1)}
         alt={alt ?? caption}
         sizes="(min-width: 960px) 768px, (min-width: 780px) calc(62.5vw + 181px), calc(96.52vw - 54px)"
-        placeholder="blur"
-        blurDataURL={blurData}
+        placeholder={isDoBlur ? "blur" : undefined}
+        blurDataURL={isDoBlur ? blurData : undefined}
         priority
         {...props}
       />
