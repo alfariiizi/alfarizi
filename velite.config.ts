@@ -174,21 +174,6 @@ const posts = defineCollection({
       };
     })
     .transform((data) => {
-      const dateNow = new Date();
-      const datePost = new Date(data.date);
-
-      // Menghitung selisih dalam milidetik
-      const difference = dateNow.getTime() - datePost.getTime();
-
-      // Mengubah milidetik menjadi hari
-      const dayDifference = difference / (1000 * 60 * 60 * 24);
-
-      return {
-        ...data,
-        isNew: dayDifference < 14,
-      };
-    })
-    .transform((data) => {
       const regXHeader = /\n(?<flag>#{1,6})\s+(?<content>.+)/g;
       const slugger = new GithubSlugger();
       const raw = data.raw;
