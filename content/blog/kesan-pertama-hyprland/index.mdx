@@ -1,0 +1,121 @@
+---
+category: Publish
+icon: 👀
+title: "Kesan Pertama: Hyprland"
+keywords:
+  - Kesan Pertama
+  - Hyprland
+description: Seminggu ini gue nyobain tiling window manager bernama Hyprland. Di tulisan ini gue mau sharing pengalam seminggu gue gunain Hyprland.
+date: 2024-05-23
+tags:
+  - kesan-pertama
+  - tiling-wm
+  - hyprland
+  - linux
+toc: true
+---
+
+<Image
+  src="/content/blog/kesan-pertama-hyprland/show-off.png"
+  alt="My Setup"
+  scale={0.8}
+/>
+
+Seminggu ini gue nyobain tiling window manager bernama [Hyprland](https://hyprland.org). Dalam seminggu tersebut, gue lebih sering pakek keyboard daripada mouse. Mouse gue cuman berguna pas gue browsing doang. Oke, disini gue mau sharing bagus jeleknya ketika gue menggunakan Hyprland dalam seminggu terakhir ini.
+
+## Sebelum nyobain Hyprland
+
+<Image
+  src="https://github.com/Bismuth-Forge/bismuth/raw/master/img/rice.png"
+  caption="Bismuth"
+  scale={0.8}
+/>
+
+Gue pengguna distro [Manjaro Linux](https://manjaro.org), yang mana merupakan [Arch based distro](https://wiki.archlinux.org/title/Arch-based_distributions). Selama gunain Manjaro, gue pakek [KDE Plasma](https://kde.org/id/plasma-desktop) sebagai desktop environment gue. Dalam layouting window, gue pakek add-ons [Bismuth](https://github.com/Bismuth-Forge/bismuth) supaya bisa auto tiling di KDE Plasma. Cuman nih, beberapa minggu yang lalu, ada update baru KDE Plasma ke versi 6, sedangkan Bismuth sendiri hanya support sampek KDE Plasma versi 5. Sebenernya ada alternatif lain bernama [Polonium](https://github.com/zeroxoneafour/polonium), tapi menurut gue fitur nya masih kalah jauh dari Bismuth.
+
+Karena gue nggak nemuin alternatif lain dari Bismuth, gue pun memberanikan diri buat nyobain Tiling Window Manager. Gue cari cari yang paling populer itu ada [i3](https://i3wm.org), [Awesome](https://awesomewm.org), [Sway](https://swaywm.org), [Bspwm](https://github.com/baskerville/bspwm), dan [Hyprland](https://hyprland.org). Yaudah deh gue pick salah satu, yakni **Hyprland**. Untuk menginstall Hyprland ini, gue pakek script dari [Repo Arch-Hyprland (jaKooLit)](https://github.com/JaKooLit/Arch-Hyprland).
+
+## The Good, Bad, and Neutral
+
+### The Good
+
+Gue masih kali ini pakek Tiling Window Manger, jadi kelebihan/kekurangan yang gue sebutkan disini mungkin rada overlapping antara kelebihan/kekurangan tiling window manager secara general dan kelebihan/kekurangan Hyprland secara spesifik.
+
+#### Window Layout
+
+<Image
+  src="/content/blog/kesan-pertama-hyprland/layout.png"
+  caption="1 window master (kiri) dan 3 window lainnya (kanan)"
+  scale={0.8}
+/>
+
+Ya... namanya juga tiling window manager, pasti kelebihannya ada kaitannya dengan layout nya. Seperti yang udah kelihatan di gambar diatas, window kita bisa auto tiling. Jadinya kita ngga perlu repot repot drag-and-drop window nya kesana kemari. Kita juga bisa mengatur kapan suatu aplikasi akan auto tiling, dan kapan akan floating. Semua ini bisa diatur di bagian window rules.
+
+#### Keybinding
+
+Supaya kita bisa lebih cepat dalam melakukan suatu hal, kita perlu mengatur keybinding. Cara mengatur nya cukup gampang, misalnya saja untuk membuka terminal [Wezterm](https://wezfurlong.org/wezterm/index.html) dengan `Ctrl + Alt + T`, kita bisa menuliskan script config seperti ini:
+
+```conf
+bind = CTRL ALT, T, exec, wezterm
+```
+
+Nah... Untuk program yang ngga punya keybinding, kita bisa panggil dengan bantuan application launcher bernama [Rofi](https://github.com/davatorium/rofi). Gue udah bikin keybinding rofi ini dengan `ALT + Space`.
+
+```conf
+bind = ALT, SPACE, exec, pkill rofi || rofi -show drun -modi drun,filebrowser,run,window
+```
+
+<Image
+  src="/content/blog/kesan-pertama-hyprland/rofi.png"
+  caption="Rofi"
+  scale={0.8}
+/>
+
+#### Animasi
+
+<Image
+  src="/content/blog/kesan-pertama-hyprland/animation.gif"
+  alt="workspaces"
+  scale={2}
+/>
+
+Secara out of the box, Hyprland udah support animasi, sehingga kita bisa mengatur berbagai macam tipe animasi yang sesuai dengan event transition yang kita inginkan.
+
+#### Workspaces
+
+<Image
+  src="/content/blog/kesan-pertama-hyprland/workspaces.gif"
+  alt="workspaces"
+  scale={2}
+/>
+
+Hampir semua sistem operasi pasti punya workspaces. Cuman ketika workspaces nya ini di-combine dengan Hyprland... Beuhh... Mantul banget jadinya. All in Keyboard! Transisi workspaces ini sebenarnya juga bisa dianimasikan, cuman gue pengen lebih snappy, jadi gue matiin animasi transisi nya ini.
+
+### The Bad
+
+<Image
+  src="/content/blog/kesan-pertama-hyprland/wallpaper-anime.png"
+  alt="Anime Wallpaper"
+  scale={0.8}
+/>
+
+Gue ngga terlalu suka wallpaper anime! Bisa dibilang ini sebenarnya bias terhadap instalasi script yang gue pakek, soalnya Hyprland memberi kita pilihan buat pakek wallpaper apapun. Cuman nih, buat ngubah wallpaper aja kita perlu belajar lagi beberapa package seperti yang sudah dituliskan di [Hyprland Docs: Wallpaper](https://wiki.hyprland.org/Useful-Utilities/Wallpapers).
+
+### The Neutral
+
+<Image
+  src="/content/blog/kesan-pertama-hyprland/config-hyprland.png"
+  caption="Hyprland Config"
+  scale={0.8}
+/>
+
+Gue sebelumnya belum pernah nyobain tiling window manager karena gue terlalu takut ngadepin banyak config file di tiling window manager. Dan ya... Hyprland juga gitu. Dar instalasi script yang gue pakek, ada banyak banget config file nya. Cuman, setelah gue coba baca perlahan lahan, structur config file nya cukup mudah dipahami. Ditambah lagi penjelasan [Dokumentasi Hyprland](https://wiki.hyprland.org) enak banget buat dibaca. Trus juga komunitas nya Hyprland saat ini sedang banyak orang-orang yang kayak gue ini, sehingga masih banyak tuh pertanyaan pertanyaan konyol yang membuat gue merasa banyak temen belajar nya.
+
+Meskipun dokumentasi nya enak dibaca, gue masih merasa kalau ngelakuin config yang paling enak itu ya pakek GUI, bukan pakek config file.
+
+## Kesimpulan
+
+Gue ngerasa nge-unlock produktifitas baru selama menggunakan Hyprland ini. Hampir semua yang ada di hyprland ini gue menyukainya (kecuali wallpaper anime nya). Gue bakalan terus lanjut pakek Hyprland ini di main laptop gue. Mungkin sekian dulu tulisan gue tentang Hyprland ini. Kalau kalian ada kritik, saran, atau sekedar ingin menyapa, bisa kalian tulis di komentar ya!
+
+Btw, kalian udah pernah nyobain Hyprland belum? Atau mungkin kalian pakek tiling window manager lain? Atau kalian udah cukup nyaman dengan stackig/floating window manager? Coba kalian share di komentar tentang sistem apa yang kalian pakek dan mengapa kalian nyaman banget pakek sistem itu.
+
