@@ -144,7 +144,7 @@ const posts = defineCollection({
       description: s.string().max(999),
       date: s.isodate(),
       icon: s.string(),
-      toc: s.boolean().default(false),
+      toc: s.boolean().default(true),
       tags: s.string().array().default([]),
       rcc: s.boolean().default(false), // client component
       bib: s.string().array().default([]), // bibliography
