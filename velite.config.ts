@@ -260,10 +260,10 @@ export default defineConfig({
   root: "public/content",
   output: {
     data: ".velite",
-    // assets: "public/static",
-    // base: "/static/",
-    // name: "[name]-[hash:6].[ext]",
-    // clean: true,
+    assets: "public/static",
+    base: "/static/",
+    name: "[name]-[hash:6].[ext]",
+    clean: true,
   },
   collections: { tags, pages, posts, projects },
   mdx: {
