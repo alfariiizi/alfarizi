@@ -1,8 +1,8 @@
-import { postMetadata, projects } from ".velite";
+import { posts, projects } from ".velite";
 
 export const allTagsRaw = [
   ...projects.map((post) => post.tags).flat(),
-  ...postMetadata.map((post) => post.tags).flat(),
+  ...posts.map((post) => post.tags).flat(),
 ];
 
 const allTags: string[] = [];

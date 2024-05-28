@@ -257,7 +257,7 @@ const projects = defineCollection({
 });
 
 export default defineConfig({
-  root: "content",
+  root: "public/content",
   output: {
     data: ".velite",
     assets: "public/static",

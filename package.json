@@ -6,7 +6,7 @@
   "scripts": {
     "gen:assets-content": "bash script/copy-assets.sh",
     "build": "next build",
-    "dev": "bash script/copy-assets.sh && next dev",
+    "dev": "next dev",
     "lint": "next lint",
     "start": "next start"
   },

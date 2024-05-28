@@ -1,4 +1,4 @@
-import { postMetadata, projects } from ".velite";
+import { posts, projects } from ".velite";
 import { Maxwidthdiv } from "@/app/_components/Maxwindthdiv";
 import { allTags } from "@/lib/tags";
 import "@/styles/content.css";
@@ -46,7 +46,7 @@ export default function page({ params }: Props) {
             from: "Project",
           }) as Content,
       ),
-    ...postMetadata
+    ...posts
       .filter((f) => f.tags.includes(params.tag))
       .map(
         (post) =>
