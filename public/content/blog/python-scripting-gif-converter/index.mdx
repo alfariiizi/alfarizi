@@ -1,0 +1,294 @@
+---
+icon: 👀
+title: "Python Scripting: GIF Converter"
+keywords:
+  - Python Scripting
+  - GIF Converter
+description: Terkadang kita punya video yang ingin dikonversi ke format GIF. Disini aku bakal jelasin gimana kita ngubah format video apapun ke format GIF.
+date: 2024-05-31
+tags:
+  - python
+  - scripting
+---
+
+File GIF merupakan file gambar yang bisa bergerak. Terkadang, kita tidak ingin mengupload file dalam bentuk video. Nah... Kita bisa gunain format GIF ini. Tapi, kalau kita udah ada file video nya, berarti kita perlu meng-konversi file video tersebut ke format GIF. Disini aku bakal jelasin gimana caranya nge-konversi file video ke format GIF, dan aku juga bakal bikin scripting nya supaya lebih gampang meng-konversi.
+
+<Callout title="Asumsi" status="warning">
+	Disini aku asumsikan kalian menggunakan sistem Unix/Linux. Entah itu OS berbasis Linux, MacOS, atau Windows yang pakek WSL (Windows Subsystem for Linux).
+</Callout>
+
+## Cara meng-konversi
+
+Untuk meng-konversi dari file video ke format GIF, kita bisa menggunakan bantuan `ffmpeg`. Jika kalian belum punya `ffmpeg`, kalian bisa ikuti tutorial instalasi nya di [website ini](https://www.hostinger.com/tutorials/how-to-install-ffmpeg). Command `ffmpeg` ini mempunyai banyak opsi. Untuk mengubah video mp4 bernama `input.mp4` ke bentuk file GIF bernama `output.gif`, kita bisa menjalankan command berikut:
+
+```bash
+ffmpeg -i input.mp4 -vf fps=10,scale={640}:-1:flags=lanczos -c:v gif output.gif
+```
+
+Penjelasan lebih lanjut mengenai option nya:
+
+- `-i input.mp4`: Argumen ini menentukan file input yang akan diproses oleh ffmpeg. Dalam kasus ini, input.mp4 adalah file video input.
+- `-vf fps=10,scale={640}:-1:flags=lanczos`: Menggambarkan serangkaian filter (video filter `vf`) yang akan diterapkan pada video.
+  - `fps=10`: Filter untuk mengatur frame rate output menjadi 10 frame per detik.
+  - `scale={640}:-1`: Filter untuk mengubah resolusi video. Angka 640 adalah lebar yang diinginkan, dan -1 adalah nilai ketinggian yang akan disesuaikan secara proporsional. -1 menunjukkan agar ffmpeg secara otomatis menyesuaikan ketinggian sesuai dengan lebar yang ditentukan.
+  - `flags=lanczos`: Ini adalah metode penskalaan yang digunakan oleh filter scale. Lanczos adalah salah satu algoritma penskalaan yang menghasilkan kualitas gambar yang tinggi.
+- `-c:v gif`: Argumen ini menentukan codec video (-c:v) yang digunakan untuk output. Dalam kasus ini, gif menunjukkan bahwa output akan berupa file GIF.
+- `output.gif`: Ini adalah nama file untuk output, dalam kasus ini, output.gif.
+
+<Callout title="Cobain" status="info">
+	Sebelum lanjut, kalian perlu nyobain dulu command diatas. Kalau ternyata command tersebut berhasil mengkonversi file video menjadi file GIF, kalian bisa lanjut ke bagian selanjutnya.
+</Callout>
+
+## Optimisasi File GIF
+
+Terkadang `ffmpeg` menghasilkan file GIF berukuran besar dan tidak teroptimasi. Untuk mengatasi ini, kita perlu pengoptimasian file GIF. Salah satu cara untuk mengoptimasi file GIF adalah dengan menggunakan `gifsicle`. Untuk proses instalasi nya, kalian bisa pakek package manager sistem kalian atau kalian bisa download dan install prebuilt binaries yang dapat diperoleh di [website resmi](https://www.lcdf.org/gifsicle) nya. Dengan menggunakan `gifsicle` ini kita bisa mengoptimasi file GIF dengan cara menjalankan command berikut:
+
+```bash
+gifsicle -O3 output.gif -o optimized_output.gif
+```
+
+Penjelasan lebih lanjut mengenai option nya:
+
+- `-O3`: Opsi ini mengoptimalkan file GIF secara agresif dengan level kompresi maksimum. Level kompresi yang lebih tinggi akan menghasilkan ukuran file yang lebih kecil, tetapi membutuhkan waktu kompresi yang lebih lama. Pilihan `-O3` adalah level kompresi tertinggi yang ditawarkan oleh gifsicle.
+- `output.gif`: Ini adalah nama file input, yaitu file GIF yang akan dioptimalkan.
+- `-o optimized_output.gif`: Opsi `-o` diikuti oleh nama file output (optimized_output.gif). Ini menentukan nama dan lokasi file untuk menyimpan hasil optimasi dari file GIF input. Dalam hal ini, file output yang dioptimalkan akan disimpan dengan nama optimized_output.gif.
+
+## Python Scripting: GIF Converter
+
+Kita sudah melakukan konversi file video menjadi file GIF menggunakan `ffmpeg`. Kemudian kita juga sudah berhasil mengoptimasi file GIF tersebut menggunakan `gifsicle`. Sekarang kita akan membuat python scripting supaya lebih gampang dalam menjalankan commands konversi dan optimasi dari `ffmpeg` dan `gifsicle`.
+
+### Dependencies
+
+- Python versi 3
+- Library Python:
+  - `argparse`
+  - `subprocess`
+  - `os`
+
+### Importing dependencies
+
+Kita import dulu semua dependencies yang dibutuhkan.
+
+```python
+import argparse
+import subprocess
+import os
+```
+
+### Mengambil argument
+
+Dengan menggunakan `argparse`, kita dapat mengambil argument command nya seperti berikut:
+
+```python
+parser = argparse.ArgumentParser(description="Convert your video into gif")
+
+parser.add_argument('input', type=str, help='Your videos that you want to convert into. Example: some-video.webm')
+parser.add_argument('output', type=str, nargs='?', default='', help="(Optional) Your output gif name. Example: output.gif")
+parser.add_argument('-w', '--width', type=int, nargs='?', default='640', help="(Optional) Your gif output width (in pixel). Default=640. Example: 720")
+
+args = parser.parse_args()
+```
+
+Disini kita ambil 3 argument, yakni `input`, `output` (optional), dan `--width` (optional, default nya 640px).
+
+### Main Function
+
+Sekarang kita masuk ke main function nya. Kita awali dengan mendapatkan semua value argument nya.
+
+```python {2-4}
+if __name__ == "__main__":
+    input: str = args.input
+    output: str = args.output
+    width: int = args.width
+```
+
+Kemudian kita check apakah pengguna mengisikan `output`. Jika `output` terisi, maka nama output harus dalam format `.gif`. Kita raise error kalau ternyata output nya tidak dalam format `.gif`.
+
+```python {6-9}
+if __name__ == "__main__":
+    input: str = args.input
+    output: str = args.output
+    width: int = args.width
+
+    is_input_available = len(output) != 0
+
+    if(is_input_available and not '.gif' in output):
+        raise ValueError("The output name must be in gif format")
+```
+
+Kemudian kita coba ambil nama `input` nya tanpa format (misal: `naruto-clip.mp4` ➡️ `naruto-clip`). Kita namakan variable nya `input_name`. Kemudian kita juga membuat temporary name (`temp_name`) berdasarkan `input_name`. Kemudian kita juga mengecek apakah `output` tidak terisi, jika memang tidak terisi maka kita akan membuat nama output nya berdasarkan nama `input_name` (misal: `naruto-clip.mp4` ➡️ `naruto-clip.gif`).
+
+```python {11-15}
+if __name__ == "__main__":
+    input: str = args.input
+    output: str = args.output
+    width: int = args.width
+
+    is_input_available = len(output) != 0
+
+    if(is_input_available and not '.gif' in output):
+        raise ValueError("The output name must be in gif format")
+
+    input_name = input.split('.')[0]
+    temp_name = f'{input_name}.temp.gif' # temporary name
+
+    if(not is_input_available):
+        output = f'{input_name}.gif'
+```
+
+Semua sudah siap, sekarang kita jalankan commands nya menggunakan function `subprocess.run`. Pertama, kita lakukan konversi dahulu menggunakan command `ffmpeg`, kemudian hasil konversi tersebut kita optimasi menggunakan command `gifsicle`. Terakhir, kita hapus temporary name (`temp_name`) nya. Disini kita juga handling error, supaya jika muncul error pada saat konversi atau optimasi, maka akan muncul pesan `Failed to convert...`.
+
+```python {17-26}
+if __name__ == "__main__":
+    input: str = args.input
+    output: str = args.output
+    width: int = args.width
+
+    is_input_available = len(output) != 0
+
+    if(is_input_available and not '.gif' in output):
+        raise ValueError("The output name must be in gif format")
+
+    input_name = input.split('.')[0]
+    temp_name = f'{input_name}.temp.gif' # temporary name
+
+    if(not is_input_available):
+        output = f'{input_name}.gif'
+
+    try:
+        # Run ffmpeg to convert video to gif
+        subprocess.run(['ffmpeg', '-i', input, '-vf', f'fps=10,scale={width}:-1:flags=lanczos', '-c:v', 'gif', temp_name], check=True)
+        # Optimize the gif using gifsicle
+        subprocess.run(['gifsicle', '-O3', temp_name, '-o', output], check=True)
+        os.remove(temp_name)
+        print(f'Success convert and optimized {input} into {output}')
+
+    except subprocess.CalledProcessError as e:
+        print(f"Failed to convert your video into gif")
+```
+
+Code keseluruhan nya adalah sebagai berikut:
+
+```python title="gif-converter.py"
+import argparse
+import subprocess
+import os
+
+parser = argparse.ArgumentParser(description="Convert your video into gif")
+parser.add_argument('input', type=str, help='Your videos that you want to convert into. Example: some-video.webm')
+parser.add_argument('output', type=str, nargs='?', default='', help="(Optional) Your output gif name. Example: output.gif")
+parser.add_argument('-w', '--width', type=int, nargs='?', default='640', help="(Optional) Your gif output width (in pixel). Default=640. Example: 720")
+args = parser.parse_args()
+
+if __name__ == "__main__":
+    input: str = args.input
+    output: str = args.output
+    width: int = args.width
+
+    is_input_available = len(output) != 0
+
+    if(is_input_available and not '.gif' in output):
+        raise ValueError("The output name must be in gif format")
+
+    input_name = input.split('.')[0]
+    temp_name = f'{input_name}.temp.gif' # temporary name
+
+    if(not is_input_available):
+        output = f'{input_name}.gif'
+
+    try:
+        # Run ffmpeg to convert video to gif
+        subprocess.run(['ffmpeg', '-i', input, '-vf', f'fps=10,scale={width}:-1:flags=lanczos', '-c:v', 'gif', temp_name], check=True)
+        # Optimize the gif using gifsicle
+        subprocess.run(['gifsicle', '-O3', temp_name, '-o', output], check=True)
+        os.remove(temp_name)
+        print(f'Success convert and optimized {input} into {output}')
+
+    except subprocess.CalledProcessError as e:
+        print(f"Failed to convert your video into gif")
+```
+
+### Tambahan: Shebang
+
+Jika kalian ingin menjalankan python tanpa memanggil command `python`, kalian bisa menggunakan shebang dibagian paling atas. Sehingga kalian bisa menghapus format `.py` nya.
+
+```python title="gif-converter" {1}
+#!/usr/bin/python3
+
+import argparse
+import subprocess
+import os
+
+...
+```
+
+Dengan begitu, kalian bisa memanggil nya seperti ini:
+
+```bash
+./gif-converter
+```
+
+### Tambahan: PATH
+
+Pastinya kalian ingin menjalankan kode tersebut dari directory manapun. Untuk itu, kalian perlu mendaftarkan file nya ke environment variable bernaman `PATH`.
+
+```bashrc
+export PATH=$HOME/your-path-to-gif-converter:$PATH
+```
+
+Jangan lupa melakukan sourcing ke bashrc kalian.
+
+```bash
+source ~/.bashrc
+```
+
+### Hasil
+
+Dengan code dan beberapa tambahan diatas, kita bisa melihat help function seperti berikut:
+
+```bash
+gif-converter --help
+```
+
+Akan menghasilkan output:
+
+```plaintext
+usage: gif-converter [-h] [-w [WIDTH]] input [output]
+
+Convert your video into gif
+
+positional arguments:
+  input                 Your videos that you want to convert into. Example: some-video.webm
+  output                (Optional) Your output gif name. Example: output.gif
+
+options:
+  -h, --help            show this help message and exit
+  -w [WIDTH], --width [WIDTH]
+                        (Optional) Your gif output width (in pixel). Default=640. Example: 720
+```
+
+Sekarang kita coba konversi video berformat WEBM ke format GIF. Disini saya sudah ada video bernama `once-upon-a-time.mp4` yang saya ambil dari [video youtube ini](https://youtu.be/hY8WyRwpPz8?si=ltN2HgdYaa_a5pd8). Video nya seperti ini:
+
+<video width="320" height="240" className="w-full" controls preload="none">
+	<source src="once-upon-a-time.mp4" type="video/mp4" />
+</video>
+
+Dengan menjalankan command berikut
+
+```bash
+gif-converter once-upon-a-time.mp4
+```
+
+aku akan dapet file GIF bernama `once-upon-a-time.gif` seperti ini:
+
+<Image
+  src="once-upon-a-time.gif"
+  caption="Hasil konversi"
+  scale={1}
+/>
+
+## Kesimpulan
+
+Ngubah file video ke bentuk file GIF sebenarnya tidaklah susah. Cukup dengan bantuan `ffmpeg` dan `gifsicle`, kita bisa mengkonversi file video menjadi file GIF yang sudah teroptimasi. Ditambah lagi, dengan bantuan python scripting, kita bisa membuat command baru yang mana secara otomatis sudah menjalankan `ffmpeg` dan `gifsicle`.
+
+Mungkin sekian dulu tulisan dari aku. Kalau ada kritik, saran, pertanyaan, atau sekedar ingin menyapa, kalian bisa tulis dikomentar di bawah ya. Bye byee... Salam sehat selalu 👋.
