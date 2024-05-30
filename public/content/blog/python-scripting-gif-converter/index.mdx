@@ -22,15 +22,15 @@ tags:
   scale={1}
 />
 
-File GIF merupakan file gambar yang bisa bergerak. Terkadang, kita tidak ingin mengupload file dalam bentuk video. Nah... Kita bisa gunain format GIF ini. Tapi, kalau kita udah ada file video nya, berarti kita perlu meng-konversi file video tersebut ke format GIF. Disini aku bakal jelasin gimana caranya nge-konversi file video ke format GIF, dan aku juga bakal bikin scripting nya supaya lebih gampang meng-konversi.
+File GIF merupakan file gambar yang bisa bergerak. Terkadang, kita tidak ingin mengupload file dalam bentuk video. Nah... Kita bisa gunain format GIF ini. Tapi, kalau kita udah ada file video nya, berarti kita hanya perlu mengonversi file video tersebut ke format GIF. Disini aku bakal jelasin gimana caranya nge-konversi file video ke format GIF, dan aku juga bakal bikin scripting nya supaya lebih gampang mengonversi.
 
 <Callout title="Asumsi" status="warning">
 	Disini aku asumsikan kalian menggunakan sistem Unix/Linux. Entah itu OS berbasis Linux, MacOS, atau Windows yang pakek WSL (Windows Subsystem for Linux).
 </Callout>
 
-## Cara meng-konversi
+## Cara mengonversi
 
-Untuk meng-konversi dari file video ke format GIF, kita bisa menggunakan bantuan `ffmpeg`. Jika kalian belum punya `ffmpeg`, kalian bisa ikuti tutorial instalasi nya di [website ini](https://www.hostinger.com/tutorials/how-to-install-ffmpeg). Command `ffmpeg` ini mempunyai banyak opsi. Untuk mengubah video mp4 bernama `input.mp4` ke bentuk file GIF bernama `output.gif`, kita bisa menjalankan command berikut:
+Untuk mengonversi dari file video ke format GIF, kita bisa menggunakan bantuan `ffmpeg`. Jika kalian belum punya `ffmpeg`, kalian bisa ikuti tutorial instalasi nya di [website ini](https://www.hostinger.com/tutorials/how-to-install-ffmpeg). Command `ffmpeg` ini mempunyai banyak opsi. Untuk mengubah video mp4 bernama `input.mp4` ke bentuk file GIF bernama `output.gif`, kita bisa menjalankan command berikut:
 
 ```bash
 ffmpeg -i input.mp4 -vf fps=10,scale={640}:-1:flags=lanczos -c:v gif output.gif
@@ -47,7 +47,7 @@ Penjelasan lebih lanjut mengenai option nya:
 - `output.gif`: Ini adalah nama file untuk output, dalam kasus ini, output.gif.
 
 <Callout title="Cobain" status="info">
-	Sebelum lanjut, kalian perlu nyobain dulu command diatas. Kalau ternyata command tersebut berhasil mengkonversi file video menjadi file GIF, kalian bisa lanjut ke bagian selanjutnya.
+	Sebelum lanjut, kalian perlu nyobain dulu command diatas. Kalau ternyata command tersebut berhasil mengonversi file video menjadi file GIF, kalian bisa lanjut ke bagian selanjutnya.
 </Callout>
 
 ## Optimisasi File GIF
@@ -300,6 +300,6 @@ aku akan dapet file GIF bernama `once-upon-a-time.gif` seperti ini:
 
 ## Kesimpulan
 
-Ngubah file video ke bentuk file GIF sebenarnya tidaklah susah. Cukup dengan bantuan `ffmpeg` dan `gifsicle`, kita bisa mengkonversi file video menjadi file GIF yang sudah teroptimasi. Ditambah lagi, dengan bantuan python scripting, kita bisa membuat command baru yang mana secara otomatis sudah menjalankan `ffmpeg` dan `gifsicle`.
+Ngubah file video ke bentuk file GIF sebenarnya tidaklah susah. Cukup dengan bantuan `ffmpeg` dan `gifsicle`, kita bisa mengonversi file video menjadi file GIF yang sudah teroptimasi. Ditambah lagi, dengan bantuan python scripting, kita bisa membuat command baru yang mana secara otomatis sudah menjalankan `ffmpeg` dan `gifsicle`.
 
 Mungkin sekian dulu tulisan dari aku. Kalau ada kritik, saran, pertanyaan, atau sekedar ingin menyapa, kalian bisa tulis dikomentar di bawah ya. Bye byee... Salam sehat selalu 👋.
