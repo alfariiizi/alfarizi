@@ -9,7 +9,16 @@ date: 2024-05-31
 tags:
   - python
   - scripting
+  - gif
+  - ffmpeg
+  - gifsicle
 ---
+
+<Image
+  src="https://www.reactiongifs.com/wp-content/uploads/2013/10/tim-and-eric-mind-blown.gif"
+  alt="gif: mind blowing"
+  scale={1}
+/>
 
 File GIF merupakan file gambar yang bisa bergerak. Terkadang, kita tidak ingin mengupload file dalam bentuk video. Nah... Kita bisa gunain format GIF ini. Tapi, kalau kita udah ada file video nya, berarti kita perlu meng-konversi file video tersebut ke format GIF. Disini aku bakal jelasin gimana caranya nge-konversi file video ke format GIF, dan aku juga bakal bikin scripting nya supaya lebih gampang meng-konversi.
 
@@ -267,9 +276,9 @@ options:
                         (Optional) Your gif output width (in pixel). Default=640. Example: 720
 ```
 
-Sekarang kita coba konversi video berformat WEBM ke format GIF. Disini saya sudah ada video bernama `once-upon-a-time.mp4` yang saya ambil dari [video youtube ini](https://youtu.be/hY8WyRwpPz8?si=ltN2HgdYaa_a5pd8). Video nya seperti ini:
+Sekarang kita coba konversi video berformat WEBM ke format GIF. Disini aku udah ada video bernama `once-upon-a-time.mp4` yang aku ambil dari [video youtube ini](https://youtu.be/hY8WyRwpPz8?si=ltN2HgdYaa_a5pd8). Video nya seperti ini:
 
-<video width="320" height="240" className="w-full" controls preload="none">
+<video width="320" height="240" className="w-full" controls>
 	<source src="once-upon-a-time.mp4" type="video/mp4" />
 </video>
 
