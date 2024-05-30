@@ -93,6 +93,33 @@ export default function page() {
             so far I have used a simple model from Scikit-Learn.
           </p>
         </TechItem>
+
+        {/* Scripting */}
+        <TechItem heading="Scripting" techList={["python", "bash", "zsh"]}>
+          <p>
+            For scripting, I usually use python, bash script or zsh script. Most
+            of the time I just use python. I do bash/zsh script if needed, but
+            for me, python is really simple to write.
+          </p>
+        </TechItem>
+
+        {/* System */}
+        <TechItem heading="System" techList={["manjaro", "arch", "hyprland"]}>
+          <p>
+            It is been years that I use Manjaro. I like that Manjaro is Arch
+            Based Distro, so it have access to AUR Package, and also Manjaro has
+            easier installation than Arch. For desktop environment, I use tiling
+            window manager called Hyprland.
+          </p>
+        </TechItem>
+
+        {/* Code editor */}
+        <TechItem heading="Code Editor" techList={["neovim", "vim", "vscode"]}>
+          <p>
+            Most of the time, I use Neovim or Vim. But when I need more UI
+            feature like example REPL in Jupyter Notebook, I will use VSCode.
+          </p>
+        </TechItem>
       </div>
     </Maxwidthdiv>
   );
