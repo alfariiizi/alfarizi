@@ -1,8 +1,5 @@
-"use client";
-
 import { MotionDiv, MotionH1 } from "@/lib/framer-motion";
 import { cn } from "@/lib/utils";
-import { AnimatePresence } from "framer-motion";
 import React from "react";
 
 export default function loading() {
