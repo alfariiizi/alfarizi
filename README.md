@@ -1,11 +1,43 @@
-# Alfarizi
+# Alfarizi's Personal Website
 
-Alfarizi personal website.
-This is my personal website that use:
+Welcome to the repository of my personal website, a dynamic and visually appealing space where I showcase my portfolio and blog. This site is built using modern web technologies including Next.js, TailwindCSS, Shadcn UI, Velite.js, and react-email.
 
-- nextjs
-- tailwindcss
-- shadcn-ui
-- contentlayer
+## Technologies Used
 
-<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/alfariiizi/alfarizi">Alfarizi</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://github.com/alfariiizi">Moh Rizal Alfarizi</a> is licensed under <a href="http://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"></a></p>
+- **Next.js**: A React framework for building user interfaces with server-side rendering and generating static websites.
+- **TailwindCSS**: A utility-first CSS framework for rapidly building custom designs.
+- **Shadcn UI**: A component library that helps in building consistent and accessible user interfaces easily.
+- **Velite.js**: Tool for building type-safe data layer, turn Markdown / MDX, YAML, JSON, or other files into app's data layer with Zod schema.
+- **react-email**: A library to build responsive HTML emails with React components.
+
+## Setup
+
+To run this project locally, follow these steps:
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/alfariiizi/alfarizi
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Start the development server:
+
+```bash
+npm run dev
+```
+
+Navigate to `http://localhost:3000` to view the site.
+
+## Contributing
+
+Contributions are always welcome! If you have any suggestions or improvements, please fork the repository and create a pull request, or open an issue with the tag "enhancements".
+
+## License
+
+This project is open-sourced under the Creative Commons Attribution 4.0 International License (CC BY 4.0). See the LICENSE file for more details.
