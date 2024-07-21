@@ -47,7 +47,7 @@ export default function RootLayout({
           integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC"
           crossOrigin="anonymous"
         />
-        {env.UMAMI_DATA_WEBSITE_ID && (
+        {env.NODE_ENV !== 'development' && env.UMAMI_DATA_WEBSITE_ID && (
           <script
             defer
             src="https://analytics.eu.umami.is/script.js"

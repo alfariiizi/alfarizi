@@ -142,6 +142,7 @@ const posts = defineCollection({
     .object({
       title: s.string().max(99),
       description: s.string().max(999),
+      image: s.string(),
       date: s.isodate(),
       icon: s.string(),
       toc: s.boolean().default(true),
@@ -158,6 +159,17 @@ const posts = defineCollection({
         ...data,
         slug,
         permalink: `/blog/${slug}`,
+      };
+    })
+    .transform((data) => {
+      const isExternalImage = data.image.slice(0, 4).includes("http");
+      const imgSrc = isExternalImage
+        ? data.image
+        : `/content${data.permalink}/${data.image}`;
+
+      return {
+        ...data,
+        image: imgSrc,
       };
     })
     .transform((data) => {
