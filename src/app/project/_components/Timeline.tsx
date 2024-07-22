@@ -82,7 +82,7 @@ export function Timeline() {
                     "font-display",
                   )}
                 >
-                  {project.title} ({project.company})
+                  {project.title} ({project.team})
                 </h3>
                 <h4
                   className={cn(

@@ -1,0 +1,93 @@
+import { Image } from "@/components/mdx/Image";
+import Link from "next/link";
+import { projects } from ".velite/index";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import Tag from "@/app/_components/Tag";
+import { LuBookmark } from "react-icons/lu";
+
+const bookmarkProjectTitle = [
+  "[This Site] Personal Website",
+  "Robota",
+  "Windsight",
+];
+
+const sortedDateeProjects = projects.sort((a, b) =>
+  new Date(a.startDate) > new Date(b.startDate) ? -1 : 1,
+);
+
+// const bookmarkProject = projects.filter((item) =>
+//   bookmarkProjectTitle.some((s) => s === item.title),
+// );
+const bookmarkProject = bookmarkProjectTitle.map(
+  (item) => projects.find((f) => f.title === item)!,
+);
+const notBookmarkProject = sortedDateeProjects.filter((item) =>
+  bookmarkProjectTitle.every((s) => s !== item.title),
+);
+const sortedProjects = [...bookmarkProject, ...notBookmarkProject];
+
+export default function Projects() {
+  return (
+    <div className="grid grid-cols-1 gap-x-10 gap-y-10 sm:grid-cols-2 sm:gap-y-24 lg:grid-cols-3">
+      {sortedProjects.map((project) => (
+        <ProjectItem key={project.title} project={project} />
+      ))}
+    </div>
+  );
+}
+
+type ProjectItemProps = {
+  project: (typeof projects)[0];
+};
+
+function ProjectItem({ project }: ProjectItemProps) {
+  const startYear = project.startDate.split("-")[0];
+  const endYear = project.endDate?.split("-")[0] ?? "Present";
+
+  return (
+    <Link href={project.permalink} className="group" prefetch={false}>
+      <Card className="relative h-full rounded-md px-3 py-1">
+        {bookmarkProjectTitle.some((s) => s === project.title) && (
+          <LuBookmark className="absolute right-0 top-0 z-20 size-7 fill-accent" />
+        )}
+        <CardContent className="flex h-full flex-col justify-between gap-6 p-0 py-0">
+          <div className="flex flex-col gap-2">
+            <div className="group relative aspect-video w-full transition-all duration-300">
+              <Image
+                src={project.image.src}
+                alt={project.title}
+                className="aspect-video w-full rounded-sm object-cover opacity-100 duration-300 group-hover:opacity-20"
+              />
+              <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center bg-transparent opacity-0 duration-300 group-hover:opacity-100">
+                <p>Click to view</p>
+              </div>
+            </div>
+            <div className="flex flex-col gap-1">
+              <h3 className="text-lg font-semibold group-hover:underline">
+                {project.title}
+              </h3>
+              <p className="text-muted-foreground">{project.description}</p>
+              <p className="text-sm text-accent">
+                {project.isPersonalProject
+                  ? "Personal Project"
+                  : `Created with ${project.team}`}
+              </p>
+              <p className="text-sm text-muted-foreground">
+                {startYear} - {endYear}
+              </p>
+              <div className="my-3 flex flex-wrap gap-3">
+                {project.tags.map((tag) => (
+                  <Tag key={tag} tag={tag} className="text-sm sm:text-sm" />
+                ))}
+              </div>
+            </div>
+          </div>
+          <Button variant="link" className="justify-start p-0">
+            View Project
+          </Button>
+        </CardContent>
+      </Card>
+    </Link>
+  );
+}

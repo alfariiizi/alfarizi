@@ -219,12 +219,13 @@ const posts = defineCollection({
 
 const projects = defineCollection({
   name: "Project",
-  pattern: "project/**/*.mdx",
+  pattern: "project/**/index.mdx",
   schema: s
     .object({
       title: s.string().max(99),
-      company: s.string().max(99),
       description: s.string().max(999),
+      team: s.string().max(99),
+      image: s.image(),
       tech: s.string().max(99),
       link: s.string().url().optional(),
       repo: s.string().url().optional(),
@@ -242,6 +243,13 @@ const projects = defineCollection({
         ...data,
         slug,
         permalink: `/project/${slug}`,
+      };
+    })
+    .transform((data) => {
+      const isPersonalProject = data.team.toLowerCase().includes("personal");
+      return {
+        ...data,
+        isPersonalProject,
       };
     }),
   // .transform(async (data) => {

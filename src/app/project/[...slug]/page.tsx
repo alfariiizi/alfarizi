@@ -70,7 +70,7 @@ export default function PostPage({ params }: PostProps) {
             "font-display text-2xl font-semibold text-primary sm:text-3xl",
           )}
         >
-          {post.title} ({post.company})
+          {post.title} ({post.team})
         </h1>
         {post.description && (
           <p className={cn("text-base sm:text-lg")}>{post.description}</p>
