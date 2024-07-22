@@ -43,7 +43,7 @@ type BlogItemProps = {
 
 function BlogItem({ post, isNew }: BlogItemProps) {
   return (
-    <article className="flex flex-col gap-4 rounded-md border bg-card pb-4 text-card-foreground shadow-sm">
+    <article className="flex flex-col gap-3 rounded-md border bg-card px-3 pb-4 text-card-foreground shadow-sm">
       {/* <div className="aspect-square w-full bg-gray-300" /> */}
       <Link
         href={post.permalink}
@@ -61,8 +61,8 @@ function BlogItem({ post, isNew }: BlogItemProps) {
           <p>Click to read</p>
         </div>
       </Link>
-      <div className="flex h-full flex-col justify-between gap-3 px-3 py-2">
-        <div className="flex flex-col gap-2">
+      <div className="flex h-full flex-col justify-between gap-3 py-2">
+        <div className="flex flex-col">
           {/* {isNew && ( */}
           {/*   <p className="mb-1 w-fit animate-pulse rounded-md bg-accent px-2 py-1 text-xs font-semibold text-accent-foreground"> */}
           {/*     New 🎉 */}
@@ -79,7 +79,7 @@ function BlogItem({ post, isNew }: BlogItemProps) {
           <p className="font-sans text-sm leading-normal text-zinc-700 dark:text-zinc-400 sm:text-base">
             {post.description}
           </p>
-          <div className="my-3 flex flex-wrap gap-3">
+          <div className="my-4 flex flex-wrap gap-3">
             {post.tags.map((tag) => (
               <Tag
                 key={tag}

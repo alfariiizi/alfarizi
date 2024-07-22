@@ -47,7 +47,7 @@ function ProjectItem({ project }: ProjectItemProps) {
 
   return (
     <Link href={project.permalink} className="group" prefetch={false}>
-      <Card className="relative h-full rounded-md px-3 py-1">
+      <Card className="relative h-full rounded-md px-3 pb-3 pt-1">
         {bookmarkProjectTitle.some((s) => s === project.title) && (
           <LuBookmark className="absolute right-0 top-0 z-20 size-7 fill-accent" />
         )}
@@ -64,10 +64,12 @@ function ProjectItem({ project }: ProjectItemProps) {
               </div>
             </div>
             <div className="flex flex-col gap-1">
-              <h3 className="text-lg font-semibold group-hover:underline">
+              <h3 className="font-display text-lg font-semibold text-primary sm:text-xl">
                 {project.title}
               </h3>
-              <p className="text-muted-foreground">{project.description}</p>
+              <p className="font-sans text-sm leading-normal text-muted-foreground sm:text-base">
+                {project.description}
+              </p>
               <p className="text-sm text-accent">
                 {project.isPersonalProject
                   ? "Personal Project"
