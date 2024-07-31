@@ -149,6 +149,7 @@ const posts = defineCollection({
       tags: s.string().array().default([]),
       rcc: s.boolean().default(false), // client component
       bib: s.string().array().default([]), // bibliography
+      lang: s.enum(["id", "en"]).optional().default("id"),
       mdx: s.mdx({ gfm: true }),
       raw: s.raw(),
     })

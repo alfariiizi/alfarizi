@@ -6,6 +6,9 @@ import { formatter, isNew } from "./utils";
 import { Image } from "@/components/mdx/Image";
 import Link from "next/link";
 import Tag from "@/app/_components/Tag";
+import IndonesianLang from "@public/images/indonesian-flag.png";
+import EnglishLang from "@public/images/english-lang.png";
+import NextImage from "next/image";
 
 type PostsVelite = (typeof posts)[0];
 type PostMetadata = Omit<PostsVelite, "mdx" | "raw">;
@@ -43,7 +46,18 @@ type BlogItemProps = {
 
 function BlogItem({ post, isNew }: BlogItemProps) {
   return (
-    <article className="flex flex-col gap-3 rounded-md border bg-card px-3 pb-4 text-card-foreground shadow-sm">
+    <article
+      lang={post.lang}
+      className="relative flex flex-col gap-3 rounded-md border bg-card px-3 pb-4 text-card-foreground shadow-sm"
+    >
+      <NextImage
+        src={post.lang === "id" ? IndonesianLang : EnglishLang}
+        title={post.lang === "id" ? "Indonesian Language" : "English Language"}
+        alt={`Language: ${post.lang}`}
+        width={30}
+        height={20}
+        className="absolute left-3 top-3 z-50 aspect-video rounded-sm border border-secondary opacity-70"
+      />
       {/* <div className="aspect-square w-full bg-gray-300" /> */}
       <Link
         href={post.permalink}

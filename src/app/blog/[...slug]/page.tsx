@@ -69,7 +69,7 @@ export default function page({ params }: Props) {
       }}
       className="mb-28 space-y-10"
     >
-      <Maxwidthdiv smallPadding className="flex gap-6" lang="id">
+      <Maxwidthdiv smallPadding className="flex gap-6" lang={post.lang}>
         {post.toc && <div className="hidden w-[100px] lg:block" />}
         {/* Article */}
         <Article lang="id">
