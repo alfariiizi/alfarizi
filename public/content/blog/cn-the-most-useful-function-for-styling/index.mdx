@@ -1,9 +1,10 @@
 ---
 icon: 🛠️
-title: "cn(): Fungsi Paling Berguna untuk Styling"
-description: Tailwindcss merupakan utility-first CSS framework, sehingga kita perlu menuliskan banyak css class pada `className` di component react. Dengan menggunakan fungsi `cn()`, kita dapat membuat penulisan css class nya menjadi tidak ambigu dan mampu meng-handle penulisan kondisi compleks
+title: "cn(): The Most Useful Function for Styling"
+description: TailwindCSS is a utility-first CSS framework, which often requires us to write many CSS classes in React components' className. By using the cn() function, we can make the CSS class notation clear and handle complex conditional statements.
 image: cover.png
 date: "2024-07-31"
+lang: en
 tags:
   - reactjs
   - styling
@@ -26,12 +27,12 @@ bib:
 />
 
 <Callout>
-Pada tulisan ini, saya akan menggunakan [tailwindcss](https://tailwindcss.com/) untuk melakukan styling pada aplikasi reactjs.
+In this article, I will use [tailwindcss](https://tailwindcss.com/) to style a ReactJS application.
 </Callout>
 
-## Permasalahan
+## The Problem
 
-Pada saat menuliskan nama css class kita `className` (react), pastinya kita pernah mendapati bahwa kita ingin merging nama dari 2 css class yang sama. Misalnya kita punya component seperti ini:
+When writing CSS class names in React's className, we often find that we want to merge the names of two identical CSS classes. For instance, consider a component like this:
 
 ```tsx {10} title="Maxwidthdiv.tsx"
 type Props = React.HTMLAttributes<HTMLDivElement>
@@ -52,7 +53,7 @@ export function Maxwidthdiv({
 }
 ```
 
-Kita ingin menggunakan `Maxwidthdiv` secara fleksibel, sehingga kita perlu menggunakan props `className`. Namun, jika kita menuliskan `className` seperti penulisan di atas, maka akan ada kemungkinan class yang kita tulis tidak ter-merge dengan baik. Misalnya saja component `Maxwidthdiv` kita panggil seperti ini:
+We want to use `Maxwidthdiv` flexibly, so we need to use the className prop. However, if we write className as above, there's a chance the classes we write won't merge well. For example, if the `Maxwidthdiv` component is called like this:
 
 ```tsx {3}
 export default function App() {
@@ -64,9 +65,9 @@ export default function App() {
 }
 ```
 
-Component `App` tersebut menggunakan `Maxwidthdiv` dengan class `px-4`, yang mana di dalam `Maxwidthdiv` juga terdapat `px-8`. Ini akan menyebabkan hasil styling tidak menentu, terkadang hasil nya bisa `px-4`, dan terkadang hasil nya bisa `px-8`, tergantung cara tailwind melakukan sorting.
+The `App` component uses `Maxwidthdiv` with the class `px-4`, while inside Maxwidthdiv, there's also `px-8`. This can cause inconsistent styling results, sometimes resulting in `px-4`, and other times `px-8`, depending on how Tailwind processes the sorting.
 
-## Solusi: `twMerge`
+## Solution: twMerge
 
 <Image
   src="tw-merge.png"
@@ -74,19 +75,19 @@ Component `App` tersebut menggunakan `Maxwidthdiv` dengan class `px-4`, yang man
   scale={1}
 />
 
-Untuk melakukan merging class pada tailwindcss, kita bisa menggunakan fungsi `twMerge` dari package [`tailwind-merge`](https://github.com/dcastil/tailwind-merge). Pertama tama kita perlu menginstall `tailwind-merge` terlebih dahulu
+To merge classes in TailwindCSS, we can use the `twMerge` function from the `tailwind-merge` package. First, we need to install `tailwind-merge`:
 
 ```bash
 npm install tailwind-merge
 ```
 
-atau
+or
 
 ```bash
 yarn add tailwind-merge
 ```
 
-Setelah itu kita bisa menggunakan `twMerge` seperti ini:
+Then, we can use `twMerge` like this:
 
 ```tsx {1,12}
 import { twMerge } from 'tailwind-merge'
@@ -109,9 +110,9 @@ export function Maxwidthdiv({
 }
 ```
 
-Dengan update component `Maxwidthdiv` tersebut, maka jika component ini dipanggil di component `App` seperti sebelumnya, maka tidak akan terjadi ambiguitas hasil. Sehingga hasil akhir nya pasti menggunakan `px-4` pada `App`.
+With the updated `Maxwidthdiv` component, if it's called in the `App` component as before, there will be no ambiguity in the results. The final outcome will definitely use `px-4` in the `App`.
 
-## Meng-handle kombinasi kompleks dengan `clsx`
+## Handling Complex Combinations with `clsx`
 
 <Image
   src="clsx.png"
@@ -119,7 +120,7 @@ Dengan update component `Maxwidthdiv` tersebut, maka jika component ini dipanggi
   scale={1}
 />
 
-Jika penulisan class kita cukup complex dan penuh dengan conditional statement, maka akan lebih baik jika kita menggunakan [`clsx`](https://github.com/lukeed/clsx). Kita bisa menginstall nya dengan
+If our class notation is complex and full of conditional statements, it would be better to use `clsx`. We can install it with:
 
 ```bash
 npm install clsx
@@ -131,7 +132,7 @@ atau
 yarn add clsx
 ```
 
-Berdasarkan dokumentasi `clsx`, kita bisa melakukan beberapa kombinasi kompleks seperti ini:
+Based on the `clsx` documentation, we can perform several complex combinations like this:
 
 ```ts
 import clsx from 'clsx';
@@ -165,7 +166,7 @@ clsx('foo', [1 && 'bar', { baz:false, bat:null }, ['hello', ['world']]], 'cya');
 
 ## `cn()` = `twMerge` + `clsx`
 
-`twMerge` dapat membantu kita dalam melakukan merging class, sedangkan `clsx` dapat membantu kita dalam mengkombinasikan statement kompleks menjadi string class. Dengan kedua fungsi tersebut, kita bisa membuat fungsi baru bernama `cn()` seperti ini:
+`twMerge` helps us merge classes, while `clsx` helps us combine complex statements into a class string. With both functions, we can create a new function named `cn()` like this:
 
 ```ts
 import { clsx, type ClassValue } from "clsx";
@@ -176,7 +177,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 ```
 
-Dengan fungsi `cn()` tersebut, kita bisa melakukan kombinasi kompleks seperti ini:
+With the `cn()` function, we can perform complex combinations like this:
 
 ```ts
 // 1
@@ -193,7 +194,7 @@ cn({ 'bg-blue-500 text-black': true }, { 'text-white': true }, null, { 'rounded-
 // => 'bg-blue-500 text-white rounded-lg'
 ```
 
-Sekarang kita bisa mengupdate component `Maxwidthdiv` supaya menggunakan fungsi `cn()`:
+Now we can update the `Maxwidthdiv` component to use the `cn()` function:
 
 ```tsx {1,12}
 import { cn } from 'path-to-cn'
@@ -216,7 +217,7 @@ export function Maxwidthdiv({
 }
 ```
 
-Dengan begitu, kita menggunakan component `Maxwidthdiv` dengan class yang mempunyai kombinasi kompleks seperti ini:
+In this way, we use the `Maxwidthdiv` component with a class that has complex combinations like this:
 
 ```tsx {6-11}
 export default function App() {
@@ -242,9 +243,9 @@ export default function App() {
 
 ## Kesimpulan
 
-Tailwindcss merupakan utility-first CSS framework, sehingga kita perlu menuliskan banyak css class pada `className` di component react. Dengan menggunakan fungsi `cn()`, kita dapat membuat penulisan css class nya menjadi tidak ambigu dan mampu meng-handle penulisan kondisi compleks dikarenakan bantuan fungsi `twMerge` dan `clsx`.
+TailwindCSS is a utility-first CSS framework, so we need to write many CSS classes in React components' className. By using the `cn()` function, we can make the CSS class notation clear and handle complex conditional statements with the help of `twMerge` and `clsx`.
 
-Oke... Mungkin sampai disini penjelasan saya tentang fungsi paling berguna untuk styling, yakni `cn()`. Apakah kalian sebelumnya udah pernah menggunakan fungsi `cn()` ini? Ataukah kalian mempunyai alternatif lain? Kalian bisa menuliskannya di komentar ya!
+Okay... Maybe that's all for my explanation about the most useful function for styling, `cn()`. Have you ever used the `cn()` function before? Or do you have an alternative? You can write it in the comment section below 👇!
 
 ## Extra: shadcn-ui
 
@@ -254,6 +255,6 @@ Oke... Mungkin sampai disini penjelasan saya tentang fungsi paling berguna untuk
   scale={1}
 />
 
-Saya pertama kali tahu fungsi `cn()` ini sebenarnya dari [shadcn-ui](https://ui.shadcn.com/). Dengan menginstall shadcn-ui, kita akan memeperoleh fungsi `cn()` di dalam file `/src/lib/utils.ts`. Fungsi `cn()` ini digunakan di hampir semua shadcn-ui component yang bertujuan supaya kita bisa melakukan styling secara fleksible.
+I first learned about the `cn()` function actually from shadcn-ui. By installing shadcn-ui, we will obtain the `cn()` function in the file `/src/lib/utils.ts`. The `cn()` function is used in almost all shadcn-ui components aimed at enabling us to style flexibly.
 
-Setelah saya pikirkan lagi, apakah mungkin huruf "cn" pada "shadcn" sebenarnya di ambil dari fungsi `cn()` ini... Hmm...
+After thinking about it again, is it possible that the "cn" in "shadcn" is actually taken from this cn() function... Hmm... 🤔
