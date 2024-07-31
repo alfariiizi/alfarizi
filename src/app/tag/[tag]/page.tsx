@@ -85,23 +85,25 @@ export default function page({ params }: Props) {
         </div>
       ) : (
         <div className="ml-[6%] flex flex-col gap-8">
-          {contents.map((content) => (
-            <div key={content.slug}>
-              <Link
-                href={content.slug}
-                className="font-display text-xl font-semibold text-primary duration-150 hover:opacity-70"
-              >
-                {content.title}
-              </Link>
-              {content.description && <p>{content.description}</p>}
-              <p className="text-sm">
-                From:{" "}
-                <span className="font-semibold text-secondary">
-                  {content.from}
-                </span>
-              </p>
-            </div>
-          ))}
+          {contents
+            .sort((a, b) => (a.title > b.title ? 1 : -1))
+            .map((content) => (
+              <div key={content.slug}>
+                <Link
+                  href={`/${content.from.toLowerCase()}/${content.slug}`}
+                  className="font-display text-xl font-semibold text-primary duration-150 hover:opacity-70"
+                >
+                  {content.title}
+                </Link>
+                {content.description && <p>{content.description}</p>}
+                <p className="text-sm">
+                  From:{" "}
+                  <span className="font-semibold text-secondary">
+                    {content.from}
+                  </span>
+                </p>
+              </div>
+            ))}
         </div>
       )}
     </Maxwidthdiv>
