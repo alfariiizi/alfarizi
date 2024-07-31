@@ -14,7 +14,7 @@ export function Code({ className, ...props }: Props) {
 
   return (
     <code
-      className={cn("text-rose-500 dark:text-rose-800", className)}
+      className={cn("text-rose-500 dark:text-rose-400", className)}
       {...props}
     />
   );

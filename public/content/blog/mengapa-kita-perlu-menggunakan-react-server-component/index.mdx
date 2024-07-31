@@ -85,12 +85,13 @@ export default function Page() {
   const sortedPost = posts.sort((a, b) =>
     new Date(a.metadata.date) < new Date(b.metadata.date) ? 1 : -1,
   );
+  const getTop10 = sortedPost.slice(0, 10)
 
   return (
     <div>
       <h2>Latest posts</h2>
       <div>
-        {sortedPost.map((post) => (
+        {getTop10.map((post) => (
           <article key={post.metadata.title}>
             <h3>{post.metadata.title}</h3>
           </article>
@@ -117,6 +118,12 @@ Karena component diatas merupakan RSC, maka yang akan diterima oleh user adalah:
       <h3>Example Title 3</h3>
     </article>
     <!-- And so on -->
+    <article>
+      <h3>Example Title 9</h3>
+    </article>
+    <article>
+      <h3>Example Title 10</h3>
+    </article>
   </div>
 </div>
 ```

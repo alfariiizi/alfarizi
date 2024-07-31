@@ -1,0 +1,259 @@
+---
+icon: 🛠️
+title: "cn(): Fungsi Paling Berguna untuk Styling"
+description: Tailwindcss merupakan utility-first CSS framework, sehingga kita perlu menuliskan banyak css class pada `className` di component react. Dengan menggunakan fungsi `cn()`, kita dapat membuat penulisan css class nya menjadi tidak ambigu dan mampu meng-handle penulisan kondisi compleks
+image: cover.png
+date: "2024-07-31"
+tags:
+  - reactjs
+  - styling
+  - tailwindcss
+  - clsx
+  - tailwind-merge
+  - tw-merge
+  - shadcn-ui
+bib: 
+  - "[TailwindCSS](https://tailwindcss.com/)"
+  - "[clsx](https://github.com/lukeed/clsx)"
+  - "[tailwind-merge](https://github.com/dcastil/tailwind-merge)"
+  - "[shadcn/ui](https://ui.shadcn.com/)"
+---
+
+<Image
+  src="cover.png"
+  alt="Cover"
+  scale={1}
+/>
+
+<Callout>
+Pada tulisan ini, saya akan menggunakan [tailwindcss](https://tailwindcss.com/) untuk melakukan styling pada aplikasi reactjs.
+</Callout>
+
+## Permasalahan
+
+Pada saat menuliskan nama css class kita `className` (react), pastinya kita pernah mendapati bahwa kita ingin merging nama dari 2 css class yang sama. Misalnya kita punya component seperti ini:
+
+```tsx {10} title="Maxwidthdiv.tsx"
+type Props = React.HTMLAttributes<HTMLDivElement>
+
+export function Maxwidthdiv({
+  className,
+  children,
+  ...props
+}: Props) {
+  return (
+    <div
+      className={`mx-auto w-full max-w-[1440px] px-8 sm:px-10 md:px-12 ${className}`}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+}
+```
+
+Kita ingin menggunakan `Maxwidthdiv` secara fleksibel, sehingga kita perlu menggunakan props `className`. Namun, jika kita menuliskan `className` seperti penulisan di atas, maka akan ada kemungkinan class yang kita tulis tidak ter-merge dengan baik. Misalnya saja component `Maxwidthdiv` kita panggil seperti ini:
+
+```tsx {3}
+export default function App() {
+  return (
+    <Maxwidthdiv className="text-primary font-bold px-4">
+      <p>Something</p>
+    </Maxwidthdiv>
+  )
+}
+```
+
+Component `App` tersebut menggunakan `Maxwidthdiv` dengan class `px-4`, yang mana di dalam `Maxwidthdiv` juga terdapat `px-8`. Ini akan menyebabkan hasil styling tidak menentu, terkadang hasil nya bisa `px-4`, dan terkadang hasil nya bisa `px-8`, tergantung cara tailwind melakukan sorting.
+
+## Solusi: `twMerge`
+
+<Image
+  src="tw-merge.png"
+  caption="Github tailwind-merge"
+  scale={1}
+/>
+
+Untuk melakukan merging class pada tailwindcss, kita bisa menggunakan fungsi `twMerge` dari package [`tailwind-merge`](https://github.com/dcastil/tailwind-merge). Pertama tama kita perlu menginstall `tailwind-merge` terlebih dahulu
+
+```bash
+npm install tailwind-merge
+```
+
+atau
+
+```bash
+yarn add tailwind-merge
+```
+
+Setelah itu kita bisa menggunakan `twMerge` seperti ini:
+
+```tsx {1,12}
+import { twMerge } from 'tailwind-merge'
+
+type Props = React.HTMLAttributes<HTMLDivElement>
+
+export function Maxwidthdiv({
+  className,
+  children,
+  ...props
+}: Props) {
+  return (
+    <div
+      className={twMerge('mx-auto w-full max-w-[1440px] px-8 sm:px-10 md:px-12', className)}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+}
+```
+
+Dengan update component `Maxwidthdiv` tersebut, maka jika component ini dipanggil di component `App` seperti sebelumnya, maka tidak akan terjadi ambiguitas hasil. Sehingga hasil akhir nya pasti menggunakan `px-4` pada `App`.
+
+## Meng-handle kombinasi kompleks dengan `clsx`
+
+<Image
+  src="clsx.png"
+  caption="Github clsx"
+  scale={1}
+/>
+
+Jika penulisan class kita cukup complex dan penuh dengan conditional statement, maka akan lebih baik jika kita menggunakan [`clsx`](https://github.com/lukeed/clsx). Kita bisa menginstall nya dengan
+
+```bash
+npm install clsx
+```
+
+atau
+
+```bash
+yarn add clsx
+```
+
+Berdasarkan dokumentasi `clsx`, kita bisa melakukan beberapa kombinasi kompleks seperti ini:
+
+```ts
+import clsx from 'clsx';
+// or
+import { clsx } from 'clsx';
+
+// Strings (variadic)
+clsx('foo', true && 'bar', 'baz');
+//=> 'foo bar baz'
+
+// Objects
+clsx({ foo:true, bar:false, baz:isTrue() });
+//=> 'foo baz'
+
+// Objects (variadic)
+clsx({ foo:true }, { bar:false }, null, { '--foobar':'hello' });
+//=> 'foo --foobar'
+
+// Arrays
+clsx(['foo', 0, false, 'bar']);
+//=> 'foo bar'
+
+// Arrays (variadic)
+clsx(['foo'], ['', 0, false, 'bar'], [['baz', [['hello'], 'there']]]);
+//=> 'foo bar baz hello there'
+
+// Kitchen sink (with nesting)
+clsx('foo', [1 && 'bar', { baz:false, bat:null }, ['hello', ['world']]], 'cya');
+//=> 'foo bar hello world cya'
+```
+
+## `cn()` = `twMerge` + `clsx`
+
+`twMerge` dapat membantu kita dalam melakukan merging class, sedangkan `clsx` dapat membantu kita dalam mengkombinasikan statement kompleks menjadi string class. Dengan kedua fungsi tersebut, kita bisa membuat fungsi baru bernama `cn()` seperti ini:
+
+```ts
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+```
+
+Dengan fungsi `cn()` tersebut, kita bisa melakukan kombinasi kompleks seperti ini:
+
+```ts
+// 1
+cn('text-base font-medium', true && 'font-bold p-10', 'p-4');
+// => 'text-base font-bold p-4'
+
+// 2
+const isLarge = true;
+cn({ 'text-lg font-bold': isLarge, 'text-sm': !isLarge, 'font-medium text-wrap': true });
+// => 'text-lg font-medium text-wrap'
+
+// 3
+cn({ 'bg-blue-500 text-black': true }, { 'text-white': true }, null, { 'rounded-lg': true });
+// => 'bg-blue-500 text-white rounded-lg'
+```
+
+Sekarang kita bisa mengupdate component `Maxwidthdiv` supaya menggunakan fungsi `cn()`:
+
+```tsx {1,12}
+import { cn } from 'path-to-cn'
+
+type Props = React.HTMLAttributes<HTMLDivElement>
+
+export function Maxwidthdiv({
+  className,
+  children,
+  ...props
+}: Props) {
+  return (
+    <div
+      className={cn('mx-auto w-full max-w-[1440px] px-8 sm:px-10 md:px-12', className)}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+}
+```
+
+Dengan begitu, kita menggunakan component `Maxwidthdiv` dengan class yang mempunyai kombinasi kompleks seperti ini:
+
+```tsx {6-11}
+export default function App() {
+  const [isCollapsed, setIsCollapsed] = useState(false)
+
+  return (
+    <Maxwidthdiv
+      className={
+        cn(
+          "text-primary font-bold px-4",
+          isCollapsed ? 'w-40 px-1' : 'w-[200px]'
+        )
+      }
+    >
+      <p>Something</p>
+      <button onClick={() => setIsCollapsed(prev => !prev)}>
+        Collapsed
+      <button>
+    </Maxwidthdiv>
+  )
+}
+```
+
+## Kesimpulan
+
+Tailwindcss merupakan utility-first CSS framework, sehingga kita perlu menuliskan banyak css class pada `className` di component react. Dengan menggunakan fungsi `cn()`, kita dapat membuat penulisan css class nya menjadi tidak ambigu dan mampu meng-handle penulisan kondisi compleks dikarenakan bantuan fungsi `twMerge` dan `clsx`.
+
+Oke... Mungkin sampai disini penjelasan saya tentang fungsi paling berguna untuk styling, yakni `cn()`. Apakah kalian sebelumnya udah pernah menggunakan fungsi `cn()` ini? Ataukah kalian mempunyai alternatif lain? Kalian bisa menuliskannya di komentar ya!
+
+## Extra: shadcn-ui
+
+<Image
+  src="shadcn-ui.png"
+  caption="Landing Page shadcn-ui"
+  scale={1}
+/>
+
+Saya pertama kali tahu fungsi `cn()` ini sebenarnya dari [shadcn-ui](https://ui.shadcn.com/). Dengan menginstall shadcn-ui, kita akan memeperoleh fungsi `cn()` di dalam file `/src/lib/utils.ts`. Fungsi `cn()` ini digunakan di hampir semua shadcn-ui component yang bertujuan supaya kita bisa melakukan styling secara fleksible.
+
+Setelah saya pikirkan lagi, apakah mungkin huruf "cn" pada "shadcn" sebenarnya di ambil dari fungsi `cn()` ini... Hmm...

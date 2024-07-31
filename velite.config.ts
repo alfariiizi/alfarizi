@@ -8,7 +8,7 @@ import { remarkPlugins } from "./src/mdx-plugins/remark-plugins";
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 
-const icon = s.enum(["github", "instagram", "medium", "twitter", "youtube"]);
+// const icon = s.enum(["github", "instagram", "medium", "twitter", "youtube"]);
 const count = s
   .object({ total: s.number(), posts: s.number() })
   .default({ total: 0, posts: 0 });
@@ -43,13 +43,13 @@ const pages = defineCollection({
     })),
 });
 
-const meta = s
-  .object({
-    title: s.string().optional(),
-    description: s.string().optional(),
-    keywords: s.array(s.string()).optional(),
-  })
-  .default({});
+// const meta = s
+//   .object({
+//     title: s.string().optional(),
+//     description: s.string().optional(),
+//     keywords: s.array(s.string()).optional(),
+//   })
+//   .default({});
 
 // const posts = defineCollection({
 //   name: "Post",
@@ -142,7 +142,7 @@ const posts = defineCollection({
     .object({
       title: s.string().max(99),
       description: s.string().max(999),
-      image: s.string(),
+      image: s.image().or(s.string()),
       date: s.isodate(),
       icon: s.string(),
       toc: s.boolean().default(true),
@@ -161,17 +161,25 @@ const posts = defineCollection({
         permalink: `/blog/${slug}`,
       };
     })
-    .transform((data) => {
-      const isExternalImage = data.image.slice(0, 4).includes("http");
-      const imgSrc = isExternalImage
-        ? data.image
-        : `/content${data.permalink}/${data.image}`;
-
-      return {
-        ...data,
-        image: imgSrc,
-      };
-    })
+    // .transform((data) => {
+    //   if(typeof data.image === 'string') {
+    //   return {
+    //     ...data,
+    //     image: data.image
+    //   }
+    // }
+    //   data.image.
+    //   const isExternalImage = data.image.slice(0, 4).includes("http");
+    //   // const imgSrc = isExternalImage
+    //   //   ? data.image
+    //   //   : `/content${data.permalink}/${data.image}`;
+    //   const imgSrc = isExternalImage ? data.image : s.image();
+    //
+    //   return {
+    //     ...data,
+    //     image: imgSrc,
+    //   };
+    // })
     .transform((data) => {
       const bib = data.bib.map((b) => {
         const result = b.match(regex);
