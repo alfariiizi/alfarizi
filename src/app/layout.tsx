@@ -7,6 +7,7 @@ import { Inter, Josefin_Sans } from "next/font/google";
 import { Navbar } from "./_components/Navbar";
 import { Providers } from "./_components/Providers";
 import { layout } from "./_components/shared";
+import Footer from "./_components/Footer";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -47,7 +48,7 @@ export default function RootLayout({
           integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC"
           crossOrigin="anonymous"
         />
-        {env.NODE_ENV !== 'development' && env.UMAMI_DATA_WEBSITE_ID && (
+        {env.NODE_ENV !== "development" && env.UMAMI_DATA_WEBSITE_ID && (
           <script
             defer
             src="https://analytics.eu.umami.is/script.js"
@@ -63,16 +64,19 @@ export default function RootLayout({
         )}
       >
         <Providers>
-          <Navbar />
-          <main
-            className="relative"
-            style={{
-              paddingTop: layout.paddingTop,
-              paddingBottom: layout.paddingBottom,
-            }}
-          >
-            {children}
-          </main>
+          <div className="flex min-h-lvh flex-col">
+            <Navbar />
+            <main
+              className="relative flex-grow"
+              style={{
+                paddingTop: layout.paddingTop,
+                paddingBottom: layout.paddingBottom,
+              }}
+            >
+              {children}
+            </main>
+            <Footer />
+          </div>
         </Providers>
       </body>
     </html>
