@@ -44,6 +44,8 @@ type ProjectItemProps = {
 function ProjectItem({ project }: ProjectItemProps) {
   const startYear = project.startDate.split("-")[0];
   const endYear = project.endDate?.split("-")[0] ?? "Present";
+  const displayYear =
+    startYear === endYear ? startYear : `${startYear} - ${endYear}`;
 
   return (
     <Link href={project.permalink} className="group" prefetch={false}>
@@ -75,9 +77,7 @@ function ProjectItem({ project }: ProjectItemProps) {
                   ? "Personal Project"
                   : `Created with ${project.team}`}
               </p>
-              <p className="text-sm text-muted-foreground">
-                {startYear} - {endYear}
-              </p>
+              <p className="text-sm text-muted-foreground">{displayYear}</p>
               <div className="my-3 flex flex-wrap gap-3">
                 {project.tags.map((tag) => (
                   <Tag key={tag} tag={tag} className="text-sm sm:text-sm" />
