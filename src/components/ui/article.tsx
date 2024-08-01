@@ -16,7 +16,7 @@ const Article = React.forwardRef<
     ref={ref}
     className={cn(
       "flex w-full max-w-[80ch] flex-col gap-6 divide-y-2 divide-dashed divide-gray-300 dark:divide-gray-800",
-      "relative mx-auto px-4 pb-16 pt-10 text-foreground",
+      "relative mx-auto px-4 pb-16 pt-8 text-foreground",
       className,
     )}
     {...props}

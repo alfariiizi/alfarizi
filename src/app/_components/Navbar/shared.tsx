@@ -14,7 +14,7 @@ export const menus = [
     icon: () => <BsPostcard className="size-5" />,
   },
   {
-    label: "Project",
+    label: "Projects",
     href: "/project",
     icon: () => <PiProjectorScreenChart className="size-5" />,
   },

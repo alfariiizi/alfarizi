@@ -13,6 +13,7 @@ import { cn } from "@/lib/utils";
 import { type Metadata } from "next";
 import Link from "next/link";
 import readingTime from "reading-time";
+import { LuArrowLeft } from "react-icons/lu";
 
 interface PostProps {
   params: {
@@ -65,6 +66,12 @@ export default function PostPage({ params }: PostProps) {
   return (
     <Article lang="id">
       <ArticleHeader>
+        <Link
+          href="/project"
+          className="-mt-4 mb-6 flex w-fit items-center gap-1 text-sm leading-tight opacity-60 duration-150 hover:opacity-100"
+        >
+          <LuArrowLeft className="size-4" /> See all projects
+        </Link>
         <h1
           className={cn(
             "font-display text-2xl font-semibold text-primary sm:text-3xl",

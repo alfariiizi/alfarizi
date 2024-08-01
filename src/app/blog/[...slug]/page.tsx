@@ -17,6 +17,7 @@ import React from "react";
 import readingTime from "reading-time";
 import { getPostFromParams, type PostProps } from "./lib/getPostFromParams";
 import { MotionDiv } from "@/lib/framer-motion";
+import { LuArrowLeft, LuArrowRight } from "react-icons/lu";
 
 export function generateMetadata({ params }: PostProps): Metadata {
   const post = getPostFromParams(params);
@@ -72,8 +73,14 @@ export default function page({ params }: Props) {
       <Maxwidthdiv smallPadding className="flex gap-6" lang={post.lang}>
         {post.toc && <div className="hidden w-[100px] lg:block" />}
         {/* Article */}
-        <Article lang="id">
+        <Article>
           <ArticleHeader>
+            <Link
+              href="/blog"
+              className="-mt-4 mb-6 flex w-fit items-center gap-1 text-sm leading-tight opacity-60 duration-150 hover:opacity-100"
+            >
+              <LuArrowLeft className="size-4" /> See all posts
+            </Link>
             <div className="flex justify-start gap-4">
               {post.icon && (
                 <h1 className="text-xl sm:text-3xl">{post.icon}</h1>
@@ -110,7 +117,7 @@ export default function page({ params }: Props) {
             </div>
           </ArticleHeader>
 
-          <ArticleContent>
+          <ArticleContent lang={post.lang}>
             <Mdx code={post.mdx} />
           </ArticleContent>
 
@@ -176,6 +183,13 @@ export default function page({ params }: Props) {
                   </div>
                 );
               })}
+              <div className="mt-6 h-[2px] w-full border-t-2 border-dashed" />
+              <Link
+                href="/blog"
+                className="mt-1 flex w-full items-center gap-1 text-sm leading-tight opacity-60 duration-150 hover:opacity-100"
+              >
+                See other posts <LuArrowRight className="size-4" />
+              </Link>
             </div>
           </div>
         )}
