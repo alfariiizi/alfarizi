@@ -53,6 +53,31 @@ const config = {
     config.plugins.push(new VeliteWebpackPlugin());
     return config;
   },
+  async redirects() {
+    return [
+      {
+        source: "/social/instagram",
+        destination: "https://www.instagram.com/alfariiiziii_/",
+        permanent: true,
+      },
+      {
+        source: "/social/twitter",
+        destination: "https://x.com/alfariiiziiiii",
+        permanent: true,
+      },
+      {
+        source: "/social/linkedin",
+        destination:
+          "https://www.linkedin.com/in/moh-rizal-alfarizi-3809b9246/",
+        permanent: true,
+      },
+      {
+        source: "/social/github",
+        destination: "https://github.com/alfariiizi",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 class VeliteWebpackPlugin {

@@ -5,21 +5,21 @@ export const socials = [
   {
     label: "Github",
     icon: FaGithub,
-    href: "https://github.com/alfariiizi",
+    href: "/social/github",
   },
   {
     label: "Instagram",
     icon: FaInstagram,
-    href: "https://www.instagram.com/alfariiiziii_/",
+    href: "/social/instagram",
   },
   {
     label: "LinkedIn",
     icon: FaLinkedin,
-    href: "https://www.linkedin.com/in/moh-rizal-alfarizi-3809b9246/",
+    href: "/social/linkedin",
   },
   {
     label: "Twitter",
     icon: FaXTwitter,
-    href: "https://twitter.com/alfariiiziiiii",
+    href: "/social/twitter",
   },
 ] as const;
