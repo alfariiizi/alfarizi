@@ -183,7 +183,7 @@ const posts = defineCollection({
             height: imageSize.height,
             blurWidth: imageSize.width,
             blurHeight: imageSize.height,
-            blurDataURL: blurData,
+            blurDataURL: blurData ?? "",
           } as Image,
         };
       }
