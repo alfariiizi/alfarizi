@@ -17,7 +17,7 @@ export default function Footer() {
             <Link
               key={`footer-menu-${menu.label}`}
               href={menu.href}
-              className="text-xs underline-offset-4 hover:underline"
+              className="text-xs underline-offset-4 duration-150 hover:underline hover:opacity-80 lg:hover:no-underline"
               prefetch={false}
             >
               {menu.label}
