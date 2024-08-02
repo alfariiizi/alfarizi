@@ -1,3 +1,5 @@
+"use client";
+
 import { type posts } from ".velite/index";
 import { cn } from "@/lib/utils";
 import React from "react";
@@ -9,6 +11,7 @@ import Tag from "@/app/_components/Tag";
 import IndonesianLang from "@public/images/indonesian-flag.png";
 import EnglishLang from "@public/images/english-lang.png";
 import NextImage from "next/image";
+import { parseAsString, useQueryState } from "nuqs";
 
 type PostsVelite = (typeof posts)[0];
 type PostMetadata = Omit<PostsVelite, "mdx" | "raw">;
@@ -18,10 +21,10 @@ type Props = {
 };
 
 export default function Blog({ posts }: Props) {
-  // const [search] = useQueryState("search", parseAsString.withDefault(""));
-  // const filteredPost = posts.filter((f) =>
-  //   f.title.toLowerCase().includes(search.toLowerCase()),
-  // );
+  const [search] = useQueryState("search", parseAsString);
+  const filteredPost = posts.filter((f) =>
+    f.title.toLowerCase().includes(search?.toLowerCase() ?? ""),
+  );
 
   return (
     <div
@@ -30,7 +33,7 @@ export default function Blog({ posts }: Props) {
         "font-display",
       )}
     >
-      {posts.map((post) => {
+      {filteredPost.map((post) => {
         const isPostNew = isNew(post.date);
 
         return <BlogItem key={post.title} post={post} isNew={isPostNew} />;
@@ -63,14 +66,22 @@ function BlogItem({ post, isNew }: BlogItemProps) {
         href={post.permalink}
         className="group relative aspect-video w-full transition-all duration-300"
       >
-        <Image
+        <NextImage
           src={post.image}
           alt={post.title}
-          // width={512}
-          // height={512}
-          // quality={100}
-          className="aspect-video w-full rounded-sm object-cover opacity-100 duration-300 group-hover:opacity-20"
+          width={post.image.width}
+          height={post.image.height}
+          blurDataURL={post.image.blurDataURL}
+          className="mt-3 aspect-video w-full rounded-sm object-cover opacity-100 duration-300 group-hover:opacity-20"
         />
+        {/* <Image */}
+        {/*   src={post.image} */}
+        {/*   alt={post.title} */}
+        {/*   // width={512} */}
+        {/*   // height={512} */}
+        {/*   // quality={100} */}
+        {/*   className="aspect-video w-full rounded-sm object-cover opacity-100 duration-300 group-hover:opacity-20" */}
+        {/* /> */}
         <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center bg-transparent opacity-0 duration-300 group-hover:opacity-100">
           <p>Click to read</p>
         </div>

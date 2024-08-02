@@ -1,7 +1,9 @@
 import GithubSlugger from "github-slugger";
-import { defineCollection, defineConfig, s } from "velite";
+import { Image, defineCollection, defineConfig, s } from "velite";
 import { rehypePlugins } from "./src/mdx-plugins/rehype-plugins";
 import { remarkPlugins } from "./src/mdx-plugins/remark-plugins";
+import { getBase64 } from "@/lib/getBase64";
+import probe from "probe-image-size";
 
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
@@ -162,25 +164,35 @@ const posts = defineCollection({
         permalink: `/blog/${slug}`,
       };
     })
-    // .transform((data) => {
-    //   if(typeof data.image === 'string') {
-    //   return {
-    //     ...data,
-    //     image: data.image
-    //   }
-    // }
-    //   data.image.
-    //   const isExternalImage = data.image.slice(0, 4).includes("http");
-    //   // const imgSrc = isExternalImage
-    //   //   ? data.image
-    //   //   : `/content${data.permalink}/${data.image}`;
-    //   const imgSrc = isExternalImage ? data.image : s.image();
-    //
-    //   return {
-    //     ...data,
-    //     image: imgSrc,
-    //   };
-    // })
+    .transform(async (data) => {
+      if (typeof data.image === "string") {
+        const blurData = await getBase64(data.image);
+        const imageSize = await probe(data.image)
+          .then((data) => data)
+          .catch(() => {
+            return {
+              width: 1024,
+              height: 720,
+            };
+          });
+        return {
+          ...data,
+          image: {
+            src: data.image,
+            width: imageSize.width,
+            height: imageSize.height,
+            blurWidth: imageSize.width,
+            blurHeight: imageSize.height,
+            blurDataURL: blurData,
+          } as Image,
+        };
+      }
+
+      return {
+        ...data,
+        image: data.image,
+      };
+    })
     .transform((data) => {
       const bib = data.bib.map((b) => {
         const result = b.match(regex);

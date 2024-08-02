@@ -8,18 +8,15 @@ import { useEffect, useState } from "react";
 import { useDebounce } from "@uidotdev/usehooks";
 
 export default function SearchInput() {
-  const [searchUrl, setSearchUrl] = useQueryState(
-    "search",
-    parseAsString.withDefault(""),
-  );
-  const [search, setSearch] = useState(searchUrl);
+  const [searchUrl, setSearchUrl] = useQueryState("search", parseAsString);
+  const [search, setSearch] = useState(searchUrl ?? "");
   const debouncedSearch = useDebounce(search, 500);
 
   useEffect(() => {
     async function updateSearchUrl() {
       try {
         await setSearchUrl(debouncedSearch, {
-          shallow: false,
+          shallow: true,
         });
       } catch (error) {
         console.error(error);
