@@ -5,6 +5,7 @@ import Projects from "./_components/Projects";
 
 export const metadata: Metadata = {
   title: "Project",
+  description: "Check out a selection of my latest web development projects.",
 };
 
 export default function page() {

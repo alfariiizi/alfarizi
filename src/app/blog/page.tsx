@@ -9,6 +9,8 @@ export const revalidate = 10;
 
 export const metadata: Metadata = {
   title: "Blogpost",
+  description:
+    "Explore my latest posts, featuring insights and projects on React.js, Next.js, Python, Neovim, and Linux. Stay updated with fresh content designed to enhance your development skills and knowledge.",
 };
 
 type Props = {
