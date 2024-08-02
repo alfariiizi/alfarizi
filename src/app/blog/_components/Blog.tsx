@@ -104,7 +104,7 @@ function BlogItem({ post, isNew }: BlogItemProps) {
           <p className="font-sans text-sm leading-normal text-zinc-700 dark:text-zinc-400 sm:text-base">
             {post.description}
           </p>
-          <div className="my-4 flex flex-wrap gap-3">
+          <div className="my-4 flex flex-wrap gap-x-2 gap-y-1">
             {post.tags.map((tag) => (
               <Tag
                 key={tag}
