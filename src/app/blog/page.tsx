@@ -40,8 +40,14 @@ export default function Page({ searchParams: { search } }: Props) {
             Latest posts ✍️
           </h2>
           <p>
-            This is all my posts. Mostly about React.js, Next.js, Python,
-            Neovim, and Linux.
+            🚀 Explore my latest posts, featuring insights and projects on{" "}
+            <strong>React.js</strong>, <strong>Next.js</strong>,{" "}
+            <strong>Python</strong>, <strong>Neovim</strong>, and{" "}
+            <strong>Linux</strong>.{" "}
+            <span className="hidden lg:inline">
+              <br /> ✨ Stay updated with fresh content designed to enhance your
+              development skills and knowledge.
+            </span>
           </p>
         </div>
         <SearchInput />
