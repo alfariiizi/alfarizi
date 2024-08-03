@@ -78,9 +78,13 @@ function ProjectItem({ project }: ProjectItemProps) {
                   : `Created with ${project.team}`}
               </p>
               <p className="text-sm text-muted-foreground">{displayYear}</p>
-              <div className="my-3 flex flex-wrap gap-x-2 gap-y-1">
+              <div className="my-3 flex flex-wrap gap-1">
                 {project.tags.map((tag) => (
-                  <Tag key={tag} tag={tag} className="text-sm sm:text-sm" />
+                  <Tag
+                    key={tag}
+                    tag={tag}
+                    className="font-sans text-xs sm:text-sm"
+                  />
                 ))}
               </div>
             </div>

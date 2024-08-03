@@ -19,10 +19,11 @@ type Props = {
   };
 };
 
+const sortedPost = posts.sort((a, b) =>
+  new Date(a.date) < new Date(b.date) ? 1 : -1,
+);
+
 export default function Page({ searchParams: { search } }: Props) {
-  const sortedPost = posts.sort((a, b) =>
-    new Date(a.date) < new Date(b.date) ? 1 : -1,
-  );
   // const filteredPost = search
   //   ? sortedPost.filter((f) =>
   //       f.title.toLowerCase().includes(search.toLowerCase()),
