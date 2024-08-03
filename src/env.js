@@ -8,6 +8,10 @@ export const env = createEnv({
    */
   server: {
     NODE_ENV: z.enum(["development", "test", "production"]),
+    DOMAIN_URL: z
+      .string()
+      .optional()
+      .transform((val) => (!!val ? new URL(val) : undefined)),
     PROJECT_NAME: z.string(),
     GOOGLE_VERIFICATION_ID: z.string().optional(),
     RESEND_API_KEY: z.string(),
@@ -31,6 +35,7 @@ export const env = createEnv({
     // [Server]
     NODE_ENV: process.env.NODE_ENV,
     PROJECT_NAME: "Alfarizi",
+    DOMAIN_URL: process.env.DOMAIN_URL,
     GOOGLE_VERIFICATION_ID: process.env.GOOGLE_VERIFICATION_ID,
     RESEND_API_KEY: process.env.RESEND_API_KEY,
     UMAMI_DATA_WEBSITE_ID: process.env.UMAMI_DATA_WEBSITE_ID,
