@@ -24,7 +24,7 @@ export async function Image({
   const isExternal = typeof src !== "string" ? false : !src.startsWith("/");
   const srcFull = isExternal
     ? src.toString()
-    : `${env.NEXT_PUBLIC_URL}${src.toString()}`;
+    : `${env.APP_URL}${src.toString()}`;
 
   const blurData = await getBase64(srcFull);
   let isDoBlur = true;

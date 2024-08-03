@@ -8,7 +8,7 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: "*",
       },
     ],
-    sitemap: `${env.NEXT_PUBLIC_URL}/sitemap.xml`,
-    host: env.NEXT_PUBLIC_URL,
+    sitemap: `${env.APP_URL}/sitemap.xml`,
+    host: env.APP_URL,
   };
 }

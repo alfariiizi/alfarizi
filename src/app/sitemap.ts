@@ -5,9 +5,9 @@ import { type MetadataRoute } from "next";
 
 function generateUrl(route: string) {
   if (route.startsWith("/")) {
-    return `${env.NEXT_PUBLIC_URL}${route}`;
+    return `${env.APP_URL}${route}`;
   }
-  return `${env.NEXT_PUBLIC_URL}/${route}`;
+  return `${env.APP_URL}/${route}`;
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -30,7 +30,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     // Home
     {
-      url: env.NEXT_PUBLIC_URL,
+      url: env.APP_URL,
       changeFrequency: "monthly",
       priority: 1,
     },

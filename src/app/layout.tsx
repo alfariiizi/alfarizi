@@ -29,9 +29,6 @@ export const metadata: Metadata = {
   description:
     "Explore Alfarizi's world of innovation through detailed blog posts and a portfolio of diverse projects spanning software development. Dive into the journey of creativity and technology.",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
-  verification: {
-    google: env.GOOGLE_VERIFICATION_ID,
-  },
 };
 
 export default function RootLayout({
