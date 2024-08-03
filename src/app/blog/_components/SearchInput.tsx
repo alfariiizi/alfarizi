@@ -7,9 +7,18 @@ import { LuSearch } from "react-icons/lu";
 import { useEffect, useState } from "react";
 import { useDebounce } from "@uidotdev/usehooks";
 
-export default function SearchInput() {
-  const [searchUrl, setSearchUrl] = useQueryState("search", parseAsString);
-  const [search, setSearch] = useState(searchUrl ?? "");
+type Props = {
+  initialParams: {
+    search?: string;
+  };
+};
+
+export default function SearchInput({ initialParams }: Props) {
+  const [searchUrl, setSearchUrl] = useQueryState(
+    "search",
+    parseAsString.withDefault(initialParams.search ?? ""),
+  );
+  const [search, setSearch] = useState(searchUrl);
   const debouncedSearch = useDebounce(search, 500);
 
   useEffect(() => {
@@ -32,7 +41,7 @@ export default function SearchInput() {
       <Input
         type="search"
         value={search}
-        onChange={(e) => {
+        onChange={async (e) => {
           setSearch(e.target.value);
         }}
         placeholder="Search posts"

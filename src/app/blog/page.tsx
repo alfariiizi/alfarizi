@@ -23,11 +23,11 @@ export default function Page({ searchParams: { search } }: Props) {
   const sortedPost = posts.sort((a, b) =>
     new Date(a.date) < new Date(b.date) ? 1 : -1,
   );
-  const filteredPost = search
-    ? sortedPost.filter((f) =>
-        f.title.toLowerCase().includes(search.toLowerCase()),
-      )
-    : sortedPost;
+  // const filteredPost = search
+  //   ? sortedPost.filter((f) =>
+  //       f.title.toLowerCase().includes(search.toLowerCase()),
+  //     )
+  //   : sortedPost;
 
   return (
     <Maxwidthdiv className="my-10 flex justify-center">
@@ -52,9 +52,9 @@ export default function Page({ searchParams: { search } }: Props) {
             </span>
           </p>
         </div>
-        <SearchInput />
+        <SearchInput initialParams={{ search }} />
         <Blog
-          posts={filteredPost.map((item) => ({
+          posts={sortedPost.map((item) => ({
             ...item,
           }))}
         />
