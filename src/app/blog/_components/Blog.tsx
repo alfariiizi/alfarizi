@@ -4,13 +4,11 @@ import { type posts } from ".velite/index";
 import { cn } from "@/lib/utils";
 import React from "react";
 import { formatter, isNew } from "./utils";
-// import Image from "next/image";
-import { Image } from "@/components/mdx/Image";
 import Link from "next/link";
 import Tag from "@/app/_components/Tag";
 import IndonesianLang from "@public/images/indonesian-flag.png";
 import EnglishLang from "@public/images/english-lang.png";
-import NextImage from "next/image";
+import Image from "next/image";
 import { parseAsString, useQueryState } from "nuqs";
 
 type PostsVelite = (typeof posts)[0];
@@ -53,7 +51,7 @@ function BlogItem({ post, isNew }: BlogItemProps) {
       lang={post.lang}
       className="relative flex flex-col gap-3 rounded-md border bg-card px-3 pb-4 text-card-foreground shadow-sm"
     >
-      <NextImage
+      <Image
         src={post.lang === "id" ? IndonesianLang : EnglishLang}
         title={post.lang === "id" ? "Indonesian Language" : "English Language"}
         alt={`Language: ${post.lang}`}
@@ -66,7 +64,7 @@ function BlogItem({ post, isNew }: BlogItemProps) {
         href={post.permalink}
         className="group relative aspect-video w-full transition-all duration-300"
       >
-        <NextImage
+        <Image
           src={post.image}
           alt={post.title}
           width={post.image.width}
