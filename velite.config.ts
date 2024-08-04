@@ -246,6 +246,7 @@ const projects = defineCollection({
       title: s.string().max(99),
       description: s.string().max(999),
       team: s.string().max(99),
+      position: s.string().max(99).optional(),
       image: s.image(),
       tech: s.string().max(99),
       link: s.string().url().optional(),

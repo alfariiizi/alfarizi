@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Tag from "@/app/_components/Tag";
 import { LuBookmark } from "react-icons/lu";
+import { capitalize } from "@/lib/utils";
 
 const bookmarkProjectTitle = [
   "[This Site] Personal Website",
@@ -77,7 +78,14 @@ function ProjectItem({ project }: ProjectItemProps) {
                   ? "Personal Project"
                   : `Created with ${project.team}`}
               </p>
-              <p className="text-sm text-muted-foreground">{displayYear}</p>
+              {project.position && (
+                <p className="text-sm text-muted-foreground">
+                  as {capitalize(project.position)}
+                </p>
+              )}
+              <p className="text-sm text-muted-foreground">
+                Created from {displayYear}
+              </p>
               <div className="my-3 flex flex-wrap gap-1">
                 {project.tags.map((tag) => (
                   <Tag
