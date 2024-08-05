@@ -4,6 +4,7 @@ import { Excalidraw } from "../excalidraw";
 import { Callout } from "./Callout";
 import { Image } from "./Image";
 import { Math } from "./Math";
+import { Tabs, TabsContent } from "@/components/mdx/Tabs";
 import { elements } from "./basic-element";
 
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
@@ -26,6 +27,8 @@ const mdxComponents = {
   Link,
   Math,
   Excalidraw,
+  Tabs,
+  TabsContent,
   ...elements,
   generatePath,
 };

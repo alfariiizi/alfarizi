@@ -77,15 +77,28 @@ The `App` component uses `Maxwidthdiv` with the class `px-4`, while inside Maxwi
 
 To merge classes in TailwindCSS, we can use the `twMerge` function from the `tailwind-merge` package. First, we need to install `tailwind-merge`:
 
-```bash
-npm install tailwind-merge
-```
-
-or
-
-```bash
-yarn add tailwind-merge
-```
+<Tabs onlyCode>
+  <TabsContent value="npm">
+    ```bash
+    npm install tailwind-merge
+    ```
+  </TabsContent>
+  <TabsContent value="yarn">
+    ```bash
+    yarn add tailwind-merge
+    ```
+  </TabsContent>
+  <TabsContent value="pnpm">
+    ```bash
+    pnpm add tailwind-merge
+    ```
+  </TabsContent>
+  <TabsContent value="bun">
+    ```bash
+    bun add tailwind-merge
+    ```
+  </TabsContent>
+</Tabs>
 
 Then, we can use `twMerge` like this:
 
@@ -122,15 +135,28 @@ With the updated `Maxwidthdiv` component, if it's called in the `App` component 
 
 If our class notation is complex and full of conditional statements, it would be better to use `clsx`. We can install it with:
 
-```bash
-npm install clsx
-```
-
-atau
-
-```bash
-yarn add clsx
-```
+<Tabs onlyCode>
+  <TabsContent value="npm">
+    ```bash
+    npm install clsx
+    ```
+  </TabsContent>
+  <TabsContent value="yarn">
+    ```bash
+    yarn add clsx
+    ```
+  </TabsContent>
+  <TabsContent value="pnpm">
+    ```bash
+    pnpm add clsx
+    ```
+  </TabsContent>
+  <TabsContent value="bun">
+    ```bash
+    bun add clsx
+    ```
+  </TabsContent>
+</Tabs>
 
 Based on the `clsx` documentation, we can perform several complex combinations like this:
 

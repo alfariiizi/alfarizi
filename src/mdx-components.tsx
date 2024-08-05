@@ -1,6 +1,7 @@
 import { Callout } from "@/components/mdx/Callout";
 import { Image } from "@/components/mdx/Image";
 import { Math } from "@/components/mdx/Math";
+import { Tabs, TabsContent } from "@/components/mdx/Tabs";
 import { elements } from "@/components/mdx/basic-element";
 // import CounterDemo from "@content/blog/CounterDemo";
 import type { MDXComponents } from "mdx/types";
@@ -14,6 +15,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     Link,
     Math,
     Excalidraw,
+    Tabs,
+    TabsContent,
     ...elements,
     ...components,
   };
