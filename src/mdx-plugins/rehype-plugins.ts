@@ -25,8 +25,8 @@ export const rehypePlugins = [
     rehypePrettyCode,
     {
       grid: true,
-      theme: "dark-plus",
-      keepBackground: false,
+      theme: "tokyo-night",
+      keepBackground: true,
     },
   ],
 ];

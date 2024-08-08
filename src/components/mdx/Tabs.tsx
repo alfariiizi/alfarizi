@@ -35,7 +35,7 @@ export function Tabs({ onlyCode, children }: Props) {
       )}
     >
       <TabsList className="z-40 bg-secondary text-secondary">
-        {values?.map((val, idx, arr) => (
+        {values?.map((val, idx) => (
           <Fragment key={`tabs-${idx}-with-val-${val}`}>
             <TabsTrigger
               value={val}
@@ -43,9 +43,6 @@ export function Tabs({ onlyCode, children }: Props) {
             >
               {val}
             </TabsTrigger>
-            {idx !== arr.length - 1 && (
-              <div className="h-full w-[2px] border-r-2 border-r-secondary" />
-            )}
           </Fragment>
         ))}
       </TabsList>
@@ -53,17 +50,9 @@ export function Tabs({ onlyCode, children }: Props) {
         tabIndex={-1}
         className={cn(
           "-mt-5 rounded-[8px] border-2 border-secondary bg-background pt-5",
-          onlyCode ? "bg-[#1F2937] dark:bg-[#010304]" : "px-3 sm:px-4",
+          onlyCode ? "bg-[#1A1B26]" : "px-3 sm:px-4",
         )}
       >
-        {onlyCode && (
-          <div
-            tabIndex={-1}
-            className={cn(
-              "absolute left-1/2 top-[39px] z-10 h-1 w-[99%] -translate-x-1/2 bg-[#1F2937] px-4 dark:bg-[#010304]",
-            )}
-          />
-        )}
         {Children.map(children, (child: React.ReactNode) => {
           if (React.isValidElement(child) && child.type === TabsContent) {
             return React.cloneElement(child, {
@@ -87,15 +76,36 @@ type TabsContentProps = React.ComponentPropsWithoutRef<
 export const TabsContent = React.forwardRef<
   React.ElementRef<typeof TabsContentRaw>,
   TabsContentProps
->(({ onlyCode, className, ...props }, ref) => (
-  <TabsContentRaw
-    ref={ref}
-    className={cn(
-      "rounded-[8px] ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-      onlyCode && "-mb-8 -mt-[34px]",
-      className,
-    )}
-    {...props}
-  />
-));
+>(({ onlyCode, className, children, ...props }, ref) => {
+  return (
+    <TabsContentRaw
+      ref={ref}
+      className={cn(
+        "rounded-[8px] ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+        onlyCode && "-mb-8 -mt-[34px]",
+        className,
+      )}
+      {...props}
+    >
+      {Children.map(children, (child: React.ReactNode) => {
+        if (React.isValidElement(child)) {
+          return Children.map(
+            React.cloneElement(child, {
+              // @ts-ignore
+              tabContent: true, // what we want to inject it
+            }),
+            (childnest: React.ReactNode) => {
+              if (React.isValidElement(childnest)) {
+                return React.cloneElement(childnest, {
+                  // @ts-ignore
+                  tabContent: true,
+                });
+              }
+            },
+          );
+        }
+      })}
+    </TabsContentRaw>
+  );
+});
 TabsContent.displayName = TabsContentRaw.displayName;

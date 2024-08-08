@@ -1,5 +1,5 @@
 import GithubSlugger from "github-slugger";
-import { Image, defineCollection, defineConfig, s } from "velite";
+import { type Image, defineCollection, defineConfig, s } from "velite";
 import { rehypePlugins } from "./src/mdx-plugins/rehype-plugins";
 import { remarkPlugins } from "./src/mdx-plugins/remark-plugins";
 import { getBase64 } from "@/lib/getBase64";
