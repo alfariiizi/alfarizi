@@ -1,6 +1,6 @@
 ---
 title: "Robota"
-description: Solusi Pintar Kelola Hotel Mudah dengan bantuan AI. Realtime Monitoring harga kompetitor. Respon ulasan tamu dengan cepat.
+description: Smart Solution Manage Hotel Easily with AI. Realtime Monitoring of Competitor Prices. Respond to Guest Reviews Quickly.
 image: landing.png
 team: Product Team of Datains
 position: Frontend Developer
@@ -13,25 +13,79 @@ tags:
   - nextjs
   - tailwindcss
   - hotel
+  - hospitality
+  - ota
 ---
 
+## My Contribution to Robota
+
+Robota is an AI-assisted, real-time hotel review analysis tool based on Online Travel Agencies (OTA). I began managing this project as a **Frontend Developer** since **May 2023**.
+
 <Image
-  src="landing.png"
-  alt="Robota Landing Page"
+  src="old-dashboard.png"
   full
-  caption="Landing page Robota"
+  caption="Old version of Robota Dashboard"
 />
 
+Previously, Robota had a comprehensive set of features, but they were all built on top of vanilla react.js (from CRA) version 16. This setup led to complex coding workflows that resulted in erratic outputs—sometimes loading, sometimes showing results, and sometimes errors. Additionally, using vanilla react.js significantly slowed down the development process. For instance, changing a paragraph's text required about a minute to see the update in the browser.
 
-Robota merupakan analisis review hotel secara realtime dengan bantuan AI.
-
-Produk Robota ini dikerjakan oleh Tim Produk DataIns. Ruang lingkup yang saya kerjakan adalah dibagian frontend.
+Due to overall poor feedback on Robota’s UI/UX design, a redesign was deemed necessary. At the same time, I saw this redesign as an opportunity to completely overhaul the frontend tech stack.
 
 <Image
   src="dashboard.png"
   alt="Robota Dashboard"
   full
-  caption="Dashboard Robota"
+  caption="New version of Robota Dashboard"
 />
 
-> On Progress written
+In **September 2023**, I proposed a fundamental change to the frontend tech stack. The primary change involved using _Next.js 13 App Dir_ as the framework for the frontend, supplemented with technologies like _shadcn-ui_, _react-query_, _zustand_, _zod_, and _trpc_. My proposal was approved by the Tech Lead, Product Manager, Team Leader, and all members of the Frontend Team. Consequently, there are two versions of Robota: the version before September 2023 (old version) and the version after September 2023 (new version). By December 2023, the old version was completely phased out, and [robota.app](https://robota.app) now hosts the new version of Robota. After redesigning and updating the tech-stack, Robota received positive feedback from its users, because the application design has become better (thanks to the UI/UX Team of Robota), and the application has become more stable (rarely errors appear).
+
+> As of writing this, I am still managing the Robota product.
+
+## Mengenal Robota
+
+Robota consists of three main sections:
+
+- Landing Page
+- Blog Article
+- App Dashboard
+
+> All descriptions below pertain to the new version of Robota.
+
+### Landing Page
+
+<Image
+  src="landing.png"
+  full
+  caption="Landing Page of Robota"
+/>
+
+The landing page provides an overview of the Robota product. You can visit this page at [robota.app](https://robota.app).
+
+### Blog Article
+
+<Image
+  src="blog.png"
+  full
+  caption="Blog"
+/>
+
+This section hosts a collection of free-to-read articles. The primary topics focus on comprehensive education about the hospitality industry, supported by detailed data. All of these articles were written by the Article Writing Team of Robota. You can access this article at [robota.app/blog](https://robota.app/blog).
+
+> To date, there is always a new article every two weeks.
+
+### App Dashboard
+
+<Image
+  src="dashboard.png"
+  alt="Robota Dashboard"
+  full
+  caption="App Dashboard of Robota"
+/>
+
+This is the hospitality analysis dashboard. You need to register your hotel to gain access to this dashboard.
+
+## Conclusion
+
+As I continue to lead the frontend development of Robota, my focus remains on enhancing both the functionality and user experience to better serve our users in the hospitality industry. The transformation from the old version to the new one marks a significant step forward in our commitment to delivering cutting-edge technology solutions. The positive feedback received since the launch of the new version motivates us to keep pushing boundaries and improving our services. Moving forward, we will continue to innovate and refine our platform, ensuring that Robota remains at the forefront of hotel analytics technology.
+
