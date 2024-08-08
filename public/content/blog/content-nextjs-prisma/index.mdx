@@ -1,0 +1,293 @@
+---
+icon: 📡
+title: "Setup Next.js App Directory and Prisma ORM"
+description: This guide covers setting up a Next.js application with Prisma ORM, focusing on installation, configuration, and database management. Learn to handle migrations and generate Prisma Client for efficient data operations in both development and production.
+image: cover.png
+date: "2024-08-09"
+lang: en
+tags:
+  - nextjs
+  - orm
+  - prisma-orm
+  - sqlite
+  - setup
+bib: []
+---
+
+<Image
+  src="cover.png"
+  alt="Cover"
+  scale={1}
+/>
+
+## Introduction
+
+This guide provides a comprehensive walkthrough for setting up a Next.js application integrated with Prisma ORM. It covers the initial setup, configuration, and basic CRUD operations to get you started with a robust development foundation.
+
+## Installing Nextjs
+
+Setting up Next.js is straightforward with support for multiple package managers. Choose the one that best fits your workflow:
+
+<Tabs onlyCode>
+  <TabsContent value="npm">
+    ```bash
+    npx create-next-app my-next-app
+    cd my-next-app
+    ```
+  </TabsContent>
+  <TabsContent value="yarn">
+    ```bash
+    yarn create next-app my-next-app
+    cd my-next-app
+    ```
+  </TabsContent>
+  <TabsContent value="pnpm">
+    ```bash
+    pnpm create next-app my-next-app
+    cd my-next-app
+    ```
+  </TabsContent>
+  <TabsContent value="bun">
+    ```bash
+    bun create next-app my-next-app
+    cd my-next-app
+    ```
+  </TabsContent>
+</Tabs>
+
+## Installing Prisma
+
+To integrate Prisma into your Next.js application, install Prisma Client and the Prisma CLI as follows:
+
+<Tabs onlyCode>
+  <TabsContent value="npm">
+    ```bash
+    npm install @prisma/client
+    npm install prisma --save-dev
+    npx prisma init
+    ```
+  </TabsContent>
+  <TabsContent value="yarn">
+    ```bash
+    yarn add @prisma/client
+    yarn add prisma --dev
+    yarn prisma init
+    ```
+  </TabsContent>
+  <TabsContent value="pnpm">
+    ```bash
+    pnpm add @prisma/client
+    pnpm add prisma --save-dev
+    pnpm prisma init
+    ```
+  </TabsContent>
+  <TabsContent value="bun">
+    ```bash
+    bun add @prisma/client
+    bun add prisma --dev
+    bun prisma init
+    ```
+  </TabsContent>
+</Tabs>
+
+## Folder Structure
+
+Folder structure yang saya gunakan adalah seperti ini:
+
+```plaintext {8-14} {19-20}
+.
+├── next.config.js
+├── next-env.d.ts
+├── node_modules
+├── package.json
+├── postcss.config.cjs
+├── prettier.config.js
+├── prisma
+│   ├── db.sqlite
+│   ├── migrations
+│   │   ├── 20240701154234_init
+│   │   │   └── migration.sql
+│   │   └── migration_lock.toml
+│   └── schema.prisma
+├── public
+├── README.md
+├── src
+│   ├── app
+│   ├── server
+│   │   └── db.ts
+├── tailwind.config.ts
+├── tsconfig.json
+├── yarn-error.log
+└── yarn.lock
+```
+
+## Prisma Setup
+
+Configure your Prisma environment by setting up the schema and initializing the database connection:
+
+<Tabs onlyCode>
+  <TabsContent value="schema.prisma">
+    ```prisma
+    generator client {
+        provider        = "prisma-client-js"
+    }
+
+    datasource db {
+        provider = "sqlite"
+        url      = "file:./dev.db"
+    }
+
+    model User {
+        id            String    @id @default(cuid())
+        name          String?
+        email         String?   @unique
+
+        @@map("users")
+    }
+    ```
+  </TabsContent>
+  <TabsContent value="db.ts">
+    ```typescript
+    import { PrismaClient } from "@prisma/client";
+    import { env } from "@/env";
+
+    const createPrismaClient = () =>
+      new PrismaClient({
+        log:
+          env.NODE_ENV === "development" ? ["query", "error", "warn"] : ["error"],
+      });
+
+    const globalForPrisma = globalThis as unknown as {
+      prisma: ReturnType<typeof createPrismaClient> | undefined;
+    };
+
+    export const db = globalForPrisma.prisma ?? createPrismaClient();
+
+    if (env.NODE_ENV !== "production") globalForPrisma.prisma = db;
+    ```
+  </TabsContent>
+</Tabs>
+
+## Using Prisma
+
+### Database Migrations with Prisma
+
+Prisma Migrate is a powerful feature that helps you manage your database schema through code. You can create and apply migrations that are based on changes in your Prisma schema.
+
+#### Creating Migrations
+
+When you make changes to your `schema.prisma`, you need to create a migration file that Prisma can use to update the database schema:
+
+<Tabs onlyCode>
+  <TabsContent value="npm">
+    ```bash
+    npx prisma migrate dev --name describe_your_migration
+    ```
+  </TabsContent>
+  <TabsContent value="yarn">
+    ```bash
+    yarn prisma migrate dev --name describe_your_migration
+    ```
+  </TabsContent>
+  <TabsContent value="pnpm">
+    ```bash
+    pnpm prisma migrate dev --name describe_your_migration
+    ```
+  </TabsContent>
+  <TabsContent value="bun">
+    ```bash
+    bun prisma migrate dev --name describe_your_migration
+    ```
+  </TabsContent>
+</Tabs>
+
+This command will generate SQL migration files in the `prisma/migrations` directory and immediately apply them to your development database. It's ideal for local development environments.
+
+#### Applying Migrations in Production
+
+To deploy your migrations in a production environment, you should use the migrate deploy command which skips the generation step:
+
+<Tabs onlyCode>
+  <TabsContent value="npm">
+    ```bash
+    npx prisma migrate deploy
+    ```
+  </TabsContent>
+  <TabsContent value="yarn">
+    ```bash
+    yarn prisma migrate deploy
+    ```
+  </TabsContent>
+  <TabsContent value="pnpm">
+    ```bash
+    pnpm prisma migrate deploy
+    ```
+  </TabsContent>
+  <TabsContent value="bun">
+    ```bash
+    bun prisma migrate deploy
+    ```
+  </TabsContent>
+</Tabs>
+
+This command applies all pending migrations for your production database. It's crucial to perform this step after you have tested the migrations in a staging or another safe testing environment.
+
+### Syncing Database Schema
+
+If you prefer to sync your database schema directly without creating migration files, you can use Prisma DB Push. This is particularly useful during early development stages but not recommended for production environments.
+
+<Tabs onlyCode>
+  <TabsContent value="npm">
+    ```bash
+    npx prisma db push
+    ```
+  </TabsContent>
+  <TabsContent value="yarn">
+    ```bash
+    yarn prisma db push
+    ```
+  </TabsContent>
+  <TabsContent value="pnpm">
+    ```bash
+    pnpm prisma db push
+    ```
+  </TabsContent>
+  <TabsContent value="bun">
+    ```bash
+    bun prisma db push
+    ```
+  </TabsContent>
+</Tabs>
+
+### Generating Prisma Client
+
+To interact with your database, generate the Prisma Client based on your current schema:
+
+<Tabs onlyCode>
+  <TabsContent value="npm">
+    ```bash
+    npx prisma generate
+    ```
+  </TabsContent>
+  <TabsContent value="yarn">
+    ```bash
+    yarn prisma generate
+    ```
+  </TabsContent>
+  <TabsContent value="pnpm">
+    ```bash
+    pnpm prisma generate
+    ```
+  </TabsContent>
+  <TabsContent value="bun">
+    ```bash
+    bun prisma generate
+    ```
+  </TabsContent>
+</Tabs>
+
+The `prisma generate` command reads your Prisma schema and generates or updates the Prisma Client. You should run this command after every change to your schema or after pulling changes that include schema modifications.
+
+## Conclusion
+
+With the above configurations, your Next.js application is now set up with Prisma ORM. This setup will assist you in managing your database operations efficiently, and you can extend this setup to include advanced features as your application grows.
