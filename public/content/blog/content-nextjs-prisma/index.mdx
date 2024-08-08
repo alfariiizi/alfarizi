@@ -288,6 +288,32 @@ To interact with your database, generate the Prisma Client based on your current
 
 The `prisma generate` command reads your Prisma schema and generates or updates the Prisma Client. You should run this command after every change to your schema or after pulling changes that include schema modifications.
 
+## Using Prisma in Next.js Server Components
+
+Next.js 14 introduces enhanced support for server components, allowing direct integration of backend operations within your React components. This section demonstrates how to use the `db` object from Prisma to perform database queries directly from a server component.
+
+### Example: Fetching User Data
+
+Creating a server component that fetches user data from the database using Prisma. This component will run exclusively on the server, ensuring that database credentials and queries do not expose to the client.
+
+```tsx title="@/components/UserLists.tsx"
+import { db } from '@/server/db'; // Adjust the path according to your project structure
+
+export default async function UserList() {
+  const users = await db.user.findMany(); // Fetch all users
+  return (
+    <div>
+      <h1>User List</h1>
+        <ul>
+          {users.map(user => (
+            <li key={user.id}>{user.name}</li>
+          ))}
+        </ul>
+    </div>
+  );
+}
+```
+
 ## Conclusion
 
 With the above configurations, your Next.js application is now set up with Prisma ORM. This setup will assist you in managing your database operations efficiently, and you can extend this setup to include advanced features as your application grows.
