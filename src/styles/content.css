@@ -23,7 +23,7 @@
 }
 
 [data-rehype-pretty-code-title] {
-  @apply h-fit w-full max-w-[100vw] rounded-t-md bg-secondary !py-2 px-4 font-mono text-sm text-secondary-foreground dark:bg-secondary/40 sm:text-base;
+  @apply h-fit w-full max-w-[100vw] rounded-t-md bg-secondary !py-2 px-4 font-mono text-sm text-secondary-foreground sm:text-base;
 }
 
 [data-line] {
