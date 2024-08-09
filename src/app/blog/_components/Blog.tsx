@@ -55,6 +55,7 @@ function BlogItem({ post, isNew }: BlogItemProps) {
         src={post.lang === "id" ? IndonesianLang : EnglishLang}
         title={post.lang === "id" ? "Indonesian Language" : "English Language"}
         alt={`Language: ${post.lang}`}
+        quality={60}
         width={30}
         height={20}
         className="absolute left-3 top-3 z-50 aspect-video rounded-sm border border-secondary opacity-70"
@@ -69,6 +70,7 @@ function BlogItem({ post, isNew }: BlogItemProps) {
           alt={post.title}
           width={post.image.width}
           height={post.image.height}
+          quality={50}
           placeholder={post.image.blurDataURL.length !== 0 ? "blur" : "empty"}
           blurDataURL={post.image.blurDataURL}
           className="mt-3 aspect-video w-full rounded-sm object-cover opacity-100 duration-300 group-hover:opacity-20"
