@@ -21,7 +21,7 @@ interface PostProps {
   };
 }
 
-function getPostFromParams(params: PostProps["params"]) {
+function getProjectFromParams(params: PostProps["params"]) {
   const slug = params?.slug?.join("/");
   const post = projects.find((post) => post.slug === slug);
 
@@ -33,7 +33,7 @@ function getPostFromParams(params: PostProps["params"]) {
 }
 
 export function generateMetadata({ params }: PostProps): Metadata {
-  const project = getPostFromParams(params);
+  const project = getProjectFromParams(params);
 
   if (!project) {
     return {};
@@ -45,14 +45,15 @@ export function generateMetadata({ params }: PostProps): Metadata {
   };
 }
 
-// export async function generateStaticParams(): Promise<PostProps["params"][]> {
-//   return allProjects.map((post) => ({
-//     slug: post.slugAsParams.split("/"),
-//   }));
-// }
+// You can comment this if you want to show loading states
+export function generateStaticParams(): PostProps["params"][] {
+  return projects.map((project) => ({
+    slug: [project.slug],
+  }));
+}
 
 export default function PostPage({ params }: PostProps) {
-  const post = getPostFromParams(params);
+  const post = getProjectFromParams(params);
 
   if (!post) {
     notFound();
