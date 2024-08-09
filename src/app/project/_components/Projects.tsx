@@ -1,4 +1,4 @@
-import { Image } from "@/components/mdx/Image";
+import Image from "next/image";
 import Link from "next/link";
 import { projects } from ".velite/index";
 import { Card, CardContent } from "@/components/ui/card";
@@ -60,6 +60,21 @@ function ProjectItem({ project }: ProjectItemProps) {
               <Image
                 src={project.image.src}
                 alt={project.title}
+                width={
+                  project.image.width > 512
+                    ? project.image.width * 0.4
+                    : project.image.width
+                }
+                height={
+                  project.image.height > 512
+                    ? project.image.height * 0.4
+                    : project.image.height
+                }
+                quality={50}
+                placeholder={
+                  project.image.blurDataURL.length !== 0 ? "blur" : "empty"
+                }
+                blurDataURL={project.image.blurDataURL}
                 className="aspect-video w-full rounded-sm object-cover opacity-100 duration-300 group-hover:opacity-20"
               />
               <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center bg-transparent opacity-0 duration-300 group-hover:opacity-100">

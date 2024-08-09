@@ -68,8 +68,14 @@ function BlogItem({ post, isNew }: BlogItemProps) {
         <Image
           src={post.image}
           alt={post.title}
-          width={post.image.width}
-          height={post.image.height}
+          width={
+            post.image.width > 512 ? post.image.width * 0.4 : post.image.width
+          }
+          height={
+            post.image.height > 512
+              ? post.image.height * 0.4
+              : post.image.height
+          }
           quality={50}
           placeholder={post.image.blurDataURL.length !== 0 ? "blur" : "empty"}
           blurDataURL={post.image.blurDataURL}
