@@ -3,6 +3,7 @@ import rehypeKatex from "rehype-katex";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import { visit } from "unist-util-visit";
+import rehypeStringify from "rehype-stringify";
 
 /* eslint-disable */
 
@@ -29,6 +30,7 @@ export const rehypePlugins = [
       keepBackground: true,
     },
   ],
+  rehypeStringify,
 ];
 
 export default rehypePlugins;
