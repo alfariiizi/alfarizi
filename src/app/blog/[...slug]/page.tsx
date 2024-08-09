@@ -18,7 +18,6 @@ import readingTime from "reading-time";
 import { getPostFromParams, type PostProps } from "./lib/getPostFromParams";
 import { MotionDiv } from "@/lib/framer-motion";
 import { LuArrowLeft, LuArrowRight } from "react-icons/lu";
-import { posts } from ".velite";
 
 export function generateMetadata({ params }: PostProps): Metadata {
   const post = getPostFromParams(params);
@@ -33,11 +32,12 @@ export function generateMetadata({ params }: PostProps): Metadata {
   };
 }
 
-export function generateStaticParams(): PostProps["params"][] {
-  return posts.map((post) => ({
-    slug: [post.slug],
-  }));
-}
+// You can comment this if you want to show loading states
+// export function generateStaticParams(): PostProps["params"][] {
+//   return posts.map((post) => ({
+//     slug: [post.slug],
+//   }));
+// }
 
 const formatter = new Intl.DateTimeFormat("en-US", { dateStyle: "long" });
 
