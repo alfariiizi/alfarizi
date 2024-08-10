@@ -49,7 +49,9 @@ export default function HomePage() {
                   24 years old nerd who interested in several IT fields,
                   including{" "}
                   <RoughNotation type="highlight" color="hsl(var(--accent))">
-                    <span className="text-nowrap">Web development</span>
+                    <span className="text-nowrap px-1 font-semibold text-gray-900 dark:text-gray-700">
+                      Web development
+                    </span>
                   </RoughNotation>
                   ,{" "}
                   <RoughNotation type="underline" color="hsl(var(--accent))">
@@ -76,7 +78,9 @@ export default function HomePage() {
                   </RoughNotation>
                   , while the framework I utilize for full-stack development is{" "}
                   <RoughNotation type="highlight" color="hsl(var(--accent))">
-                    <span className="text-nowrap">Next.js</span>
+                    <span className="text-nowrap px-1 font-semibold text-gray-900 dark:text-gray-700">
+                      Next.js
+                    </span>{" "}
                   </RoughNotation>
                   .
                 </p>
