@@ -55,7 +55,7 @@ function ProjectItem({ project }: ProjectItemProps) {
           <LuBookmark className="absolute right-0 top-0 z-20 size-7 fill-accent" />
         )}
         <CardContent className="flex h-full flex-col justify-between gap-6 p-0 py-0">
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-4">
             <div className="group relative aspect-video w-full transition-all duration-300">
               <Image
                 src={project.image.src}
