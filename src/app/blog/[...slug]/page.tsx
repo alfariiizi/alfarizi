@@ -19,6 +19,7 @@ import { getPostFromParams, type PostProps } from "./lib/getPostFromParams";
 import { MotionDiv } from "@/lib/framer-motion";
 import { LuArrowLeft, LuArrowRight } from "react-icons/lu";
 import { posts } from ".velite";
+import DivFadeIn from "@/app/_components/DivFadeIn";
 
 export function generateMetadata({ params }: PostProps): Metadata {
   const post = getPostFromParams(params);
@@ -56,22 +57,7 @@ export default async function page({ params }: Props) {
   const headings = post.headings;
 
   return (
-    <MotionDiv
-      initial={{
-        opacity: 0,
-      }}
-      animate={{
-        opacity: 1,
-      }}
-      exit={{
-        opacity: 0,
-      }}
-      transition={{
-        ease: "easeInOut",
-        duration: 0.5,
-      }}
-      className="mb-28 space-y-10"
-    >
+    <DivFadeIn>
       <Maxwidthdiv smallPadding className="flex gap-6" lang={post.lang}>
         {post.toc && <div className="hidden w-[100px] lg:block" />}
         {/* Article */}
@@ -199,6 +185,6 @@ export default async function page({ params }: Props) {
 
       {/* Comments */}
       <Comments />
-    </MotionDiv>
+    </DivFadeIn>
   );
 }
