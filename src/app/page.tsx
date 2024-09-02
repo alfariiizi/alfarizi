@@ -5,10 +5,30 @@ import Link from "next/link";
 import { RoughNotation, RoughNotationGroup } from "react-rough-notation";
 import { Maxwidthdiv } from "./_components/Maxwindthdiv";
 import { socials } from "./data";
+import { posts } from "@/velite/posts";
+
+const sortedPost = posts
+  .sort((a, b) => (new Date(a.date) < new Date(b.date) ? 1 : -1))
+  .slice(0, 3);
 
 import ImgHero from "@public/images/hero.png";
+import Blog from "./blog/_components/Blog";
+import Projects from "./project/_components/Projects";
+import { sortedProjects } from "./project/shared";
 
 export default function HomePage() {
+  return (
+    <div className="mb-20 flex flex-col gap-16 md:gap-32">
+      <HeroSection />
+      <div className="space-y-40 md:space-y-52">
+        <BlogSection />
+        <ProjectSection />
+      </div>
+    </div>
+  );
+}
+
+function HeroSection() {
   return (
     <Maxwidthdiv className="relative px-0">
       <div className="z-10 bg-background/60 backdrop-blur-2xl dark:bg-background/80 sm:backdrop-blur-3xl">
@@ -162,6 +182,50 @@ export default function HomePage() {
           draggable={false}
         />
       </MotionDiv>
+    </Maxwidthdiv>
+  );
+}
+
+function BlogSection() {
+  return (
+    <Maxwidthdiv className="flex w-full flex-col items-center justify-center gap-8">
+      <div>
+        <h2 className="text-center font-display text-4xl font-medium">
+          Newest Articles
+        </h2>
+      </div>
+      <div className="flex w-full flex-col gap-10">
+        <Blog
+          posts={sortedPost.map((item) => ({
+            ...item,
+          }))}
+        />
+        <Link
+          href="/blog"
+          className="w-full rounded-md border-2 border-secondary bg-background px-4 py-2 text-center text-sm text-foreground duration-150 hover:bg-secondary/20"
+        >
+          See all articles
+        </Link>
+      </div>
+    </Maxwidthdiv>
+  );
+}
+
+function ProjectSection() {
+  return (
+    <Maxwidthdiv className="flex w-full flex-col items-center justify-center gap-8">
+      <div>
+        <h2 className="text-center font-display text-4xl">Featured Projects</h2>
+      </div>
+      <div className="flex w-full flex-col gap-10">
+        <Projects projects={sortedProjects.slice(0, 3)} />
+        <Link
+          href="/project"
+          className="w-full rounded-md border-2 border-secondary bg-background px-4 py-2 text-center text-sm text-foreground duration-150 hover:bg-secondary/20"
+        >
+          See all projects
+        </Link>
+      </div>
     </Maxwidthdiv>
   );
 }

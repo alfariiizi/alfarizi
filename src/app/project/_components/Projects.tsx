@@ -1,37 +1,24 @@
 import Image from "next/image";
 import Link from "next/link";
-import { projects } from ".velite/index";
+import { type projects } from ".velite/index";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Tag from "@/app/_components/Tag";
 import { LuBookmark } from "react-icons/lu";
 import { capitalize } from "@/lib/utils";
+import { bookmarkProjectTitle } from "../shared";
 
-const bookmarkProjectTitle = [
-  "[This Site] Personal Website",
-  "Robota",
-  "Windsight",
-];
+type ProjectsVelite = (typeof projects)[0];
+type ProjectMetadata = Omit<ProjectsVelite, "mdx" | "raw">;
 
-const sortedDateeProjects = projects.sort((a, b) =>
-  new Date(a.startDate) > new Date(b.startDate) ? -1 : 1,
-);
+type Props = {
+  projects: ProjectMetadata[];
+};
 
-// const bookmarkProject = projects.filter((item) =>
-//   bookmarkProjectTitle.some((s) => s === item.title),
-// );
-const bookmarkProject = bookmarkProjectTitle.map(
-  (item) => projects.find((f) => f.title === item)!,
-);
-const notBookmarkProject = sortedDateeProjects.filter((item) =>
-  bookmarkProjectTitle.every((s) => s !== item.title),
-);
-const sortedProjects = [...bookmarkProject, ...notBookmarkProject];
-
-export default function Projects() {
+export default function Projects({ projects }: Props) {
   return (
     <div className="grid grid-cols-1 gap-x-10 gap-y-10 sm:grid-cols-2 sm:gap-y-24 lg:grid-cols-3">
-      {sortedProjects.map((project) => (
+      {projects.map((project) => (
         <ProjectItem key={project.title} project={project} />
       ))}
     </div>
@@ -39,7 +26,7 @@ export default function Projects() {
 }
 
 type ProjectItemProps = {
-  project: (typeof projects)[0];
+  project: ProjectMetadata;
 };
 
 function ProjectItem({ project }: ProjectItemProps) {

@@ -3,6 +3,7 @@ import { type Metadata } from "next";
 import { Maxwidthdiv } from "../_components/Maxwindthdiv";
 import Projects from "./_components/Projects";
 import DivFadeIn from "../_components/DivFadeIn";
+import { sortedProjects } from "./shared";
 
 export const metadata: Metadata = {
   title: "Project",
@@ -24,7 +25,7 @@ export default function page() {
           </h2>
           <p>Check out a selection of my latest web development projects.</p>
         </div>
-        <Projects />
+        <Projects projects={sortedProjects} />
         {/* <Timeline /> */}
       </Maxwidthdiv>
     </DivFadeIn>

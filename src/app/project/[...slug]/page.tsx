@@ -14,7 +14,6 @@ import { type Metadata } from "next";
 import Link from "next/link";
 import readingTime from "reading-time";
 import { LuArrowLeft } from "react-icons/lu";
-import { MotionDiv } from "@/lib/framer-motion";
 import DivFadeIn from "@/app/_components/DivFadeIn";
 
 interface PostProps {

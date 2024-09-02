@@ -16,7 +16,6 @@ import { notFound } from "next/navigation";
 import React from "react";
 import readingTime from "reading-time";
 import { getPostFromParams, type PostProps } from "./lib/getPostFromParams";
-import { MotionDiv } from "@/lib/framer-motion";
 import { LuArrowLeft, LuArrowRight } from "react-icons/lu";
 import { posts } from ".velite";
 import DivFadeIn from "@/app/_components/DivFadeIn";

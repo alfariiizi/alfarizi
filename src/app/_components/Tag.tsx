@@ -16,7 +16,7 @@ export default function Tag({ tag, className, ...props }: Props) {
       )}
       {...props}
     >
-      {tag}
+      #{tag}
     </Link>
   );
 }
