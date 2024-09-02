@@ -137,105 +137,105 @@ const regex = /\[([^\]]+)]\(([^)]+)\)/;
 //     }),
 // });
 
+const postSchema = s
+  .object({
+    title: s.string().max(99),
+    description: s.string().max(999),
+    image: s.image().or(s.string()),
+    date: s.isodate(),
+    icon: s.string(),
+    toc: s.boolean().default(true),
+    tags: s.string().array().default([]),
+    rcc: s.boolean().default(false), // client component
+    bib: s.string().array().default([]), // bibliography
+    lang: s.enum(["id", "en"]).optional().default("id"),
+    mdx: s.mdx({ gfm: true }),
+    raw: s.raw(),
+  })
+  .transform((data) => {
+    const slugger = new GithubSlugger();
+    const slug = slugger.slug(data.title);
+    return {
+      ...data,
+      slug,
+      permalink: `/blog/${slug}`,
+    };
+  })
+  .transform(async (data) => {
+    if (typeof data.image === "string") {
+      const blurData = await getBase64(data.image);
+      const imageSize = await probe(data.image)
+        .then((data) => data)
+        .catch(() => {
+          return {
+            width: 1024,
+            height: 720,
+          };
+        });
+      return {
+        ...data,
+        image: {
+          src: data.image,
+          width: imageSize.width,
+          height: imageSize.height,
+          blurWidth: imageSize.width,
+          blurHeight: imageSize.height,
+          blurDataURL: blurData ?? "",
+        } as Image,
+      };
+    }
+
+    return {
+      ...data,
+      image: data.image,
+    };
+  })
+  .transform((data) => {
+    const bib = data.bib.map((b) => {
+      const result = b.match(regex);
+      return {
+        text: result?.[1],
+        link: result?.[2],
+      };
+    });
+    return {
+      ...data,
+      bib,
+    };
+  })
+  .transform((data) => {
+    const regXHeader = /\n(?<flag>#{1,6})\s+(?<content>.+)/g;
+    const slugger = new GithubSlugger();
+    const raw = data.raw;
+    const headings = Array.from(raw.matchAll(regXHeader)).map(({ groups }) => {
+      const flag = groups?.flag;
+      const content = groups?.content;
+      const flagLevel = [
+        "one",
+        "two",
+        "three",
+        undefined,
+        undefined,
+        undefined,
+      ];
+
+      return {
+        level: flag?.length ? flagLevel[flag.length - 1] : undefined,
+        text: content,
+        slug: content ? slugger.slug(content) : undefined,
+      };
+    });
+
+    return {
+      ...data,
+      headings,
+    };
+  });
+
 const posts = defineCollection({
   name: "Post",
   pattern: "blog/**/index.mdx",
-  schema: s
-    .object({
-      title: s.string().max(99),
-      description: s.string().max(999),
-      image: s.image().or(s.string()),
-      date: s.isodate(),
-      icon: s.string(),
-      toc: s.boolean().default(true),
-      tags: s.string().array().default([]),
-      rcc: s.boolean().default(false), // client component
-      bib: s.string().array().default([]), // bibliography
-      lang: s.enum(["id", "en"]).optional().default("id"),
-      mdx: s.mdx({ gfm: true }),
-      raw: s.raw(),
-    })
-    .transform((data) => {
-      const slugger = new GithubSlugger();
-      const slug = slugger.slug(data.title);
-      return {
-        ...data,
-        slug,
-        permalink: `/blog/${slug}`,
-      };
-    })
-    .transform(async (data) => {
-      if (typeof data.image === "string") {
-        const blurData = await getBase64(data.image);
-        const imageSize = await probe(data.image)
-          .then((data) => data)
-          .catch(() => {
-            return {
-              width: 1024,
-              height: 720,
-            };
-          });
-        return {
-          ...data,
-          image: {
-            src: data.image,
-            width: imageSize.width,
-            height: imageSize.height,
-            blurWidth: imageSize.width,
-            blurHeight: imageSize.height,
-            blurDataURL: blurData ?? "",
-          } as Image,
-        };
-      }
-
-      return {
-        ...data,
-        image: data.image,
-      };
-    })
-    .transform((data) => {
-      const bib = data.bib.map((b) => {
-        const result = b.match(regex);
-        return {
-          text: result?.[1],
-          link: result?.[2],
-        };
-      });
-      return {
-        ...data,
-        bib,
-      };
-    })
-    .transform((data) => {
-      const regXHeader = /\n(?<flag>#{1,6})\s+(?<content>.+)/g;
-      const slugger = new GithubSlugger();
-      const raw = data.raw;
-      const headings = Array.from(raw.matchAll(regXHeader)).map(
-        ({ groups }) => {
-          const flag = groups?.flag;
-          const content = groups?.content;
-          const flagLevel = [
-            "one",
-            "two",
-            "three",
-            undefined,
-            undefined,
-            undefined,
-          ];
-
-          return {
-            level: flag?.length ? flagLevel[flag.length - 1] : undefined,
-            text: content,
-            slug: content ? slugger.slug(content) : undefined,
-          };
-        },
-      );
-
-      return {
-        ...data,
-        headings,
-      };
-    }),
+  schema: postSchema,
 });
 
 const projects = defineCollection({
