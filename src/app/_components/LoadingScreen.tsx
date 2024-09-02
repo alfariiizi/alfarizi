@@ -39,7 +39,7 @@ export default function LoadingScreen({ className }: Props) {
           ease: "easeInOut",
           repeatType: "mirror",
           repeat: Infinity,
-          duration: 1,
+          duration: 0.8,
         }}
         className={cn("font-display text-4xl font-semibold")}
       >

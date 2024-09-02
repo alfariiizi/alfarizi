@@ -22,7 +22,7 @@ export function Providers({ children }: { children: ReactNode }) {
 
 function BrandName({ children }: { children: ReactNode }) {
   const [isMount, setMount] = useState(false);
-  const [countdown, setCountdown] = useState(3);
+  const [countdown, setCountdown] = useState(1);
 
   useEffect(() => {
     if (countdown === 0) {
