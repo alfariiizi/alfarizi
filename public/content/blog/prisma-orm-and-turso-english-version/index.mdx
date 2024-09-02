@@ -1,7 +1,7 @@
 ---
 icon: 🐃
-title: Prisma ORM and Turso (with Next.js 14+ App Router)
-description: Dengan menggabungkan Prisma dan Turso, kita dapat dengan mudah mengelola dan men-deploy aplikasi Next.js berbasis SQLite secara cloud-native.
+title: Prisma ORM and Turso (with Next.js 14+ App Router) (English Version)
+description: By combining Prisma and Turso, we can easily manage and deploy cloud-native SQLite-based Next.js applications.
 image: cover.png
 date: 2024-09-02
 tags:
@@ -14,7 +14,7 @@ bib:
   - "[Prisma + Turso | Turso](https://docs.turso.tech/sdk/ts/orm/prisma)"
   - "[Introduction - Turso](https://docs.turso.tech/cli/introduction)"
   - "[Turso (Early Access) | Prisma Documentation](https://www.prisma.io/docs/orm/overview/databases/turso)"
-lang: id
+lang: en
 ---
 
 <Image
@@ -23,17 +23,17 @@ lang: id
   scale={1}
 />
 
-Prisma ORM mempunyai keunggulan dimana ia dapat ditulis secara sederhana dengan schema nya dan prisma-client nya dapat digunakan di backend secara typesafe. Prisma support berbagai macam DBMS berbasis SQL, yang dimana salah satu nya adalah Sqlite. Jika kita ingin men-deploy suatu aplikasi, kita tentunya juga perlu tempat untuk menyimpan data berbasis Sqlite ini. Pilihan DBaaS yang paling populer untuk sqlite adalah Turso.
+Prisma ORM offers the advantage of writing schemas simply, and its prisma-client can be used in the backend with type safety. Prisma supports various SQL-based DBMS, one of which is SQLite. When deploying an application, we also need a place to store our SQLite-based data. The most popular DBaaS choice for SQLite is Turso.
 
-Di tulisan ini, saya akan berbagi bagaimana menggunakan Turso dan Prisma pada Next.js 14+ (App Router).
+In this article, I will share how to use Turso and Prisma with Next.js 14+ (App Router).
 
 ## Preparing
 
-Sebelum menggunakan Turso, kita perlu melakukan setup pada Next.js dan Prisma terlebih dahulu.
+Before using Turso, we need to set up Next.js and Prisma first.
 
-### Instalasi Next.js
+### Installing Next.js
 
-Untuk menginstall next.js, kita bisa menginstall nya dengan:
+To install Next.js, you can run:
 
 <Tabs onlyCode>
   <TabsContent value="npm">
@@ -58,17 +58,17 @@ Untuk menginstall next.js, kita bisa menginstall nya dengan:
   </TabsContent>
 </Tabs>
 
-Disini saya menggunakan nama program `my-next-app`. Setelah proses instalasi selesai, kita dapat masuk ke dalam folder app nya dengan cara:
+Here, I’m using the program name `my-next-app`. Once the installation process is complete, we can navigate into the app folder by running:
 
 ```bash
 cd my-next-app
 ```
 
-Proses instalasi next.js sudah selesai, selanjutnya mari kita melakukan instalasi Prisma.
+With that, the Next.js installation process is complete. Next, let's install Prisma.
 
-### Instalasi Prisma
+### Installing Prisma
 
-Untuk menginstall Prisma, kita dapat menjalankan command berikut:
+To install Prisma, run the following commands:
 
 <Tabs onlyCode>
   <TabsContent value="npm">
@@ -103,7 +103,7 @@ Untuk menginstall Prisma, kita dapat menjalankan command berikut:
 
 ### Setup Prisma
 
-Setelah itu kita dapat menuliskan schema model pada `/prisma/schema.prisma`. Disini saya akan membuat model sederhana seperti ini:
+After that, we can define our schema model in /prisma/schema.prisma. Here, I'll create a simple model like this:
 
 ```prisma title="/prisma/schema.prisma"
 generator client {
@@ -123,7 +123,7 @@ model Post {
 }
 ```
 
-Next, kita jalankan proses migrasi dengan menjalankan command berikut:
+Next, run the migration process with the following command:
 
 <Tabs onlyCode>
   <TabsContent value="npm">
@@ -148,7 +148,7 @@ Next, kita jalankan proses migrasi dengan menjalankan command berikut:
   </TabsContent>
 </Tabs>
 
-Disini saya nama kan migrasi nya `init`, sehingga akan ter-generate file sql `/prisma/migrations/[date]_init/migration.sql` yang berisi:
+Here, I named the migration `init`, which will generate an SQL file at `/prisma/migrations/[date]_init/migration.sql` containing:
 
 ```sql title="/prisma/migrations/[date]_init/migration.sql"
 -- CreateTable
@@ -160,7 +160,7 @@ CREATE TABLE "Post" (
 );
 ```
 
-Dengan menjalankan command sebelumnya, maka seharusnya akan ter-generate juga folder _Prisma Client_ pada `node_modules/.prisma/client` yang dimana dapat kita gunakan untuk mengakses model secara typesafe di typescript. Jika folder tersebut belum ter-generate, maka kita bisa menjalankan:
+By running the previous command, a Prisma Client folder should also be generated at `node_modules/.prisma/client`, which we can use to access models with type safety in TypeScript. If the folder is not generated, you can run:
 
 <Tabs onlyCode>
   <TabsContent value="npm">
@@ -185,9 +185,9 @@ Dengan menjalankan command sebelumnya, maka seharusnya akan ter-generate juga fo
   </TabsContent>
 </Tabs>
 
-### Setup Prisma + Next.js
+### Integrating Prisma with Next.js
 
-Setelah Prisma berhasil disetup, maka selanjutnya kita dapat memasangkan prisma ini di next.js. Cara nya adalah, kita buat file `/src/server/db.ts` yang berisikan:
+After successfully setting up Prisma, we can integrate it into our Next.js application. Create a file `/src/server/db.ts` containing:
 
 ```ts title="/src/server/db.ts"
 import { PrismaClient } from "@prisma/client";
@@ -207,13 +207,13 @@ export const db = globalForPrisma.prisma ?? createPrismaClient();
 if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = db;
 ```
 
-Dengan begitu, kita dapat memanggil prisma client menggunakan variable `db` tersebut.
+This allows us to call the Prisma client using the `db` variable.
 
 ## Turso
 
-### Instalasi Turso-CLI
+### Installing Turso-CLI
 
-Pada Turso, terdapat fitur Turso-CLI (Command Line Interface) yang dimana memudahkan kita dalam mengelola dan berkomunikasi dengan database kita di Turso. Untuk menginstall Turso-CLI, kita dapat menjalankan:
+Turso provides a Turso-CLI (Command Line Interface) feature that makes it easy to manage and communicate with your databases on Turso. To install Turso-CLI, run:
 
 <Tabs onlyCode>
   <TabsContent value="macOS">
@@ -233,13 +233,13 @@ Pada Turso, terdapat fitur Turso-CLI (Command Line Interface) yang dimana memuda
   </TabsContent>
 </Tabs>
 
-Setelah proses instalasi Turso-CLI selesai, kita dapat melihat apa saja yang bisa lakukan dengan Turso-CLI ini dengan cara menjalankan:
+After the Turso-CLI installation is complete, you can see the av Turso periodically checks the activity of your databases. If your database has been idle for a long time, Turso will automatically deactivate it. To reactivate it, you can go to your DB dashboard, then go to the "Settings" menu. If your settings menu looks like the image below, then your database is active 👍.ailable commands by running:
 
 ```bash
 turso --help
 ```
 
-yang akan menghasilkan output:
+Which will output:
 
 ```plaintext
 Turso CLI
@@ -269,7 +269,7 @@ Flags:
 
 ### Turso Login
 
-Selanjutnya, kita perlu login ke website Turso menggunakan default browser dari kalian. Kalian bisa mengakses wesbite turso di [https://turso.tech](https://turso.tech), kemudian masuk ke login page.
+Next, you need to log in to the Turso website using your default browser. You can access the Turso website at [https://turso.tech](https://turso.tech) and navigate to the login page.
 
 <Image
   src="turso-login-page.png"
@@ -277,9 +277,9 @@ Selanjutnya, kita perlu login ke website Turso menggunakan default browser dari 
   scale={1}
 />
 
-Saya sudah mempunyai akun github, sehingga disini saya bisa login menggunakan github provider.
+I already have a GitHub account, so I can log in using the GitHub provider.
 
-Jika sudah login di default browser kalian, kita bisa kembali ke terminal dan menjalankan command berikut:
+Once you're logged in through your default browser, return to the terminal and run the following command:
 
 <Tabs onlyCode>
   <TabsContent value="macOS/Linux">
@@ -302,7 +302,7 @@ Jika sudah login di default browser kalian, kita bisa kembali ke terminal dan me
   scale={1}
 />
 
-Pada browser, setelah kita login, turso akan mengalihkan kita ke halaman dashboard. Untuk membuat database baru, kita bisa masuk ke menu database, kemudian klik "Create Database", maka akan muncul form input "database name" dan "database group". Disini saya akan menamakan database nya "testing", kemudian klik "Create Database".
+After logging in, Turso will redirect you to the dashboard page. To create a new database, navigate to the "Databases" menu and click "Create Database". A form will appear asking for the "database name" and "database group". Here, I'll name the database "testing" and then click "Create Database".
 
 <Image
   src="turso-create-db.png"
@@ -310,7 +310,7 @@ Pada browser, setelah kita login, turso akan mengalihkan kita ke halaman dashboa
   scale={1}
 />
 
-Setelah proses pembuatan database selesai, kita akan dialihkan ke tampilan dashboard pada spesifik database.
+Once the database creation process is complete, you'll be redirected to the specific database dashboard view.
 
 <Image
   src="turso-db-testing.png"
@@ -318,48 +318,48 @@ Setelah proses pembuatan database selesai, kita akan dialihkan ke tampilan dashb
   scale={1}
 />
 
-### Menghubungkan Prisma ke Turso
+### Connecting Prisma to Turso
 
 #### File `.env`
 
-Kita kembali masuk ke project next.js, kemudian kita buat file env yang berisi:
+Go back to your Next.js project and create an .env file containing:
 
 ```env title=".env"
 TURSO_DATABASE_URL=
 TURSO_AUTH_TOKEN=
 ```
 
-Value dari `TURSO_DATABASE_URL` dapat diperoleh dengan cara menjalankan:
+You can obtain the value for `TURSO_DATABASE_URL` by running:
 
 <Tabs onlyCode>
-  <TabsContent value="Memperoleh TURSO_DATABASE_URL">
+  <TabsContent value="Get TURSO_DATABASE_URL">
     ```bash
     turso db show [db_name]
     ```
   </TabsContent>
-  <TabsContent value="Memperoleh TURSO_AUTH_TOKEN">
+  <TabsContent value="Get TURSO_AUTH_TOKEN">
     ```bash
     turso tokens create [db_name]
     ```
   </TabsContent>
 </Tabs>
 
-Karena sebelumnya saya menggunakan nama db "testing", maka saya ubah \[db_name\] nya ke "testing"
+Since I previously used the database name "testing", I'll replace \[db_name\] with "testing":
 
 <Tabs onlyCode>
-  <TabsContent value="Memperoleh TURSO_DATABASE_URL">
+  <TabsContent value="Get TURSO_DATABASE_URL">
     ```bash
     turso db show testing
     ```
   </TabsContent>
-  <TabsContent value="Memperoleh TURSO_AUTH_TOKEN">
+  <TabsContent value="Get TURSO_AUTH_TOKEN">
     ```bash
     turso tokens create testing
     ```
   </TabsContent>
 </Tabs>
 
-Hasil dari masing-masing command tersebut kita copy-paste ke file `.env` nya:
+Copy and paste the results from each command into your `.env` file:
 
 ```env title=".env"
 TURSO_DATABASE_URL=libsql://testing-alfariiizi.turso.io
@@ -367,12 +367,12 @@ TURSO_AUTH_TOKEN=eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MjUzNTM2MjMsIm
 ```
 
 <Callout status="warning">
-    Jangan sembarangan membagikan isi dari `TURSO_AUTH_TOKEN`!
+  Do not share the contents of TURSO_AUTH_TOKEN carelessly!
 </Callout>
 
 #### Prisma Adapter
 
-Kita masuk ke `/prisma/schema.prisma`, kemudian kita tambahkan `driverAdapters` pada `previewFeatures`:
+We go to `/prisma/schema.prisma`, then we add `driverAdapters` to `previewFeatures`:
 
 ```prisma {3} title="/prisma/schema.prisma"
 generator client {
@@ -393,7 +393,7 @@ model Post {
 }
 ```
 
-Setelah itu kita masuk ke file `/src/server/db.ts`, kemudian kita tambahkan code berikut:
+After that we go to the `/src/server/db.ts file`, then we add the following code:
 
 ```ts title="/src/server/db.ts"
 import { PrismaClient } from "@prisma/client";
@@ -423,7 +423,7 @@ export const db = globalForPrisma.prisma ?? createPrismaClient();
 if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = db;
 ```
 
-Kemudian kita coba run migrasi lagi:
+Then we run the migration again:
 
 <Tabs onlyCode>
   <TabsContent value="npm">
@@ -448,19 +448,19 @@ Kemudian kita coba run migrasi lagi:
   </TabsContent>
 </Tabs>
 
-Kamu juga bisa menamakan migrasi sama seperti sebelumnya, yakni "init".
+You can also name the migration the same as before, which is "init".
 
-### Push migration ke Turso
+### Push migration to Turso
 
-Setelah semua langkah sebelumnya sudah dilakukan, sekarang saatnya kita push hasil migrasi nya ke Turso. Kita dapat melakukan push dengan command:
+After completing all the previous steps, it’s time to push the migration results to Turso. We can push it using the command:
 
 ```bash
 turso db shell turso-prisma-db < ./prisma/migrations/20240902093411_init/migration.sql
 ```
 
-Kalian perlu menyesuaikan bagian `20240902093411_init` sesuai dengan filepath hasil migrasi kalian.
+You need to adjust the `20240902093411_init` part according to your migration file path.
 
-Jika proses push tersebut berhasil, maka kalian bisa kembali ke website dashboard turso, kemudian klik "Edit Data", dan pilih "Outerbase Studio" atau "Drizzle Studio". Kalian akan menemukan tabel "Post" pada database tersebut.
+If the push process is successful, you can return to the Turso dashboard website, click "Edit Data," and choose "Outerbase Studio" or "Drizzle Studio." You will find the "Post" table in that database.
 
 <Image
   src="outerbase-studio.png"
@@ -468,10 +468,10 @@ Jika proses push tersebut berhasil, maka kalian bisa kembali ke website dashboar
   scale={1}
 />
 
-Sampai disini kalian sudah bisa menggunakan Turso pada aplikasi kalian.
+At this point, you can start using Turso in your application.
 
 <Callout status="warning">
-    Turso secara berkala akan mengecek ke-aktifan database kalian. Jika database kalian cukup lama idle, maka Turso akan secara otomatis menonaktifkan tersebut tersebut. Jika kalian ingin mengaktifkannya kembali dengan cara masuk ke dashboard db kalian, kemudian masuk ke menu "Settings". Jika menu settings kalian seperti pada gambar dibawah ini, maka database kalian sedang aktif 👍.
+   Turso periodically checks the activity of your databases. If your database has been idle for a long time, Turso will automatically deactivate it. To reactivate it, you can go to your DB dashboard, then go to the "Settings" menu. If your settings menu looks like the image below, then your database is active 👍.
     <Image
       src="turso-dashboard-db-settings.png"
       caption="DB Dashboard Settings"
@@ -481,7 +481,6 @@ Sampai disini kalian sudah bisa menggunakan Turso pada aplikasi kalian.
 
 ## Kesimpulan
 
-Dengan menggabungkan Prisma dan Turso, kita dapat dengan mudah mengelola dan men-deploy aplikasi Next.js berbasis SQLite secara cloud-native. Turso juga memungkinkan untuk menggunakan SQLite secara skalabel di cloud, sementara itu Prisma memberikan kita kemudahan dalam menulis dan mengelola schema database dengan type-safe di TypeScript.
+By combining Prisma and Turso, we can easily manage and deploy cloud-native Next.js applications based on SQLite. Turso also allows for scalable SQLite usage in the cloud, while Prisma provides ease in writing and managing database schemas with type safety in TypeScript.
 
-Jika kalian merasa terbantu dengan adanya tulisan ini, kalian bisa kasih aku reaction dibawah. Atau jika kalian ada pertanyaan, bisa kalian tulis di kolom komentar! Terima kasih dan salam sehat selalu!
-
+If you found this post helpful, feel free to give me a reaction below. Or if you have any questions, you can write them in the comment section! Thank you and stay healthy!
