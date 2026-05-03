@@ -2,9 +2,10 @@ import Link from "next/link";
 import * as runtime from "react/jsx-runtime";
 import { Excalidraw } from "../excalidraw";
 import { Callout } from "./Callout";
-import { Image } from "./Image";
+import { Image as MdxImageComponent } from "./Image";
 import { Math } from "./Math";
 import { Tabs, TabsContent } from "@/components/mdx/Tabs";
+import Caption from "./Caption";
 import { elements } from "./basic-element";
 
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
@@ -21,25 +22,30 @@ const useMDXComponent = (code: string) => {
   return fn({ ...runtime, baseUrl: process.cwd() }).default;
 };
 
-const mdxComponents = {
-  Image,
-  Callout,
-  Link,
-  Math,
-  Excalidraw,
-  Tabs,
-  TabsContent,
-  ...elements,
-  generatePath,
-};
-
 interface MdxProps {
   code: string;
+  assetDirectory?: string;
   components?: Record<string, React.ComponentType>;
 }
 
-export const Mdx = ({ code, components }: MdxProps) => {
+export const Mdx = ({ code, assetDirectory, components }: MdxProps) => {
   const Component = useMDXComponent(code);
+  const mdxComponents = {
+    Image: (props: React.ComponentProps<typeof MdxImageComponent>) => (
+      <MdxImageComponent {...props} assetDirectory={assetDirectory} />
+    ),
+    Callout,
+    Link,
+    Math,
+    Excalidraw,
+    Tabs,
+    TabsContent,
+    Caption,
+    ...elements,
+    generatePath: (filename: string) =>
+      assetDirectory ? `${assetDirectory}/${filename}` : generatePath(filename),
+  };
+
   return <Component components={{ ...mdxComponents, ...components }} />;
 };
 

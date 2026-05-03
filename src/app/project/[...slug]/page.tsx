@@ -129,7 +129,14 @@ export default function PostPage({ params }: PostProps) {
         </ArticleHeader>
 
         <ArticleContent>
-          <Mdx code={post.mdx} />
+          <Mdx
+            code={post.mdx}
+            assetDirectory={
+              typeof post.assetDirectory === "string"
+                ? post.assetDirectory
+                : undefined
+            }
+          />
         </ArticleContent>
 
         <ArticleFooter>

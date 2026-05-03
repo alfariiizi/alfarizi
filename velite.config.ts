@@ -1,9 +1,14 @@
+import path from "node:path";
 import GithubSlugger from "github-slugger";
 import { type Image, defineCollection, defineConfig, s } from "velite";
 import { rehypePlugins } from "./src/mdx-plugins/rehype-plugins";
 import { remarkPlugins } from "./src/mdx-plugins/remark-plugins";
-import { getBase64 } from "@/lib/getBase64";
-import probe from "probe-image-size";
+import {
+  getAssetBlurDataURL,
+  getAssetDimensions,
+  resolveContentAssetReference,
+  toImageMetadata,
+} from "@/lib/content-assets.js";
 
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
@@ -141,7 +146,7 @@ const postSchema = s
   .object({
     title: s.string().max(99),
     description: s.string().max(999),
-    image: s.image().or(s.string()),
+    image: s.string(),
     date: s.isodate(),
     icon: s.string(),
     toc: s.boolean().default(true),
@@ -152,42 +157,40 @@ const postSchema = s
     mdx: s.mdx({ gfm: true }),
     raw: s.raw(),
   })
-  .transform((data) => {
+  .transform((data, { meta }) => {
     const slugger = new GithubSlugger();
     const slug = slugger.slug(data.title);
+    const assetDirectory = path.posix.dirname(
+      resolveContentAssetReference({
+        asset: "__placeholder__",
+        contentPath: meta.path,
+      }).src,
+    );
     return {
       ...data,
       slug,
       permalink: `/blog/${slug}`,
+      assetDirectory,
     };
   })
-  .transform(async (data) => {
-    if (typeof data.image === "string") {
-      const blurData = await getBase64(data.image);
-      const imageSize = await probe(data.image)
-        .then((data) => data)
-        .catch(() => {
-          return {
-            width: 1024,
-            height: 720,
-          };
-        });
-      return {
-        ...data,
-        image: {
-          src: data.image,
-          width: imageSize.width,
-          height: imageSize.height,
-          blurWidth: imageSize.width,
-          blurHeight: imageSize.height,
-          blurDataURL: blurData ?? "",
-        } as Image,
-      };
-    }
+  .transform(async (data, { meta }) => {
+    const assetReference = resolveContentAssetReference({
+      asset: data.image,
+      contentPath: meta.path,
+    });
+    const [blurDataURL, imageSize] = await Promise.all([
+      getAssetBlurDataURL(assetReference),
+      getAssetDimensions(assetReference),
+    ]);
 
     return {
       ...data,
-      image: data.image,
+      image: toImageMetadata({
+        src: assetReference.src,
+        width: imageSize.width,
+        height: imageSize.height,
+        blurDataURL,
+      }) as Image,
     };
   })
   .transform((data) => {
@@ -247,7 +250,7 @@ const projects = defineCollection({
       description: s.string().max(999),
       team: s.string().max(99),
       position: s.string().max(99).optional(),
-      image: s.image(),
+      image: s.string(),
       tech: s.string().max(99),
       link: s.string().url().optional(),
       repo: s.string().url().optional(),
@@ -258,13 +261,40 @@ const projects = defineCollection({
       mdx: s.mdx({ gfm: true }),
       raw: s.raw(),
     })
-    .transform((data) => {
+    .transform((data, { meta }) => {
       const slugger = new GithubSlugger();
       const slug = slugger.slug(data.title);
+      const assetDirectory = path.posix.dirname(
+        resolveContentAssetReference({
+          asset: "__placeholder__",
+          contentPath: meta.path,
+        }).src,
+      );
       return {
         ...data,
         slug,
         permalink: `/project/${slug}`,
+        assetDirectory,
+      };
+    })
+    .transform(async (data, { meta }) => {
+      const assetReference = resolveContentAssetReference({
+        asset: data.image,
+        contentPath: meta.path,
+      });
+      const [blurDataURL, imageSize] = await Promise.all([
+        getAssetBlurDataURL(assetReference),
+        getAssetDimensions(assetReference),
+      ]);
+
+      return {
+        ...data,
+        image: toImageMetadata({
+          src: assetReference.src,
+          width: imageSize.width,
+          height: imageSize.height,
+          blurDataURL,
+        }) as Image,
       };
     })
     .transform((data) => {

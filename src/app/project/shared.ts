@@ -1,3 +1,4 @@
+import { sortProjectsByStartDate } from "@/lib/content-utils.js";
 import { projects } from ".velite/index";
 
 export const bookmarkProjectTitle = [
@@ -6,9 +7,7 @@ export const bookmarkProjectTitle = [
   "Windsight",
 ];
 
-export const sortedDateeProjects = projects.sort((a, b) =>
-  new Date(a.startDate) > new Date(b.startDate) ? -1 : 1,
-);
+export const sortedDateeProjects = sortProjectsByStartDate(projects);
 
 export const bookmarkProject = bookmarkProjectTitle.map(
   (item) => projects.find((f) => f.title === item)!,

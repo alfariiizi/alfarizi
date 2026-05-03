@@ -1,4 +1,6 @@
+import { filterPostsBySearchQuery } from "@/lib/blog-search.js";
 import { cn } from "@/lib/utils";
+import { sortPostsByDate } from "@/lib/content-utils.js";
 import { posts } from "@/velite/posts";
 import { type Metadata } from "next";
 import { Maxwidthdiv } from "../_components/Maxwindthdiv";
@@ -20,16 +22,10 @@ type Props = {
   };
 };
 
-const sortedPost = posts.sort((a, b) =>
-  new Date(a.date) < new Date(b.date) ? 1 : -1,
-);
+const sortedPost = sortPostsByDate(posts);
 
 export default function Page({ searchParams: { search } }: Props) {
-  // const filteredPost = search
-  //   ? sortedPost.filter((f) =>
-  //       f.title.toLowerCase().includes(search.toLowerCase()),
-  //     )
-  //   : sortedPost;
+  const filteredPosts = filterPostsBySearchQuery(sortedPost, search);
 
   return (
     <DivFadeIn>
@@ -57,7 +53,7 @@ export default function Page({ searchParams: { search } }: Props) {
           </div>
           <SearchInput initialParams={{ search }} />
           <Blog
-            posts={sortedPost.map((item) => ({
+            posts={filteredPosts.map((item) => ({
               ...item,
             }))}
           />

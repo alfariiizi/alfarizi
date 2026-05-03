@@ -105,7 +105,14 @@ export default async function page({ params }: Props) {
           </ArticleHeader>
 
           <ArticleContent lang={post.lang}>
-            <Mdx code={post.mdx} />
+            <Mdx
+              code={post.mdx}
+              assetDirectory={
+                typeof post.assetDirectory === "string"
+                  ? post.assetDirectory
+                  : undefined
+              }
+            />
           </ArticleContent>
 
           <ArticleFooter className="space-y-6">

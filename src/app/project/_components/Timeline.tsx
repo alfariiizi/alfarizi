@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import { sortProjectsByStartDate } from "@/lib/content-utils.js";
 import "@/styles/timeline.css";
 import { BsStarFill } from "react-icons/bs";
 import { useInView } from "react-intersection-observer";
@@ -23,9 +24,7 @@ export function Timeline() {
     triggerOnce: true,
   });
 
-  const sortedProjects = projects.sort((a, b) =>
-    new Date(a.startDate) > new Date(b.startDate) ? -1 : 1,
-  );
+  const sortedProjects = sortProjectsByStartDate(projects);
 
   return (
     <section ref={ref}>

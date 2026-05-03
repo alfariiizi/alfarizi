@@ -1,15 +1,11 @@
-"use client";
-
 import { type posts } from ".velite/index";
 import { cn } from "@/lib/utils";
-import React from "react";
 import { formatter, isNew } from "./utils";
 import Link from "next/link";
 import Tag from "@/app/_components/Tag";
 import IndonesianLang from "@public/images/indonesian-flag.png";
 import EnglishLang from "@public/images/english-lang.png";
 import Image from "next/image";
-import { parseAsString, useQueryState } from "nuqs";
 
 type PostsVelite = (typeof posts)[0];
 type PostMetadata = Omit<PostsVelite, "mdx" | "raw">;
@@ -19,11 +15,6 @@ type Props = {
 };
 
 export default function Blog({ posts }: Props) {
-  const [search] = useQueryState("search", parseAsString);
-  const filteredPost = posts.filter((f) =>
-    f.title.toLowerCase().includes(search?.toLowerCase() ?? ""),
-  );
-
   return (
     <div
       className={cn(
@@ -31,7 +22,7 @@ export default function Blog({ posts }: Props) {
         "font-display",
       )}
     >
-      {filteredPost.map((post) => {
+      {posts.map((post) => {
         const isPostNew = isNew(post.date);
 
         return <BlogItem key={post.title} post={post} isNew={isPostNew} />;

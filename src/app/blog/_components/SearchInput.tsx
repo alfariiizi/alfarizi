@@ -25,7 +25,8 @@ export default function SearchInput({ initialParams }: Props) {
     async function updateSearchUrl() {
       try {
         await setSearchUrl(debouncedSearch, {
-          shallow: true,
+          shallow: false,
+          scroll: false,
         });
       } catch (error) {
         console.error(error);

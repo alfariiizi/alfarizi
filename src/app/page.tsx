@@ -1,4 +1,5 @@
 import { MotionDiv } from "@/lib/framer-motion";
+import { sortPostsByDate } from "@/lib/content-utils.js";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,9 +8,7 @@ import { Maxwidthdiv } from "./_components/Maxwindthdiv";
 import { socials } from "./data";
 import { posts } from "@/velite/posts";
 
-const sortedPost = posts
-  .sort((a, b) => (new Date(a.date) < new Date(b.date) ? 1 : -1))
-  .slice(0, 3);
+const sortedPost = sortPostsByDate(posts).slice(0, 3);
 
 import ImgHero from "@public/images/hero.png";
 import Blog from "./blog/_components/Blog";

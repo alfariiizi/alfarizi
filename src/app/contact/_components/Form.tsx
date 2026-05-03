@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { contactFormClientSchema } from "@/lib/contact-form.js";
 import {
   FormControl,
   FormField,
@@ -14,18 +15,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { z } from "zod";
 
-const formSchema = z.object({
-  email: z.string().email(),
-  message: z.string(),
-});
-
-type FormSchema = z.infer<typeof formSchema>;
+type FormSchema = typeof contactFormClientSchema._type;
 
 export default function Form() {
   const form = useForm<FormSchema>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(contactFormClientSchema),
     defaultValues: {
       email: "",
       message: "",
@@ -33,19 +28,39 @@ export default function Form() {
   });
 
   async function onSubmit(values: FormSchema) {
-    const data = new URLSearchParams();
-    data.append("email", values.email);
-    data.append("message", values.message);
-    const res = await fetch("/api/email", {
-      method: "POST",
-      body: data,
-    });
+    try {
+      const data = new URLSearchParams();
+      data.append("email", values.email);
+      data.append("message", values.message);
 
-    if (res.ok) {
-      toast.success("Successfully send an email!", { duration: 4000 });
+      const res = await fetch("/api/email", {
+        method: "POST",
+        body: data,
+      });
+
+      const payload = (await res.json().catch(() => null)) as
+        | { message?: string }
+        | null;
+
+      if (!res.ok) {
+        toast.error(
+          payload?.message ?? "Failed to send your message. Please try again.",
+          { duration: 4000 },
+        );
+        return;
+      }
+
+      toast.success(payload?.message ?? "Successfully sent an email!", {
+        duration: 4000,
+      });
       form.reset({
         email: "",
         message: "",
+      });
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to send your message. Please try again.", {
+        duration: 4000,
       });
     }
   }
