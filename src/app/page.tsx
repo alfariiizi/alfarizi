@@ -50,14 +50,14 @@ function HeroSection() {
                   </RoughNotation>
                   , a Cat lover, Developer, and Nerd.
                 </h1>
-                <div className="relative mx-auto !aspect-square  h-[150px] overflow-clip rounded-full bg-primary p-2 shadow-lg sm:h-[120px]">
+                <div className="relative mx-auto !aspect-square  h-[150px] overflow-clip rounded-full bg-primary p-0 shadow-lg sm:h-[150px]">
                   <Image
                     src={ImgHero}
                     alt="Alfarizi"
                     placeholder="blur"
                     width={200}
                     height={200}
-                    className="absolute aspect-square"
+                    className="aspect-square"
                     priority
                     draggable={false}
                   />
