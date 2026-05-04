@@ -34,9 +34,6 @@ function HeroSection() {
           <div className="flex max-w-3xl flex-col gap-6 md:mb-28 md:gap-10">
             <div className="flex flex-col-reverse gap-4 sm:flex-row">
               <div className="space-y-4">
-                <p className="text-sm font-medium tracking-[0.2em] text-muted-foreground uppercase">
-                  Moh Rizal Alfarizi
-                </p>
                 <h1
                   className={cn(
                     "font-display text-4xl font-black text-primary md:text-5xl md:leading-snug",
