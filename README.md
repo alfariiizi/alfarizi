@@ -23,7 +23,7 @@ git clone https://github.com/alfariiizi/alfarizi
 2. Install dependencies:
 
 ```bash
-npm install
+npm ci
 ```
 
 3. Start the development server:
@@ -33,6 +33,16 @@ npm run dev
 ```
 
 Navigate to `http://localhost:3000` to view the site.
+
+## Scripts
+
+Use the npm scripts below for the verified local workflow:
+
+```bash
+npm test
+npm run lint
+npm run build
+```
 
 ## Contributing
 

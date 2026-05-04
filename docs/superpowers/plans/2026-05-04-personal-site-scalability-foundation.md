@@ -17,14 +17,20 @@ These changes are already in place and should be treated as the new starting poi
 - Deterministic non-mutating sort helpers live in `src/lib/content-utils.js`.
 - Contact form validation and in-memory rate limiting live in `src/lib/contact-form.js`.
 - Contact API and form UI now return structured success/error responses.
+- Contact endpoint now adds request IDs, structured operational logs, a honeypot field, and a light same-origin check when the `Origin` header is present.
 - Content asset normalization now lives in `src/lib/content-assets.js`.
 - Velite frontmatter images now resolve local assets from the filesystem instead of relying on live HTTP fetches.
 - MDX image rendering now receives per-document asset context, so relative sources like `cover.png` resolve during static generation.
 - Blog search normalization now lives in `src/lib/blog-search.js`.
 - Blog listing filtering now happens in the server page before data reaches the presentational grid.
+- MDX asset path joining now lives in `src/lib/mdx-paths.js`, replacing the old hardcoded slug helper.
+- The MDX runtime trust boundary is now documented in `docs/architecture/content-pipeline.md`.
+- `npm` is now the canonical package manager, `packageManager` is pinned in `package.json`, and non-canonical lockfiles have been removed.
+- `README.md` now documents the verified `npm ci`-based local workflow.
 - Regression tests for those behaviors live in `tests/contact-form.test.mjs` and `tests/content-utils.test.mjs`.
 - Additional asset resolution regression tests live in `tests/content-assets.test.mjs`.
 - Additional blog search regression tests live in `tests/blog-search.test.mjs`.
+- Additional MDX path regression tests live in `tests/mdx-paths.test.mjs`.
 
 ## File Map
 
@@ -41,15 +47,19 @@ These changes are already in place and should be treated as the new starting poi
 - `src/app/project/shared.ts`
 - `src/components/mdx/Image.tsx`
 - `src/components/mdx/MDXComponets.tsx`
+- `src/lib/mdx-paths.js`
 - `src/lib/content-assets.js`
 - `src/lib/blog-search.js`
 - `src/lib/contact-form.js`
 - `src/lib/content-utils.js`
+- `README.md`
 - `velite.config.ts`
+- `docs/architecture/content-pipeline.md`
 - `tests/content-assets.test.mjs`
 - `tests/blog-search.test.mjs`
 - `tests/contact-form.test.mjs`
 - `tests/content-utils.test.mjs`
+- `tests/mdx-paths.test.mjs`
 
 **Likely future files to modify**
 
@@ -62,14 +72,13 @@ These changes are already in place and should be treated as the new starting poi
 - `src/app/blog/page.tsx`
 - `src/app/blog/[...slug]/page.tsx`
 - `src/app/project/[...slug]/page.tsx`
-- `src/lib/getBase64.ts`
 - `README.md`
 
 **Likely future files to create**
 
 - `src/lib/blog-search.js`
 - `tests/blog-search.test.mjs`
-- `src/lib/mdx-paths.ts`
+- `src/lib/mdx-paths.js`
 - `tests/mdx-paths.test.mjs`
 - `docs/architecture/content-pipeline.md`
 
@@ -82,11 +91,11 @@ These changes are already in place and should be treated as the new starting poi
 - Modify: `package.json`
 - Delete or archive after approval: `package-lock.json` or `yarn.lock` or `bun.lockb`
 
-- [ ] **Step 1: Decide the canonical package manager**
+- [x] **Step 1: Decide the canonical package manager**
 
 Pick exactly one of `npm`, `yarn`, or `bun`. Prefer `npm` unless there is a strong existing deployment dependency on another tool.
 
-- [ ] **Step 2: Update setup docs**
+- [x] **Step 2: Update setup docs**
 
 Document one install path only in `README.md`, including:
 
@@ -96,11 +105,11 @@ npm test
 npm run dev
 ```
 
-- [ ] **Step 3: Remove non-canonical lockfiles**
+- [x] **Step 3: Remove non-canonical lockfiles**
 
 Keep only the lockfile for the chosen package manager.
 
-- [ ] **Step 4: Reinstall dependencies from scratch**
+- [x] **Step 4: Reinstall dependencies from scratch**
 
 Run:
 
@@ -111,7 +120,7 @@ npm ci
 
 Expected: install finishes without native module errors.
 
-- [ ] **Step 5: Verify `sharp` loads**
+- [x] **Step 5: Verify `sharp` loads**
 
 Run:
 
@@ -130,11 +139,11 @@ Expected: `sharp ok`
 - Create: `src/lib/mdx-paths.ts`
 - Test: `tests/mdx-paths.test.mjs`
 
-- [ ] **Step 1: Write the failing path test**
+- [x] **Step 1: Write the failing path test**
 
 Cover a case where a blog post slug such as `prisma-orm-and-turso` resolves local asset references without using a hardcoded slug.
 
-- [ ] **Step 2: Run the test and confirm it fails**
+- [x] **Step 2: Run the test and confirm it fails**
 
 Run:
 
@@ -144,7 +153,7 @@ node --test tests/mdx-paths.test.mjs
 
 Expected: FAIL because slug-aware path generation does not exist yet.
 
-- [ ] **Step 3: Implement a reusable MDX asset path helper**
+- [x] **Step 3: Implement a reusable MDX asset path helper**
 
 Create a helper that receives:
 
@@ -158,11 +167,11 @@ And returns a stable public path such as:
 /content/blog/prisma-orm-and-turso/cover.png
 ```
 
-- [ ] **Step 4: Replace the hardcoded helper in `MDXComponets.tsx`**
+- [x] **Step 4: Replace the hardcoded helper in `MDXComponets.tsx`**
 
 Pass the current content slug through the page layer instead of relying on a global constant.
 
-- [ ] **Step 5: Re-run the test**
+- [x] **Step 5: Re-run the test**
 
 Expected: PASS
 
@@ -173,15 +182,15 @@ Expected: PASS
 - Modify: `src/app/blog/[...slug]/page.tsx`
 - Modify: `src/app/project/[...slug]/page.tsx`
 
-- [ ] **Step 1: Confirm the supported Velite MDX render path**
+- [x] **Step 1: Confirm the supported Velite MDX render path**
 
 Check whether the current Velite output can be rendered through a safer, framework-supported path before designing a custom runtime.
 
-- [ ] **Step 2: If supported, replace the current runtime**
+- [x] **Step 2: Confirm whether the current runtime can be replaced safely**
 
 Switch away from direct `new Function` execution.
 
-- [ ] **Step 3: If not supported, isolate the risk**
+- [x] **Step 3: Because replacement was not supported, isolate the risk**
 
 Constrain the execution surface to trusted content only and document that trust boundary in `docs/architecture/content-pipeline.md`.
 
@@ -196,7 +205,7 @@ Constrain the execution surface to trusted content only and document that trust 
 - Modify: `src/app/blog/_components/Blog.tsx`
 - Modify: `src/app/blog/_components/SearchInput.tsx`
 
-- [ ] **Step 1: Write failing tests for blog search behavior**
+- [x] **Step 1: Write failing tests for blog search behavior**
 
 Cover:
 
@@ -204,7 +213,7 @@ Cover:
 - query match is case-insensitive
 - result order stays newest-first
 
-- [ ] **Step 2: Run the tests and confirm they fail**
+- [x] **Step 2: Run the tests and confirm they fail**
 
 Run:
 
@@ -212,19 +221,19 @@ Run:
 node --test tests/blog-search.test.mjs
 ```
 
-- [ ] **Step 3: Implement a pure search helper**
+- [x] **Step 3: Implement a pure search helper**
 
 Keep it independent of React so it can be reused on server-rendered pages later.
 
-- [ ] **Step 4: Use the helper in the page layer first**
+- [x] **Step 4: Use the helper in the page layer first**
 
 Filter posts in `src/app/blog/page.tsx` using `searchParams.search` before sending data to the client.
 
-- [ ] **Step 5: Simplify the client grid**
+- [x] **Step 5: Simplify the client grid**
 
 Make `Blog.tsx` a presentational component that only renders posts it receives.
 
-- [ ] **Step 6: Verify behavior manually**
+- [x] **Step 6: Verify behavior manually**
 
 Run:
 
@@ -244,11 +253,11 @@ Check `/blog?search=react` and `/blog?search=linux`.
 - Modify: `README.md`
 - Create: `docs/architecture/content-pipeline.md`
 
-- [ ] **Step 1: Measure the current bottleneck**
+- [x] **Step 1: Measure the current bottleneck**
 
 Record which transformations in `velite.config.ts` depend on remote fetches or native image processing.
 
-- [ ] **Step 2: Decide the preferred model**
+- [x] **Step 2: Decide the preferred model**
 
 Choose one:
 
@@ -256,11 +265,11 @@ Choose one:
 - generate metadata only for local assets
 - skip blur placeholders for unsupported sources
 
-- [ ] **Step 3: Implement the smallest safe change**
+- [x] **Step 3: Implement the smallest safe change**
 
 Prefer a strategy that removes network dependency during build.
 
-- [ ] **Step 4: Document the authoring rules**
+- [x] **Step 4: Document the authoring rules**
 
 Explain which image paths are supported and how to add new content assets safely.
 
@@ -273,15 +282,15 @@ Explain which image paths are supported and how to add new content assets safely
 - Modify: `src/app/contact/_components/Form.tsx`
 - Test: `tests/contact-form.test.mjs`
 
-- [ ] **Step 1: Add a failing test for over-limit messaging**
+- [x] **Step 1: Add a failing test for over-limit messaging**
 
 Confirm the user-facing response stays stable when rate limited.
 
-- [ ] **Step 2: Add request identifiers or structured server logs**
+- [x] **Step 2: Add request identifiers or structured server logs**
 
 Log only operational data. Never log message bodies in plaintext.
 
-- [ ] **Step 3: Add one stronger abuse control**
+- [x] **Step 3: Add one stronger abuse control**
 
 Choose one:
 
@@ -289,7 +298,7 @@ Choose one:
 - origin check
 - CAPTCHA or Turnstile
 
-- [ ] **Step 4: Re-run contact form tests**
+- [x] **Step 4: Re-run contact form tests**
 
 Run:
 
@@ -301,25 +310,25 @@ Expected: PASS
 
 ## Final Verification
 
-- [ ] Run:
+- [x] Run:
 
 ```bash
 npm test
 ```
 
-- [ ] Run:
+- [x] Run:
 
 ```bash
 npx tsc --noEmit
 ```
 
-- [ ] Run after fixing native dependency state:
+- [x] Run after fixing native dependency state:
 
 ```bash
 npm run lint
 npm run build
 ```
 
-- [ ] Update `README.md` with the verified local workflow only after the above commands succeed.
+- [x] Update `README.md` with the verified local workflow only after the above commands succeed.
 
 Plan complete and saved to `docs/superpowers/plans/2026-05-04-personal-site-scalability-foundation.md`. Ready to execute?

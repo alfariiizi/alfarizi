@@ -1,7 +1,10 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { contactFormClientSchema } from "@/lib/contact-form.js";
+import {
+  CONTACT_HONEYPOT_FIELD_NAME,
+  contactFormClientSchema,
+} from "@/lib/contact-form.js";
 import {
   FormControl,
   FormField,
@@ -22,6 +25,7 @@ export default function Form() {
   const form = useForm<FormSchema>({
     resolver: zodResolver(contactFormClientSchema),
     defaultValues: {
+      company: "",
       email: "",
       message: "",
     },
@@ -30,6 +34,7 @@ export default function Form() {
   async function onSubmit(values: FormSchema) {
     try {
       const data = new URLSearchParams();
+      data.append(CONTACT_HONEYPOT_FIELD_NAME, values.company ?? "");
       data.append("email", values.email);
       data.append("message", values.message);
 
@@ -54,6 +59,7 @@ export default function Form() {
         duration: 4000,
       });
       form.reset({
+        company: "",
         email: "",
         message: "",
       });
@@ -68,6 +74,14 @@ export default function Form() {
   return (
     <FormRoot {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-5">
+        <input
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          className="hidden"
+          aria-hidden="true"
+          {...form.register(CONTACT_HONEYPOT_FIELD_NAME)}
+        />
         <FormField
           control={form.control}
           name="email"

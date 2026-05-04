@@ -2,7 +2,11 @@ import test from "node:test";
 import assert from "node:assert/strict";
 
 import {
+  CONTACT_RATE_LIMIT_MESSAGE,
+  CONTACT_SUCCESS_MESSAGE,
+  createContactRateLimitResponse,
   consumeContactRateLimit,
+  evaluateContactRequest,
   normalizeContactFormInput,
 } from "../src/lib/contact-form.js";
 
@@ -14,6 +18,7 @@ test("normalizeContactFormInput trims and validates contact payload", () => {
 
   assert.equal(result.success, true);
   assert.deepEqual(result.data, {
+    company: "",
     email: "hello@example.com",
     message: "This is a valid message body.",
   });
@@ -74,4 +79,57 @@ test("consumeContactRateLimit resets after the time window passes", () => {
 
   assert.equal(resetAttempt.allowed, true);
   assert.equal(resetAttempt.remaining, 2);
+});
+
+test("createContactRateLimitResponse keeps the user-facing payload stable", async () => {
+  const response = createContactRateLimitResponse({
+    requestId: "req_test_123",
+    retryAfterSeconds: 42,
+  });
+
+  assert.equal(response.status, 429);
+  assert.equal(response.headers.get("Retry-After"), "42");
+  assert.equal(response.headers.get("X-Request-Id"), "req_test_123");
+  assert.deepEqual(await response.json(), {
+    message: CONTACT_RATE_LIMIT_MESSAGE,
+  });
+});
+
+test("evaluateContactRequest allows normal submissions", () => {
+  const result = evaluateContactRequest({
+    honeypot: "",
+    origin: "https://alfarizi.dev",
+    requestUrl: "https://alfarizi.dev/api/email",
+  });
+
+  assert.deepEqual(result, {
+    action: "allow",
+  });
+});
+
+test("evaluateContactRequest treats a filled honeypot as spam and acknowledges it", () => {
+  const result = evaluateContactRequest({
+    honeypot: "Acme Inc",
+    origin: "https://alfarizi.dev",
+    requestUrl: "https://alfarizi.dev/api/email",
+  });
+
+  assert.deepEqual(result, {
+    action: "accept_without_delivery",
+    responseMessage: CONTACT_SUCCESS_MESSAGE,
+    reason: "honeypot_filled",
+  });
+});
+
+test("evaluateContactRequest rejects a mismatched origin header", () => {
+  const result = evaluateContactRequest({
+    honeypot: "",
+    origin: "https://malicious.example",
+    requestUrl: "https://alfarizi.dev/api/email",
+  });
+
+  assert.deepEqual(result, {
+    action: "reject",
+    reason: "origin_mismatch",
+  });
 });

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import * as runtime from "react/jsx-runtime";
+import { generateMdxAssetPath } from "@/lib/mdx-paths.js";
 import { Excalidraw } from "../excalidraw";
 import { Callout } from "./Callout";
 import { Image as MdxImageComponent } from "./Image";
@@ -13,11 +14,9 @@ import { elements } from "./basic-element";
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-implied-eval */
 
-export function generatePath(filename: string) {
-  return `/content/blog/mengapa-kita-perlu-menggunakan-react-server-component/${filename}`;
-}
-
 const useMDXComponent = (code: string) => {
+  // Velite emits trusted MDX runtime code as a string. Keep this evaluation
+  // confined to build-generated content from `.velite`, never user input.
   const fn = new Function(code);
   return fn({ ...runtime, baseUrl: process.cwd() }).default;
 };
@@ -43,7 +42,7 @@ export const Mdx = ({ code, assetDirectory, components }: MdxProps) => {
     Caption,
     ...elements,
     generatePath: (filename: string) =>
-      assetDirectory ? `${assetDirectory}/${filename}` : generatePath(filename),
+      generateMdxAssetPath(assetDirectory, filename),
   };
 
   return <Component components={{ ...mdxComponents, ...components }} />;
