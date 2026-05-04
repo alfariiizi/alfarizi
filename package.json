@@ -2,7 +2,7 @@
   "name": "alfarizi",
   "version": "1.0.0",
   "private": true,
-  "packageManager": "npm@10.8.2",
+  "packageManager": "pnpm@10.17.1",
   "type": "module",
   "scripts": {
     "gen:assets-content": "bash script/copy-assets.sh",
@@ -95,5 +95,13 @@
   "ct3aMetadata": {
     "initVersion": "7.26.0"
   },
-  "overrides": {}
+  "overrides": {},
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@swc/core",
+      "esbuild",
+      "react-vertical-timeline-component",
+      "sharp"
+    ]
+  }
 }

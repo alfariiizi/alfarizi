@@ -23,25 +23,25 @@ git clone https://github.com/alfariiizi/alfarizi
 2. Install dependencies:
 
 ```bash
-npm ci
+pnpm install --frozen-lockfile
 ```
 
 3. Start the development server:
 
 ```bash
-npm run dev
+pnpm dev
 ```
 
 Navigate to `http://localhost:3000` to view the site.
 
 ## Scripts
 
-Use the npm scripts below for the verified local workflow:
+Use the pnpm scripts below for the verified local workflow:
 
 ```bash
-npm test
-npm run lint
-npm run build
+pnpm test
+pnpm lint
+pnpm build
 ```
 
 ## Contributing

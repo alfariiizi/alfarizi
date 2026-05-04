@@ -25,8 +25,9 @@ These changes are already in place and should be treated as the new starting poi
 - Blog listing filtering now happens in the server page before data reaches the presentational grid.
 - MDX asset path joining now lives in `src/lib/mdx-paths.js`, replacing the old hardcoded slug helper.
 - The MDX runtime trust boundary is now documented in `docs/architecture/content-pipeline.md`.
-- `npm` is now the canonical package manager, `packageManager` is pinned in `package.json`, and non-canonical lockfiles have been removed.
-- `README.md` now documents the verified `npm ci`-based local workflow.
+- `pnpm` is now the canonical package manager, `packageManager` is pinned in `package.json`, and non-canonical lockfiles have been removed.
+- Required dependency build scripts are explicitly whitelisted via `package.json#pnpm.onlyBuiltDependencies`.
+- `README.md` now documents the verified `pnpm`-based local workflow.
 - Regression tests for those behaviors live in `tests/contact-form.test.mjs` and `tests/content-utils.test.mjs`.
 - Additional asset resolution regression tests live in `tests/content-assets.test.mjs`.
 - Additional blog search regression tests live in `tests/blog-search.test.mjs`.
@@ -93,16 +94,16 @@ These changes are already in place and should be treated as the new starting poi
 
 - [x] **Step 1: Decide the canonical package manager**
 
-Pick exactly one of `npm`, `yarn`, or `bun`. Prefer `npm` unless there is a strong existing deployment dependency on another tool.
+Pick exactly one of `pnpm`, `npm`, `yarn`, or `bun`. Prefer the package manager that matches the verified repository workflow.
 
 - [x] **Step 2: Update setup docs**
 
 Document one install path only in `README.md`, including:
 
 ```bash
-npm ci
-npm test
-npm run dev
+pnpm install --frozen-lockfile
+pnpm test
+pnpm dev
 ```
 
 - [x] **Step 3: Remove non-canonical lockfiles**
@@ -115,7 +116,7 @@ Run:
 
 ```bash
 rm -rf node_modules
-npm ci
+pnpm install --frozen-lockfile
 ```
 
 Expected: install finishes without native module errors.
@@ -238,7 +239,7 @@ Make `Blog.tsx` a presentational component that only renders posts it receives.
 Run:
 
 ```bash
-npm run dev
+pnpm dev
 ```
 
 Check `/blog?search=react` and `/blog?search=linux`.
@@ -303,7 +304,7 @@ Choose one:
 Run:
 
 ```bash
-npm test
+pnpm test
 ```
 
 Expected: PASS
@@ -313,7 +314,7 @@ Expected: PASS
 - [x] Run:
 
 ```bash
-npm test
+pnpm test
 ```
 
 - [x] Run:
@@ -325,8 +326,8 @@ npx tsc --noEmit
 - [x] Run after fixing native dependency state:
 
 ```bash
-npm run lint
-npm run build
+pnpm lint
+pnpm build
 ```
 
 - [x] Update `README.md` with the verified local workflow only after the above commands succeed.
