@@ -2,7 +2,7 @@ import { sortProjectsByStartDate } from "@/lib/content-utils.js";
 import { projects } from ".velite/index";
 
 export const bookmarkProjectTitle = [
-  "[This Site] Personal Website",
+  "[This Site] rizalalfarizi.com",
   "Robota",
   "Windsight",
 ];

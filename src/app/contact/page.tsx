@@ -2,9 +2,9 @@ import { type Metadata } from "next";
 import { Maxwidthdiv } from "../_components/Maxwindthdiv";
 import Form from "./_components/Form";
 
-const title = "Get in Touch 🫱🏼‍🫲🏽";
+const title = "Contact";
 const description =
-  "Reach out to connect or collaborate with me. Whether you have questions, want to discuss a project, or simply want to say hello, feel free to send me an email.";
+  "If you want to discuss engineering, product, or a project that needs careful execution, send a note. I read them myself, which keeps the process honest.";
 
 export const metadata: Metadata = {
   title: {

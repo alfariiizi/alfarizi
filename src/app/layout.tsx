@@ -22,12 +22,11 @@ const josefinSans = Josefin_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default: "Alfarizi's Personal Website",
+    default: "Alfarizi",
     template: "%s | Alfarizi",
   },
-  // description: "Explore Alfarizi's world of innovation through detailed blog posts and a portfolio of diverse projects spanning software development, design, and more. Dive into the journey of creativity and technology.",
   description:
-    "Explore Alfarizi's world of innovation through detailed blog posts and a portfolio of diverse projects spanning software development. Dive into the journey of creativity and technology.",
+    "Moh Rizal Alfarizi builds thoughtful software for real-world use across product, frontend, backend, and delivery, with a focus on practical engineering work.",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 

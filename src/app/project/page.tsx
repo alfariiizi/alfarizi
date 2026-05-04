@@ -6,8 +6,9 @@ import DivFadeIn from "../_components/DivFadeIn";
 import { sortedProjects } from "./shared";
 
 export const metadata: Metadata = {
-  title: "Project",
-  description: "Check out a selection of my latest web development projects.",
+  title: "Selected Work",
+  description:
+    "A curated selection of work that reflects product thinking, systems design, and practical execution.",
 };
 
 export default function page() {
@@ -21,9 +22,12 @@ export default function page() {
               "font-display",
             )}
           >
-            Explore My Projects 🏗️
+            Selected Work
           </h2>
-          <p>Check out a selection of my latest web development projects.</p>
+          <p>
+            A curated selection of work that reflects product thinking, systems
+            design, and practical execution.
+          </p>
         </div>
         <Projects projects={sortedProjects} />
         {/* <Timeline /> */}
