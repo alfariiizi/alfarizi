@@ -65,7 +65,7 @@ function ProjectItem({ project }: ProjectItemProps) {
                 className="aspect-video w-full rounded-sm object-cover opacity-100 duration-300 group-hover:opacity-20"
               />
               <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center bg-transparent opacity-0 duration-300 group-hover:opacity-100">
-                <p>Click to view</p>
+                <p>Open project</p>
               </div>
             </div>
             <div className="flex flex-col gap-1">
@@ -100,7 +100,7 @@ function ProjectItem({ project }: ProjectItemProps) {
             </div>
           </div>
           <Button variant="link" className="justify-start p-0">
-            View Project
+            View details
           </Button>
         </CardContent>
       </Card>

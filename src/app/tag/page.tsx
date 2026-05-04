@@ -5,9 +5,9 @@ import { Maxwidthdiv } from "../_components/Maxwindthdiv";
 import DivFadeIn from "../_components/DivFadeIn";
 
 export const metadata: Metadata = {
-  title: "Tag",
+  title: "Topics",
   description:
-    "Explore all tags that I use in my blogpost and in my project details.",
+    "Browse the topics that connect the writing and project sections.",
 };
 
 export default function page() {
@@ -41,11 +41,11 @@ export default function page() {
       <Maxwidthdiv className="my-10 flex flex-col gap-14">
         <div className="flex flex-col gap-3">
           <h2 className="font-display text-4xl font-bold text-primary">
-            Tags 🎯
+            Topics
           </h2>
           <p className="max-w-[800px]">
-            All tags that I use in my blogpost or in my projects. You can click
-            the tag and see all related blogpost or projects that use the tag.
+            Each tag groups related writing and projects. Use this index to
+            follow a topic without scanning the whole archive.
           </p>
         </div>
         <div className="flex flex-wrap gap-4 text-sm sm:text-base">

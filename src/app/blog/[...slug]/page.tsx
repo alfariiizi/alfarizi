@@ -66,7 +66,7 @@ export default async function page({ params }: Props) {
               href="/blog"
               className="-mt-4 mb-6 flex w-fit items-center gap-1 text-sm leading-tight opacity-60 duration-150 hover:opacity-100"
             >
-              <LuArrowLeft className="size-4" /> See all posts
+              <LuArrowLeft className="size-4" /> Back to writing
             </Link>
             <div className="flex justify-start gap-4">
               {post.icon && (
@@ -182,7 +182,7 @@ export default async function page({ params }: Props) {
                 href="/blog"
                 className="mt-1 flex w-full items-center gap-1 text-sm leading-tight opacity-60 duration-150 hover:opacity-100"
               >
-                See other posts <LuArrowRight className="size-4" />
+                More writing <LuArrowRight className="size-4" />
               </Link>
             </div>
           </div>

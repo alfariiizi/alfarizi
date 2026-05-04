@@ -81,7 +81,7 @@ function BlogItem({ post, isNew }: BlogItemProps) {
         {/*   className="aspect-video w-full rounded-sm object-cover opacity-100 duration-300 group-hover:opacity-20" */}
         {/* /> */}
         <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center bg-transparent opacity-0 duration-300 group-hover:opacity-100">
-          <p>Click to read</p>
+          <p>Open article</p>
         </div>
       </Link>
       <div className="flex h-full flex-col justify-between gap-3 py-2">

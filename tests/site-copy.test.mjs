@@ -11,27 +11,61 @@ test("homepage copy matches the premium positioning", () => {
   assert.match(page, /Building thoughtful software for real-world use\./);
   assert.match(page, /I work across product, frontend, backend, and delivery to build/);
   assert.match(page, /clear, reliable, and useful under real\s+constraints\./);
+  assert.match(page, /Recent Writing/);
+  assert.match(page, /Selected Work/);
+  assert.match(page, /Browse writing/);
+  assert.match(page, /Browse projects/);
   assert.doesNotMatch(page, /Hey there/);
   assert.doesNotMatch(page, /Cat lover/);
   assert.doesNotMatch(page, /24 years old/);
 });
 
 test("supporting pages avoid casual emoji-led framing", () => {
+  const blogPage = read("src/app/blog/page.tsx");
   const projectPage = read("src/app/project/page.tsx");
   const contactPage = read("src/app/contact/page.tsx");
+  const tagPage = read("src/app/tag/page.tsx");
+  const tagDetailPage = read("src/app/tag/[tag]/page.tsx");
+  const techPage = read("src/app/tech/page.tsx");
   const layout = read("src/app/layout.tsx");
   const projectShared = read("src/app/project/shared.ts");
+  const projectList = read("src/app/project/_components/Projects.tsx");
+  const blogList = read("src/app/blog/_components/Blog.tsx");
+  const projectDetail = read("src/app/project/[...slug]/page.tsx");
+  const blogDetail = read("src/app/blog/[...slug]/page.tsx");
   const personalWebsiteProject = read(
     "public/content/project/personal-website/index.mdx",
   );
 
+  assert.match(blogPage, /Writing/);
+  assert.match(
+    blogPage,
+    /Essays, notes, and occasional experiments on software, tools, and the tradeoffs behind both\./,
+  );
+  assert.doesNotMatch(blogPage, /✍️|🚀|✨/);
+
   assert.doesNotMatch(projectPage, /🏗️/);
   assert.doesNotMatch(contactPage, /🫱🏼‍🫲🏽/);
+  assert.match(tagPage, /Topics/);
+  assert.match(tagDetailPage, /Tag: /);
+  assert.doesNotMatch(tagPage, /🎯/);
+  assert.match(techPage, /Tools/);
+  assert.doesNotMatch(techPage, /🧰/);
   assert.doesNotMatch(layout, /Personal Website/);
   assert.doesNotMatch(layout, /CTO Ozone/);
   assert.doesNotMatch(layout, /\bOzone\b/);
   assert.doesNotMatch(projectShared, /Personal Website/);
   assert.doesNotMatch(personalWebsiteProject, /Personal Website/);
+  assert.match(projectList, /Open project/);
+  assert.match(projectList, /View details/);
+  assert.match(blogList, /Open article/);
+  assert.match(projectDetail, /Back to projects/);
+  assert.match(projectDetail, /Live site:/);
+  assert.match(projectDetail, /Repository:/);
+  assert.match(blogDetail, /Back to writing/);
+  assert.match(blogDetail, /More writing/);
+  assert.match(tagDetailPage, /Source:/);
+  assert.match(tagDetailPage, /the full topic index/);
 });
 
 test("metadata reflects the new positioning", () => {

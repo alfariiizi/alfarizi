@@ -25,6 +25,7 @@ type Props = {
 export function generateMetadata({ params }: Props): Metadata {
   return {
     title: `Tag: ${params.tag}`,
+    description: `Writing and projects related to ${params.tag}.`,
   };
 }
 
@@ -66,7 +67,7 @@ export default function page({ params }: Props) {
     <DivFadeIn>
       <Maxwidthdiv className="mb-10 mt-10 flex max-w-[800px] flex-col gap-16">
         <h2 className="font-display text-4xl font-bold text-primary">
-          Tags:{" "}
+          Tag:{" "}
           <span className="underline decoration-secondary underline-offset-[6px]">
             {params.tag}
           </span>
@@ -75,12 +76,12 @@ export default function page({ params }: Props) {
           <div className="flex gap-3 rounded-md border-2 border-red-900 bg-red-200 px-3 py-2 text-red-900 dark:border-red-100 dark:bg-red-950 dark:text-red-100 md:items-center">
             <PiWarningOctagonFill className="size-6 min-w-6" />
             <p className="min-w-0">
-              There are no projects or posts that use this tag yet. See{" "}
+              No writing or projects use this tag yet. Browse{" "}
               <Link
                 href="/tag"
                 className="underline decoration-2 underline-offset-2 duration-150 hover:opacity-75"
               >
-                other tags
+                the full topic index
               </Link>
               .
             </p>
@@ -99,7 +100,7 @@ export default function page({ params }: Props) {
                   </Link>
                   {content.description && <p>{content.description}</p>}
                   <p className="text-sm">
-                    From:{" "}
+                    Source:{" "}
                     <span className="font-semibold text-secondary">
                       {content.from}
                     </span>

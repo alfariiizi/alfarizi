@@ -145,7 +145,7 @@ function BlogSection() {
     <Maxwidthdiv className="flex w-full flex-col items-center justify-center gap-8">
       <div>
         <h2 className="text-center font-display text-4xl font-medium">
-          Newest Articles
+          Recent Writing
         </h2>
       </div>
       <div className="flex w-full flex-col gap-10">
@@ -158,7 +158,7 @@ function BlogSection() {
           href="/blog"
           className="w-full rounded-md border-2 border-secondary bg-background px-4 py-2 text-center text-sm text-foreground duration-150 hover:bg-secondary/20"
         >
-          See all articles
+          Browse writing
         </Link>
       </div>
     </Maxwidthdiv>
@@ -169,7 +169,7 @@ function ProjectSection() {
   return (
     <Maxwidthdiv className="flex w-full flex-col items-center justify-center gap-8">
       <div>
-        <h2 className="text-center font-display text-4xl">Featured Projects</h2>
+        <h2 className="text-center font-display text-4xl">Selected Work</h2>
       </div>
       <div className="flex w-full flex-col gap-10">
         <Projects projects={sortedProjects.slice(0, 3)} />
@@ -177,7 +177,7 @@ function ProjectSection() {
           href="/project"
           className="w-full rounded-md border-2 border-secondary bg-background px-4 py-2 text-center text-sm text-foreground duration-150 hover:bg-secondary/20"
         >
-          See all projects
+          Browse projects
         </Link>
       </div>
     </Maxwidthdiv>

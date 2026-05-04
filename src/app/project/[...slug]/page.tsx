@@ -73,7 +73,7 @@ export default function PostPage({ params }: PostProps) {
             href="/project"
             className="-mt-4 mb-6 flex w-fit items-center gap-1 text-sm leading-tight opacity-60 duration-150 hover:opacity-100"
           >
-            <LuArrowLeft className="size-4" /> See all projects
+            <LuArrowLeft className="size-4" /> Back to projects
           </Link>
           <h1
             className={cn(
@@ -104,7 +104,7 @@ export default function PostPage({ params }: PostProps) {
           </div>
           {post.link && (
             <h4 className={cn("font-semibold")}>
-              <span className="font-display">Link:</span>{" "}
+              <span className="font-display">Live site:</span>{" "}
               <Link
                 href={post.link}
                 target="_blank"
@@ -116,7 +116,7 @@ export default function PostPage({ params }: PostProps) {
           )}
           {post.repo && (
             <h4 className={cn("font-semibold")}>
-              <span className="font-display">Repo:</span>{" "}
+              <span className="font-display">Repository:</span>{" "}
               <Link
                 href={post.repo}
                 target="_blank"

@@ -11,9 +11,9 @@ import DivFadeIn from "../_components/DivFadeIn";
 export const revalidate = 10;
 
 export const metadata: Metadata = {
-  title: "Blogpost",
+  title: "Writing",
   description:
-    "Explore my latest posts, featuring insights and projects on React.js, Next.js, Python, Neovim, and Linux. Stay updated with fresh content designed to enhance your development skills and knowledge.",
+    "Essays, notes, and occasional experiments on software, tools, and the tradeoffs behind both.",
 };
 
 type Props = {
@@ -38,16 +38,15 @@ export default function Page({ searchParams: { search } }: Props) {
                 "font-display",
               )}
             >
-              Latest posts ✍️
+              Writing
             </h2>
             <p>
-              🚀 Explore my latest posts, featuring insights and projects on{" "}
-              <strong>React.js</strong>, <strong>Next.js</strong>,{" "}
-              <strong>Python</strong>, <strong>Neovim</strong>, and{" "}
-              <strong>Linux</strong>.{" "}
+              Essays, notes, and occasional experiments on software, tools,
+              and the tradeoffs behind both.{" "}
               <span className="hidden lg:inline">
-                <br /> ✨ Stay updated with fresh content designed to enhance
-                your development skills and knowledge.
+                <br /> The focus is practical: what changes the shape of a
+                system, what keeps it maintainable, and what matters once work
+                has to survive real use.
               </span>
             </p>
           </div>
