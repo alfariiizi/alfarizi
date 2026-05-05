@@ -17,3 +17,23 @@ export function sortProjectsByStartDate(projects) {
     new Date(a.startDate) > new Date(b.startDate) ? -1 : 1,
   );
 }
+
+/**
+ * @template {{ startDate: string, highlight?: boolean }} T
+ * @param {T[]} projects
+ */
+export function getHighlightedProjects(projects) {
+  return sortProjectsByStartDate(
+    projects.filter((project) => project.highlight === true),
+  );
+}
+
+/**
+ * @template {{ startDate: string, highlight?: boolean }} T
+ * @param {T[]} projects
+ */
+export function getNonHighlightedProjects(projects) {
+  return sortProjectsByStartDate(
+    projects.filter((project) => project.highlight !== true),
+  );
+}
