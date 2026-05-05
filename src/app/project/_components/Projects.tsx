@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import Tag from "@/app/_components/Tag";
 import { LuBookmark } from "react-icons/lu";
 import { capitalize } from "@/lib/utils";
-import { bookmarkProjectTitle } from "../shared";
+import ProjectTypeBadge from "./ProjectTypeBadge";
 
 type ProjectsVelite = (typeof projects)[0];
 type ProjectMetadata = Omit<ProjectsVelite, "mdx" | "raw">;
@@ -38,7 +38,7 @@ function ProjectItem({ project }: ProjectItemProps) {
   return (
     <Link href={project.permalink} className="group" prefetch={false}>
       <Card className="relative h-full rounded-md px-3 pb-3 pt-1">
-        {bookmarkProjectTitle.some((s) => s === project.title) && (
+        {project.highlight && (
           <LuBookmark className="absolute right-0 top-0 z-20 size-7 fill-accent" />
         )}
         <CardContent className="flex h-full flex-col justify-between gap-6 p-0 py-0">
@@ -75,18 +75,17 @@ function ProjectItem({ project }: ProjectItemProps) {
               <p className="font-sans text-sm leading-normal text-muted-foreground sm:text-base">
                 {project.description}
               </p>
-              <p className="text-sm text-accent">
-                {project.isPersonalProject
-                  ? "Personal Project"
-                  : `Created with ${project.team}`}
-              </p>
+              <div className="flex flex-wrap items-center gap-2 pt-1">
+                <ProjectTypeBadge projectType={project.projectType} />
+                <p className="text-sm text-accent">{project.company}</p>
+              </div>
               {project.position && (
                 <p className="text-sm text-muted-foreground">
                   as {capitalize(project.position)}
                 </p>
               )}
               <p className="text-sm text-muted-foreground">
-                Created from {displayYear}
+                Built from {displayYear}
               </p>
               <div className="my-3 flex flex-wrap gap-1">
                 {project.tags.map((tag) => (

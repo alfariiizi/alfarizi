@@ -4,7 +4,7 @@ import { Maxwidthdiv } from "../_components/Maxwindthdiv";
 import { RoughBox, RoughUnderline } from "../_components/RoughNotation";
 import Projects from "./_components/Projects";
 import DivFadeIn from "../_components/DivFadeIn";
-import { sortedProjects } from "./shared";
+import { highlightedProjects, nonHighlightedProjects } from "./shared";
 
 export const metadata: Metadata = {
   title: "Selected Work",
@@ -33,7 +33,29 @@ export default function page() {
             .
           </p>
         </div>
-        <Projects projects={sortedProjects} />
+        <section className="flex flex-col gap-5">
+          <div className="space-y-1">
+            <h3 className="font-display text-2xl font-semibold text-primary">
+              Highlighted Projects
+            </h3>
+            <p className="text-muted-foreground">
+              Three projects that best represent the current shape of my work.
+            </p>
+          </div>
+          <Projects projects={highlightedProjects} />
+        </section>
+        <section className="flex flex-col gap-5">
+          <div className="space-y-1">
+            <h3 className="font-display text-2xl font-semibold text-primary">
+              All Projects
+            </h3>
+            <p className="text-muted-foreground">
+              Professional systems, public products, and personal projects,
+              sorted from newest to oldest.
+            </p>
+          </div>
+          <Projects projects={nonHighlightedProjects} />
+        </section>
         {/* <Timeline /> */}
       </Maxwidthdiv>
     </DivFadeIn>

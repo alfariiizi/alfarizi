@@ -13,7 +13,7 @@ const sortedPost = sortPostsByDate(posts).slice(0, 3);
 import ImgHero from "@public/images/hero.png";
 import Blog from "./blog/_components/Blog";
 import Projects from "./project/_components/Projects";
-import { sortedProjects } from "./project/shared";
+import { highlightedProjects } from "./project/shared";
 
 export default function HomePage() {
   return (
@@ -179,7 +179,7 @@ function ProjectSection() {
         </h2>
       </div>
       <div className="flex w-full flex-col gap-10">
-        <Projects projects={sortedProjects.slice(0, 3)} />
+        <Projects projects={highlightedProjects} />
         <Link
           href="/project"
           className="w-full rounded-md border-2 border-secondary bg-background px-4 py-2 text-center text-sm text-foreground duration-150 hover:bg-secondary/20"
