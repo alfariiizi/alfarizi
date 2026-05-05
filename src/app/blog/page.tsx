@@ -4,6 +4,7 @@ import { sortPostsByDate } from "@/lib/content-utils.js";
 import { posts } from "@/velite/posts";
 import { type Metadata } from "next";
 import { Maxwidthdiv } from "../_components/Maxwindthdiv";
+import { RoughBox, RoughUnderline } from "../_components/RoughNotation";
 import Blog from "./_components/Blog";
 import SearchInput from "./_components/SearchInput";
 import DivFadeIn from "../_components/DivFadeIn";
@@ -38,15 +39,18 @@ export default function Page({ searchParams: { search } }: Props) {
                 "font-display",
               )}
             >
-              Writing
+              <RoughBox>Writing</RoughBox>
             </h2>
             <p>
-              Essays, notes, and occasional experiments on software, tools,
-              and the tradeoffs behind both.{" "}
+              Essays, notes, and occasional experiments on software, tools, and
+              the tradeoffs behind both.{" "}
               <span className="hidden lg:inline">
-                <br /> The focus is practical: what changes the shape of a
-                system, what keeps it maintainable, and what matters once work
-                has to survive real use.
+                <br /> The focus is practical:{" "}
+                <RoughUnderline multiline>
+                  what changes the shape of a system
+                </RoughUnderline>
+                , what keeps it maintainable, and what matters once work has to
+                survive real use.
               </span>
             </p>
           </div>

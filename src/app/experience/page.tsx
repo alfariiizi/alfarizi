@@ -2,6 +2,11 @@ import { cn } from "@/lib/utils";
 import { type Metadata } from "next";
 import Link from "next/link";
 import { Maxwidthdiv } from "../_components/Maxwindthdiv";
+import {
+  RoughBox,
+  RoughBracketRight,
+  RoughUnderline,
+} from "../_components/RoughNotation";
 import { experiences } from "./data";
 
 const title = "Experience";
@@ -21,10 +26,13 @@ export default function ExperiencePage() {
       <section className="max-w-4xl space-y-5">
         <div className="space-y-3">
           <h1 className="font-display text-4xl font-semibold tracking-tight text-primary sm:text-5xl">
-            {title}
+            <RoughBox>{title}</RoughBox>
           </h1>
           <p className="max-w-3xl text-base leading-7 text-foreground/90 sm:text-lg">
-            {description}
+            A <RoughUnderline>selected record of work</RoughUnderline> across
+            product, frontend, backend, and delivery. Not a full resume, only
+            the parts that best show how I tend to work when the constraints are
+            real.
           </p>
         </div>
         <div className="max-w-3xl space-y-4 text-sm leading-7 text-muted-foreground sm:text-base">
@@ -93,7 +101,9 @@ export default function ExperiencePage() {
               <aside className="space-y-3 md:pt-1">
                 <p className="text-sm text-muted-foreground">Focus areas</p>
                 <p className="text-sm leading-6 text-foreground/75 md:text-right">
-                  {experience.capabilities.join(", ")}
+                  <RoughBracketRight>
+                    {experience.capabilities.join(", ")}
+                  </RoughBracketRight>
                 </p>
               </aside>
             </div>

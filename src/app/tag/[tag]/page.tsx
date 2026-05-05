@@ -6,6 +6,7 @@ import "@/styles/content.css";
 import { type Metadata } from "next";
 import Link from "next/link";
 import { PiWarningOctagonFill } from "react-icons/pi";
+import { RoughBox } from "@/app/_components/RoughNotation";
 
 type From = "Project" | "Blog";
 
@@ -67,10 +68,7 @@ export default function page({ params }: Props) {
     <DivFadeIn>
       <Maxwidthdiv className="mb-10 mt-10 flex max-w-[800px] flex-col gap-16">
         <h2 className="font-display text-4xl font-bold text-primary">
-          Tag:{" "}
-          <span className="underline decoration-secondary underline-offset-[6px]">
-            {params.tag}
-          </span>
+          Tag: <RoughBox>{params.tag}</RoughBox>
         </h2>
         {contents.length === 0 ? (
           <div className="flex gap-3 rounded-md border-2 border-red-900 bg-red-200 px-3 py-2 text-red-900 dark:border-red-100 dark:bg-red-950 dark:text-red-100 md:items-center">

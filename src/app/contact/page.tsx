@@ -1,5 +1,6 @@
 import { type Metadata } from "next";
 import { Maxwidthdiv } from "../_components/Maxwindthdiv";
+import { RoughBox, RoughUnderline } from "../_components/RoughNotation";
 import Form from "./_components/Form";
 
 const title = "Contact";
@@ -18,9 +19,13 @@ export default function page() {
     <Maxwidthdiv className="mt-10 flex max-w-3xl flex-col gap-10">
       <div className="flex flex-col gap-2">
         <h1 className="font-display text-3xl font-bold text-primary sm:text-4xl">
-          {title}
+          <RoughBox>{title}</RoughBox>
         </h1>
-        <p className="text-sm leading-normal sm:text-base">{description}</p>
+        <p className="text-sm leading-normal sm:text-base">
+          If you want to discuss engineering, product, or a project that needs{" "}
+          <RoughUnderline>careful execution</RoughUnderline>, send a note. I
+          read them myself, which keeps the process honest.
+        </p>
       </div>
       <Form />
     </Maxwidthdiv>

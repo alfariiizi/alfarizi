@@ -2,6 +2,7 @@ import { allTagsRaw } from "@/lib/tags";
 import { type Metadata } from "next";
 import Link from "next/link";
 import { Maxwidthdiv } from "../_components/Maxwindthdiv";
+import { RoughBox, RoughUnderline } from "../_components/RoughNotation";
 import DivFadeIn from "../_components/DivFadeIn";
 
 export const metadata: Metadata = {
@@ -41,11 +42,14 @@ export default function page() {
       <Maxwidthdiv className="my-10 flex flex-col gap-14">
         <div className="flex flex-col gap-3">
           <h2 className="font-display text-4xl font-bold text-primary">
-            Topics
+            <RoughBox>Topics</RoughBox>
           </h2>
           <p className="max-w-[800px]">
             Each tag groups related writing and projects. Use this index to
-            follow a topic without scanning the whole archive.
+            <RoughUnderline>
+              follow a topic without scanning the whole archive
+            </RoughUnderline>
+            .
           </p>
         </div>
         <div className="flex flex-wrap gap-4 text-sm sm:text-base">

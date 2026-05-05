@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import { type Metadata } from "next";
 import { Maxwidthdiv } from "../_components/Maxwindthdiv";
+import { RoughBox, RoughUnderline } from "../_components/RoughNotation";
 import Projects from "./_components/Projects";
 import DivFadeIn from "../_components/DivFadeIn";
 import { sortedProjects } from "./shared";
@@ -22,11 +23,14 @@ export default function page() {
               "font-display",
             )}
           >
-            Selected Work
+            <RoughBox>Selected</RoughBox> Work
           </h2>
           <p>
-            A curated selection of work that reflects product thinking, systems
-            design, and practical execution.
+            A curated selection of work that reflects{" "}
+            <RoughUnderline>
+              product thinking, systems design, and practical execution
+            </RoughUnderline>
+            .
           </p>
         </div>
         <Projects projects={sortedProjects} />

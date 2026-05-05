@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { Maxwidthdiv } from "./_components/Maxwindthdiv";
+import { RoughBox, RoughUnderline } from "./_components/RoughNotation";
 import { socials } from "./data";
 import { posts } from "@/velite/posts";
 
@@ -39,7 +40,8 @@ function HeroSection() {
                     "font-display text-4xl font-black text-primary md:text-5xl md:leading-snug",
                   )}
                 >
-                  Building thoughtful software for real-world use.
+                  Building <RoughBox>thoughtful software</RoughBox> for{" "}
+                  <RoughUnderline>real-world use</RoughUnderline>.
                 </h1>
               </div>
               <div className="relative mx-auto !aspect-square  h-[150px] overflow-clip rounded-full bg-primary p-0 shadow-lg sm:h-[150px]">
@@ -58,8 +60,11 @@ function HeroSection() {
             <div className="flex flex-col gap-6 leading-7">
               <p>
                 I work across product, frontend, backend, and delivery to build
-                systems that are clear, reliable, and useful under real
-                constraints.
+                systems that are{" "}
+                <RoughUnderline multiline>
+                  clear, reliable, and useful under real constraints
+                </RoughUnderline>
+                .
               </p>
               <p>
                 That usually means choosing the quieter option when it is the
@@ -145,7 +150,7 @@ function BlogSection() {
     <Maxwidthdiv className="flex w-full flex-col items-center justify-center gap-8">
       <div>
         <h2 className="text-center font-display text-4xl font-medium">
-          Recent Writing
+          <RoughBox>Recent</RoughBox> Writing
         </h2>
       </div>
       <div className="flex w-full flex-col gap-10">
@@ -169,7 +174,9 @@ function ProjectSection() {
   return (
     <Maxwidthdiv className="flex w-full flex-col items-center justify-center gap-8">
       <div>
-        <h2 className="text-center font-display text-4xl">Selected Work</h2>
+        <h2 className="text-center font-display text-4xl">
+          <RoughBox>Selected</RoughBox> Work
+        </h2>
       </div>
       <div className="flex w-full flex-col gap-10">
         <Projects projects={sortedProjects.slice(0, 3)} />
