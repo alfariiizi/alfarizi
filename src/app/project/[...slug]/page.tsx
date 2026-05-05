@@ -15,6 +15,7 @@ import Link from "next/link";
 import readingTime from "reading-time";
 import { LuArrowLeft } from "react-icons/lu";
 import DivFadeIn from "@/app/_components/DivFadeIn";
+import ProjectTypeBadge from "../_components/ProjectTypeBadge";
 
 interface PostProps {
   params: {
@@ -64,10 +65,14 @@ export default function PostPage({ params }: PostProps) {
   const endYear = post.endDate?.split("-")[0] ?? "Present";
   const displayYear =
     startYear === endYear ? startYear : `${startYear} - ${endYear}`;
+  const shouldShowLiveLink =
+    post.projectType !== "professional-internal" && Boolean(post.link);
+  const shouldShowRepository =
+    post.projectType === "personal" && Boolean(post.repo);
 
   return (
     <DivFadeIn>
-      <Article lang="id">
+      <Article lang="en">
         <ArticleHeader>
           <Link
             href="/project"
@@ -80,11 +85,25 @@ export default function PostPage({ params }: PostProps) {
               "font-display text-2xl font-semibold text-primary sm:text-3xl",
             )}
           >
-            {post.title} ({post.team})
+            {post.title}
           </h1>
           {post.description && (
             <p className={cn("text-base sm:text-lg")}>{post.description}</p>
           )}
+          <div className="flex flex-wrap items-center gap-3">
+            <ProjectTypeBadge projectType={post.projectType} />
+            <p className="font-display text-base font-semibold text-slate-500 sm:text-lg">
+              {post.company}
+            </p>
+            {post.position && (
+              <>
+                <div className="h-2 w-2 rounded-full bg-accent" />
+                <p className="font-display text-base font-semibold text-slate-500 sm:text-lg">
+                  {post.position}
+                </p>
+              </>
+            )}
+          </div>
           <div className="flex h-auto items-center gap-3 sm:gap-7">
             <p
               className={cn(
@@ -102,11 +121,11 @@ export default function PostPage({ params }: PostProps) {
               {readingTime(post.raw).text}
             </p>
           </div>
-          {post.link && (
+          {shouldShowLiveLink && (
             <h4 className={cn("font-semibold")}>
               <span className="font-display">Live site:</span>{" "}
               <Link
-                href={post.link}
+                href={post.link!}
                 target="_blank"
                 className="inline h-fit text-sm underline decoration-foreground underline-offset-2 duration-150 hover:opacity-80"
               >
@@ -114,11 +133,11 @@ export default function PostPage({ params }: PostProps) {
               </Link>
             </h4>
           )}
-          {post.repo && (
+          {shouldShowRepository && (
             <h4 className={cn("font-semibold")}>
               <span className="font-display">Repository:</span>{" "}
               <Link
-                href={post.repo}
+                href={post.repo!}
                 target="_blank"
                 className="inline h-fit text-sm underline decoration-foreground underline-offset-2 duration-150 hover:opacity-80"
               >
