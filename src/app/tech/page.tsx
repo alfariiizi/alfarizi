@@ -41,6 +41,12 @@ import {
 } from "react-icons/si";
 import { Maxwidthdiv } from "../_components/Maxwindthdiv";
 import DivFadeIn from "../_components/DivFadeIn";
+import {
+  AsideBracketAnnotation,
+  HeroLeadAnnotation,
+  SectionEyebrowAnnotation,
+  SectionTitleAnnotation,
+} from "./_components/RoughTechAnnotations";
 
 export const metadata: Metadata = {
   title: "Tech",
@@ -320,12 +326,7 @@ export default function TechPage() {
               <h1 className="font-display text-4xl font-semibold tracking-tight text-primary sm:text-5xl">
                 Tech
               </h1>
-              <p className="max-w-3xl text-base leading-7 text-foreground/90 sm:text-lg">
-                A selective view of the technologies I trust most in production.
-                This is less a catalog of everything I have touched, and more a
-                record of the tools that keep showing up when the work needs to
-                be clear, durable, and ready to ship.
-              </p>
+              <HeroLeadAnnotation />
             </div>
             <div className="max-w-3xl space-y-4 text-sm leading-7 text-muted-foreground sm:text-base">
               <p>
@@ -374,12 +375,10 @@ export default function TechPage() {
               <div className="grid gap-5 md:grid-cols-[minmax(0,1fr)_15rem] md:gap-10">
                 <div className="space-y-5">
                   <header className="space-y-2">
-                    <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground">
+                    <SectionEyebrowAnnotation>
                       {section.eyebrow}
-                    </p>
-                    <h2 className="max-w-3xl text-balance font-display text-2xl font-medium leading-tight text-foreground sm:text-[2rem]">
-                      {section.title}
-                    </h2>
+                    </SectionEyebrowAnnotation>
+                    <SectionTitleAnnotation title={section.title} />
                     <p className="max-w-3xl text-sm leading-7 text-foreground/90 sm:text-base">
                       {section.summary}
                     </p>
@@ -408,7 +407,9 @@ export default function TechPage() {
                     What it tends to support
                   </p>
                   <p className="text-sm leading-6 text-foreground/75 md:text-right">
-                    {section.aside}
+                    <AsideBracketAnnotation>
+                      {section.aside}
+                    </AsideBracketAnnotation>
                   </p>
                 </aside>
               </div>
