@@ -1,11 +1,15 @@
 ---
 title: "Windsight"
-description: "Data insight with multiple platform"
-team: Product Team of Datains
+description: "Data insight platform integrating regional analytics from multiple visualization sources."
+team: Product Team of DataIns
+company: DataIns
+projectType: professional-public
+highlight: false
+status: active
 position: Frontend Developer
 image: cover.png
 link: https://sandbox.windsight.id
-tech: "Nextjs 14"
+tech: "Next.js Fullstack"
 startDate: "2024-01-14"
 icon: "/images/tech-logo/nextjs.png"
 tags:
@@ -15,26 +19,42 @@ tags:
   - superset
   - looker-studio
   - tableu
+  - analytics
 ---
 
-## My Contribution to Windsight
+<Image src="cover.png" full caption="Windsight landing page" />
 
-<Image
-  src="cover.png"
-  full
-  caption="Landing Page of Windsight"
-/>
+## Overview
 
-Windsight is an application that displays data insights from several platforms. To date, the platforms utilized include: Superset, Google Looker Studio, and Tableau. I was first tasked with leading Windsight in January 2024 as a Frontend Developer.
+Windsight is a data insight platform that brings together analytics from multiple visualization platforms, including Superset, Google Looker Studio, and Tableau.
 
-With my experience managing [Robota](/project/robota), I was appointed to determine the tech stack for Windsight. Generally, the tech stack I selected is similar to that of Robota, but with several optimizations to ensure that 90% of data fetching is performed on the server using the Server Component feature from Next.js App Dir. Utilizing Server Components has made the application faster during data fetching. I specifically discuss this topic in my article titled: [Mengapa kita perlu menggunakan React Server Component](/blog/mengapa-kita-perlu-menggunakan-react-server-component).
+## Business Context
 
-<Image
-  src="dashboard.png"
-  full
-  caption="Dashboard of Samarinda City Government"
-/>
+The product is used for regional data analysis, such as city, regency, or provincial dashboards. One known use case involved public-sector data presentation for the Samarinda City Government.
 
-Currently, one of the users of Windsight is the Samarinda City Government. The dashboard includes various data from the Samarinda City Government presented in graphical form.
+## My Role
 
-> As of now, I am still in charge of the Windsight product.
+I led frontend stack direction and implementation decisions for Windsight, building from lessons learned on Robota.
+
+## Key Capabilities
+
+- Regional analytics presentation
+- Integration with multiple dashboard providers
+- Server-component-heavy data fetching approach
+- Public landing surface
+- Dashboard-oriented application UI
+
+## Technical Direction
+
+Windsight uses Next.js App Router with an emphasis on React Server Components. The goal was to move most data fetching to the server so dashboard pages remained more stable and predictable.
+
+## Outcome / Impact
+
+Windsight helped formalize a server-first frontend direction for analytics-heavy products and gave me a practical place to apply Next.js architecture choices to data presentation work.
+
+## Gallery
+
+<Image src="dashboard.png" full caption="Dashboard example" />
+
+- Screenshot placeholder: regional insight overview
+- Screenshot placeholder: embedded analytics detail
