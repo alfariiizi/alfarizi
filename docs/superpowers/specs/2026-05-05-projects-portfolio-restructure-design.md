@@ -79,7 +79,6 @@ Keep the current fields that still serve the project detail and card UI:
 
 - `title`
 - `description`
-- `team`
 - `position`
 - `image`
 - `tech`
@@ -91,6 +90,18 @@ Keep the current fields that still serve the project detail and card UI:
 - `tags`
 - `mdx`
 - `raw`
+
+### Team Field Status
+
+`team` should no longer be treated as a display or classification field.
+
+From this restructure onward:
+
+- `company` replaces `team` as the user-facing organization context
+- `projectType` replaces any category inference previously derived from `team`
+- project cards and project detail headers should stop rendering `team`
+
+If keeping `team` temporarily helps migration, it may remain in old documents during the transition, but it should be treated as deprecated and removed from the target UI semantics.
 
 ### Source of Truth
 
@@ -148,6 +159,8 @@ The three highlighted projects are:
 
 These should appear in a dedicated highlighted area above the general project list.
 
+The same three highlighted projects should also be used for the homepage `Selected Work` preview so the homepage and the full projects page stay aligned.
+
 ## Projects Page Behavior
 
 ### Page Structure
@@ -186,6 +199,8 @@ Rules:
 - allow personal and professional work to appear in the same stream
 - always show enough metadata to distinguish context quickly
 
+Sorting should use `startDate` descending for the non-highlighted list.
+
 ## Card UI Rules
 
 Each card should show:
@@ -218,6 +233,27 @@ Recommended mapping:
 - `professional-public` may show a live link if safe and available
 - `personal` may show both live link and repository if available
 - `professional-internal` should not show a public live link unless explicitly safe
+
+## Project Detail Header Rules
+
+The project detail page header should be updated to match the new content model.
+
+It should show:
+
+- title
+- company
+- project type badge
+- role if present
+- year range
+- safe public links according to project type
+
+It should not render the legacy `title (team)` pattern.
+
+Link behavior on the detail page must follow the same rules as the card/list experience:
+
+- `personal`: may show live link and repository when available
+- `professional-public`: may show live link if safe, and repository only if intended for publication
+- `professional-internal`: should omit public live links unless explicitly approved as safe
 
 ## Project Detail Structure
 
@@ -355,7 +391,13 @@ Recommended asset names:
 - `gallery-02.png`
 - `gallery-03.png`
 
-The MDX content should still be written now even if the files do not exist yet.
+Because the current Velite pipeline resolves `image` metadata eagerly, every project must have a real image file for the frontmatter `image` field at implementation time.
+
+That means:
+
+- each project must ship with a real `cover.png` or equivalent existing asset from day one
+- no project frontmatter should point to a missing file
+- if a final screenshot is not ready yet, implementation should use a real placeholder image file rather than a missing reference
 
 During drafting, the `Gallery` section can contain placeholder notes such as:
 
@@ -363,7 +405,11 @@ During drafting, the `Gallery` section can contain placeholder notes such as:
 - `Screenshot placeholder: checkout and package flow`
 - `Screenshot placeholder: internal scheduling board`
 
-This allows the written portfolio content to be completed before final screenshots are prepared.
+Only the cover image is required immediately for the current pipeline.
+
+Gallery images may be added later. Until then, the written `Gallery` section should use textual placeholders rather than broken or missing image references.
+
+This allows the written portfolio content to be completed before final screenshots are prepared while remaining compatible with the current build pipeline.
 
 ## Drafting Strategy
 
@@ -420,7 +466,7 @@ Likely implementation targets include:
 - `src/app/project/shared.ts`
 - `src/app/project/_components/Projects.tsx`
 - `src/app/project/[...slug]/page.tsx`
-- possibly homepage project-preview usage in `src/app/page.tsx`
+- `src/app/page.tsx`
 
 ## Success Criteria
 
