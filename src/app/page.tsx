@@ -40,8 +40,7 @@ function HeroSection() {
                     "font-display text-4xl font-black text-primary md:text-5xl md:leading-snug",
                   )}
                 >
-                  Building <RoughBox>thoughtful software</RoughBox> for{" "}
-                  <RoughUnderline>real-world use</RoughUnderline>.
+                  Building thoughtful software for real-world use.
                 </h1>
               </div>
               <div className="relative mx-auto !aspect-square  h-[150px] overflow-clip rounded-full bg-primary p-0 shadow-lg sm:h-[150px]">

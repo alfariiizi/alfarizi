@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { type Metadata } from "next";
 import { Maxwidthdiv } from "../_components/Maxwindthdiv";
-import { RoughBox, RoughUnderline } from "../_components/RoughNotation";
+import { RoughUnderline } from "../_components/RoughNotation";
 import Projects from "./_components/Projects";
 import DivFadeIn from "../_components/DivFadeIn";
 import { highlightedProjects, nonHighlightedProjects } from "./shared";
@@ -23,7 +23,7 @@ export default function page() {
               "font-display",
             )}
           >
-            <RoughBox>Selected</RoughBox> Work
+            Selected Work
           </h2>
           <p>
             A curated selection of work that reflects{" "}
