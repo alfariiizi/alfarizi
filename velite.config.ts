@@ -249,6 +249,14 @@ const projects = defineCollection({
       title: s.string().max(99),
       description: s.string().max(999),
       team: s.string().max(99),
+      company: s.string().max(99),
+      projectType: s.enum([
+        "personal",
+        "professional-public",
+        "professional-internal",
+      ]),
+      highlight: s.boolean().default(false),
+      status: s.string().max(30).optional(),
       position: s.string().max(99).optional(),
       image: s.string(),
       tech: s.string().max(99),
@@ -298,10 +306,18 @@ const projects = defineCollection({
       };
     })
     .transform((data) => {
-      const isPersonalProject = data.team.toLowerCase().includes("personal");
+      const projectTypeLabels = {
+        personal: "Personal",
+        "professional-public": "Professional",
+        "professional-internal": "Internal System",
+      } as const;
+
       return {
         ...data,
-        isPersonalProject,
+        projectTypeLabel: projectTypeLabels[data.projectType],
+        isPersonalProject: data.projectType === "personal",
+        isProfessionalProject: data.projectType !== "personal",
+        isInternalProject: data.projectType === "professional-internal",
       };
     }),
   // .transform(async (data) => {
