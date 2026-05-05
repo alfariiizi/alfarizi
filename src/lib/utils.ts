@@ -13,3 +13,26 @@ export function capitalize(str: string) {
 export async function stall(stallTime = 3000) {
   await new Promise((resolve) => setTimeout(resolve, stallTime));
 }
+
+function mapperLocale(locale: string) {
+  switch (locale) {
+    case "id":
+      return "id-ID";
+    case "en":
+      return "en-US";
+    default:
+      return locale;
+  }
+}
+
+export function getFormattedDate(
+  locale: "id" | "en",
+  date: string | Date,
+  dateStyle: "long" | "full" | "medium" | "short" = "long",
+): string {
+  const dateRes = typeof date === "string" ? new Date(date) : date;
+
+  return new Intl.DateTimeFormat(mapperLocale(locale), {
+    dateStyle,
+  }).format(dateRes);
+}
