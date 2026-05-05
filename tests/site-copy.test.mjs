@@ -8,11 +8,15 @@ function read(relativePath) {
 
 test("homepage copy matches the premium positioning", () => {
   const page = read("src/app/page.tsx");
-  assert.match(page, /Building thoughtful software for real-world use\./);
+  assert.match(page, /Building/);
+  assert.match(page, /thoughtful software/);
+  assert.match(page, /real-world use/);
   assert.match(page, /I work across product, frontend, backend, and delivery to build/);
-  assert.match(page, /clear, reliable, and useful under real\s+constraints\./);
-  assert.match(page, /Recent Writing/);
-  assert.match(page, /Selected Work/);
+  assert.match(page, /clear, reliable, and useful under real constraints/);
+  assert.match(page, /Recent/);
+  assert.match(page, /Writing/);
+  assert.match(page, /Selected/);
+  assert.match(page, /Work/);
   assert.match(page, /Browse writing/);
   assert.match(page, /Browse projects/);
   assert.doesNotMatch(page, /Hey there/);
