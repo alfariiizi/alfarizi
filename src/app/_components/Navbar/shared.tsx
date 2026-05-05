@@ -1,6 +1,11 @@
 import { BsPostcard, BsTags } from "react-icons/bs";
 import { PiProjectorScreenChart } from "react-icons/pi";
-import { RiContactsBookLine, RiHome2Line, RiStackLine } from "react-icons/ri";
+import {
+  RiBriefcase3Line,
+  RiContactsBookLine,
+  RiHome2Line,
+  RiStackLine,
+} from "react-icons/ri";
 
 export const menus = [
   {
@@ -17,6 +22,11 @@ export const menus = [
     label: "Projects",
     href: "/project",
     icon: () => <PiProjectorScreenChart className="size-5" />,
+  },
+  {
+    label: "Experience",
+    href: "/experience",
+    icon: () => <RiBriefcase3Line className="size-5" />,
   },
   {
     label: "Tags",
