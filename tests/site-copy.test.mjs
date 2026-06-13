@@ -87,3 +87,20 @@ test("experience copy reflects the updated Oriskin role", () => {
     /Senior Fullstack Engineer, Development Team Lead/,
   );
 });
+
+test("organization copy is publicly exposed", () => {
+  const navbar = read("src/app/_components/Navbar/shared.tsx");
+  const sitemap = read("src/app/sitemap.ts");
+  const homePage = read("src/app/page.tsx");
+  const organizationPage = read("src/app/organization/page.tsx");
+  const organizationData = read("src/app/organization/data.ts");
+
+  assert.match(navbar, /label: "Organization"/);
+  assert.match(sitemap, /generateUrl\("\/organization"\)/);
+  assert.match(homePage, /Organization/);
+  assert.match(homePage, /Vandor/);
+  assert.match(organizationPage, /Vandor/);
+  assert.match(organizationData, /vx/);
+  assert.match(organizationData, /vxt/);
+  assert.match(organizationData, /vpkg/);
+});

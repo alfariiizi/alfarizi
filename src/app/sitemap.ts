@@ -35,6 +35,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
 
+    // Organization
+    {
+      url: generateUrl("/organization"),
+      changeFrequency: "monthly",
+      priority: 0.85,
+    },
+
     // Blog
     {
       url: generateUrl("/blog"),

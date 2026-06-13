@@ -1,6 +1,7 @@
 import { BsPostcard, BsTags } from "react-icons/bs";
 import { PiProjectorScreenChart } from "react-icons/pi";
 import {
+  RiBuilding4Line,
   RiBriefcase3Line,
   RiContactsBookLine,
   RiHome2Line,
@@ -12,6 +13,11 @@ export const menus = [
     label: "Home",
     href: "/",
     icon: () => <RiHome2Line className="size-5" />,
+  },
+  {
+    label: "Organization",
+    href: "/organization",
+    icon: () => <RiBuilding4Line className="size-5" />,
   },
   {
     label: "Blog",
