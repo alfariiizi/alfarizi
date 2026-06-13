@@ -186,6 +186,41 @@ export function ResumeDocument({
           </div>
         </section>
 
+        {resumeData.organization ? (
+          <section className={cn("space-y-4", isCompact && "space-y-2")}>
+            <SectionTitle variant={variant} compact={isCompact}>
+              {resumeData.organization.name}
+            </SectionTitle>
+            <div
+              className={cn(
+                "space-y-3 text-sm leading-7 sm:text-base",
+                isCompact && "space-y-1.5 leading-5",
+              )}
+            >
+              <p>{resumeData.organization.summary}</p>
+              <p className="text-muted-foreground">
+                {resumeData.organization.description}
+              </p>
+              <ul
+                className={cn(
+                  "space-y-2",
+                  isCompact && "space-y-1 leading-5",
+                )}
+              >
+                {resumeData.organization.highlights.map((highlight) => (
+                  <li key={highlight} className="grid grid-cols-[auto_1fr] gap-3">
+                    <span
+                      aria-hidden="true"
+                      className="mt-2 h-1.5 w-1.5 rounded-full bg-current"
+                    />
+                    <span>{highlight}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+        ) : null}
+
         <section className={cn("space-y-4", isCompact && "space-y-2")}>
           <SectionTitle variant={variant} compact={isCompact}>
             Selected Projects

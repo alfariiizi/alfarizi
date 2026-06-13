@@ -41,6 +41,12 @@ export type ResumeProfile = {
     links: ResumeContactLink[];
   };
   experience: ResumeExperience[];
+  organization: {
+    name: string;
+    summary: string;
+    description: string;
+    highlights: string[];
+  } | null;
   projects: ResumeProject[];
   skills: string[];
 };
@@ -142,6 +148,23 @@ function buildResumeProfile(length: ResumeLength): ResumeProfile {
       links: buildContactLinks(length),
     },
     experience: isCompact ? compactExperience : experiences,
+    organization: {
+      name: "Vandor",
+      summary:
+        "Backend-oriented organization for tools, documentation, and technical writing.",
+      description:
+        "Vandor is where I explore smaller backend surfaces with clearer boundaries and a documentation-first way of explaining the work.",
+      highlights: isCompact
+        ? [
+            "Backend-oriented tools and workflows",
+            "Spec-first Go templating and packaging work",
+          ]
+        : [
+            "Backend-oriented tools and workflows",
+            "Spec-first Go templating, packaging, and CLI work",
+            "Documentation that explains the reasoning behind the choices",
+          ],
+    },
     projects: isCompact
       ? compactProjects.slice(0, 1)
       : buildProjectSelection(allProjects),
