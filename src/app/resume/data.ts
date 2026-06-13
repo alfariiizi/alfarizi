@@ -4,7 +4,6 @@ import { env } from "@/env";
 import { experiences } from "../experience/data";
 import { vandor } from "../organization/data";
 import { socials } from "../data";
-import { RESUME_BUILD_TIMESTAMP } from "@/lib/resume/build-info.js";
 
 type ResumeExperience = (typeof experiences)[number];
 type Project = (typeof allProjects)[number];
@@ -173,7 +172,6 @@ function buildResumeProfile(length: ResumeLength): ResumeProfile {
   };
 }
 
-export const resumeBuildTimestamp = RESUME_BUILD_TIMESTAMP;
 export const resumeProfiles = {
   full: buildResumeProfile("full"),
   compact: buildResumeProfile("compact"),

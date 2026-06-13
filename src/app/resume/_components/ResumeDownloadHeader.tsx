@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { buildResumePdfHref } from "../utils.js";
-import { resumeBuildTimestamp } from "../data";
 
 type Props = {
   className?: string;
@@ -32,8 +31,8 @@ export function ResumeDownloadHeader({ className }: Props) {
         <div className="space-y-2">
           <p className="text-xs text-muted-foreground">Download links</p>
           <p className="max-w-3xl text-sm leading-7 text-muted-foreground sm:text-base">
-            The links below point to build-generated PDFs. The timestamp stays
-            stable for the current deploy.
+            The links below point to build-generated PDFs. The filenames stay
+            stable until you regenerate them.
           </p>
         </div>
 
@@ -45,11 +44,7 @@ export function ResumeDownloadHeader({ className }: Props) {
                 {group.items.map((download) => (
                   <Link
                     key={`${group.length}-${download.variant}`}
-                    href={buildResumePdfHref(
-                      resumeBuildTimestamp,
-                      download.variant,
-                      group.length,
-                    )}
+                    href={buildResumePdfHref(download.variant, group.length)}
                     download
                     className="rounded-md bg-primary px-4 py-2 text-sm text-background duration-150 hover:opacity-80"
                   >

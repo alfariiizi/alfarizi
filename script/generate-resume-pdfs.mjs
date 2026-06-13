@@ -5,7 +5,6 @@ import { spawn } from "node:child_process";
 
 import puppeteer from "puppeteer";
 
-import { RESUME_BUILD_TIMESTAMP } from "../src/lib/resume/build-info.js";
 import {
   buildResumePdfFilename,
   buildResumePdfRouteSegment,
@@ -16,19 +15,19 @@ const BASE_URL = `http://127.0.0.1:${PORT}`;
 const resumeFiles = {
   atsFull: path.resolve(
     "public/resume/ats",
-    buildResumePdfFilename(RESUME_BUILD_TIMESTAMP, "ats", "full"),
+    buildResumePdfFilename(),
   ),
   oriFull: path.resolve(
     "public/resume/ori",
-    buildResumePdfFilename(RESUME_BUILD_TIMESTAMP, "ori", "full"),
+    buildResumePdfFilename(),
   ),
   atsCompact: path.resolve(
     "public/resume/ats-1page",
-    buildResumePdfFilename(RESUME_BUILD_TIMESTAMP, "ats", "compact"),
+    buildResumePdfFilename(),
   ),
   oriCompact: path.resolve(
     "public/resume/ori-1page",
-    buildResumePdfFilename(RESUME_BUILD_TIMESTAMP, "ori", "compact"),
+    buildResumePdfFilename(),
   ),
 };
 

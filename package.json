@@ -6,9 +6,8 @@
   "type": "module",
   "scripts": {
     "gen:assets-content": "bash script/copy-assets.sh",
-    "prebuild": "node script/write-resume-build-info.mjs",
     "build": "next build && node script/generate-resume-pdfs.mjs",
-    "dev": "node script/write-resume-build-info.mjs && next dev",
+    "dev": "next dev",
     "lint": "next lint",
     "test": "node --test tests/*.test.mjs",
     "start": "next start"

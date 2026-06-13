@@ -34,23 +34,18 @@ export function formatResumeBuildTimestamp(date) {
 }
 
 /**
- * @param {string} timestamp
- * @param {"ats" | "ori"} variant
- * @param {"full" | "compact"} [length]
+ * @returns {string}
  */
-export function buildResumePdfFilename(timestamp, variant, length = "full") {
-  void variant;
-  void length;
-  return `${timestamp} - ${RESUME_FILENAME_BASE}.pdf`;
+export function buildResumePdfFilename() {
+  return `${RESUME_FILENAME_BASE}.pdf`;
 }
 
 /**
- * @param {string} timestamp
  * @param {"ats" | "ori"} variant
  * @param {"full" | "compact"} [length]
  */
-export function buildResumePdfHref(timestamp, variant, length = "full") {
-  return `/resume/${variant}${RESUME_VARIANT_SEGMENT[length]}/${buildResumePdfFilename(timestamp, variant, length)}`;
+export function buildResumePdfHref(variant, length = "full") {
+  return `/resume/${variant}${RESUME_VARIANT_SEGMENT[length]}/${buildResumePdfFilename()}`;
 }
 
 /**
