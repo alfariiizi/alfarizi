@@ -161,7 +161,14 @@ export function ResumeDocument({
               >
                 <div className="space-y-1">
                   <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                    <h3 className="font-medium">{experience.company}</h3>
+                    <Link
+                      href={experience.companyHref}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      className="font-medium underline-offset-4 hover:underline"
+                    >
+                      {experience.company}
+                    </Link>
                     <span className="text-sm text-muted-foreground">
                       {experience.role}
                     </span>
@@ -189,7 +196,14 @@ export function ResumeDocument({
         {resumeData.organization ? (
           <section className={cn("space-y-4", isCompact && "space-y-2")}>
             <SectionTitle variant={variant} compact={isCompact}>
-              {resumeData.organization.name}
+              <Link
+                href={resumeData.organization.href}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="underline-offset-4 hover:underline"
+              >
+                {resumeData.organization.name}
+              </Link>
             </SectionTitle>
             <div
               className={cn(

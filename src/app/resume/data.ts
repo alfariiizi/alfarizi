@@ -2,6 +2,7 @@ import { projects as allProjects } from ".velite/index";
 import { getHighlightedProjects } from "@/lib/content-utils.js";
 import { env } from "@/env";
 import { experiences } from "../experience/data";
+import { vandor } from "../organization/data";
 import { socials } from "../data";
 import { RESUME_BUILD_TIMESTAMP } from "@/lib/resume/build-info.js";
 
@@ -45,6 +46,7 @@ export type ResumeProfile = {
     name: string;
     summary: string;
     description: string;
+    href: string;
     highlights: string[];
   } | null;
   projects: ResumeProject[];
@@ -149,11 +151,10 @@ function buildResumeProfile(length: ResumeLength): ResumeProfile {
     },
     experience: isCompact ? compactExperience : experiences,
     organization: {
-      name: "Vandor",
-      summary:
-        "Backend-oriented organization for tools, documentation, and technical writing.",
-      description:
-        "Vandor is where I explore smaller backend surfaces with clearer boundaries and a documentation-first way of explaining the work.",
+      name: vandor.name,
+      summary: vandor.summary,
+      description: vandor.description,
+      href: vandor.href,
       highlights: isCompact
         ? [
             "Backend-oriented tools and workflows",
