@@ -1,4 +1,5 @@
 import fs from "node:fs/promises";
+import { existsSync } from "node:fs";
 import net from "node:net";
 import path from "node:path";
 import { spawn } from "node:child_process";
@@ -53,10 +54,11 @@ const server = spawn(
 try {
   await waitForServer(`${BASE_URL}/resume`);
 
+  const browserConfig = await getBrowserConfig();
   const browser = await puppeteer.launch({
-    executablePath: process.env.PUPPETEER_EXECUTABLE_PATH ?? "/usr/bin/chromium",
-    headless: true,
-    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    executablePath: browserConfig.executablePath,
+    headless: browserConfig.headless,
+    args: browserConfig.args,
   });
 
   try {
@@ -141,4 +143,32 @@ async function waitForExit(child) {
   await new Promise((resolve) => {
     child.once("exit", resolve);
   });
+}
+
+async function getBrowserConfig() {
+  const executablePath = process.env.PUPPETEER_EXECUTABLE_PATH;
+  if (executablePath) {
+    return {
+      executablePath,
+      headless: true,
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    };
+  }
+
+  if (existsSync("/usr/bin/chromium")) {
+    return {
+      executablePath: "/usr/bin/chromium",
+      headless: true,
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    };
+  }
+
+  const chromiumModule = await import("@sparticuz/chromium");
+  const chromium = chromiumModule.default ?? chromiumModule;
+
+  return {
+    executablePath: await chromium.executablePath(),
+    headless: chromium.headless,
+    args: chromium.args,
+  };
 }
