@@ -16,8 +16,8 @@ export function ResumeDownloadHeader({ className }: Props) {
     <section className={className}>
       <div className="flex flex-col gap-4 rounded-[2rem] border border-primary/10 bg-background/80 p-6 shadow-sm backdrop-blur-sm sm:p-8">
         <div className="space-y-2">
-          <p className="text-xs uppercase tracking-[0.28em] text-muted-foreground">
-            Download Resume
+          <p className="text-xs text-muted-foreground">
+            Download links
           </p>
           <p className="max-w-3xl text-sm leading-7 text-muted-foreground sm:text-base">
             The links below point to build-generated PDFs. The timestamp stays
@@ -41,4 +41,3 @@ export function ResumeDownloadHeader({ className }: Props) {
     </section>
   );
 }
-

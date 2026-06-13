@@ -248,7 +248,7 @@ function StackBadge({
         {Icon ? (
           <Icon className={cn("h-5 w-5", iconClassName)} />
         ) : (
-          <span className="text-[0.68rem] font-semibold uppercase tracking-[0.16em]">
+          <span className="font-mono text-[0.68rem] font-semibold">
             {tool.mono}
           </span>
         )}
@@ -277,7 +277,7 @@ function FavoriteStackPanel() {
       <div className="relative space-y-6">
         <div className="flex items-end justify-between gap-4">
           <div className="space-y-2">
-            <p className="text-[0.68rem] uppercase tracking-[0.26em] text-muted-foreground">
+            <p className="text-[0.68rem] text-muted-foreground">
               Favorite stack
             </p>
             <p className="max-w-[16rem] text-sm leading-6 text-foreground/75">

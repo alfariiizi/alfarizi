@@ -1,4 +1,4 @@
-import { BsPostcard, BsTags } from "react-icons/bs";
+import { BsFileEarmarkText, BsPostcard, BsTags } from "react-icons/bs";
 import { PiProjectorScreenChart } from "react-icons/pi";
 import {
   RiBuilding4Line,
@@ -43,6 +43,11 @@ export const menus = [
     label: "Tech",
     href: "/tech",
     icon: () => <RiStackLine className="size-5" />,
+  },
+  {
+    label: "Resume",
+    href: "/resume",
+    icon: () => <BsFileEarmarkText className="size-5" />,
   },
   // {
   //   label: "Tools",

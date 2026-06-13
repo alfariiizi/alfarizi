@@ -48,7 +48,7 @@ export function ResumeDocument({ variant, preview = false }: Props) {
       >
         <header className="space-y-4 border-b border-primary/10 pb-6">
           <div className="space-y-2">
-            <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
+            <p className="text-xs text-muted-foreground">
               Resume
             </p>
             <h1

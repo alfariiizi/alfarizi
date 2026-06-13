@@ -183,7 +183,7 @@ function OrganizationSection() {
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
           <div className="space-y-4">
             <div className="space-y-2">
-              <p className="text-sm uppercase tracking-[0.22em] text-muted-foreground">
+              <p className="text-sm text-muted-foreground">
                 {vandor.name}
               </p>
               <p className="max-w-2xl text-sm leading-7 text-foreground/90 sm:text-base">
@@ -211,7 +211,7 @@ function OrganizationSection() {
             </div>
           </div>
           <div className="space-y-3">
-            <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground">
+            <p className="text-sm text-muted-foreground">
               Current products
             </p>
             <div className="grid gap-3">

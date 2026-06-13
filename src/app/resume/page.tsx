@@ -15,7 +15,7 @@ export default function ResumePage() {
     <Maxwidthdiv className="my-10 flex flex-col gap-10">
       <section className="space-y-4">
         <div className="space-y-2">
-          <p className="text-xs uppercase tracking-[0.28em] text-muted-foreground">
+          <p className="text-xs text-muted-foreground">
             Resume
           </p>
           <h1 className="font-display text-4xl font-semibold tracking-tight text-primary sm:text-5xl">
@@ -31,8 +31,8 @@ export default function ResumePage() {
 
       <section className="space-y-4">
         <div className="space-y-2">
-          <p className="text-xs uppercase tracking-[0.28em] text-muted-foreground">
-            Rendered Preview
+          <p className="text-xs text-muted-foreground">
+            Rendered preview
           </p>
           <p className="max-w-3xl text-sm leading-7 text-muted-foreground sm:text-base">
             Switch between the ATS and original variants. Both are backed by
@@ -56,4 +56,3 @@ export default function ResumePage() {
     </Maxwidthdiv>
   );
 }
-

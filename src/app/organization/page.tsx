@@ -15,7 +15,7 @@ export default function OrganizationPage() {
     <Maxwidthdiv className="my-10 flex flex-col gap-10">
       <section className="rounded-[2rem] border border-primary/10 bg-background/80 p-6 shadow-sm backdrop-blur-sm sm:p-8 lg:p-10">
         <div className="space-y-4">
-          <p className="text-xs uppercase tracking-[0.28em] text-muted-foreground">
+          <p className="text-xs text-muted-foreground">
             Organization
           </p>
           <h1 className="font-display text-4xl font-semibold tracking-tight text-primary sm:text-5xl">
@@ -38,7 +38,7 @@ export default function OrganizationPage() {
           </div>
 
           <div className="space-y-4">
-            <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground">
+            <p className="text-sm text-muted-foreground">
               Current products
             </p>
             <div className="space-y-3">

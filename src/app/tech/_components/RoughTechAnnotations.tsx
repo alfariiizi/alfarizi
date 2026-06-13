@@ -53,7 +53,7 @@ export function SectionEyebrowAnnotation({ children }: { children: string }) {
   const ready = useNotationReady();
 
   return (
-    <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground">
+    <p className="text-sm text-muted-foreground">
       <RoughNotation
         type="underline"
         show={ready}
