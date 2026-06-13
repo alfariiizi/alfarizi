@@ -86,6 +86,20 @@ test("experience copy reflects the updated Oriskin role", () => {
     experienceData,
     /Senior Fullstack Engineer, Development Team Lead/,
   );
+  assert.match(experienceData, /companyLogo/);
+  assert.match(experienceData, /\/images\/company-logos\/oriskin\.png/);
+  assert.match(experienceData, /\/images\/company-logos\/jogiia\.png/);
+  assert.match(experienceData, /\/images\/company-logos\/datains\.png/);
+  assert.match(experienceData, /\/images\/company-logos\/nanosense\.png/);
+});
+
+test("experience entries render company identity rows", () => {
+  const experiencePage = read("src/app/experience/page.tsx");
+  assert.match(experiencePage, /next\/image/);
+  assert.match(experiencePage, /experience\.companyLogo/);
+  assert.match(experiencePage, /alt={`\$\{experience\.company\} logo`}/);
+  assert.match(experiencePage, /rounded-md border border-primary\/10/);
+  assert.match(experiencePage, /{experience\.company}/);
 });
 
 test("organization copy is publicly exposed", () => {

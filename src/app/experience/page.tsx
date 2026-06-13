@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { type Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { Maxwidthdiv } from "../_components/Maxwindthdiv";
 import {
@@ -64,6 +65,20 @@ export default function ExperiencePage() {
             <div className="grid gap-5 md:grid-cols-[minmax(0,1fr)_15rem] md:gap-10">
               <div className="space-y-5">
                 <header className="space-y-2">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-md border border-primary/10 bg-background">
+                      <Image
+                        src={experience.companyLogo}
+                        alt={`${experience.company} logo`}
+                        width={40}
+                        height={40}
+                        className="h-full w-full object-contain p-1"
+                      />
+                    </div>
+                    <p className="text-sm font-medium leading-none text-foreground/85 sm:text-[0.95rem]">
+                      {experience.company}
+                    </p>
+                  </div>
                   <h2
                     className={cn(
                       "max-w-3xl text-balance font-display text-2xl font-medium leading-tight text-foreground sm:text-[2rem]",
@@ -73,9 +88,7 @@ export default function ExperiencePage() {
                     {experience.headline}
                   </h2>
                   <div className="space-y-1 text-sm leading-6 text-muted-foreground sm:text-[0.95rem]">
-                    <p className="text-foreground/80">
-                      {experience.role} · {experience.company}
-                    </p>
+                    <p className="text-foreground/80">{experience.role}</p>
                     <p>
                       {experience.period} · {experience.location}
                     </p>

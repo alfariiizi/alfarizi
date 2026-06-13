@@ -2,6 +2,7 @@ export type ExperienceEntry = {
   headline: string;
   role: string;
   company: string;
+  companyLogo: string;
   period: string;
   location: string;
   capabilities: string[];
@@ -15,6 +16,7 @@ export const experiences: ExperienceEntry[] = [
       "Leading engineering delivery across internal systems that have to hold up under real operational pressure.",
     role: "Freelance Fullstack Engineer",
     company: "Oriskin Indonesia",
+    companyLogo: "/images/company-logos/oriskin.png",
     period: "Dec 2025 to Present",
     location: "Jakarta, Indonesia, remote",
     capabilities: [
@@ -37,6 +39,7 @@ export const experiences: ExperienceEntry[] = [
       "Running multi-product delivery with clearer service boundaries and steadier engineering habits.",
     role: "Technical Lead",
     company: "PT Jogiia Digital Indotech",
+    companyLogo: "/images/company-logos/jogiia.png",
     period: "Feb 2025 to Mar 2026",
     location: "Yogyakarta, Indonesia",
     capabilities: [
@@ -58,6 +61,7 @@ export const experiences: ExperienceEntry[] = [
       "Shaping frontend systems for analytics-heavy products with an eye on longevity, not just launch speed.",
     role: "Fullstack Developer, Freelance",
     company: "PT Global Data Inspirasi",
+    companyLogo: "/images/company-logos/datains.png",
     period: "Jun 2023 to Feb 2025",
     location: "Yogyakarta, Indonesia",
     capabilities: [
@@ -78,6 +82,7 @@ export const experiences: ExperienceEntry[] = [
       "Building modern frontend foundations before the work expanded into broader technical leadership.",
     role: "Frontend Developer (Next.js)",
     company: "PT Jogiia Digital Indotech",
+    companyLogo: "/images/company-logos/jogiia.png",
     period: "Sep 2024 to Feb 2025",
     location: "Yogyakarta, Indonesia",
     capabilities: [
@@ -98,6 +103,7 @@ export const experiences: ExperienceEntry[] = [
       "Starting in analytical tooling, where software had to support research rather than simply look polished.",
     role: "Data Scientist, Junior Developer",
     company: "PT Nanosense Instrument Indonesia",
+    companyLogo: "/images/company-logos/nanosense.png",
     period: "Aug 2022 to Dec 2022",
     location: "Yogyakarta, Indonesia",
     capabilities: [
