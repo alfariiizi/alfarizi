@@ -4,10 +4,8 @@ import "@/styles/globals.css";
 import { env } from "@/env";
 import { type Metadata } from "next";
 import { Inter, Josefin_Sans } from "next/font/google";
-import { Navbar } from "./_components/Navbar";
 import { Providers } from "./_components/Providers";
-import { layout } from "./_components/shared";
-import Footer from "./_components/Footer";
+import { SiteShell } from "./_components/SiteShell";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -60,19 +58,7 @@ export default function RootLayout({
         )}
       >
         <Providers>
-          <div className="flex min-h-lvh flex-col">
-            <Navbar />
-            <main
-              className="relative flex-grow"
-              style={{
-                paddingTop: layout.paddingTop,
-                paddingBottom: layout.paddingBottom,
-              }}
-            >
-              {children}
-            </main>
-            <Footer />
-          </div>
+          <SiteShell>{children}</SiteShell>
         </Providers>
       </body>
     </html>
