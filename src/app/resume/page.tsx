@@ -3,6 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Maxwidthdiv } from "../_components/Maxwindthdiv";
 import { ResumeDownloadHeader } from "./_components/ResumeDownloadHeader";
 import { ResumeDocument } from "./_components/ResumeDocument";
+import type { ResumeLength } from "./data";
 
 export const metadata: Metadata = {
   title: "Resume",
@@ -29,30 +30,51 @@ export default function ResumePage() {
         <ResumeDownloadHeader />
       </section>
 
-      <section className="space-y-4">
-        <div className="space-y-2">
-          <p className="text-xs text-muted-foreground">
-            Rendered preview
-          </p>
-          <p className="max-w-3xl text-sm leading-7 text-muted-foreground sm:text-base">
-            Switch between the ATS and original variants. Both are backed by
-            the same data.
-          </p>
-        </div>
+      <ResumePreviewPanel
+        title="Rendered preview"
+        description="Switch between the ATS and original variants. Both are backed by the same data."
+        length="full"
+      />
 
-        <Tabs defaultValue="ori" className="space-y-4">
-          <TabsList>
-            <TabsTrigger value="ori">Original</TabsTrigger>
-            <TabsTrigger value="ats">ATS Friendly</TabsTrigger>
-          </TabsList>
-          <TabsContent value="ori" className="mt-4">
-            <ResumeDocument variant="ori" preview />
-          </TabsContent>
-          <TabsContent value="ats" className="mt-4">
-            <ResumeDocument variant="ats" preview />
-          </TabsContent>
-        </Tabs>
-      </section>
+      <ResumePreviewPanel
+        title="1-page preview"
+        description="This version trims the resume to a tighter selection that fits a single page more comfortably."
+        length="compact"
+      />
     </Maxwidthdiv>
+  );
+}
+
+function ResumePreviewPanel({
+  title,
+  description,
+  length,
+}: {
+  title: string;
+  description: string;
+  length: ResumeLength;
+}) {
+  return (
+    <section className="space-y-4">
+      <div className="space-y-2">
+        <p className="text-xs text-muted-foreground">{title}</p>
+        <p className="max-w-3xl text-sm leading-7 text-muted-foreground sm:text-base">
+          {description}
+        </p>
+      </div>
+
+      <Tabs defaultValue="ori" className="space-y-4">
+        <TabsList>
+          <TabsTrigger value="ori">Original</TabsTrigger>
+          <TabsTrigger value="ats">ATS Friendly</TabsTrigger>
+        </TabsList>
+        <TabsContent value="ori" className="mt-4">
+          <ResumeDocument variant="ori" length={length} preview />
+        </TabsContent>
+        <TabsContent value="ats" className="mt-4">
+          <ResumeDocument variant="ats" length={length} preview />
+        </TabsContent>
+      </Tabs>
+    </section>
   );
 }

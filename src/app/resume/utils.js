@@ -1,5 +1,9 @@
 const RESUME_FILENAME_BASE = "Moh Rizal Alfarizi";
 const RESUME_TIME_ZONE = "Asia/Jakarta";
+const RESUME_VARIANT_SEGMENT = {
+  full: "",
+  compact: "-1page",
+};
 
 /**
  * @param {Date} date
@@ -32,16 +36,27 @@ export function formatResumeBuildTimestamp(date) {
 /**
  * @param {string} timestamp
  * @param {"ats" | "ori"} variant
+ * @param {"full" | "compact"} [length]
  */
-export function buildResumePdfFilename(timestamp, variant) {
+export function buildResumePdfFilename(timestamp, variant, length = "full") {
   void variant;
+  void length;
   return `${timestamp} - ${RESUME_FILENAME_BASE}.pdf`;
 }
 
 /**
  * @param {string} timestamp
  * @param {"ats" | "ori"} variant
+ * @param {"full" | "compact"} [length]
  */
-export function buildResumePdfHref(timestamp, variant) {
-  return `/resume/${variant}/${buildResumePdfFilename(timestamp, variant)}`;
+export function buildResumePdfHref(timestamp, variant, length = "full") {
+  return `/resume/${variant}${RESUME_VARIANT_SEGMENT[length]}/${buildResumePdfFilename(timestamp, variant, length)}`;
+}
+
+/**
+ * @param {"ats" | "ori"} variant
+ * @param {"full" | "compact"} [length]
+ */
+export function buildResumePdfRouteSegment(variant, length = "full") {
+  return `${variant}${RESUME_VARIANT_SEGMENT[length]}`;
 }

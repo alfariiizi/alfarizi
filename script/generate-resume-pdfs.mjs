@@ -6,23 +6,37 @@ import { spawn } from "node:child_process";
 import puppeteer from "puppeteer";
 
 import { RESUME_BUILD_TIMESTAMP } from "../src/lib/resume/build-info.js";
-import { buildResumePdfFilename } from "../src/app/resume/utils.js";
+import {
+  buildResumePdfFilename,
+  buildResumePdfRouteSegment,
+} from "../src/app/resume/utils.js";
 
 const PORT = await getFreePort();
 const BASE_URL = `http://127.0.0.1:${PORT}`;
 const resumeFiles = {
-  ats: path.resolve(
+  atsFull: path.resolve(
     "public/resume/ats",
-    buildResumePdfFilename(RESUME_BUILD_TIMESTAMP, "ats"),
+    buildResumePdfFilename(RESUME_BUILD_TIMESTAMP, "ats", "full"),
   ),
-  ori: path.resolve(
+  oriFull: path.resolve(
     "public/resume/ori",
-    buildResumePdfFilename(RESUME_BUILD_TIMESTAMP, "ori"),
+    buildResumePdfFilename(RESUME_BUILD_TIMESTAMP, "ori", "full"),
+  ),
+  atsCompact: path.resolve(
+    "public/resume/ats-1page",
+    buildResumePdfFilename(RESUME_BUILD_TIMESTAMP, "ats", "compact"),
+  ),
+  oriCompact: path.resolve(
+    "public/resume/ori-1page",
+    buildResumePdfFilename(RESUME_BUILD_TIMESTAMP, "ori", "compact"),
   ),
 };
 
-await fs.mkdir(path.dirname(resumeFiles.ats), { recursive: true });
-await fs.mkdir(path.dirname(resumeFiles.ori), { recursive: true });
+await Promise.all(
+  Object.values(resumeFiles).map((file) =>
+    fs.mkdir(path.dirname(file), { recursive: true }),
+  ),
+);
 
 const server = spawn(
   process.platform === "win32" ? "pnpm.cmd" : "pnpm",
@@ -51,9 +65,19 @@ try {
     await page.setViewport({ width: 1440, height: 2400, deviceScaleFactor: 1 });
     await page.emulateMediaType("screen");
 
-    for (const variant of ["ats", "ori"]) {
-      const url = `${BASE_URL}/resume/${variant}`;
-      const outputFile = resumeFiles[variant];
+    const variants = [
+      { key: "atsFull", style: "ats", length: "full" },
+      { key: "oriFull", style: "ori", length: "full" },
+      { key: "atsCompact", style: "ats", length: "compact" },
+      { key: "oriCompact", style: "ori", length: "compact" },
+    ];
+
+    for (const variant of variants) {
+      const url = `${BASE_URL}/resume/${buildResumePdfRouteSegment(
+        variant.style,
+        variant.length,
+      )}`;
+      const outputFile = resumeFiles[variant.key];
 
       await page.goto(url, { waitUntil: "domcontentloaded", timeout: 60_000 });
       await page.waitForSelector("article", { timeout: 30_000 });
@@ -64,7 +88,7 @@ try {
         preferCSSPageSize: true,
       });
 
-      console.log(`Generated ${variant} PDF at ${outputFile}`);
+      console.log(`Generated ${variant.key} PDF at ${outputFile}`);
     }
   } finally {
     await browser.close();
