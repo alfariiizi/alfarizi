@@ -78,3 +78,12 @@ test("metadata reflects the new positioning", () => {
   assert.match(layout, /real-world use/i);
   assert.match(layout, /engineering work/i);
 });
+
+test("experience copy reflects the updated Oriskin role", () => {
+  const experienceData = read("src/app/experience/data.ts");
+  assert.match(experienceData, /Freelance Fullstack Engineer/);
+  assert.doesNotMatch(
+    experienceData,
+    /Senior Fullstack Engineer, Development Team Lead/,
+  );
+});

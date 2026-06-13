@@ -13,7 +13,7 @@ export const experiences: ExperienceEntry[] = [
   {
     headline:
       "Leading engineering delivery across internal systems that have to hold up under real operational pressure.",
-    role: "Senior Fullstack Engineer, Development Team Lead",
+    role: "Freelance Fullstack Engineer",
     company: "Oriskin Indonesia",
     period: "Dec 2025 to Present",
     location: "Jakarta, Indonesia, remote",
