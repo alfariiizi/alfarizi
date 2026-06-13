@@ -65,7 +65,13 @@ export default function ExperiencePage() {
             <div className="grid gap-5 md:grid-cols-[minmax(0,1fr)_15rem] md:gap-10">
               <div className="space-y-5">
                 <header className="space-y-2">
-                  <div className="flex items-center gap-3">
+                  <Link
+                    href={experience.companyHref}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    aria-label={`Visit ${experience.company}`}
+                    className="group inline-flex items-center gap-3 text-foreground/85 transition hover:opacity-80"
+                  >
                     <div className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-md border border-primary/10 bg-background">
                       <Image
                         src={experience.companyLogo}
@@ -75,10 +81,10 @@ export default function ExperiencePage() {
                         className="h-full w-full object-contain p-1"
                       />
                     </div>
-                    <p className="text-sm font-medium leading-none text-foreground/85 sm:text-[0.95rem]">
+                    <p className="text-sm font-medium leading-none sm:text-[0.95rem]">
                       {experience.company}
                     </p>
-                  </div>
+                  </Link>
                   <h2
                     className={cn(
                       "max-w-3xl text-balance font-display text-2xl font-medium leading-tight text-foreground sm:text-[2rem]",

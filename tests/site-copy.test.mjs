@@ -86,7 +86,12 @@ test("experience copy reflects the updated Oriskin role", () => {
     experienceData,
     /Senior Fullstack Engineer, Development Team Lead/,
   );
+  assert.match(experienceData, /companyHref/);
   assert.match(experienceData, /companyLogo/);
+  assert.match(experienceData, /https:\/\/oriskin\.co\.id/);
+  assert.match(experienceData, /https:\/\/jogiia\.id/);
+  assert.match(experienceData, /https:\/\/datains\.id/);
+  assert.match(experienceData, /https:\/\/ecc\.co\.id\/company\/site\/view\/168369/);
   assert.match(experienceData, /\/images\/company-logos\/oriskin\.png/);
   assert.match(experienceData, /\/images\/company-logos\/jogiia\.png/);
   assert.match(experienceData, /\/images\/company-logos\/datains\.png/);
@@ -96,6 +101,9 @@ test("experience copy reflects the updated Oriskin role", () => {
 test("experience entries render company identity rows", () => {
   const experiencePage = read("src/app/experience/page.tsx");
   assert.match(experiencePage, /next\/image/);
+  assert.match(experiencePage, /target="_blank"/);
+  assert.match(experiencePage, /rel="noreferrer noopener"/);
+  assert.match(experiencePage, /aria-label={`Visit \$\{experience\.company\}`}/);
   assert.match(experiencePage, /experience\.companyLogo/);
   assert.match(experiencePage, /alt={`\$\{experience\.company\} logo`}/);
   assert.match(experiencePage, /rounded-md border border-primary\/10/);
