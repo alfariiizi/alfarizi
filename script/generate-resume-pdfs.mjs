@@ -15,19 +15,19 @@ const BASE_URL = `http://127.0.0.1:${PORT}`;
 const resumeFiles = {
   atsFull: path.resolve(
     "public/resume/ats",
-    buildResumePdfFilename(),
+    buildResumePdfFilename("ats"),
   ),
   oriFull: path.resolve(
     "public/resume/ori",
-    buildResumePdfFilename(),
+    buildResumePdfFilename("ori"),
   ),
   atsCompact: path.resolve(
     "public/resume/ats-1page",
-    buildResumePdfFilename(),
+    buildResumePdfFilename("ats"),
   ),
   oriCompact: path.resolve(
     "public/resume/ori-1page",
-    buildResumePdfFilename(),
+    buildResumePdfFilename("ori"),
   ),
 };
 

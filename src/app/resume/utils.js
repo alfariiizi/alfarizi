@@ -4,6 +4,10 @@ const RESUME_VARIANT_SEGMENT = {
   full: "",
   compact: "-1page",
 };
+const RESUME_FILENAME_SEGMENT = {
+  ats: "ats-friendly",
+  ori: "original",
+};
 
 /**
  * @param {Date} date
@@ -34,10 +38,11 @@ export function formatResumeBuildTimestamp(date) {
 }
 
 /**
+ * @param {"ats" | "ori"} type
  * @returns {string}
  */
-export function buildResumePdfFilename() {
-  return `${RESUME_FILENAME_BASE}.pdf`;
+export function buildResumePdfFilename(type) {
+  return `resume-${RESUME_FILENAME_SEGMENT[type]}-${RESUME_FILENAME_BASE.toLowerCase().replaceAll(" ", "-")}.pdf`;
 }
 
 /**
@@ -45,7 +50,7 @@ export function buildResumePdfFilename() {
  * @param {"full" | "compact"} [length]
  */
 export function buildResumePdfHref(variant, length = "full") {
-  return `/resume/${variant}${RESUME_VARIANT_SEGMENT[length]}/${buildResumePdfFilename()}`;
+  return `/resume/${variant}${RESUME_VARIANT_SEGMENT[length]}/${buildResumePdfFilename(variant)}`;
 }
 
 /**
