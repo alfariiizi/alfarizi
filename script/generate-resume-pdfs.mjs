@@ -55,7 +55,8 @@ try {
       const url = `${BASE_URL}/resume/${variant}`;
       const outputFile = resumeFiles[variant];
 
-      await page.goto(url, { waitUntil: "networkidle0" });
+      await page.goto(url, { waitUntil: "domcontentloaded", timeout: 60_000 });
+      await page.waitForSelector("article", { timeout: 30_000 });
       await page.evaluate(() => document.fonts.ready);
       await page.pdf({
         path: outputFile,
@@ -118,4 +119,3 @@ async function waitForExit(child) {
     child.once("exit", resolve);
   });
 }
-
