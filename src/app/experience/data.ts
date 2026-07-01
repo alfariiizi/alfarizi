@@ -14,8 +14,8 @@ export type ExperienceEntry = {
 export const experiences: ExperienceEntry[] = [
   {
     headline:
-      "Leading engineering delivery across internal systems that have to hold up under real operational pressure.",
-    role: "Freelance Fullstack Engineer",
+      "Building internal systems that have to hold up under real operational pressure.",
+    role: "Freelance Fullstack Developer",
     company: "Oriskin Indonesia",
     companyHref: "https://oriskin.co.id",
     companyLogo: "/images/company-logos/oriskin.png",
@@ -29,17 +29,17 @@ export const experiences: ExperienceEntry[] = [
       "Infrastructure",
     ],
     bullets: [
-      "Leading engineers across four production servers, with responsibility spanning architecture, delivery, and engineering quality.",
+      "Contributing across four production servers, with work spanning implementation, delivery, and engineering quality.",
       "Building internal systems for an 80-plus-branch clinic business, including HRIS and home-service operations tools.",
       "Shipped a WhatsApp broadcast system to production in a single overnight sprint when the delivery window left little room for ceremony.",
-      "Architecting Go services with domain-driven boundaries and OpenAPI-based integrations for Next.js frontends, while managing Docker and Kubernetes on VPS infrastructure.",
+      "Building Go services with domain-driven boundaries and OpenAPI-based integrations for Next.js frontends, while working with Docker and Kubernetes on VPS infrastructure.",
     ],
     featured: true,
   },
   {
     headline:
       "Running multi-product delivery with clearer service boundaries and steadier engineering habits.",
-    role: "Technical Lead",
+    role: "Freelance Technical Lead",
     company: "PT Jogiia Digital Indotech",
     companyHref: "https://jogiia.id",
     companyLogo: "/images/company-logos/jogiia.png",
@@ -62,7 +62,7 @@ export const experiences: ExperienceEntry[] = [
   {
     headline:
       "Shaping frontend systems for analytics-heavy products with an eye on longevity, not just launch speed.",
-    role: "Fullstack Developer, Freelance",
+    role: "Freelance Fullstack Developer",
     company: "PT Global Data Inspirasi",
     companyHref: "https://datains.id",
     companyLogo: "/images/company-logos/datains.png",
@@ -84,7 +84,7 @@ export const experiences: ExperienceEntry[] = [
   {
     headline:
       "Building modern frontend foundations before the work expanded into broader technical leadership.",
-    role: "Frontend Developer (Next.js)",
+    role: "Freelance Frontend Developer (Next.js)",
     company: "PT Jogiia Digital Indotech",
     companyHref: "https://jogiia.id",
     companyLogo: "/images/company-logos/jogiia.png",
@@ -106,7 +106,7 @@ export const experiences: ExperienceEntry[] = [
   {
     headline:
       "Starting in analytical tooling, where software had to support research rather than simply look polished.",
-    role: "Data Scientist, Junior Developer",
+    role: "Freelance Data Scientist / Junior Developer",
     company: "PT Nanosense Instrument Indonesia",
     companyHref: "https://ecc.co.id/company/site/view/168369",
     companyLogo: "/images/company-logos/nanosense.png",

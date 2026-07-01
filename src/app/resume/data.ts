@@ -128,10 +128,10 @@ function buildResumeProfile(length: ResumeLength): ResumeProfile {
   return {
     identity: {
       name: "Moh Rizal Alfarizi",
-      title: "Fullstack Engineer",
+      title: "Freelance Fullstack Engineer",
       headline: isCompact
-        ? "Fullstack engineer focused on product surfaces, internal tools, and delivery-heavy systems."
-        : "Fullstack engineer building product surfaces, internal tools, and delivery-heavy systems.",
+        ? "Freelance fullstack engineer focused on product surfaces, internal tools, and delivery-heavy systems."
+        : "Freelance fullstack engineer building product surfaces, internal tools, and delivery-heavy systems.",
     },
     summary: isCompact
       ? [

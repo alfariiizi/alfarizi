@@ -1,9 +1,12 @@
 import tailwindTypography from "@tailwindcss/typography";
-import tailwindScrollbar from "tailwind-scrollbar";
 import { type Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
 import { layout, navbar } from "./src/app/_components/shared";
 import { colorsAlternative } from "./src/lib/colors-alternative";
+
+const tailwindScrollbar = require("tailwind-scrollbar") as (options: {
+  nocompatible: boolean;
+}) => NonNullable<Config["plugins"]>[number];
 
 export default {
   content: ["./src/**/*.tsx"],

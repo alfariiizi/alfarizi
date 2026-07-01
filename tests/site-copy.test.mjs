@@ -81,11 +81,15 @@ test("metadata reflects the new positioning", () => {
 
 test("experience copy reflects the updated Oriskin role", () => {
   const experienceData = read("src/app/experience/data.ts");
-  assert.match(experienceData, /Freelance Fullstack Engineer/);
+  assert.match(experienceData, /Freelance Fullstack Developer/);
+  assert.match(experienceData, /Freelance Technical Lead/);
+  assert.match(experienceData, /Freelance Frontend Developer/);
+  assert.match(experienceData, /Feb 2025 to Mar 2026/);
   assert.doesNotMatch(
     experienceData,
     /Senior Fullstack Engineer, Development Team Lead/,
   );
+  assert.doesNotMatch(experienceData, /Leading engineers across four production servers/);
   assert.match(experienceData, /companyHref/);
   assert.match(experienceData, /companyLogo/);
   assert.match(experienceData, /https:\/\/oriskin\.co\.id/);
@@ -96,6 +100,29 @@ test("experience copy reflects the updated Oriskin role", () => {
   assert.match(experienceData, /\/images\/company-logos\/jogiia\.png/);
   assert.match(experienceData, /\/images\/company-logos\/datains\.png/);
   assert.match(experienceData, /\/images\/company-logos\/nanosense\.png/);
+});
+
+test("public role labels consistently reference freelance work", () => {
+  const experienceData = read("src/app/experience/data.ts");
+  const resumeData = read("src/app/resume/data.ts");
+  const projectContent = fs
+    .readdirSync(new URL("../public/content/project", import.meta.url), {
+      withFileTypes: true,
+    })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => read(`public/content/project/${entry.name}/index.mdx`))
+    .join("\n");
+
+  for (const role of experienceData.matchAll(/role: "([^"]+)"/g)) {
+    assert.match(role[1], /Freelance/);
+  }
+
+  for (const position of projectContent.matchAll(/^position: (.+)$/gm)) {
+    assert.match(position[1], /Freelance/);
+  }
+
+  assert.match(resumeData, /title: "Freelance Fullstack Engineer"/);
+  assert.match(resumeData, /Freelance fullstack engineer/);
 });
 
 test("experience entries render company identity rows", () => {
